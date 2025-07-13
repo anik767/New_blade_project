@@ -14,7 +14,7 @@ class ProjectPostController extends Controller
         return view('site.home');
     }
 
-    // 🔓 Public: List all projects
+    // 🔓 Public: List all projects with pagination
     public function publicList()
     {
         $projects = ProjectPost::latest()->paginate(6);
@@ -28,21 +28,21 @@ class ProjectPostController extends Controller
         return view('site.projects.show', compact('project'));
     }
 
-    // 🔐 Admin: Dashboard view
+    // 🔐 Admin: Dashboard view with project count
     public function dashboard()
     {
         $projectCount = ProjectPost::count();
         return view('admin.dashboard', compact('projectCount'));
     }
 
-    // 🔐 Admin: List projects
+    // 🔐 Admin: List all projects (paginated)
     public function index()
     {
         $projects = ProjectPost::latest()->paginate(10);
         return view('admin.projects.index', compact('projects'));
     }
 
-    // 🔐 Admin: Show create form
+    // 🔐 Admin: Show project creation form
     public function create()
     {
         return view('admin.projects.create');
@@ -52,55 +52,60 @@ class ProjectPostController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'github_link' => 'nullable|url',
-            'image' => 'nullable|image|max:2048',
+            'title'        => 'required|string|max:255',
+            'description'  => 'required|string',
+            'github_link'  => 'nullable|url',
+            'image'        => 'nullable|image|max:2048',
         ]);
 
-        $imagePath = null;
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('projects', 'public');
-        }
+        $imagePath = $request->hasFile('image')
+            ? $request->file('image')->store('projects', 'public')
+            : null;
+
+        $slug = $this->generateUniqueSlug($request->title);
 
         ProjectPost::create([
-            'title' => $request->title,
-            'slug' => Str::slug($request->title),
-            'description' => $request->description,
-            'github_link' => $request->github_link,
-            'image' => $imagePath,
+            'title'        => $request->title,
+            'slug'         => $slug,
+            'description'  => $request->description,
+            'github_link'  => $request->github_link,
+            'image'        => $imagePath,
         ]);
 
         return redirect()->route('admin.projects.index')->with('success', 'Project created successfully.');
     }
 
-    // 🔐 Admin: Show edit form
+    // 🔐 Admin: Show project edit form
     public function edit(ProjectPost $project)
     {
         return view('admin.projects.edit', compact('project'));
     }
 
-    // 🔐 Admin: Update project
+    // 🔐 Admin: Update existing project
     public function update(Request $request, ProjectPost $project)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'github_link' => 'nullable|url',
-            'image' => 'nullable|image|max:2048',
+            'title'        => 'required|string|max:255',
+            'description'  => 'required|string',
+            'github_link'  => 'nullable|url',
+            'image'        => 'nullable|image|max:2048',
         ]);
 
-        $imagePath = $project->image;
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('projects', 'public');
+        $imagePath = $request->hasFile('image')
+            ? $request->file('image')->store('projects', 'public')
+            : $project->image;
+
+        $slug = $project->slug;
+        if ($request->title !== $project->title) {
+            $slug = $this->generateUniqueSlug($request->title, $project->id);
         }
 
         $project->update([
-            'title' => $request->title,
-            'slug' => Str::slug($request->title),
-            'description' => $request->description,
-            'github_link' => $request->github_link,
-            'image' => $imagePath,
+            'title'        => $request->title,
+            'slug'         => $slug,
+            'description'  => $request->description,
+            'github_link'  => $request->github_link,
+            'image'        => $imagePath,
         ]);
 
         return redirect()->route('admin.projects.index')->with('success', 'Project updated successfully.');
@@ -112,5 +117,26 @@ class ProjectPostController extends Controller
         $project->delete();
 
         return redirect()->route('admin.projects.index')->with('success', 'Project deleted successfully.');
+    }
+
+    // 🧠 Utility: Generate a unique slug based on the title
+    private function generateUniqueSlug($title, $ignoreId = null)
+    {
+        $baseSlug = Str::slug($title);
+        $slug = $baseSlug;
+        $counter = 2;
+
+        while (
+            ProjectPost::where('slug', $slug)
+                ->when($ignoreId, function ($query) use ($ignoreId) {
+                    return $query->where('id', '!=', $ignoreId);
+                })
+                ->exists()
+        ) {
+            $slug = $baseSlug . '-' . $counter;
+            $counter++;
+        }
+
+        return $slug;
     }
 }

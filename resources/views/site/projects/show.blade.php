@@ -5,7 +5,7 @@
     <h1 class="text-3xl font-bold mb-6">{{ $project->title }}</h1>
 
     @if ($project->image)
-        <img src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->title }}" class="w-full h-64 object-cover rounded mb-6">
+        <img src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->title }}" class="w-full  rounded mb-6">
     @endif
 
     <p class="text-lg text-gray-700 mb-6 whitespace-pre-line">{{ $project->description }}</p>

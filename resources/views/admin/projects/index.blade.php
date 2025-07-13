@@ -49,7 +49,6 @@
                                 <span class="text-gray-400 italic">N/A</span>
                             @endif
                         </td>
-                        
                         <td class="px-4 py-3 border">
                             <div class="flex items-center gap-2">
                                 <a href="{{ route('admin.projects.edit', $project->id) }}"
@@ -79,8 +78,64 @@
         </table>
     </div>
 
-    <div class="mt-6">
-        {{ $projects->links() }}
-    </div>
+    {{-- Smart Pagination --}}
+    @php
+        $totalPages = $projects->lastPage();
+        $currentPage = $projects->currentPage();
+
+        $pageStart = 1;
+        $pageEnd = min(5, $totalPages);
+
+        if ($currentPage > 3 && $totalPages > 5) {
+            $pageStart = $currentPage - 2;
+            $pageEnd = $currentPage + 2;
+
+            if ($pageEnd > $totalPages) {
+                $pageEnd = $totalPages;
+                $pageStart = max($totalPages - 4, 1);
+            }
+        }
+    @endphp
+
+    <nav class="mt-6 flex justify-center space-x-2">
+        {{-- Previous --}}
+        @if ($projects->onFirstPage())
+            <span class="px-4 py-2 bg-gray-300 text-gray-700 rounded cursor-not-allowed">Previous</span>
+        @else
+            <a href="{{ $projects->previousPageUrl() }}" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Previous</a>
+        @endif
+
+        {{-- First page --}}
+        @if ($pageStart > 1)
+            <a href="{{ $projects->url(1) }}" class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">1</a>
+            @if ($pageStart > 2)
+                <span class="px-2 py-2">...</span>
+            @endif
+        @endif
+
+        {{-- Page window --}}
+        @for ($i = $pageStart; $i <= $pageEnd; $i++)
+            @if ($i == $currentPage)
+                <span class="px-4 py-2 bg-green-800 text-white rounded">{{ $i }}</span>
+            @else
+                <a href="{{ $projects->url($i) }}" class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">{{ $i }}</a>
+            @endif
+        @endfor
+
+        {{-- Last page --}}
+        @if ($pageEnd < $totalPages)
+            @if ($pageEnd < $totalPages - 1)
+                <span class="px-2 py-2">...</span>
+            @endif
+            <a href="{{ $projects->url($totalPages) }}" class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">{{ $totalPages }}</a>
+        @endif
+
+        {{-- Next --}}
+        @if ($projects->hasMorePages())
+            <a href="{{ $projects->nextPageUrl() }}" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Next</a>
+        @else
+            <span class="px-4 py-2 bg-gray-300 text-gray-700 rounded cursor-not-allowed">Next</span>
+        @endif
+    </nav>
 </div>
 @endsection

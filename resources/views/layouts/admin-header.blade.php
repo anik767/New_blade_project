@@ -56,8 +56,19 @@
     </div>
 </nav>
 
+{{-- Include Notyf assets (include once in your layout if reused) --}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+
+{{-- Trigger logout alert using Notyf --}}
 @if(session('logout_alert'))
 <script>
-    alert(@json(session('logout_alert')));
+    document.addEventListener("DOMContentLoaded", function () {
+        const notyf = new Notyf({
+            duration: 3000,
+            position: { x: 'right', y: 'top' }
+        });
+        notyf.success(@json(session('logout_alert')));
+    });
 </script>
 @endif
