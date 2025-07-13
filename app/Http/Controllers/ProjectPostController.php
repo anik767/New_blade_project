@@ -54,12 +54,21 @@ class ProjectPostController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
+            'github_link' => 'nullable|url',
+            'image' => 'nullable|image|max:2048',
         ]);
+
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('projects', 'public');
+        }
 
         ProjectPost::create([
             'title' => $request->title,
             'slug' => Str::slug($request->title),
             'description' => $request->description,
+            'github_link' => $request->github_link,
+            'image' => $imagePath,
         ]);
 
         return redirect()->route('admin.projects.index')->with('success', 'Project created successfully.');
@@ -77,15 +86,23 @@ class ProjectPostController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
+            'github_link' => 'nullable|url',
+            'image' => 'nullable|image|max:2048',
         ]);
+
+        $imagePath = $project->image;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('projects', 'public');
+        }
 
         $project->update([
             'title' => $request->title,
             'slug' => Str::slug($request->title),
             'description' => $request->description,
+            'github_link' => $request->github_link,
+            'image' => $imagePath,
         ]);
 
-        // Redirect to admin projects index
         return redirect()->route('admin.projects.index')->with('success', 'Project updated successfully.');
     }
 
@@ -94,7 +111,6 @@ class ProjectPostController extends Controller
     {
         $project->delete();
 
-        // Redirect to admin projects index
         return redirect()->route('admin.projects.index')->with('success', 'Project deleted successfully.');
     }
 }

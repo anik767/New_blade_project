@@ -10,5 +10,7 @@ class ProjectPost extends Model
         'title',
         'slug',
         'description',
+        'image',
+        'github_link',
     ];
 }

@@ -12,6 +12,8 @@ return new class extends Migration {
             $table->string('title');
             $table->string('slug')->unique();
             $table->text('description');
+            $table->string('image')->nullable();         // ✅ Image field
+            $table->string('github_link')->nullable();   // ✅ GitHub link field
             $table->timestamps();
         });
     }

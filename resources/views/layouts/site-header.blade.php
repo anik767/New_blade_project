@@ -1,5 +1,5 @@
 <nav class="bg-green-600 text-white shadow">
-    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+    <div class="container mx-auto px-4 min-h-[50px] flex justify-between items-center">
         {{-- Site Logo / Brand --}}
         <a href="{{ route('home') }}" class="font-bold text-xl">MyPortfolio</a>
 
