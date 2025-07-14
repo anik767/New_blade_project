@@ -25,10 +25,10 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate(); // checks user credentials
-
         $request->session()->regenerate(); // prevent session fixation
 
-        return redirect()->intended(route('admin.dashboard')); // redirect after login
+        return redirect()->intended(route('admin.dashboard'))
+            ->with('success', 'Login successful');
     }
 
     /**
@@ -36,10 +36,11 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        Auth::guard('web')->logout(); // Logout the user
-        $request->session()->invalidate(); // Invalidate the session
-        $request->session()->regenerateToken(); // Regenerate CSRF token
-        // Redirect to home with a flash message to show alert/toast
-        return redirect('/')->with('success', 'You have successfully logged out.');
+        Auth::guard('web')->logout(); // ✅ Logs the user out
+        $request->session()->invalidate(); // ✅ Invalidates session
+        $request->session()->regenerateToken(); // ✅ Regenerates CSRF token
+
+        // ✅ Redirects to login page with a flash message for Notyf toast
+        return redirect('/login')->with('success', 'Logged out successfully');
     }
 }

@@ -5,9 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>@yield('title', 'My Portfolio')</title>
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
+  <link rel="icon" href="{{ asset('favicon.ico') }}?v=2" type="image/x-icon">
   @stack('styles')
 </head>
+
 <body class="bg-gray-100 text-gray-900 min-h-screen flex flex-col">
 
   {{-- Site Navigation --}}
@@ -17,21 +18,34 @@
     @yield('content')
   </main>
 
-  <footer class="bg-gray-200 text-center py-4 text-sm text-gray-700 ">
+  <footer class="bg-gray-200 text-center py-4 text-sm text-gray-700">
     &copy; {{ date('Y') }} My Portfolio. All rights reserved.
   </footer>
 
   <script src="{{ asset('js/app.js') }}"></script>
   @stack('scripts')
 
-  <script>
-    @if(session('success'))
-      window.notyf?.success(@json(session('success')));
-    @endif
+  {{-- Toast with Notyf (uses npm build) --}}
+  @if(session('success'))
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const notyf = new Notyf({
+          duration: 3000,
+          position: { x: 'right', y: 'bottom' } // Toast appears bottom right
+        });
 
-    @if(session('error'))
-      window.notyf?.error(@json(session('error')));
-    @endif
-  </script>
+        // If you want to move it higher from the bottom, modify bottom CSS
+        const container = document.querySelector('.notyf__toast-container');
+        if (container) {
+          container.style.bottom = '150px'; // Push toast 150px up from bottom
+        }
+
+        notyf.success(@json(session('success')));
+      });
+    </script>
+  
+  @endif
+  
+
 </body>
 </html>

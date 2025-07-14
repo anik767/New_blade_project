@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ProjectPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectPostController extends Controller
 {
@@ -14,7 +15,7 @@ class ProjectPostController extends Controller
         return view('site.home');
     }
 
-    // 🔓 Public: List all projects with pagination
+    // 🔓 Public: List all projects with pagination (6 per page)
     public function publicList()
     {
         $projects = ProjectPost::latest()->paginate(6);
@@ -35,7 +36,7 @@ class ProjectPostController extends Controller
         return view('admin.dashboard', compact('projectCount'));
     }
 
-    // 🔐 Admin: List all projects (paginated)
+    // 🔐 Admin: List all projects with pagination (10 per page)
     public function index()
     {
         $projects = ProjectPost::latest()->paginate(10);
@@ -58,9 +59,10 @@ class ProjectPostController extends Controller
             'image'        => 'nullable|image|max:2048',
         ]);
 
-        $imagePath = $request->hasFile('image')
-            ? $request->file('image')->store('projects', 'public')
-            : null;
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('projects', 'public');
+        }
 
         $slug = $this->generateUniqueSlug($request->title);
 
@@ -72,7 +74,8 @@ class ProjectPostController extends Controller
             'image'        => $imagePath,
         ]);
 
-        return redirect()->route('admin.projects.index')->with('success', 'Project created successfully.');
+        return redirect()->route('admin.projects.index')
+                         ->with('success', 'Project created successfully.');
     }
 
     // 🔐 Admin: Show project edit form
@@ -91,10 +94,17 @@ class ProjectPostController extends Controller
             'image'        => 'nullable|image|max:2048',
         ]);
 
-        $imagePath = $request->hasFile('image')
-            ? $request->file('image')->store('projects', 'public')
-            : $project->image;
+        // Handle image upload & replace old image if new one is uploaded
+        if ($request->hasFile('image')) {
+            if ($project->image && Storage::disk('public')->exists($project->image)) {
+                Storage::disk('public')->delete($project->image);
+            }
+            $imagePath = $request->file('image')->store('projects', 'public');
+        } else {
+            $imagePath = $project->image;
+        }
 
+        // Update slug if title changed
         $slug = $project->slug;
         if ($request->title !== $project->title) {
             $slug = $this->generateUniqueSlug($request->title, $project->id);
@@ -108,15 +118,22 @@ class ProjectPostController extends Controller
             'image'        => $imagePath,
         ]);
 
-        return redirect()->route('admin.projects.index')->with('success', 'Project updated successfully.');
+        return redirect()->route('admin.projects.index')
+                         ->with('success', 'Project updated successfully.');
     }
 
     // 🔐 Admin: Delete project
     public function destroy(ProjectPost $project)
     {
+        // Optionally delete image file as well
+        if ($project->image && Storage::disk('public')->exists($project->image)) {
+            Storage::disk('public')->delete($project->image);
+        }
+
         $project->delete();
 
-        return redirect()->route('admin.projects.index')->with('success', 'Project deleted successfully.');
+        return redirect()->route('admin.projects.index')
+                         ->with('success', 'Project deleted successfully.');
     }
 
     // 🧠 Utility: Generate a unique slug based on the title
@@ -128,13 +145,10 @@ class ProjectPostController extends Controller
 
         while (
             ProjectPost::where('slug', $slug)
-                ->when($ignoreId, function ($query) use ($ignoreId) {
-                    return $query->where('id', '!=', $ignoreId);
-                })
+                ->when($ignoreId, fn($query) => $query->where('id', '!=', $ignoreId))
                 ->exists()
         ) {
-            $slug = $baseSlug . '-' . $counter;
-            $counter++;
+            $slug = $baseSlug . '-' . $counter++;
         }
 
         return $slug;

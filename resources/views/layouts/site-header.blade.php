@@ -8,6 +8,8 @@
             {{-- Public Links --}}
             <a href="{{ route('home') }}" class="hover:underline">Home</a>
             <a href="{{ route('projects.index') }}" class="hover:underline">Projects</a>
+            <a href="{{ route('site.blog.index') }}" class="hover:underline">Blog</a>
+
 
             {{-- Authenticated User Links --}}
             @auth
@@ -17,7 +19,9 @@
                 {{-- Logout Form --}}
                 <form method="POST" action="{{ route('logout') }}" class="inline ml-4">
                     @csrf
-                    
+                    <button type="submit" class="hover:underline" onclick="event.preventDefault(); this.closest('form').submit();">
+                        Logout
+                    </button>
                 </form>
             @else
                 {{-- Guest User Login --}}

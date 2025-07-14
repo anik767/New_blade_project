@@ -1,11 +1,12 @@
 <nav class="bg-gray-800 text-white shadow">
-    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+    <div class="container mx-auto px-4 min-h-[50px] flex justify-between items-center">
         <a href="{{ route('admin.dashboard') }}" class="font-bold text-xl">Admin Panel</a>
 
         <div class="space-x-4 flex items-center">
             <a href="{{ route('home') }}" class="hover:underline">Home</a>
             <a href="{{ route('admin.dashboard') }}" class="hover:underline">Dashboard</a>
             <a href="{{ route('admin.projects.index') }}" class="hover:underline">Projects</a>
+            <a href="{{ route('admin.blog.index') }}" class="hover:underline">Blog</a>
 
             @auth
             <div x-data="{ open: false }" class="relative ml-4">
@@ -44,7 +45,6 @@
                             type="submit" 
                             class="w-full text-left px-4 py-2 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none" 
                             role="menuitem"
-                            onclick="return confirm('Are you sure you want to logout?');"
                         >
                             Logout
                         </button>
@@ -55,20 +55,3 @@
         </div>
     </div>
 </nav>
-
-{{-- Include Notyf assets (include once in your layout if reused) --}}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
-<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
-
-{{-- Trigger logout alert using Notyf --}}
-@if(session('logout_alert'))
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const notyf = new Notyf({
-            duration: 3000,
-            position: { x: 'right', y: 'top' }
-        });
-        notyf.success(@json(session('logout_alert')));
-    });
-</script>
-@endif
