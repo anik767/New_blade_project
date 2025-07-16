@@ -1,31 +1,27 @@
-<nav class="bg-green-600 text-white shadow">
-    <div class="container mx-auto px-4 min-h-[50px] flex justify-between items-center">
+<nav class="bg-gradient-to-tr from-[#1e2024]  to-[#23272b] text-text shadow-lg">
+    <div class="container mx-auto px-4 min-h-[56px] flex justify-between items-center">
         {{-- Site Logo / Brand --}}
-        <a href="{{ route('home') }}" class="font-bold text-xl">MyPortfolio</a>
+        <a href="{{ route('home') }}" class="font-bold text-xl text-acttive">MyPortfolio</a>
 
         {{-- Navigation Links --}}
-        <div class="space-x-4 flex items-center">
+        <div class="space-x-4 flex items-center text-sm font-medium">
             {{-- Public Links --}}
-            <a href="{{ route('home') }}" class="hover:underline">Home</a>
-            <a href="{{ route('projects.index') }}" class="hover:underline">Projects</a>
-            <a href="{{ route('site.blog.index') }}" class="hover:underline">Blog</a>
-
+            <a href="{{ route('home') }}" class="hover:text-accent transition">Home</a>
+            <a href="{{ route('projects.index') }}" class="hover:text-accent transition">Projects</a>
+            <a href="{{ route('site.blog.index') }}" class="hover:text-accent transition">Blog</a>
 
             {{-- Authenticated User Links --}}
             @auth
-                {{-- Admin Dashboard --}}
-                <a href="{{ route('admin.dashboard') }}" class="hover:underline">Dashboard</a>
+                <a href="{{ route('admin.dashboard') }}" class="hover:text-accent transition">Dashboard</a>
 
-                {{-- Logout Form --}}
                 <form method="POST" action="{{ route('logout') }}" class="inline ml-4">
                     @csrf
-                    <button type="submit" class="hover:underline" onclick="event.preventDefault(); this.closest('form').submit();">
+                    <button type="submit" class="hover:text-accent transition" onclick="event.preventDefault(); this.closest('form').submit();">
                         Logout
                     </button>
                 </form>
             @else
-                {{-- Guest User Login --}}
-                <a href="{{ route('login') }}" class="hover:underline ml-4">Login</a>
+                <a href="{{ route('login') }}" class="ml-4 hover:text-accent transition">Login</a>
             @endauth
         </div>
     </div>

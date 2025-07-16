@@ -1,14 +1,19 @@
 @extends('layouts.site')
 @section('title', 'Projects')
 @section('content')
-    <div class="bg-background text-text min-h-screen py-16 px-4">
+    <div class="bg-gradient-to-tl from-[#1c1f23] via-[#2c3136]/60 to-[#0f1114]
+
+
+
+
+ text-text min-h-screen py-16 px-4">
         <div class="container mx-auto">
-            <h1 class="text-5xl font-extrabold text-center text-accent mb-16">Projects</h1>
+            <h1 class="text-5xl font-extrabold text-center text-text mb-16">Projects</h1>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                 @foreach ($projects as $project)
                     <div
-                        class="bg-card rounded-3xl overflow-hidden  shadow-lg shadow-accent/30 hover:shadow-2xl hover:shadow-accent/50 transition-shadow duration-300">
+                        class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/10  to-[#1e2024] rounded-3xl overflow-hidden  shadow-lg shadow-accent/30  hover:shadow-acttive/50 transition-shadow duration-300"  >
                         @if ($project->image)
                             <img src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->title }}"
                                 class="w-full h-56 object-cover rounded-t-3xl">
@@ -17,7 +22,7 @@
                         <div class="p-6">
                             <h2 class="text-2xl font-semibold mb-3">
                                 <a href="{{ route('projects.show', $project->slug) }}"
-                                    class="hover:underline text-accent capitalize antialiased ">
+                                    class="hover:underline text-text capitalize antialiased ">
                                     {{ $project->title }}
                                 </a>
                             </h2>
@@ -25,7 +30,7 @@
 
                             @if ($project->github_link)
                                 <a href="{{ $project->github_link }}" target="_blank"
-                                    class="inline-block mt-2 px-4 py-2 bg-accent text-dark font-semibold rounded hover:bg-green-500 transition">
+                                    class="inline-block mt-2 px-4 py-2 bg-accent text-dark font-semibold rounded hover:bg-acttive transition">
                                     View on GitHub
                                 </a>
                             @endif
@@ -57,7 +62,7 @@
                     <span class="px-4 py-2 bg-muted text-text rounded cursor-not-allowed">Previous</span>
                 @else
                     <a href="{{ $projects->previousPageUrl() }}"
-                        class="px-4 py-2 bg-accent text-dark font-semibold rounded hover:bg-green-500 transition">
+                        class="px-4 py-2 bg-acttive text-dark font-semibold rounded hover:bg-acttive-500 transition">
                         Previous
                     </a>
                 @endif
@@ -73,7 +78,7 @@
                 {{-- Page Window --}}
                 @for ($i = $pageStart; $i <= $pageEnd; $i++)
                     @if ($i == $currentPage)
-                        <span class="px-4 py-2 bg-accent text-dark font-semibold rounded">{{ $i }}</span>
+                        <span class="px-4 py-2 bg-acttive text-dark font-semibold rounded">{{ $i }}</span>
                     @else
                         <a href="{{ $projects->url($i) }}"
                             class="px-4 py-2 bg-muted text-text rounded hover:bg-muted/80">{{ $i }}</a>
@@ -92,7 +97,7 @@
                 {{-- Next Page --}}
                 @if ($projects->hasMorePages())
                     <a href="{{ $projects->nextPageUrl() }}"
-                        class="px-4 py-2 bg-accent text-dark font-semibold rounded hover:bg-green-500 transition">
+                        class="px-4 py-2 bg-acttive text-dark font-semibold rounded hover:bg-acttive-500 transition">
                         Next
                     </a>
                 @else
