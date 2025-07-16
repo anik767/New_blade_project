@@ -1,25 +1,28 @@
 <?php
 
+use App\Http\Controllers\HomeBannerController;
 use App\Http\Controllers\BlogPostController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProjectPostController;
 use Illuminate\Support\Facades\Route;
 
-
 // Public routes (no prefix, no middleware)
-Route::get('/', [ProjectPostController::class, 'publicHome'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/projects', [ProjectPostController::class, 'publicList'])->name('projects.index');
 Route::get('/projects/{slug}', [ProjectPostController::class, 'publicSingle'])->name('projects.show');
+
 // Public blog routes
 Route::prefix('blog')->name('site.blog.')->group(function () {
     Route::get('/', [BlogPostController::class, 'publicList'])->name('index');   // site.blog.index
     Route::get('/{slug}', [BlogPostController::class, 'publicSingle'])->name('show'); // site.blog.show
 });
 
-
-
 // Admin routes (with prefix 'admin' and auth middleware)
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [ProjectPostController::class, 'dashboard'])->name('dashboard');
+
+    Route::get('home-banner', [HomeBannerController::class, 'edit'])->name('home-banner.edit');
+    Route::post('home-banner', [HomeBannerController::class, 'update'])->name('home-banner.update');
 
     Route::get('/projects', [ProjectPostController::class, 'index'])->name('projects.index');
     Route::get('/projects/create', [ProjectPostController::class, 'create'])->name('projects.create');
@@ -32,5 +35,3 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 });
 
 require __DIR__.'/auth.php';
-
-

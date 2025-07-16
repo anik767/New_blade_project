@@ -2,3 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.two-line-ellipsis {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }

@@ -15,13 +15,20 @@ class BlogPostController extends Controller
         $posts = BlogPost::latest()->paginate(6);
         return view('site.blog.index', compact('posts'));
     }
+    public function publicHome()
+    {
+        // Fetch latest 6 blog posts (for blog section)
+        $posts = BlogPost::latest()->take(6)->get();
+
+        // Only pass blog posts — no projects
+        return view('site.home', compact('posts'));
+    }
 
     // 🔓 Public: Single blog post by slug
     public function publicSingle($slug)
     {
         $post = BlogPost::where('slug', $slug)->firstOrFail();
         return view('site.blog.show', compact('post'));
-
     }
 
     // 🔐 Admin: List blog posts with pagination
@@ -123,8 +130,8 @@ class BlogPostController extends Controller
 
         while (
             BlogPost::where('slug', $slug)
-                ->when($ignoreId, fn($query) => $query->where('id', '!=', $ignoreId))
-                ->exists()
+            ->when($ignoreId, fn($query) => $query->where('id', '!=', $ignoreId))
+            ->exists()
         ) {
             $slug = $baseSlug . '-' . $counter++;
         }
