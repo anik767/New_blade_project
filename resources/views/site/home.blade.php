@@ -6,59 +6,46 @@
     <div class="bg-[#212428]">
 
         {{-- Hero Section --}}
-<section
-class="relative h-screen bg-cover bg-center bg-no-repeat"
-style="background-image: url('{{ optional($banner) && optional($banner)->background_image ? asset('storage/' . $banner->background_image) : asset('images/Home/banner-background-one.jpg') }}')"
->
-<div class="absolute inset-0 bg-black bg-opacity-60"></div>
+        <section class="relative h-screen bg-cover bg-center bg-no-repeat"
+            style="background-image: url('{{ optional($banner) && optional($banner)->background_image ? asset('storage/' . $banner->background_image) : asset('images/Home/banner-background-one.jpg') }}')">
+            <div class="absolute inset-0 bg-black bg-opacity-60"></div>
 
-<div
-    class="container mx-auto h-full grid grid-cols-1 md:grid-cols-2 items-center px-6 relative text-white font-rajdhani z-10"
->
-    <div
-        class="flex flex-col justify-center space-y-6 text-center md:text-left py-10 md:py-0 max-w-xl mx-auto md:mx-0"
-    >
-        <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight drop-shadow-lg capitalize">
-            {{ optional($banner)->title_line1 ?? 'Hello' }}
-        </h1>
-        <h2
-            class="text-4xl md:text-5xl font-extrabold tracking-tight drop-shadow-lg min-h-[70px] text-[#59C378] "
-        >
-            {{ optional($banner)->title_line2 ?? 'I’m Azmain Iqtidar Anik' }}
-        </h2>
-        <p
-            class="text-lg md:text-xl text-gray-300 leading-relaxed drop-shadow-md max-w-md"
-        >
-            {{ optional($banner)->subtitle ?? 'Frontend Developer passionate about crafting clean, user-friendly websites that delight users.' }}
-        </p>
-        <div class="flex justify-center md:justify-start">
-            @if (optional($banner)->cv_file)
-                <a
-                    href="{{ asset('storage/' . $banner->cv_file) }}"
-                    download
-                    class="inline-block px-8 py-3 border-2 border-[#59C378] rounded-lg font-semibold tracking-wide text-[#59C378] hover:bg-[#59C378] hover:text-white transition duration-300 shadow-lg"
-                >
-                    Download CV
-                </a>
-            @else
-                <span
-                    class="inline-block px-8 py-3 border-2 border-gray-500 rounded-lg font-semibold tracking-wide text-gray-500 cursor-not-allowed"
-                >
-                    CV Not Available
-                </span>
-            @endif
-        </div>
-    </div>
+            <div
+                class="container mx-auto h-full grid grid-cols-1 md:grid-cols-2 items-center px-6 relative text-white font-rajdhani z-10">
+                <div
+                    class="flex flex-col justify-center space-y-6 text-center md:text-left py-10 md:py-0 max-w-xl mx-auto md:mx-0">
+                    <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight drop-shadow-lg capitalize">
+                        {{ optional($banner)->title_line1 ?? 'Hello' }}
+                    </h1>
+                    <h2
+                        class="text-4xl md:text-5xl font-extrabold tracking-tight drop-shadow-lg min-h-[70px] text-[#59C378] ">
+                        {{ optional($banner)->title_line2 ?? 'I’m Azmain Iqtidar Anik' }}
+                    </h2>
+                    <p class="text-lg md:text-xl text-gray-300 leading-relaxed drop-shadow-md max-w-md">
+                        {{ optional($banner)->subtitle ?? 'Frontend Developer passionate about crafting clean, user-friendly websites that delight users.' }}
+                    </p>
+                    <div class="flex justify-center md:justify-start">
+                        @if (optional($banner)->cv_file)
+                            <a href="{{ asset('storage/' . $banner->cv_file) }}" download
+                                class="inline-block px-8 py-3 border-2 border-[#59C378] rounded-lg font-semibold tracking-wide text-[#59C378] hover:bg-[#59C378] hover:text-white transition duration-300 shadow-lg">
+                                Download CV
+                            </a>
+                        @else
+                            <span
+                                class="inline-block px-8 py-3 border-2 border-gray-500 rounded-lg font-semibold tracking-wide text-gray-500 cursor-not-allowed">
+                                CV Not Available
+                            </span>
+                        @endif
+                    </div>
+                </div>
 
-    <div class="flex justify-center items-end h-full">
-        <img
-            src="{{ optional($banner) && optional($banner)->person_image ? asset('storage/' . $banner->person_image) : asset('images/Home/damo.png') }}"
-            alt="{{ optional($banner)->title_line2 ?? 'Azmain Iqtidar Anik' }}"
-            class="object-contain w-full max-w-xs md:max-w-md lg:max-w-lg max-h-[90vh] shadow-xl"
-        />
-    </div>
-</div>
-</section>
+                <div class="flex justify-center items-end h-full">
+                    <img src="{{ optional($banner) && optional($banner)->person_image ? asset('storage/' . $banner->person_image) : asset('images/Home/damo.png') }}"
+                        alt="{{ optional($banner)->title_line2 ?? 'Azmain Iqtidar Anik' }}"
+                        class="object-contain w-full max-w-xs md:max-w-md lg:max-w-lg max-h-[90vh] shadow-xl" />
+                </div>
+            </div>
+        </section>
 
 
 
@@ -167,8 +154,8 @@ style="background-image: url('{{ optional($banner) && optional($banner)->backgro
                 @else
                     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
                         @foreach ($projects as $project)
-                            <div
-                                class="bg-[#2a2e33] rounded-3xl overflow-hidden border border-gray-700 shadow-lg shadow-[#59C378]/30 hover:shadow-2xl hover:shadow-[#59C378]/50 transition-shadow duration-300 cursor-pointer">
+                            <a href="{{ route('projects.show', $project->slug) }}"
+                                class="block rounded-3xl overflow-hidden border border-gray-700 shadow-lg shadow-[#59C378]/30 hover:shadow-2xl hover:shadow-[#59C378]/50 transition-shadow duration-300 cursor-pointer bg-[#2a2e33]">
                                 @if ($project->image)
                                     <img src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->title }}"
                                         class="w-full h-56 object-cover rounded-t-3xl">
@@ -177,20 +164,21 @@ style="background-image: url('{{ optional($banner) && optional($banner)->backgro
                                         class="w-full h-56 object-cover rounded-t-3xl">
                                 @endif
                                 <div class="p-6">
-                                    <h3 class="text-2xl font-semibold mb-3 text-white two-line-ellipsis cursor-default"
+                                    <h3 class="text-2xl font-semibold mb-3 text-white two-line-ellipsis capitalize"
                                         title="{{ $project->title }}">
                                         {{ $project->title }}
                                     </h3>
 
                                     <p class="text-gray-400 mb-5">{{ Str::limit($project->description, 120) }}</p>
+
                                     @if ($project->github_link)
-                                        <a href="{{ $project->github_link }}" target="_blank" rel="noopener noreferrer"
-                                            class="text-[#59C378] font-semibold hover:underline">View Project →</a>
+                                        <span class="text-[#59C378] font-semibold hover:underline cursor-pointer">View
+                                            Project →</span>
                                     @else
                                         <span class="text-gray-500">No project link</span>
                                     @endif
                                 </div>
-                            </div>
+                            </a>
                         @endforeach
                     </div>
 
@@ -204,6 +192,7 @@ style="background-image: url('{{ optional($banner) && optional($banner)->backgro
                 @endif
             </div>
         </section>
+
 
 
 
@@ -248,9 +237,8 @@ style="background-image: url('{{ optional($banner) && optional($banner)->backgro
                 @else
                     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
                         @foreach ($posts as $post)
-                            <article
-                                class="bg-[#2a2e33] rounded-3xl p-8 cursor-pointer flex flex-col border border-gray-700 shadow-lg shadow-[#59C378]/30 
-                            hover:shadow-2xl hover:shadow-[#59C378]/50 transition duration-300">
+                            <a href="{{ route('site.blog.show', $post->slug) }}"
+                                class="block bg-[#2a2e33] rounded-3xl p-8 cursor-pointer flex flex-col border border-gray-700 shadow-lg shadow-[#59C378]/30 hover:shadow-2xl hover:shadow-[#59C378]/50 transition duration-300 no-underline">
 
                                 @if ($post->image)
                                     <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}"
@@ -261,21 +249,17 @@ style="background-image: url('{{ optional($banner) && optional($banner)->backgro
                                 @endif
 
                                 <h3 class="text-2xl font-semibold mb-3 text-white">
-                                    <a href="{{ route('site.blog.show', $post->slug) }}"
-                                        class="hover:text-[#59C378] transition">
-                                        {{ $post->title }}
-                                    </a>
+                                    {{ $post->title }}
                                 </h3>
 
                                 <p class="text-gray-400 text-base mb-6">
                                     {!! Str::limit(strip_tags($post->content), 120) !!}
                                 </p>
 
-                                <a href="{{ route('site.blog.show', $post->slug) }}"
-                                    class="mt-auto font-semibold text-[#59C378] text-lg hover:underline">
+                                <span class="mt-auto font-semibold text-[#59C378] text-lg hover:underline">
                                     Read More →
-                                </a>
-                            </article>
+                                </span>
+                            </a>
                         @endforeach
                     </div>
 
@@ -289,6 +273,7 @@ style="background-image: url('{{ optional($banner) && optional($banner)->backgro
                 @endif
             </div>
         </section>
+
 
 
 

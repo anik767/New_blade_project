@@ -1437,6 +1437,9 @@ video {
 .underline {
   text-decoration-line: underline;
 }
+.no-underline {
+  text-decoration-line: none;
+}
 .antialiased {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
