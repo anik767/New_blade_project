@@ -6,8 +6,12 @@
 
             <a href="{{ route('home') }}" class="hover:underline">Home</a>
             <a href="{{ route('admin.dashboard') }}" class="hover:underline">Dashboard</a>
+            <a href="{{ route('admin.about-me.index') }}" class="hover:underline">About Me</a>
+            <a href="{{ route('admin.services.index') }}" class="hover:underline">Services</a>
             <a href="{{ route('admin.projects.index') }}" class="hover:underline">Projects</a>
             <a href="{{ route('admin.blog.index') }}" class="hover:underline">Blog</a>
+            <a href="{{ route('admin.contacts.index') }}" class="hover:underline">Contact</a>
+            <a href="{{ route('admin.contact-messages.index') }}" class="hover:underline">Messages</a>
 
             <!-- Settings Dropdown -->
             <div x-data="{ open: false }" class="relative inline-block">

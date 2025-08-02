@@ -10,8 +10,11 @@
         <div class="container mx-auto">
             <h1 class="text-5xl font-extrabold text-center text-text mb-16">Projects</h1>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                @foreach ($projects as $project)
+            @if ($projects->isEmpty())
+                <p class="text-center text-muted">No projects found.</p>
+            @else
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    @foreach ($projects as $project)
                     <div
                         class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/10  to-[#1e2024] rounded-3xl overflow-hidden  shadow-lg shadow-accent/30  hover:shadow-acttive/50 transition-shadow duration-300"  >
                         @if ($project->image)
@@ -56,7 +59,9 @@
                 }
             @endphp
 
-            <nav class="mt-12 flex justify-center space-x-2">
+            {{-- Only show pagination if there are more than 6 projects --}}
+            @if($projects->total() > 6)
+                <nav class="mt-12 flex justify-center space-x-2">
                 {{-- Previous Page --}}
                 @if ($projects->onFirstPage())
                     <span class="px-4 py-2 bg-muted text-text rounded cursor-not-allowed">Previous</span>
@@ -103,7 +108,9 @@
                 @else
                     <span class="px-4 py-2 bg-muted text-text rounded cursor-not-allowed">Next</span>
                 @endif
-            </nav>
+                </nav>
+            @endif
+            @endif
         </div>
 
 

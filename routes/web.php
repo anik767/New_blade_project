@@ -4,10 +4,19 @@ use App\Http\Controllers\HomeBannerController;
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProjectPostController;
+use App\Http\Controllers\AboutMeController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ContactFormController;
 use Illuminate\Support\Facades\Route;
 
 // Public routes (no prefix, no middleware)
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/about', [AboutMeController::class, 'publicShow'])->name('about');
+Route::get('/services', [ServiceController::class, 'publicList'])->name('services');
+Route::get('/services/{slug}', [ServiceController::class, 'publicSingle'])->name('services.show');
+Route::get('/contact', [ContactController::class, 'publicShow'])->name('contact');
+Route::post('/contact/submit', [ContactFormController::class, 'submit'])->name('contact.submit');
 Route::get('/projects', [ProjectPostController::class, 'publicList'])->name('projects.index');
 Route::get('/projects/{slug}', [ProjectPostController::class, 'publicSingle'])->name('projects.show');
 
@@ -16,6 +25,9 @@ Route::prefix('blog')->name('site.blog.')->group(function () {
     Route::get('/', [BlogPostController::class, 'publicList'])->name('index');   // site.blog.index
     Route::get('/{slug}', [BlogPostController::class, 'publicSingle'])->name('show'); // site.blog.show
 });
+
+// Comment submission
+Route::post('/comment', [App\Http\Controllers\CommentController::class, 'store'])->name('comment.store');
 
 // Admin routes (with prefix 'admin' and auth middleware)
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
@@ -32,6 +44,21 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::delete('/projects/{project}', [ProjectPostController::class, 'destroy'])->name('projects.destroy');
 
     Route::resource('blog', BlogPostController::class);
+    Route::resource('services', ServiceController::class);
+    
+    // About Me - Edit only
+    Route::get('/about-me', [AboutMeController::class, 'edit'])->name('about-me.edit');
+    Route::post('/about-me', [AboutMeController::class, 'update'])->name('about-me.update');
+    
+    // Contact - Edit only
+    Route::get('/contacts', [ContactController::class, 'edit'])->name('contacts.edit');
+    Route::post('/contacts', [ContactController::class, 'update'])->name('contacts.update');
+    
+    // Contact Messages Management
+    Route::get('/contact-messages', [ContactFormController::class, 'index'])->name('contact-messages.index');
+    Route::get('/contact-messages/{contactMessage}', [ContactFormController::class, 'show'])->name('contact-messages.show');
+    Route::put('/contact-messages/{contactMessage}/status', [ContactFormController::class, 'updateStatus'])->name('contact-messages.update-status');
+    Route::delete('/contact-messages/{contactMessage}', [ContactFormController::class, 'destroy'])->name('contact-messages.destroy');
 });
 
 require __DIR__.'/auth.php';
