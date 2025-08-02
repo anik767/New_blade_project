@@ -59,6 +59,11 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/contact-messages/{contactMessage}', [ContactFormController::class, 'show'])->name('contact-messages.show');
     Route::put('/contact-messages/{contactMessage}/status', [ContactFormController::class, 'updateStatus'])->name('contact-messages.update-status');
     Route::delete('/contact-messages/{contactMessage}', [ContactFormController::class, 'destroy'])->name('contact-messages.destroy');
+
+    // Comments management
+    Route::get('/comments', [App\Http\Controllers\Admin\CommentController::class, 'index'])->name('comments.index');
+    Route::patch('/comments/{comment}/approve', [App\Http\Controllers\Admin\CommentController::class, 'approve'])->name('comments.approve');
+    Route::delete('/comments/{comment}', [App\Http\Controllers\Admin\CommentController::class, 'destroy'])->name('comments.destroy');
 });
 
 require __DIR__.'/auth.php';

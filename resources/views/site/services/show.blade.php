@@ -65,6 +65,70 @@
                 </div>
             </div>
 
+            <!-- Comments Section -->
+            <div class="mt-12 pt-8 border-t border-gray-700">
+                <h3 class="text-2xl font-bold text-text mb-6">Comments ({{ $service->comments->count() }})</h3>
+                
+                <!-- Display Comments -->
+                @if($service->comments->count() > 0)
+                    <div class="space-y-6 mb-8">
+                        @foreach($service->comments as $comment)
+                            <div class="bg-card border border-gray-700 rounded-lg p-6">
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-10 h-10 bg-accent rounded-full flex items-center justify-center text-background font-bold">
+                                        {{ strtoupper(substr($comment->name, 0, 1)) }}
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center space-x-2 mb-2">
+                                            <h4 class="font-semibold text-text">{{ $comment->name }}</h4>
+                                            <span class="text-muted text-sm">{{ $comment->created_at->format('M d, Y g:i A') }}</span>
+                                        </div>
+                                        <p class="text-muted">{{ $comment->comment }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @else
+                    <p class="text-muted mb-8">No comments yet. Be the first to comment!</p>
+                @endif
+
+                <!-- Comment Form -->
+                <div class="bg-card border border-gray-700 rounded-lg p-6">
+                    <h4 class="text-lg font-semibold text-text mb-4">Leave a Comment</h4>
+                    <form id="comment-form" class="space-y-6">
+                        @csrf
+                        <input type="hidden" name="type" value="service">
+                        <input type="hidden" name="id" value="{{ $service->id }}">
+                        
+                        <div>
+                            <label for="comment" class="block text-sm font-medium text-muted mb-2">Comment *</label>
+                            <textarea id="comment" name="comment" rows="6" required class="w-full px-4 py-3 bg-background border border-gray-700 rounded-lg text-text placeholder-muted focus:outline-none focus:ring-2 focus:ring-accent resize-none"></textarea>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-muted mb-2">Name *</label>
+                                <input type="text" id="name" name="name" required class="w-full px-4 py-3 bg-background border border-gray-700 rounded-lg text-text placeholder-muted focus:outline-none focus:ring-2 focus:ring-accent">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-muted mb-2">Email *</label>
+                                <input type="email" id="email" name="email" required class="w-full px-4 py-3 bg-background border border-gray-700 rounded-lg text-text placeholder-muted focus:outline-none focus:ring-2 focus:ring-accent">
+                            </div>
+                        </div>
+                        
+                        <div id="comment-message" class="hidden">
+                            <div id="comment-success" class="bg-green-500/20 border border-green-500 text-green-400 px-4 py-3 rounded text-sm hidden"></div>
+                            <div id="comment-error" class="bg-red-500/20 border border-red-500 text-red-400 px-4 py-3 rounded text-sm hidden"></div>
+                        </div>
+                        
+                        <button type="submit" class="bg-accent text-background px-8 py-3 rounded-lg hover:bg-acttive transition duration-300 font-medium">
+                            Post Comment
+                        </button>
+                    </form>
+                </div>
+            </div>
+
             <!-- Share Service Section -->
             <div class="mt-12 pt-8 border-t border-gray-700">
                 <div class="flex items-center mb-4">
@@ -92,34 +156,6 @@
                         </a>
                     </div>
                 </div>
-            </div>
-
-            <!-- Leave a Reply Section -->
-            <div class="mt-12 pt-8 border-t border-gray-700">
-                <h3 class="text-2xl font-bold text-text mb-4">Leave a Reply</h3>
-                <p class="text-muted text-sm mb-6">Your email address will not be published. Required fields are marked *</p>
-                
-                <form class="space-y-6">
-                    <div>
-                        <label for="comment" class="block text-sm font-medium text-muted mb-2">Comment *</label>
-                        <textarea id="comment" name="comment" rows="6" required class="w-full px-4 py-3 bg-card border border-gray-700 rounded-lg text-text placeholder-muted focus:outline-none focus:ring-2 focus:ring-accent resize-none"></textarea>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label for="name" class="block text-sm font-medium text-muted mb-2">Name *</label>
-                            <input type="text" id="name" name="name" required class="w-full px-4 py-3 bg-card border border-gray-700 rounded-lg text-text placeholder-muted focus:outline-none focus:ring-2 focus:ring-accent">
-                        </div>
-                        <div>
-                            <label for="email" class="block text-sm font-medium text-muted mb-2">Email *</label>
-                            <input type="email" id="email" name="email" required class="w-full px-4 py-3 bg-card border border-gray-700 rounded-lg text-text placeholder-muted focus:outline-none focus:ring-2 focus:ring-accent">
-                        </div>
-                    </div>
-                    
-                    <button type="submit" class="bg-accent text-background px-8 py-3 rounded-lg hover:bg-acttive transition duration-300 font-medium">
-                        Post Comment
-                    </button>
-                </form>
             </div>
 
             <!-- More Recommended Section -->
