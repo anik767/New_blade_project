@@ -1,6 +1,6 @@
-<div class="min-h-screen bg-gray-100">
+<div class="min-h-screen bg-gray-100 flex">
     <!-- Sidebar -->
-    <div id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-gray-800 shadow-lg transform transition-transform duration-300 ease-in-out lg:translate-x-0">
+    <div id="sidebar" class="w-64 bg-gray-800 shadow-lg transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:block">
         <div class="flex items-center justify-between h-16 px-6 border-b border-gray-700">
             <h1 class="text-xl font-bold text-white">Admin Panel</h1>
             <button class="lg:hidden text-white hover:text-gray-300" onclick="toggleSidebar()">
@@ -120,7 +120,7 @@
     </div>
 
     <!-- Main Content Area -->
-    <div class="lg:ml-64">
+    <div class="flex-1 flex flex-col">
         <!-- Top Navigation -->
         <div class="sticky top-0 z-40 bg-white shadow-sm border-b border-gray-200">
             <div class="flex items-center justify-between h-16 px-6">
@@ -142,7 +142,7 @@
         </div>
 
         <!-- Page Content -->
-        <main class="bg-gray-50 min-h-screen">
+        <main class="flex-1 bg-gray-50">
             @yield('content')
         </main>
     </div>
