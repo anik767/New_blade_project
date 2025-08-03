@@ -2,6 +2,7 @@
 @section('title', 'Create Contact Information')
 
 @section('content')
+<div class="p-6">
     <x-admin-form 
         :action="route('admin.contacts.store')" 
         title="Create Contact Information"
@@ -62,4 +63,5 @@
             help="Optional: Additional contact details or special instructions"
         />
     </x-admin-form>
+</div>
 @endsection 

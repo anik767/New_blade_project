@@ -2,7 +2,7 @@
 @section('title', 'About Me Content')
 
 @section('content')
-<div class="container mx-auto px-4 py-6">
+<div class="p-6">
     <h1 class="text-2xl font-bold mb-6">About Me Content</h1>
 
     <a href="{{ route('admin.about-me.create') }}"

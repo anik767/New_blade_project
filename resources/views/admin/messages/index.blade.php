@@ -2,7 +2,7 @@
 @section('title', 'Contact Messages')
 
 @section('content')
-<div class="container mx-auto px-4 py-6">
+<div class="p-6">
     <h1 class="text-2xl font-bold mb-6">Contact Messages</h1>
 
     @if (session('success'))

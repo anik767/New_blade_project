@@ -3,8 +3,8 @@
 @section('title', 'View Contact Message')
 
 @section('content')
-<div class="container mx-auto px-4 py-8">
-    <div class="max-w-6xl mx-auto">
+<div class="p-6">
+    <div>
         <!-- Header Section -->
         <div class="flex justify-between items-center mb-8">
             <div>

@@ -2,6 +2,7 @@
 @section('title', 'Create About Me Content')
 
 @section('content')
+<div class="p-6">
     <x-admin-form 
         :action="route('admin.about-me.store')" 
         title="Create About Me Content"
@@ -78,4 +79,5 @@
             />
         </div>
     </x-admin-form>
+</div>
 @endsection 

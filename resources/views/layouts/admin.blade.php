@@ -22,7 +22,9 @@
     <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 </head>
 <body class="bg-white text-gray-900">
-    <x-admin.sidebar />
+    <div class="min-h-screen flex">
+        <x-admin.sidebar />
+    </div>
     
     <script src="{{ asset('js/app.js') }}"></script>
     @stack('scripts')

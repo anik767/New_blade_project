@@ -2,6 +2,7 @@
 @section('title', 'Edit About Me')
 
 @section('content')
+<div class="p-6">
     <x-admin-form 
         :action="route('admin.about-me.update')" 
         title="Edit About Me"
@@ -129,6 +130,7 @@
             <p class="mt-1 text-sm text-gray-500">Upload a new profile image to replace the current one (JPG, PNG, GIF)</p>
         </div>
     </x-admin-form>
+</div>
 
     <script>
         let skillCount = 0;
