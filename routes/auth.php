@@ -17,7 +17,7 @@ Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])->n
 
 // Reset password routes wrapped in guest middleware
 
-Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])->name('password.update');
+Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])->name('password.reset');
 Route::post('reset-password', [NewPasswordController::class, 'store'])->name('password.update');
 
 
