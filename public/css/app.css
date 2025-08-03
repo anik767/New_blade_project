@@ -1008,6 +1008,9 @@ video {
 .flex-grow {
   flex-grow: 1;
 }
+.grow {
+  flex-grow: 1;
+}
 .origin-top {
   transform-origin: top;
 }
@@ -2042,6 +2045,9 @@ video {
 }
 .to-card {
   --tw-gradient-to: #272b2e var(--tw-gradient-to-position);
+}
+.to-accent\/10 {
+  --tw-gradient-to: rgb(248 162 126 / 0.1) var(--tw-gradient-to-position);
 }
 .bg-cover {
   background-size: cover;
@@ -3735,6 +3741,10 @@ video {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
+  .md\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
   .md\:flex-row {
     flex-direction: row;
   }
@@ -3828,6 +3838,10 @@ video {
 
   .lg\:grid-cols-4 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-6 {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 
   .lg\:items-center {

@@ -1,107 +1,132 @@
 @extends('layouts.site')
 
 @section('title', 'About Me')
+@section('description', 'Learn more about Azmain Iqtidar Anik - Frontend Developer. Discover my journey, skills, and passion for creating exceptional web experiences.')
 
 @section('content')
-    <div class="bg-gray-900 text-gray-100 min-h-screen">
-        <!-- Get to Know Me Section -->
-        <section class="relative py-20">
+    <div class="bg-background text-text min-h-screen">
+        
+        {{-- Hero Section --}}
+        <section class="py-32 reveal-on-scroll">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-4xl mx-auto">
+                    <h1 class="text-5xl lg:text-7xl font-extrabold text-text mb-8">About Me</h1>
+                    <p class="text-xl lg:text-2xl text-muted leading-relaxed mb-12">
+                        Passionate frontend developer with a love for creating beautiful, functional, and user-friendly web experiences.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <div class="flex items-center justify-center space-x-2 text-accent">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                            </svg>
+                            <span class="font-semibold">Creative Problem Solver</span>
+                        </div>
+                        <div class="flex items-center justify-center space-x-2 text-muted">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                            <span>Fast & Efficient Development</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content Section -->
+        <section class="py-20 reveal-on-scroll">
             <div class="container mx-auto px-6">
                 @if ($aboutMe)
                     <div class="max-w-6xl mx-auto">
-                        <!-- Header Section -->
-                        <div class="text-center mb-16">
-                            <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight mb-6 text-white">
-                                Get to Know Me
-                            </h1>
-
-                        </div>
-
-                        <!-- Main Content Grid -->
-                        <div class="">
-                            <!-- Left Section - Profile Photo and Bio -->
-                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start mb-20">
-                                <!-- Profile Photo -->
+                        <!-- Profile Section -->
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start mb-20">
+                            <!-- Profile Photo -->
+                            <div class="relative">
                                 @if ($aboutMe->image)
-                                    <div class="h-full">
+                                    <div class="relative">
+                                        <div class="absolute inset-0 bg-gradient-to-br from-accent/20 to-transparent rounded-3xl blur-2xl"></div>
                                         <img src="{{ asset('storage/' . $aboutMe->image) }}" alt="{{ $aboutMe->name }}"
-                                            class="w-full h-full mx-auto rounded-2xl object-cover shadow-2xl">
+                                            class="relative w-full max-w-md mx-auto lg:mx-0 rounded-3xl object-cover shadow-2xl hover:scale-105 transition-transform duration-500">
                                     </div>
                                 @else
-                                    <!-- Placeholder for profile photo -->
-                                    <div class="h-full">
-                                        <div
-                                            class="w-full max-w-md mx-auto h-96 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl shadow-2xl flex items-center justify-center">
-                                            <div class="text-6xl text-white opacity-50">👤</div>
+                                    <div class="relative">
+                                        <div class="absolute inset-0 bg-gradient-to-br from-accent/20 to-transparent rounded-3xl blur-2xl"></div>
+                                        <div class="relative w-full max-w-md mx-auto lg:mx-0 h-96 bg-gradient-to-br from-accent/20 to-accent/10 rounded-3xl shadow-2xl flex items-center justify-center">
+                                            <div class="text-8xl opacity-50">👤</div>
                                         </div>
                                     </div>
                                 @endif
-
-                                <!-- Bio Text -->
-                                <div class="space-y-6">
-                                    <div class="text-lg leading-relaxed text-gray-300">
-                                        {!! nl2br(e($aboutMe->content)) !!}
-                                    </div>
-                                </div>
                             </div>
 
-                            <!-- Right Section - Skill Cards -->
-                            <div class="space-y-6">
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <!-- Problem Solver Card -->
-                                    <div
-                                        class="bg-gray-800 rounded-xl p-6 border border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-gray-600">
-                                        <div class="text-center">
-                                            <div class="text-4xl mb-4">🧠</div>
-                                            <h3 class="text-xl font-semibold mb-3 text-gray-100">Problem Solver</h3>
-                                            <p class="text-gray-400 text-sm leading-relaxed">
-                                                I love tackling UI/UX challenges and turning ideas into real interfaces.
-                                            </p>
-                                        </div>
+                            <!-- Bio Text -->
+                            <div class="space-y-8">
+                                <div class="text-xl leading-relaxed text-muted">
+                                    {!! nl2br(e($aboutMe->content)) !!}
+                                </div>
+                                
+                                <!-- Quick Stats -->
+                                <div class="grid grid-cols-2 gap-6 pt-8">
+                                    <div class="text-center p-6 bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] rounded-2xl border border-gray-700">
+                                        <div class="text-3xl font-bold text-accent mb-2">3+</div>
+                                        <div class="text-sm text-muted">Years Experience</div>
                                     </div>
-
-                                    <!-- Fast Learner Card -->
-                                    <div
-                                        class="bg-gray-800 rounded-xl p-6 border border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-gray-600">
-                                        <div class="text-center">
-                                            <div class="text-4xl mb-4">🚀</div>
-                                            <h3 class="text-xl font-semibold mb-3 text-gray-100">Fast Learner</h3>
-                                            <p class="text-gray-400 text-sm leading-relaxed">
-                                                Always eager to explore new tech and push boundaries.
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <!-- Creative Coder Card -->
-                                    <div
-                                        class="bg-gray-800 rounded-xl p-6 border border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-gray-600">
-                                        <div class="text-center">
-                                            <div class="text-4xl mb-4">🎨</div>
-                                            <h3 class="text-xl font-semibold mb-3 text-gray-100">Creative Coder</h3>
-                                            <p class="text-gray-400 text-sm leading-relaxed">
-                                                Blending code and design to craft engaging user experiences.
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <!-- Team Player Card -->
-                                    <div
-                                        class="bg-gray-800 rounded-xl p-6 border border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-gray-600">
-                                        <div class="text-center">
-                                            <div class="text-4xl mb-4">🤝</div>
-                                            <h3 class="text-xl font-semibold mb-3 text-gray-100">Team Player</h3>
-                                            <p class="text-gray-400 text-sm leading-relaxed">
-                                                Great communication and collaboration skills in any environment.
-                                            </p>
-                                        </div>
+                                    <div class="text-center p-6 bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] rounded-2xl border border-gray-700">
+                                        <div class="text-3xl font-bold text-accent mb-2">50+</div>
+                                        <div class="text-sm text-muted">Projects Completed</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Skills Progress Bar Section -->
-                        <div class="mt-20">
-                            <div class="max-w-4xl mx-auto rounded-2xl p-8 shadow-lg">
+                        <!-- Skills & Strengths Section -->
+                        <div class="mb-20">
+                            <div class="text-center mb-16">
+                                <h2 class="text-4xl lg:text-5xl font-extrabold text-text mb-6">My Strengths</h2>
+                                <p class="text-xl text-muted max-w-3xl mx-auto">What makes me stand out as a developer</p>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] rounded-2xl p-8 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 text-center hover:scale-105 hover:-translate-y-2">
+                                    <div class="text-5xl mb-6">🧠</div>
+                                    <h3 class="text-2xl font-semibold mb-4 text-text">Problem Solver</h3>
+                                    <p class="text-muted leading-relaxed">
+                                        I love tackling complex UI/UX challenges and turning innovative ideas into real, functional interfaces that users love.
+                                    </p>
+                                </div>
+
+                                <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] rounded-2xl p-8 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 text-center hover:scale-105 hover:-translate-y-2">
+                                    <div class="text-5xl mb-6">🚀</div>
+                                    <h3 class="text-2xl font-semibold mb-4 text-text">Fast Learner</h3>
+                                    <p class="text-muted leading-relaxed">
+                                        Always eager to explore new technologies and push boundaries. I adapt quickly to new tools and frameworks.
+                                    </p>
+                                </div>
+
+                                <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] rounded-2xl p-8 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 text-center hover:scale-105 hover:-translate-y-2">
+                                    <div class="text-5xl mb-6">🎨</div>
+                                    <h3 class="text-2xl font-semibold mb-4 text-text">Creative Coder</h3>
+                                    <p class="text-muted leading-relaxed">
+                                        Blending clean code with beautiful design to craft engaging user experiences that convert visitors into customers.
+                                    </p>
+                                </div>
+
+                                <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] rounded-2xl p-8 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 text-center hover:scale-105 hover:-translate-y-2">
+                                    <div class="text-5xl mb-6">🤝</div>
+                                    <h3 class="text-2xl font-semibold mb-4 text-text">Team Player</h3>
+                                    <p class="text-muted leading-relaxed">
+                                        Excellent communication and collaboration skills. I work well in any environment and love sharing knowledge.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Skills Progress Section -->
+                        <div class="mb-20">
+                            <div class="text-center mb-16">
+                                <h2 class="text-4xl lg:text-5xl font-extrabold text-text mb-6">Technical Skills</h2>
+                                <p class="text-xl text-muted max-w-3xl mx-auto">Technologies and tools I use to bring ideas to life</p>
+                            </div>
+                            
+                            <div class="max-w-4xl mx-auto">
                                 @php
                                     $skills = [];
                                     if ($aboutMe->skills) {
@@ -114,129 +139,95 @@
 
                         <!-- Contact Information Section -->
                         @if ($aboutMe->email || $aboutMe->phone || $aboutMe->location || $aboutMe->linkedin || $aboutMe->github)
-                            <div class="mt-20">
-                                <h2 class="text-3xl font-bold text-center mb-12 text-gray-100">Get In Touch</h2>
+                            <div class="mb-20">
+                                <div class="text-center mb-16">
+                                    <h2 class="text-4xl lg:text-5xl font-extrabold text-text mb-6">Get In Touch</h2>
+                                    <p class="text-xl text-muted max-w-3xl mx-auto">Let's discuss your next project and create something amazing together</p>
+                                </div>
+                                
                                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                                     @if ($aboutMe->email)
-                                        <div class="flex items-center space-x-3">
-                                            
-                                            <a href="mailto:{{ $aboutMe->email }}"
-                                                class="flex items-center gap-2 text-gray-300 hover:text-blue-400 transition-colors">
-                                                
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                                    <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                                                        <path stroke-dasharray="64" stroke-dashoffset="64" d="M4 5h16c0.55 0 1 0.45 1 1v12c0 0.55 -0.45 1 -1 1h-16c-0.55 0 -1 -0.45 -1 -1v-12c0 -0.55 0.45 -1 1 -1Z">
-                                                            <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.6s" values="64;0" />
-                                                        </path>
-                                                        <path stroke-dasharray="24" stroke-dashoffset="24" d="M3 6.5l9 5.5l9 -5.5">
-                                                            <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="24;0" />
-                                                        </path>
-                                                    </g>
-                                                </svg>
-                                                {{ $aboutMe->email }}
-                                            </a>
-
+                                        <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] rounded-2xl p-6 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 hover:scale-105">
+                                            <div class="flex items-center space-x-4">
+                                                <div class="p-3 bg-accent/10 rounded-xl">
+                                                    <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                                    </svg>
+                                                </div>
+                                                <div>
+                                                    <h3 class="font-semibold text-text mb-1">Email</h3>
+                                                    <a href="mailto:{{ $aboutMe->email }}" class="text-accent hover:text-acttive transition-colors duration-300">
+                                                        {{ $aboutMe->email }}
+                                                    </a>
+                                                </div>
+                                            </div>
                                         </div>
                                     @endif
 
                                     @if ($aboutMe->phone)
-                                        <div class="flex items-center ">
-                                            
-                                            <a href="tel:{{ $aboutMe->phone }}"
-                                                class="flex items-center gap-2 text-gray-300 hover:text-blue-400 transition-colors">
-                                                
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                                    <path fill="none" stroke="currentColor" stroke-dasharray="64" stroke-dashoffset="64" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 3c0.5 0 2.5 4.5 2.5 5c0 1 -1.5 2 -2 3c-0.5 1 0.5 2 1.5 3c0.39 0.39 2 2 3 1.5c1 -0.5 2 -2 3 -2c0.5 0 5 2 5 2.5c0 2 -1.5 3.5 -3 4c-1.5 0.5 -2.5 0.5 -4.5 0c-2 -0.5 -3.5 -1 -6 -3.5c-2.5 -2.5 -3 -4 -3.5 -6c-0.5 -2 -0.5 -3 0 -4.5c0.5 -1.5 2 -3 4 -3Z">
-                                                        <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.6s" values="64;0" />
-                                                    </path>
-                                                </svg>
-                                                {{ $aboutMe->phone }}
-                                            </a>
+                                        <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] rounded-2xl p-6 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 hover:scale-105">
+                                            <div class="flex items-center space-x-4">
+                                                <div class="p-3 bg-accent/10 rounded-xl">
+                                                    <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                                    </svg>
+                                                </div>
+                                                <div>
+                                                    <h3 class="font-semibold text-text mb-1">Phone</h3>
+                                                    <a href="tel:{{ $aboutMe->phone }}" class="text-accent hover:text-acttive transition-colors duration-300">
+                                                        {{ $aboutMe->phone }}
+                                                    </a>
+                                                </div>
+                                            </div>
                                         </div>
                                     @endif
 
                                     @if ($aboutMe->location)
-                                        <div class="flex items-center gap-2">
-                                            
-                                            
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                                <circle cx="12" cy="12" r="0" fill="currentColor">
-                                                    <animate fill="freeze" attributeName="r" begin="0.7s" dur="0.2s" values="0;4" />
-                                                </circle>
-                                                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                                                    <path stroke-dasharray="56" stroke-dashoffset="56" d="M12 4c4.42 0 8 3.58 8 8c0 4.42 -3.58 8 -8 8c-4.42 0 -8 -3.58 -8 -8c0 -4.42 3.58 -8 8 -8Z">
-                                                        <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.6s" values="56;0" />
-                                                    </path>
-                                                    <path stroke-dasharray="4" stroke-dashoffset="4" d="M12 4v0M20 12h0M12 20v0M4 12h0" opacity="0">
-                                                        <animate fill="freeze" attributeName="d" begin="1s" dur="0.2s" values="M12 4v0M20 12h0M12 20v0M4 12h0;M12 4v-2M20 12h2M12 20v2M4 12h-2" />
-                                                        <animate fill="freeze" attributeName="stroke-dashoffset" begin="1s" dur="0.2s" values="4;0" />
-                                                        <set fill="freeze" attributeName="opacity" begin="1s" to="1" />
-                                                        <animateTransform attributeName="transform" dur="30s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12" />
-                                                    </path>
-                                                </g>
-                                            </svg>
-                                            <span class="text-gray-300">{{ $aboutMe->location }}</span>
+                                        <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] rounded-2xl p-6 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 hover:scale-105">
+                                            <div class="flex items-center space-x-4">
+                                                <div class="p-3 bg-accent/10 rounded-xl">
+                                                    <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                                    </svg>
+                                                </div>
+                                                <div>
+                                                    <h3 class="font-semibold text-text mb-1">Location</h3>
+                                                    <span class="text-muted">{{ $aboutMe->location }}</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     @endif
 
                                     @if ($aboutMe->linkedin || $aboutMe->github)
-
-                                        <div class="flex items-center space-x-3">
-                                            
-                                            <div class="flex space-x-4">
-                                                @if ($aboutMe->linkedin)
-                                                    <a href="{{ $aboutMe->linkedin }}" target="_blank"
-                                                        class="flex items-center gap-2 text-gray-300 hover:text-blue-400 transition-colors">
-                                                        
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                                            <circle cx="4" cy="4" r="2" fill="currentColor" fill-opacity="0">
-                                                                <animate fill="freeze" attributeName="fill-opacity" dur="0.15s" values="0;1" />
-                                                            </circle>
-                                                            <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4">
-                                                                <path stroke-dasharray="12" stroke-dashoffset="12" d="M4 10v10">
-                                                                    <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.15s" dur="0.2s" values="12;0" />
-                                                                </path>
-                                                                <path stroke-dasharray="12" stroke-dashoffset="12" d="M10 10v10">
-                                                                    <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.45s" dur="0.2s" values="12;0" />
-                                                                </path>
-                                                                <path stroke-dasharray="24" stroke-dashoffset="24" d="M10 15c0 -2.76 2.24 -5 5 -5c2.76 0 5 2.24 5 5v5">
-                                                                    <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.65s" dur="0.2s" values="24;0" />
-                                                                </path>
-                                                            </g>
-                                                        </svg>
-                                                        LinkedIn
-                                                    </a>
-                                                @endif
-                                                @if ($aboutMe->github)
-                                                    <a href="{{ $aboutMe->github }}" target="_blank"
-                                                        class="flex items-center gap-2 text-gray-300 hover:text-blue-400 transition-colors">
-                                                        
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                                            <mask id="lineMdGithubLoop0" width="24" height="24" x="0" y="0">
-                                                                <g fill="#fff">
-                                                                    <ellipse cx="9.5" cy="9" rx="1.5" ry="1" />
-                                                                    <ellipse cx="14.5" cy="9" rx="1.5" ry="1" />
-                                                                </g>
-                                                            </mask>
-                                                            <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                                                                <path stroke-dasharray="32" stroke-dashoffset="32" d="M12 4c1.67 0 2.61 0.4 3 0.5c0.53 -0.43 1.94 -1.5 3.5 -1.5c0.34 1 0.29 2.22 0 3c0.75 1 1 2 1 3.5c0 2.19 -0.48 3.58 -1.5 4.5c-1.02 0.92 -2.11 1.37 -3.5 1.5c0.65 0.54 0.5 1.87 0.5 2.5c0 0.73 0 3 0 3M12 4c-1.67 0 -2.61 0.4 -3 0.5c-0.53 -0.43 -1.94 -1.5 -3.5 -1.5c-0.34 1 -0.29 2.22 0 3c-0.75 1 -1 2 -1 3.5c0 2.19 0.48 3.58 1.5 4.5c1.02 0.92 2.11 1.37 3.5 1.5c-0.65 0.54 -0.5 1.87 -0.5 2.5c0 0.73 0 3 0 3">
-                                                                    <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.7s" values="32;0" />
-                                                                </path>
-                                                                <path stroke-dasharray="10" stroke-dashoffset="10" d="M9 19c-1.406 0-2.844-.563-3.688-1.188C4.47 17.188 4.22 16.157 3 15.5">
-                                                                    <animate attributeName="d" dur="3s" repeatCount="indefinite" values="M9 19c-1.406 0-2.844-.563-3.688-1.188C4.47 17.188 4.22 16.157 3 15.5;M9 19c-1.406 0-3-.5-4-.5-.532 0-1 0-2-.5;M9 19c-1.406 0-2.844-.563-3.688-1.188C4.47 17.188 4.22 16.157 3 15.5" />
-                                                                    <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.8s" dur="0.2s" values="10;0" />
-                                                                </path>
-                                                            </g>
-                                                            <rect width="8" height="4" x="8" y="11" fill="currentColor" mask="url(#lineMdGithubLoop0)">
-                                                                <animate attributeName="y" dur="10s" keyTimes="0;0.45;0.46;0.54;0.55;1" repeatCount="indefinite" values="11;11;7;7;11;11" />
-                                                            </rect>
-                                                        </svg>
-                                                        GitHub
-                                                    </a>
-                                                @endif
+                                        <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] rounded-2xl p-6 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 hover:scale-105">
+                                            <div class="flex items-center space-x-4">
+                                                <div class="p-3 bg-accent/10 rounded-xl">
+                                                    <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                                    </svg>
+                                                </div>
+                                                <div>
+                                                    <h3 class="font-semibold text-text mb-2">Social</h3>
+                                                    <div class="flex space-x-3">
+                                                        @if ($aboutMe->linkedin)
+                                                            <a href="{{ $aboutMe->linkedin }}" target="_blank" class="text-accent hover:text-acttive transition-colors duration-300">
+                                                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                                                </svg>
+                                                            </a>
+                                                        @endif
+                                                        @if ($aboutMe->github)
+                                                            <a href="{{ $aboutMe->github }}" target="_blank" class="text-accent hover:text-acttive transition-colors duration-300">
+                                                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                                                    <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.746-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001 12.017.001z"/>
+                                                                </svg>
+                                                            </a>
+                                                        @endif
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-
                                     @endif
                                 </div>
                             </div>
@@ -244,11 +235,11 @@
                     </div>
                 @else
                     <!-- Empty State -->
-                    <div class="text-center py-20">
-                        <div class="bg-gray-800 rounded-3xl p-16 max-w-md mx-auto shadow-2xl border border-gray-700">
+                    <div class="text-center py-20 reveal-on-scroll">
+                        <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/10 to-[#1e2024] rounded-3xl p-16 max-w-md mx-auto shadow-2xl border border-gray-700">
                             <div class="text-8xl mb-6">👤</div>
-                            <h2 class="text-3xl font-bold text-gray-100 mb-4">About Me</h2>
-                            <p class="text-gray-400 text-lg">Information about me will be available soon!</p>
+                            <h2 class="text-3xl font-bold text-text mb-4">About Me</h2>
+                            <p class="text-muted text-lg">Information about me will be available soon!</p>
                         </div>
                     </div>
                 @endif
@@ -257,12 +248,15 @@
         
         <!-- Location Map Section -->
         @if ($aboutMe && $aboutMe->map_embed_code)
-            <section class="py-20 bg-gray-800">
+            <section class="py-20 bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] reveal-on-scroll">
                 <div class="container mx-auto px-6">
                     <div class="max-w-6xl mx-auto">
-                        <h2 class="text-3xl font-bold text-center mb-12 text-gray-100">Find Me Here</h2>
+                        <div class="text-center mb-16">
+                            <h2 class="text-4xl lg:text-5xl font-extrabold text-text mb-6">Find Me Here</h2>
+                            <p class="text-xl text-muted max-w-3xl mx-auto">Based in a beautiful location, ready to work with clients worldwide</p>
+                        </div>
                         <div class="w-full">
-                            <div class="map-container" style="position: relative; width: 100%; height: 450px; overflow: hidden;">
+                            <div class="map-container rounded-3xl overflow-hidden shadow-2xl" style="position: relative; width: 100%; height: 450px; overflow: hidden;">
                                 {!! $aboutMe->map_embed_code !!}
                             </div>
                         </div>

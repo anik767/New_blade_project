@@ -58,32 +58,32 @@
                 Basic Service Information
             </h3>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <x-form-field 
-                    label="Service Title" 
-                    name="title" 
-                    required 
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <x-form-field 
+                label="Service Title" 
+                name="title" 
+                required 
                     placeholder="Web Development"
-                    :value="$service->title"
-                />
-                
-                <x-form-field 
-                    label="Service Icon" 
-                    name="icon" 
-                    placeholder="fas fa-code"
-                    help="FontAwesome icon class (e.g., fas fa-code, fas fa-mobile-alt, fas fa-paint-brush)"
-                    :value="$service->icon"
-                />
-            </div>
+                :value="$service->title"
+            />
             
             <x-form-field 
-                label="Service Description" 
-                name="description" 
-                type="textarea" 
-                required 
-                placeholder="Describe your service in detail. What problems does it solve? What value does it provide to clients?"
-                :value="$service->description"
+                label="Service Icon" 
+                name="icon" 
+                placeholder="fas fa-code"
+                    help="FontAwesome icon class (e.g., fas fa-code, fas fa-mobile-alt, fas fa-paint-brush)"
+                :value="$service->icon"
             />
+        </div>
+        
+        <x-form-field 
+                label="Service Description" 
+            name="description" 
+            type="textarea" 
+            required 
+                placeholder="Describe your service in detail. What problems does it solve? What value does it provide to clients?"
+            :value="$service->description"
+        />
         </div>
 
         <!-- Service Media & Settings -->
@@ -96,17 +96,17 @@
             </h3>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
+        <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-2">
-                        Service Image
-                    </label>
-                    
-                    @if($service->image)
+                Service Image
+            </label>
+            
+            @if($service->image)
                         <div class="mb-4 p-4 bg-gray-50 border border-gray-200 rounded-lg">
                             <p class="text-sm font-medium text-gray-700 mb-3">Current Service Image:</p>
                             <div class="relative group">
-                                <img src="{{ asset('storage/' . $service->image) }}" 
-                                     alt="Current service image" 
+                    <img src="{{ asset('storage/' . $service->image) }}" 
+                         alt="Current service image" 
                                      class="w-48 h-32 object-cover rounded-lg border border-gray-200 shadow-sm group-hover:shadow-md transition-shadow duration-200">
                                 <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-200 rounded-lg flex items-center justify-center">
                                     <svg class="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -115,14 +115,14 @@
                                     </svg>
                                 </div>
                             </div>
-                        </div>
-                    @endif
-                    
+                </div>
+            @endif
+            
                     <div class="relative">
-                        <input type="file" 
-                               name="image" 
+            <input type="file" 
+                   name="image" 
                                class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-                               accept="image/*">
+                   accept="image/*">
                     </div>
                     
                     <div class="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg">
