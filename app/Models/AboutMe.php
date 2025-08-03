@@ -10,7 +10,6 @@ class AboutMe extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
         'title',
         'content',
         'image',
@@ -19,6 +18,7 @@ class AboutMe extends Model
         'location',
         'linkedin',
         'github',
+        'map_embed_code',
         'skills',
         'experience',
         'education',

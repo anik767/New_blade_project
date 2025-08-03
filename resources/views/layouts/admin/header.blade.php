@@ -44,11 +44,11 @@
                     role="menu"
                     aria-label="Settings menu"
                 >
-                    <a href="{{ route('admin.home-banner.edit') }}"
+                    <a href="{{ route('admin.home.edit') }}"
                        class="block px-4 py-2 hover:bg-gray-100"
                        role="menuitem"
                     >
-                        Home Page Banner Edit
+                        Home
                     </a>
                     <!-- Add more items here if needed -->
                 </div>

@@ -20,8 +20,11 @@
         <table class="min-w-full bg-white border border-gray-200 text-sm text-gray-800">
             <thead class="bg-gray-100 text-left">
                 <tr>
+                    <th class="px-4 py-3 border">Image</th>
                     <th class="px-4 py-3 border">Icon</th>
                     <th class="px-4 py-3 border">Title</th>
+                    <th class="px-4 py-3 border">Order</th>
+                    <th class="px-4 py-3 border">Status</th>
                     <th class="px-4 py-3 border">Description</th>
                     <th class="px-4 py-3 border">Actions</th>
                 </tr>
@@ -30,6 +33,17 @@
                 @forelse ($services as $service)
                     <tr class="hover:bg-gray-50 transition">
                         <td class="px-4 py-3 border">
+                            @if($service->image)
+                                <img src="{{ asset('storage/' . $service->image) }}" 
+                                     alt="{{ $service->title }}" 
+                                     class="w-16 h-12 object-cover rounded border">
+                            @else
+                                <div class="w-16 h-12 bg-gray-200 rounded border flex items-center justify-center">
+                                    <span class="text-gray-400 text-xs">No Image</span>
+                                </div>
+                            @endif
+                        </td>
+                        <td class="px-4 py-3 border">
                             @if($service->icon)
                                 <span class="text-2xl">{{ $service->icon }}</span>
                             @else
@@ -37,6 +51,22 @@
                             @endif
                         </td>
                         <td class="px-4 py-3 border font-medium">{{ $service->title }}</td>
+                        <td class="px-4 py-3 border text-center">
+                            <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs font-medium">
+                                {{ $service->order }}
+                            </span>
+                        </td>
+                        <td class="px-4 py-3 border text-center">
+                            @if($service->is_active)
+                                <span class="px-2 py-1 bg-green-100 text-green-800 rounded text-xs font-medium">
+                                    Active
+                                </span>
+                            @else
+                                <span class="px-2 py-1 bg-red-100 text-red-800 rounded text-xs font-medium">
+                                    Inactive
+                                </span>
+                            @endif
+                        </td>
                         <td class="px-4 py-3 border">
                             <div class="max-w-xs truncate" title="{{ $service->description }}">
                                 {{ Str::limit($service->description, 100) }}
@@ -44,6 +74,10 @@
                         </td>
                         <td class="px-4 py-3 border">
                             <div class="flex items-center gap-2">
+                                <a href="{{ route('services.show', $service->slug) }}" target="_blank"
+                                   class="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700 focus:outline-none focus:ring-1 focus:ring-green-500 text-sm transition">
+                                    View
+                                </a>
                                 <a href="{{ route('admin.services.edit', $service->id) }}"
                                    class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 focus:outline-none focus:ring-1 focus:ring-blue-500 text-sm transition">
                                     Edit
@@ -62,7 +96,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="4" class="px-4 py-6 text-center text-gray-500 italic border">
+                        <td colspan="7" class="px-4 py-6 text-center text-gray-500 italic border">
                             No services found.
                         </td>
                     </tr>

@@ -128,10 +128,10 @@ class ServiceController extends Controller
                          ->with('success', 'Service deleted successfully.');
     }
 
-    // 🔓 Public: List all services
+    // 🔓 Public: List all services with pagination (6 per page)
     public function publicList()
     {
-        $services = Service::where('is_active', true)->orderBy('order')->get();
+        $services = Service::where('is_active', true)->orderBy('order')->paginate(6);
         return view('site.services', compact('services'));
     }
 

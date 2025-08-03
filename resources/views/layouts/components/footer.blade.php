@@ -89,13 +89,7 @@
     </div>
     
     <!-- Copyright -->
-    <div class="border-t border-gray-800">
-        <div class="container mx-auto px-4 py-4">
-            <div class="text-center text-gray-400 text-sm">
-                &copy; {{ date('Y') }} My Portfolio. All rights reserved.
-            </div>
-        </div>
-    </div>
+    
 </footer>
 
 <script>

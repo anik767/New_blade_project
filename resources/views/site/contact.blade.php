@@ -3,11 +3,11 @@
 @section('title', 'Contact')
 
 @section('content')
-<div class="bg-background text-text min-h-screen py-16 px-4">
+<div class="bg-background text-text min-h-screen pb-16 px-4">
     <div class="container mx-auto">
         @if($contact)
             <div class="max-w-4xl mx-auto">
-                <h1 class="text-5xl font-extrabold text-center text-text mb-16">{{ $contact->title }}</h1>
+                <h1 class="text-5xl font-extrabold text-center text-text mb-16 pt-8">{{ $contact->title }}</h1>
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                     <div class="bg-gradient-to-tl from-[#1e2024] via-white/10 to-[#23272b] rounded-3xl p-8 shadow-lg">

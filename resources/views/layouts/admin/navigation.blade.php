@@ -16,31 +16,6 @@
                         Dashboard
                     </a>
                     
-                    <a href="{{ route('admin.about-me.index') }}" 
-                       class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium {{ request()->routeIs('admin.about-me.*') ? 'border-blue-500 text-white' : 'border-transparent text-gray-300 hover:border-gray-300 hover:text-white' }}">
-                        About Me
-                    </a>
-                    
-                    <a href="{{ route('admin.services.index') }}" 
-                       class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium {{ request()->routeIs('admin.services.*') ? 'border-blue-500 text-white' : 'border-transparent text-gray-300 hover:border-gray-300 hover:text-white' }}">
-                        Services
-                    </a>
-                    
-                    <a href="{{ route('admin.projects.index') }}" 
-                       class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium {{ request()->routeIs('admin.projects.*') ? 'border-blue-500 text-white' : 'border-transparent text-gray-300 hover:border-gray-300 hover:text-white' }}">
-                        Projects
-                    </a>
-                    
-                    <a href="{{ route('admin.blog.index') }}" 
-                       class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium {{ request()->routeIs('admin.blog.*') ? 'border-blue-500 text-white' : 'border-transparent text-gray-300 hover:border-gray-300 hover:text-white' }}">
-                        Blog
-                    </a>
-                    
-                    <a href="{{ route('admin.contacts.index') }}" 
-                       class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium {{ request()->routeIs('admin.contacts.*') ? 'border-blue-500 text-white' : 'border-transparent text-gray-300 hover:border-gray-300 hover:text-white' }}">
-                        Contact
-                    </a>
-                    
                     <a href="{{ route('admin.contact-messages.index') }}" 
                        class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium {{ request()->routeIs('admin.contact-messages.*') ? 'border-blue-500 text-white' : 'border-transparent text-gray-300 hover:border-gray-300 hover:text-white' }}">
                         Messages
@@ -96,31 +71,6 @@
             <a href="{{ route('admin.dashboard') }}" 
                class="block pl-3 pr-4 py-2 border-l-4 text-base font-medium {{ request()->routeIs('admin.dashboard') ? 'bg-blue-800 border-blue-500 text-white' : 'border-transparent text-gray-300 hover:bg-gray-700 hover:border-gray-300 hover:text-white' }}">
                 Dashboard
-            </a>
-            
-            <a href="{{ route('admin.about-me.index') }}" 
-               class="block pl-3 pr-4 py-2 border-l-4 text-base font-medium {{ request()->routeIs('admin.about-me.*') ? 'bg-blue-800 border-blue-500 text-white' : 'border-transparent text-gray-300 hover:bg-gray-700 hover:border-gray-300 hover:text-white' }}">
-                About Me
-            </a>
-            
-            <a href="{{ route('admin.services.index') }}" 
-               class="block pl-3 pr-4 py-2 border-l-4 text-base font-medium {{ request()->routeIs('admin.services.*') ? 'bg-blue-800 border-blue-500 text-white' : 'border-transparent text-gray-300 hover:bg-gray-700 hover:border-gray-300 hover:text-white' }}">
-                Services
-            </a>
-            
-            <a href="{{ route('admin.projects.index') }}" 
-               class="block pl-3 pr-4 py-2 border-l-4 text-base font-medium {{ request()->routeIs('admin.projects.*') ? 'bg-blue-800 border-blue-500 text-white' : 'border-transparent text-gray-300 hover:bg-gray-700 hover:border-gray-300 hover:text-white' }}">
-                Projects
-            </a>
-            
-            <a href="{{ route('admin.blog.index') }}" 
-               class="block pl-3 pr-4 py-2 border-l-4 text-base font-medium {{ request()->routeIs('admin.blog.*') ? 'bg-blue-800 border-blue-500 text-white' : 'border-transparent text-gray-300 hover:bg-gray-700 hover:border-gray-300 hover:text-white' }}">
-                Blog
-            </a>
-            
-            <a href="{{ route('admin.contacts.index') }}" 
-               class="block pl-3 pr-4 py-2 border-l-4 text-base font-medium {{ request()->routeIs('admin.contacts.*') ? 'bg-blue-800 border-blue-500 text-white' : 'border-transparent text-gray-300 hover:bg-gray-700 hover:border-gray-300 hover:text-white' }}">
-                Contact
             </a>
             
             <a href="{{ route('admin.contact-messages.index') }}" 

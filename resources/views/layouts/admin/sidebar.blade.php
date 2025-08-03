@@ -97,14 +97,85 @@
                     Comments
                 </a>
 
-                <!-- Home Banner -->
-                <a href="{{ route('admin.home-banner.edit') }}" 
-                   class="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 {{ request()->routeIs('admin.home-banner.*') ? 'bg-gray-100 text-gray-900' : '' }}">
-                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                    </svg>
-                    Home Banner
-                </a>
+                <!-- Home Dropdown -->
+                <div x-data="{ homeOpen: false }" class="relative">
+                    <button @click="homeOpen = !homeOpen" 
+                            class="flex items-center justify-between w-full px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 {{ request()->routeIs('admin.home.*') ? 'bg-gray-100 text-gray-900' : '' }}">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                            Home
+                        </div>
+                        <svg class="w-4 h-4 transition-transform duration-200" 
+                             :class="{ 'rotate-180': homeOpen }"
+                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    
+                    <!-- Desktop Dropdown Menu (hidden on mobile) -->
+                    <div x-show="homeOpen" 
+                         @click.away="homeOpen = false"
+                         x-transition:enter="transition ease-out duration-100"
+                         x-transition:enter-start="transform opacity-0 scale-95"
+                         x-transition:enter-end="transform opacity-100 scale-100"
+                         x-transition:leave="transition ease-in duration-75"
+                         x-transition:leave-start="transform opacity-100 scale-100"
+                         x-transition:leave-end="transform opacity-0 scale-95"
+                         class="hidden lg:block absolute left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+                        
+                        <!-- Edit Home Banner -->
+                        <a href="{{ route('admin.home.edit') }}" 
+                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 {{ request()->routeIs('admin.home.edit') ? 'bg-blue-50 text-blue-700' : '' }}">
+                            🏠 Edit Home Banner
+                        </a>
+                        
+                        <!-- Skills & Tech Stack -->
+                        <a href="{{ route('admin.home.skills') }}" 
+                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 {{ request()->routeIs('admin.home.skills') ? 'bg-blue-50 text-blue-700' : '' }}">
+                            ⚡ Skills & Tech Stack
+                        </a>
+                        
+                        <!-- Experience -->
+                        <a href="{{ route('admin.home.experience') }}" 
+                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 {{ request()->routeIs('admin.home.experience') ? 'bg-blue-50 text-blue-700' : '' }}">
+                            💼 Experience
+                        </a>
+                    </div>
+                    
+                    <!-- Mobile Dropdown Menu (inline expansion) -->
+                    <div x-show="homeOpen" 
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 max-h-0"
+                         x-transition:enter-end="opacity-100 max-h-96"
+                         x-transition:leave="transition ease-in duration-150"
+                         x-transition:leave-start="opacity-100 max-h-96"
+                         x-transition:leave-end="opacity-0 max-h-0"
+                         class="lg:hidden overflow-hidden bg-gray-50 rounded-lg mt-1">
+                        
+                        <!-- Edit Home Banner -->
+                        <a href="{{ route('admin.home.edit') }}" 
+                           class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 {{ request()->routeIs('admin.home.edit') ? 'bg-blue-50 text-blue-700' : '' }}">
+                            <span class="mr-3">🏠</span>
+                            Edit Home Banner
+                        </a>
+                        
+                        <!-- Skills & Tech Stack -->
+                        <a href="{{ route('admin.home.skills') }}" 
+                           class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 {{ request()->routeIs('admin.home.skills') ? 'bg-blue-50 text-blue-700' : '' }}">
+                            <span class="mr-3">⚡</span>
+                            Skills & Tech Stack
+                        </a>
+                        
+                        <!-- Experience -->
+                        <a href="{{ route('admin.home.experience') }}" 
+                           class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 {{ request()->routeIs('admin.home.experience') ? 'bg-blue-50 text-blue-700' : '' }}">
+                            <span class="mr-3">💼</span>
+                            Experience
+                        </a>
+                    </div>
+                </div>
             </div>
 
             <!-- Divider -->

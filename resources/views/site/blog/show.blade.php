@@ -6,17 +6,12 @@
     <div class="container mx-auto px-6 py-16">
         <div class="max-w-4xl mx-auto">
             <!-- Page Title -->
-            <div class="text-center mb-8">
-                <h1 class="text-4xl font-bold text-text mb-4">Post with Title, Image and Meta Info</h1>
+           
             </div>
 
             <!-- Author and Meta Information -->
-            <div class="text-center mb-6">
-                <div class="flex items-center justify-center mb-2">
-                    <div class="w-10 h-10 bg-gray-600 rounded-full mr-3"></div>
-                    <span class="text-muted">Portfolio</span>
-                </div>
-                <p class="text-muted text-sm mb-4">Published in Blog, Portfolio</p>
+            <div class="text-center ">
+                
                 
                 <!-- Meta Info Line -->
                 <div class="flex items-center justify-center space-x-6 text-sm text-muted border-t border-gray-700 pt-4">

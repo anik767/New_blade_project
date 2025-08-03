@@ -14,14 +14,14 @@
             <div
                 class="flex flex-col justify-center space-y-6 text-center md:text-left py-10 md:py-0 max-w-xl mx-auto md:mx-0">
                 <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight drop-shadow-lg capitalize">
-                    {{ optional($banner)->title_line1 ?? 'Hello' }}
+                    {{ optional($banner)->title_line1 ?: 'Hello' }}
                 </h1>
                 <h2
                     class="text-4xl md:text-5xl font-extrabold tracking-tight drop-shadow-lg min-h-[70px] text-accent">
-                    {{ optional($banner)->title_line2 ?? 'I’m Azmain Iqtidar Anik' }}
+                    {{ optional($banner)->title_line2 ?: 'I\'m Azmain Iqtidar Anik' }}
                 </h2>
                 <p class="text-lg md:text-xl text-muted leading-relaxed drop-shadow-md max-w-md">
-                    {{ optional($banner)->subtitle ?? 'Frontend Developer passionate about crafting clean, user-friendly websites that delight users.' }}
+                    {{ optional($banner)->subtitle ?: 'Frontend Developer passionate about crafting clean, user-friendly websites that delight users.' }}
                 </p>
                 <div class="flex justify-center md:justify-start">
                     @if (optional($banner)->cv_file)
@@ -168,7 +168,10 @@
         <div class="container mx-auto px-6 text-center ">
             <h2 class="text-5xl font-extrabold text-text mb-14">Skills & Tech Stack</h2>
             <div class="flex flex-wrap justify-center gap-8">
-                @foreach (['HTML', 'CSS', 'Tailwind', 'Laravel', 'React'] as $skill)
+                @php
+                    $skills = optional($banner)->skills ?? ['HTML', 'CSS', 'Tailwind', 'Laravel', 'React'];
+                @endphp
+                @foreach ($skills as $skill)
                     <div
                         class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5  to-[#1e2024] px-8 py-5 rounded-3xl border border-gray-700 shadow-lg shadow-accent/30 text-muted font-semibold text-lg hover:scale-105  hover:shadow-acttive/50 transform transition">
                         {{ $skill }}
@@ -182,14 +185,27 @@
     <section class="py-20" id="experience">
         <div class="container mx-auto px-6">
             <h2 class="text-5xl font-extrabold text-center text-text mb-16">Experience</h2>
-            <div class="border-l-4 border-accent hover:border-acttive transition duration-300 pl-8 space-y-12 bg-gradient-to-l from-[#23272b]   to-[#1e2024] rounded-xl p-8">
-                <div>
-                    <h3 class="text-2xl font-semibold text-text">Frontend Developer <span
-                            class="text-muted font-normal">— SIMEC System Ltd</span></h3>
-                    <p class="text-sm text-muted mb-3">July 2023 - Present</p>
-                    <p class="text-muted text-lg max-w-3xl">Working with Laravel, Vue, and Tailwind CSS to build
-                        responsive web interfaces.</p>
-                </div>
+            <div class="space-y-6">
+                @php
+                    $experiences = optional($banner)->experience ?? [
+                        [
+                            'title' => 'Frontend Developer',
+                            'company' => 'SIMEC System Ltd',
+                            'period' => 'July 2023 - Present',
+                            'description' => 'Working with Laravel, Vue, and Tailwind CSS to build responsive web interfaces.'
+                        ]
+                    ];
+                @endphp
+                @foreach ($experiences as $experience)
+                    <div class="border-l-4 border-accent hover:border-acttive transition duration-300 pl-8 space-y-12 bg-gradient-to-l from-[#23272b] to-[#1e2024] rounded-xl p-8">
+                        <div>
+                            <h3 class="text-2xl font-semibold text-text">{{ $experience['title'] }} <span
+                                    class="text-muted font-normal">— {{ $experience['company'] }}</span></h3>
+                            <p class="text-sm text-muted mb-3">{{ $experience['period'] }}</p>
+                            <p class="text-muted text-lg max-w-3xl">{{ $experience['description'] }}</p>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>

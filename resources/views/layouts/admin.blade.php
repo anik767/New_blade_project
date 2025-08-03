@@ -23,7 +23,7 @@
 </head>
 <body class="bg-white text-gray-900">
     {{-- Admin Sidebar Component --}}
-    <x-admin-sidebar />
+            <x-admin.sidebar />
     
     <script src="{{ asset('js/app.js') }}"></script>
     @stack('scripts')

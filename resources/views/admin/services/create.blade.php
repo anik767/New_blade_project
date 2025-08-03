@@ -31,5 +31,18 @@
             required 
             placeholder="Describe your service..."
         />
+        
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">
+                Service Image
+            </label>
+            
+            <input type="file" 
+                   name="image" 
+                   class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                   accept="image/*">
+            
+            <p class="mt-1 text-sm text-gray-500">Upload an image for this service (JPG, PNG, GIF, max 2MB)</p>
+        </div>
     </x-admin-form>
 @endsection 

@@ -1,9 +1,9 @@
 @extends('layouts.admin')
-@section('title', "Edit Blog Post - {$blog->title}")
+@section('title', "Edit Blog Post - {$post->title}")
 
 @section('content')
     <x-admin-form 
-        :action="route('admin.blog.update', $blog->id)" 
+        :action="route('admin.blog.update', $post->id)" 
         title="Edit Blog Post"
         submit-text="Update Post"
         method="PUT"
@@ -15,7 +15,7 @@
                 name="title" 
                 required 
                 placeholder="Enter blog post title"
-                :value="$blog->title"
+                :value="$post->title"
             />
             
             <div>
@@ -23,10 +23,10 @@
                     Featured Image
                 </label>
                 
-                @if($blog->image)
+                @if($post->image)
                     <div class="mb-4">
                         <p class="text-sm text-gray-600 mb-2">Current Image:</p>
-                        <img src="{{ asset('storage/' . $blog->image) }}" 
+                        <img src="{{ asset('storage/' . $post->image) }}" 
                              alt="Current blog image" 
                              class="w-40 h-auto border rounded shadow">
                     </div>
@@ -48,7 +48,7 @@
             required 
             placeholder="Write your blog post content here..."
             help="You can use HTML tags for formatting"
-            :value="$blog->content"
+            :value="$post->content"
         />
     </x-admin-form>
 @endsection

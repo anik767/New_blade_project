@@ -13,6 +13,30 @@ use Illuminate\Support\Facades\Route;
 // Public routes (no prefix, no middleware)
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [AboutMeController::class, 'publicShow'])->name('about');
+Route::get('/test-about', function() {
+    try {
+        $aboutMe = \App\Models\AboutMe::first();
+        if (!$aboutMe) {
+            $aboutMe = \App\Models\AboutMe::create([
+                'title' => 'Test About',
+                'content' => 'Test content',
+                'email' => 'test@example.com',
+            ]);
+        }
+        return response()->json(['success' => true, 'aboutMe' => $aboutMe]);
+    } catch (\Exception $e) {
+        return response()->json(['success' => false, 'error' => $e->getMessage()]);
+    }
+});
+
+Route::get('/test-about-view', function() {
+    try {
+        $aboutMe = \App\Models\AboutMe::first();
+        return view('site.about', compact('aboutMe'));
+    } catch (\Exception $e) {
+        return response()->json(['success' => false, 'error' => $e->getMessage()]);
+    }
+});
 Route::get('/services', [ServiceController::class, 'publicList'])->name('services');
 Route::get('/services/{slug}', [ServiceController::class, 'publicSingle'])->name('services.show');
 Route::get('/contact', [ContactController::class, 'publicShow'])->name('contact');
@@ -33,8 +57,14 @@ Route::post('/comment', [App\Http\Controllers\CommentController::class, 'store']
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [ProjectPostController::class, 'dashboard'])->name('dashboard');
 
-    Route::get('home-banner', [HomeBannerController::class, 'edit'])->name('home-banner.edit');
-    Route::post('home-banner', [HomeBannerController::class, 'update'])->name('home-banner.update');
+    Route::get('home', [HomeBannerController::class, 'edit'])->name('home.edit');
+    Route::put('home', [HomeBannerController::class, 'update'])->name('home.update');
+
+    // Home Skills & Experience routes
+    Route::get('home/skills', [HomeBannerController::class, 'skills'])->name('home.skills');
+    Route::put('home/skills', [HomeBannerController::class, 'updateSkills'])->name('home.update-skills');
+    Route::get('home/experience', [HomeBannerController::class, 'experience'])->name('home.experience');
+    Route::put('home/experience', [HomeBannerController::class, 'updateExperience'])->name('home.update-experience');
 
     Route::get('/projects', [ProjectPostController::class, 'index'])->name('projects.index');
     Route::get('/projects/create', [ProjectPostController::class, 'create'])->name('projects.create');

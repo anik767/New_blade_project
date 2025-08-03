@@ -17,13 +17,12 @@ class ContactController extends Controller
         if (!$contact) {
             // Create a default contact entry if none exists
             $contact = Contact::create([
+                'title' => 'Contact Information',
+                'content' => 'Get in touch with us for any inquiries or collaborations.',
                 'email' => 'your.email@example.com',
                 'phone' => '',
                 'address' => '',
-                'city' => '',
-                'linkedin' => '',
-                'github' => '',
-                'additional_info' => '',
+                'social_links' => '',
             ]);
         }
         
@@ -36,36 +35,25 @@ class ContactController extends Controller
     public function update(Request $request)
     {
         $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
             'email' => 'required|email|max:255',
             'phone' => 'nullable|string|max:255',
             'address' => 'nullable|string|max:500',
-            'city' => 'nullable|string|max:255',
-            'linkedin' => 'nullable|url|max:255',
-            'github' => 'nullable|url|max:255',
-            'additional_info' => 'nullable|string',
+            'social_links' => 'nullable|string',
         ]);
 
-        $contact = Contact::first();
-        
-        if (!$contact) {
-            $contact = new Contact();
-        }
-
         $data = [
+            'title' => $request->title,
+            'content' => $request->content,
             'email' => $request->email,
             'phone' => $request->phone,
             'address' => $request->address,
-            'city' => $request->city,
-            'linkedin' => $request->linkedin,
-            'github' => $request->github,
-            'additional_info' => $request->additional_info,
+            'social_links' => $request->social_links,
         ];
 
-        if ($contact->exists) {
-            $contact->update($data);
-        } else {
-            Contact::create($data);
-        }
+        $contact = Contact::firstOrCreate([], $data);
+        $contact->update($data);
 
         return redirect()->route('admin.contacts.edit')
                          ->with('success', 'Contact information updated successfully.');

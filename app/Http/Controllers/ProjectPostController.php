@@ -34,7 +34,7 @@ class ProjectPostController extends Controller
     public function dashboard()
     {
         $projectCount = ProjectPost::count();
-        return view('admin.dashboard', compact('projectCount'));
+        return view('admin.dashboard.index', compact('projectCount'));
     }
 
     // 🔐 Admin: List all projects with pagination (10 per page)
