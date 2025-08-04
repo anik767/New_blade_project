@@ -18,26 +18,145 @@
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     
     <!-- Notyf for notifications -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3.10.0/notyf.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3.10.0/notyf.min.js"></script>
+    
+    <style>
+        /* Ensure notifications stay on one line */
+        .notyf__toast {
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+            max-width: 400px !important;
+        }
+        
+        .notyf__toast .notyf__message {
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+        }
+        
+        /* Custom single line class */
+        .notyf__toast--single-line {
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+        }
+    </style>
 </head>
 <body class="bg-white text-gray-900">
+    <!-- Fallback notifications -->
+    <x-notification />
+    
     <div class="min-h-screen flex">
         <x-admin.sidebar />
     </div>
     
     <script src="{{ asset('js/app.js') }}"></script>
     @stack('scripts')
-    @if(session('success'))
     <script>
       document.addEventListener('DOMContentLoaded', function () {
-        const notyf = new Notyf({
-          duration: 3000,
-          position: { x: 'right', y: 'bottom' }
-        });
-        notyf.success(@json(session('success')));
+        let notyfLoaded = false;
+        
+        try {
+          if (typeof Notyf !== 'undefined') {
+            const notyf = new Notyf({
+              duration: 4000,
+              position: { x: 'right', y: 'bottom' },
+              dismissible: true,
+              types: [
+                {
+                  type: 'success',
+                  background: '#10B981',
+                  icon: {
+                    className: 'fas fa-check',
+                    tagName: 'i',
+                    text: ''
+                  }
+                },
+                {
+                  type: 'error',
+                  background: '#EF4444',
+                  icon: {
+                    className: 'fas fa-times',
+                    tagName: 'i',
+                    text: ''
+                  }
+                },
+                {
+                  type: 'warning',
+                  background: '#F59E0B',
+                  icon: {
+                    className: 'fas fa-exclamation-triangle',
+                    tagName: 'i',
+                    text: ''
+                  }
+                },
+                {
+                  type: 'info',
+                  background: '#3B82F6',
+                  icon: {
+                    className: 'fas fa-info-circle',
+                    tagName: 'i',
+                    text: ''
+                  }
+                }
+              ],
+              // Ensure notifications stay on one line
+              ripple: false,
+              // Prevent text wrapping
+              className: 'notyf__toast--single-line'
+            });
+
+            notyfLoaded = true;
+
+            // Success notifications
+            @if(session('success'))
+              notyf.success(@json(session('success')));
+            @endif
+
+            // Error notifications
+            @if(session('error'))
+              notyf.error(@json(session('error')));
+            @endif
+
+            // Warning notifications
+            @if(session('warning'))
+              notyf.open({
+                type: 'warning',
+                message: @json(session('warning'))
+              });
+            @endif
+
+            // Info notifications
+            @if(session('info'))
+              notyf.open({
+                type: 'info',
+                message: @json(session('info'))
+              });
+            @endif
+
+            // Validation errors
+            @if($errors->any())
+              @foreach($errors->all() as $error)
+                notyf.error(@json($error));
+              @endforeach
+            @endif
+
+            // Hide custom notifications if notyf is working
+            const customNotifications = document.getElementById('notification-container');
+            if (customNotifications) {
+              customNotifications.style.display = 'none';
+            }
+
+          } else {
+            console.warn('Notyf not loaded, using custom notifications');
+          }
+        } catch (error) {
+          console.error('Notyf error:', error);
+          console.warn('Using custom notifications as fallback');
+        }
       });
     </script>
-    @endif
 </body>
 </html>

@@ -43,11 +43,11 @@
                 <thead class="bg-gradient-to-r from-gray-50 to-gray-100">
                     <tr>
                         <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Image</th>
-                        <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Icon</th>
                         <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Title</th>
-                        <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Order</th>
-                        <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Status</th>
                         <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Description</th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Icon</th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Status</th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Created</th>
                         <th class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Actions</th>
                     </tr>
                 </thead>
@@ -59,7 +59,8 @@
                                     <div class="relative group">
                                         <img src="{{ asset('storage/' . $service->image) }}" 
                                              alt="{{ $service->title }}" 
-                                             class="w-20 h-16 object-cover rounded-lg border border-gray-200 shadow-sm group-hover:shadow-md transition-shadow duration-200">
+                                             class="w-full h-16 object-cover rounded-lg border border-gray-200 shadow-sm group-hover:shadow-md transition-shadow duration-200"
+                                             style="aspect-ratio: 16/9; object-position: center;">
                                         <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-200 rounded-lg flex items-center justify-center">
                                             <svg class="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -68,12 +69,23 @@
                                         </div>
                                     </div>
                                 @else
-                                    <div class="w-20 h-16 bg-gray-100 rounded-lg border border-gray-200 flex items-center justify-center">
+                                    <div class="w-full h-16 bg-gray-100 rounded-lg border border-gray-200 flex items-center justify-center">
                                         <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                         </svg>
                                     </div>
                                 @endif
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm font-semibold text-gray-900">{{ $service->title }}</div>
+                                <div class="text-sm text-gray-500">{{ $service->created_at->format('M d, Y') }}</div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="max-w-xs">
+                                    <p class="text-sm text-gray-900 truncate" title="{{ $service->description }}">
+                                        {{ Str::limit($service->description, 80) }}
+                                    </p>
+                                </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 @if($service->icon)
@@ -84,15 +96,6 @@
                                 @else
                                     <span class="text-gray-400 italic text-sm">No Icon</span>
                                 @endif
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm font-semibold text-gray-900">{{ $service->title }}</div>
-                                <div class="text-sm text-gray-500">{{ $service->slug }}</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                                    {{ $service->order }}
-                                </span>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 @if($service->is_active)
@@ -111,12 +114,8 @@
                                     </span>
                                 @endif
                             </td>
-                            <td class="px-6 py-4">
-                                <div class="max-w-xs">
-                                    <p class="text-sm text-gray-900 truncate" title="{{ $service->description }}">
-                                        {{ Str::limit($service->description, 80) }}
-                                    </p>
-                                </div>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                {{ $service->created_at->diffForHumans() }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                 <div class="flex items-center space-x-2">
@@ -161,7 +160,7 @@
                                     <h3 class="text-lg font-medium text-gray-900 mb-2">No services found</h3>
                                     <p class="text-gray-500 mb-4">Get started by creating your first service.</p>
                                     <a href="{{ route('admin.services.create') }}" 
-                                       class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200">
+                                       class="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-200">
                                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                                         </svg>

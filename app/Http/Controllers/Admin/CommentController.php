@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
+use App\Traits\AdminNotificationTrait;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
+    use AdminNotificationTrait;
     public function index()
     {
         $comments = Comment::with('commentable')
@@ -21,13 +23,13 @@ class CommentController extends Controller
     {
         $comment->update(['is_approved' => true]);
         
-        return redirect()->back()->with('success', 'Comment approved successfully!');
+        return $this->successRedirect('Comment approved successfully!');
     }
 
     public function destroy(Comment $comment)
     {
         $comment->delete();
         
-        return redirect()->back()->with('success', 'Comment deleted successfully!');
+        return $this->successRedirect('Comment deleted successfully!');
     }
 }

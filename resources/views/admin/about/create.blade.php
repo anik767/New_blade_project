@@ -29,7 +29,7 @@
             label="Profile Image" 
             name="image" 
             type="file" 
-            help="Upload your profile picture (max 2MB, JPG, PNG, GIF)"
+            help="Upload your profile picture (no size limit, JPG, PNG, GIF)"
             accept="image/*"
         />
         

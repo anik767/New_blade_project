@@ -51,10 +51,10 @@
 
             <div class="flex justify-center items-end h-full reveal-on-scroll">
                 <div class="relative">
-                    <div class="absolute inset-0 bg-gradient-to-t from-accent/20 to-transparent rounded-full blur-3xl"></div>
+                    <div class=" rounded-full "></div>
                     <img src="{{ optional($banner) && optional($banner)->person_image ? asset('storage/' . $banner->person_image) : asset('images/Home/damo.png') }}"
                         alt="{{ optional($banner)->title_line2 ?? 'Azmain Iqtidar Anik' }}"
-                        class="relative object-contain w-full max-w-xs lg:max-w-lg max-h-[90vh] shadow-2xl rounded-2xl hover:scale-105 transition-transform duration-500" />
+                        class="relative object-contain w-full max-w-xs lg:max-w-lg max-h-[90vh]  rounded-2xl  transition-transform duration-500" />
                 </div>
             </div>
         </div>
@@ -71,9 +71,9 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                 <div class="space-y-8 reveal-on-scroll">
                     <div class="relative">
-                        <div class="absolute inset-0 bg-gradient-to-br from-accent/20 to-transparent rounded-3xl blur-2xl"></div>
+                        <div class="absolute inset-0  "></div>
                         <img src="{{ asset('images/Home/damo.png') }}" alt="Azmain Iqtidar Anik"
-                            class="relative w-full max-w-md mx-auto lg:mx-0 rounded-3xl object-cover shadow-2xl hover:scale-105 transition-transform duration-500" />
+                            class="relative w-full max-w-md mx-auto lg:mx-0 rounded-3xl object-cover   transition-transform duration-500" />
                     </div>
 
                     <p class="text-xl leading-relaxed text-muted max-w-lg mx-auto lg:mx-0">

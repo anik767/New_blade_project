@@ -135,7 +135,7 @@
                             <ul class="text-sm text-green-700 mt-1 list-disc list-inside space-y-1">
                                 <li>Recommended size: 1200x800 pixels</li>
                                 <li>Formats: JPG, PNG, GIF</li>
-                                <li>Maximum file size: 2MB</li>
+                                <li>No file size limit</li>
                                 <li>Leave empty to keep current image</li>
                             </ul>
                         </div>

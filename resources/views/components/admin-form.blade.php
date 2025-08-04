@@ -1,10 +1,10 @@
 <div class="w-full">
-    <div class="bg-white shadow-sm rounded-lg border border-gray-200">
-        <div class="px-6  border-b border-gray-200">
-            <h2 class="text-xl font-semibold text-gray-900">{{ $title ?? 'Form' }}</h2>
+    <div class=" ">
+        <div class="">
+            <h2 class="text-xl font-semibold text-gray-900 ">{{ $title ?? 'Form' }}</h2>
         </div>
         
-        <form action="{{ $action }}" method="POST" enctype="multipart/form-data" class="p-6 space-y-6">
+        <form action="{{ $action }}" method="POST" enctype="multipart/form-data" class="">
             @csrf
             @if(isset($method))
                 @method($method)

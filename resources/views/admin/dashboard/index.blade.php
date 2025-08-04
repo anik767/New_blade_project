@@ -106,7 +106,7 @@
             </div>
             <div class="mt-4 flex items-center justify-between">
                 <span class="text-sm text-purple-600 font-medium">
-                    {{ \App\Models\Service::where('active', true)->count() }} active
+                    {{ \App\Models\Service::where('is_active', true)->count() }} active
                 </span>
                 <a href="{{ route('admin.services.index') }}" class="text-purple-600 hover:text-purple-800 font-medium text-sm flex items-center">
                     View all
@@ -140,6 +140,143 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                     </svg>
                 </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Home Management Overview -->
+    <div class="mb-8">
+        <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
+            <div class="bg-gradient-to-r from-indigo-50 to-purple-50 px-6 py-4 border-b border-gray-200">
+                <h3 class="text-lg font-semibold text-gray-900 flex items-center">
+                    <svg class="w-5 h-5 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                    </svg>
+                    Home Management
+                </h3>
+            </div>
+            <div class="p-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    @php
+                        $banner = \App\Models\HomeBanner::latest()->first();
+                        if (!$banner) {
+                            $banner = new \App\Models\HomeBanner();
+                        }
+                    @endphp
+                    
+                    <!-- Banner Section -->
+                    <div class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg p-4 border border-indigo-200">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center">
+                                <svg class="w-6 h-6 text-indigo-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                                <h4 class="font-semibold text-gray-900">Banner</h4>
+                            </div>
+                        </div>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Background Image</span>
+                                <span class="font-medium {{ $banner->background_image ? 'text-green-600' : 'text-gray-400' }}">
+                                    {{ $banner->background_image ? '✓' : '✗' }}
+                                </span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Profile Image</span>
+                                <span class="font-medium {{ $banner->person_image ? 'text-green-600' : 'text-gray-400' }}">
+                                    {{ $banner->person_image ? '✓' : '✗' }}
+                                </span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">CV File</span>
+                                <span class="font-medium {{ $banner->cv_file ? 'text-green-600' : 'text-gray-400' }}">
+                                    {{ $banner->cv_file ? '✓' : '✗' }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <a href="{{ route('admin.home.banner.edit') }}" 
+                               class="w-full bg-indigo-600 text-white px-3 py-2 rounded-lg hover:bg-indigo-700 transition-colors duration-200 text-center block text-sm">
+                                Edit Banner
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Skills Section -->
+                    <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4 border border-green-200">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center">
+                                <svg class="w-6 h-6 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                </svg>
+                                <h4 class="font-semibold text-gray-900">Skills</h4>
+                            </div>
+                        </div>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Total Skills</span>
+                                <span class="font-medium text-gray-900">{{ count($banner->skills ?? []) }}</span>
+                            </div>
+                            @if(is_array($banner->skills) && count($banner->skills) > 0)
+                                <div class="flex flex-wrap gap-1">
+                                    @foreach(array_slice($banner->skills, 0, 2) as $skill)
+                                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">{{ $skill }}</span>
+                                    @endforeach
+                                    @if(count($banner->skills) > 2)
+                                        <span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full">+{{ count($banner->skills) - 2 }} more</span>
+                                    @endif
+                                </div>
+                            @else
+                                <p class="text-xs text-gray-500">No skills added yet</p>
+                            @endif
+                        </div>
+                        <div class="mt-4">
+                            <a href="{{ route('admin.home.skills.edit') }}" 
+                               class="w-full bg-green-600 text-white px-3 py-2 rounded-lg hover:bg-green-700 transition-colors duration-200 text-center block text-sm">
+                                Edit Skills
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Experience Section -->
+                    <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg p-4 border border-purple-200">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center">
+                                <svg class="w-6 h-6 text-purple-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2h8z"></path>
+                                </svg>
+                                <h4 class="font-semibold text-gray-900">Experience</h4>
+                            </div>
+                        </div>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Total Experiences</span>
+                                <span class="font-medium text-gray-900">{{ count($banner->experience ?? []) }}</span>
+                            </div>
+                            @if(is_array($banner->experience) && count($banner->experience) > 0)
+                                <div class="space-y-1">
+                                    @foreach(array_slice($banner->experience, 0, 2) as $exp)
+                                        <div class="text-xs">
+                                            <div class="font-medium text-gray-900">{{ $exp['title'] ?? 'Job Title' }}</div>
+                                            <div class="text-gray-600">{{ $exp['company'] ?? 'Company' }}</div>
+                                        </div>
+                                    @endforeach
+                                    @if(count($banner->experience) > 2)
+                                        <div class="text-xs text-gray-500">+{{ count($banner->experience) - 2 }} more experiences</div>
+                                    @endif
+                                </div>
+                            @else
+                                <p class="text-xs text-gray-500">No experience added yet</p>
+                            @endif
+                        </div>
+                        <div class="mt-4">
+                            <a href="{{ route('admin.home.experience.edit') }}" 
+                               class="w-full bg-purple-600 text-white px-3 py-2 rounded-lg hover:bg-purple-700 transition-colors duration-200 text-center block text-sm">
+                                Edit Experience
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -189,9 +326,14 @@
                             
                             // Add recent comments
                             foreach(\App\Models\Comment::with('commentable')->latest()->take(3)->get() as $comment) {
+                                $commentableTitle = 'Unknown';
+                                if ($comment->commentable) {
+                                    $commentableTitle = $comment->commentable->title ?? 'Unknown';
+                                }
+                                
                                 $recentActivities->push([
                                     'type' => 'comment',
-                                    'title' => $comment->name . ' commented on ' . ($comment->commentable->title ?? 'Unknown'),
+                                    'title' => $comment->name . ' commented on ' . $commentableTitle,
                                     'time' => $comment->created_at,
                                     'icon' => 'M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z',
                                     'color' => 'purple',
@@ -322,7 +464,7 @@
                             </div>
                         </a>
                         
-                        <a href="{{ route('admin.home.edit') }}" class="flex items-center p-3 rounded-lg hover:bg-yellow-50 transition-colors group">
+                        <a href="{{ route('admin.home.banner.edit') }}" class="flex items-center p-3 rounded-lg hover:bg-yellow-50 transition-colors group">
                             <div class="p-2 rounded-full bg-yellow-100 text-yellow-600 group-hover:bg-yellow-200 transition-colors">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
@@ -418,7 +560,7 @@
                     </div>
                     <div class="flex items-center justify-between">
                         <span class="text-sm text-gray-600">Active Services</span>
-                        <span class="text-sm font-semibold text-green-600">{{ \App\Models\Service::where('active', true)->count() }}</span>
+                        <span class="text-sm font-semibold text-green-600">{{ \App\Models\Service::where('is_active', true)->count() }}</span>
                     </div>
                     <div class="flex items-center justify-between">
                         <span class="text-sm text-gray-600">Total Messages</span>
