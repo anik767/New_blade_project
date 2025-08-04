@@ -15,5 +15,12 @@ class HomeBanner extends Model
         'background_image',  // new field for background image
         'person_image',      // new field for person image
         'cv_file',           // CV upload
+        'skills',            // JSON array of skills
+        'experience',        // JSON array of experience
+    ];
+
+    protected $casts = [
+        'skills' => 'array',
+        'experience' => 'array',
     ];
 }

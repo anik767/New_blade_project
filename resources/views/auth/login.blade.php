@@ -16,7 +16,7 @@
         <!-- Login Form -->
         <div class="bg-white/10 backdrop-blur-lg rounded-lg shadow-2xl p-8 border border-white/20">
             <!-- Session Status -->
-            <x-auth-session-status class="mb-4" :status="session('status')" />
+            <x-auth.session-status class="mb-4" :status="session('status')" />
 
             <form method="POST" action="{{ route('login') }}" class="space-y-6">
                 @csrf

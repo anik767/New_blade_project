@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\BlogPost;
+use App\Traits\AdminNotificationTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
 class BlogPostController extends Controller
 {
+    use AdminNotificationTrait;
     // 🔓 Public: List blog posts (pagination)
     public function publicList()
     {
@@ -47,82 +49,98 @@ class BlogPostController extends Controller
     // 🔐 Admin: Store blog post
     public function store(Request $request)
     {
-        $request->validate([
-            'title'   => 'required|string|max:255',
-            'content' => 'required|string',
-            'image'   => 'nullable|image|max:2048',
-        ]);
+        try {
+            $request->validate([
+                'title'   => 'required|string|max:255',
+                'content' => 'required|string',
+                'image'   => 'nullable|image',
+            ]);
 
-        $imagePath = null;
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('blog', 'public');
+            $imagePath = null;
+            if ($request->hasFile('image')) {
+                $imagePath = $request->file('image')->store('blog', 'public');
+            }
+
+            $slug = $this->generateUniqueSlug($request->title);
+
+            BlogPost::create([
+                'title'   => $request->title,
+                'slug'    => $slug,
+                'content' => $request->content,
+                'image'   => $imagePath,
+            ]);
+
+            return $this->successRedirect('Blog created successfully.', 'admin.blog.index');
+        } catch (\Exception $e) {
+            return $this->handleException($e, 'Failed to create blog post');
         }
-
-        $slug = $this->generateUniqueSlug($request->title);
-
-        BlogPost::create([
-            'title'   => $request->title,
-            'slug'    => $slug,
-            'content' => $request->content,
-            'image'   => $imagePath,
-        ]);
-
-        return redirect()->route('admin.blog.index')->with('success', 'Blog created successfully.');
     }
 
     // 🔐 Admin: Show edit form
     public function edit(BlogPost $blog)
     {
-        return view('admin.blog.edit', ['post' => $blog]);
+        try {
+            return view('admin.blog.edit', ['post' => $blog]);
+        } catch (\Exception $e) {
+            return $this->errorRedirect('Blog post not found', 'admin.blog.index');
+        }
     }
 
     // 🔐 Admin: Update blog post
     public function update(Request $request, BlogPost $blog)
     {
-        $request->validate([
-            'title'   => 'required|string|max:255',
-            'content' => 'required|string',
-            'image'   => 'nullable|image|max:2048',
-        ]);
+        try {
+            $request->validate([
+                'title'   => 'required|string|max:255',
+                'content' => 'required|string',
+                'image'   => 'nullable|image',
+            ]);
 
-        if ($request->hasFile('image')) {
-            if ($blog->image && Storage::disk('public')->exists($blog->image)) {
-                Storage::disk('public')->delete($blog->image);
+            if ($request->hasFile('image')) {
+                if ($blog->image && Storage::disk('public')->exists($blog->image)) {
+                    Storage::disk('public')->delete($blog->image);
+                }
+                $imagePath = $request->file('image')->store('blog', 'public');
+            } else {
+                $imagePath = $blog->image;
             }
-            $imagePath = $request->file('image')->store('blog', 'public');
-        } else {
-            $imagePath = $blog->image;
+
+            $slug = $blog->slug;
+            if ($request->title !== $blog->title) {
+                $slug = $this->generateUniqueSlug($request->title, $blog->id);
+            }
+
+            $blog->update([
+                'title'   => $request->title,
+                'slug'    => $slug,
+                'content' => $request->content,
+                'image'   => $imagePath,
+            ]);
+
+            return $this->successRedirect('Blog updated successfully.', 'admin.blog.index');
+        } catch (\Exception $e) {
+            return $this->handleException($e, 'Failed to update blog post');
         }
-
-        $slug = $blog->slug;
-        if ($request->title !== $blog->title) {
-            $slug = $this->generateUniqueSlug($request->title, $blog->id);
-        }
-
-        $blog->update([
-            'title'   => $request->title,
-            'slug'    => $slug,
-            'content' => $request->content,
-            'image'   => $imagePath,
-        ]);
-
-        return redirect()->route('admin.blog.index')->with('success', 'Blog updated successfully.');
     }
 
     // 🔐 Admin: Delete blog post
     public function destroy(BlogPost $blog)
     {
-        if ($blog->image && Storage::disk('public')->exists($blog->image)) {
-            Storage::disk('public')->delete($blog->image);
+        try {
+            if ($blog->image && Storage::disk('public')->exists($blog->image)) {
+                Storage::disk('public')->delete($blog->image);
+            }
+
+            $blog->delete();
+
+            return $this->successRedirect('Blog deleted successfully.', 'admin.blog.index');
+        } catch (\Exception $e) {
+            return $this->handleException($e, 'Failed to delete blog post');
         }
-
-        $blog->delete();
-
-        return redirect()->route('admin.blog.index')->with('success', 'Blog deleted successfully.');
     }
 
     // 🧠 Utility: Generate unique slug
-    private function generateUniqueSlug($title, $ignoreId = null)
+    public function generateUniqueSlug($title, $ignoreId = null)
     {
         $baseSlug = Str::slug($title);
         $slug = $baseSlug;

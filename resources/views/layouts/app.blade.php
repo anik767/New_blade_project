@@ -9,7 +9,7 @@
   @stack('styles')
 </head>
 
-<body class="bg-gray-100 text-gray-900 min-h-screen flex flex-col">
+<body class="bg-gray-100 text-gray-900 min-h-full flex flex-col">
 
   {{-- Site Navigation --}}
   <x-site-navigation />

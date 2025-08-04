@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\ContactMessage;
+use App\Traits\AdminNotificationTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class ContactFormController extends Controller
 {
+    use AdminNotificationTrait;
     public function submit(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -80,7 +82,6 @@ class ContactFormController extends Controller
     {
         $contactMessage->delete();
         
-        return redirect()->route('admin.contact-messages.index')
-            ->with('success', 'Message deleted successfully');
+        return $this->successRedirect('Message deleted successfully', 'admin.contact-messages.index');
     }
 }

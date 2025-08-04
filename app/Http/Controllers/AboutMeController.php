@@ -18,7 +18,6 @@ class AboutMeController extends Controller
         if (!$aboutMe) {
             // Create a default about me entry if none exists
             $aboutMe = AboutMe::create([
-                'name' => 'Your Name',
                 'title' => 'Your Title',
                 'content' => 'Tell visitors about yourself...',
                 'email' => 'your.email@example.com',
@@ -38,7 +37,6 @@ class AboutMeController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
             'title' => 'nullable|string|max:255',
             'content' => 'required|string',
             'image' => 'nullable|image|max:2048',
@@ -47,6 +45,10 @@ class AboutMeController extends Controller
             'location' => 'nullable|string|max:255',
             'linkedin' => 'nullable|url|max:255',
             'github' => 'nullable|url|max:255',
+            'map_embed_code' => 'nullable|string',
+            'skills' => 'nullable|array',
+            'skills.*.name' => 'required|string|max:255',
+            'skills.*.percentage' => 'required|integer|min:0|max:100',
         ]);
 
         $aboutMe = AboutMe::first();
@@ -64,8 +66,20 @@ class AboutMeController extends Controller
             $imagePath = $aboutMe->image;
         }
 
+        // Process skills data
+        $skills = [];
+        if ($request->has('skills')) {
+            foreach ($request->skills as $skill) {
+                if (!empty($skill['name']) && isset($skill['percentage'])) {
+                    $skills[] = [
+                        'name' => $skill['name'],
+                        'percentage' => (int) $skill['percentage']
+                    ];
+                }
+            }
+        }
+
         $data = [
-            'name' => $request->name,
             'title' => $request->title,
             'content' => $request->content,
             'image' => $imagePath,
@@ -74,13 +88,12 @@ class AboutMeController extends Controller
             'location' => $request->location,
             'linkedin' => $request->linkedin,
             'github' => $request->github,
+            'map_embed_code' => $request->map_embed_code,
+            'skills' => json_encode($skills),
         ];
 
-        if ($aboutMe->exists) {
-            $aboutMe->update($data);
-        } else {
-            AboutMe::create($data);
-        }
+        $aboutMe = AboutMe::firstOrCreate([], $data);
+        $aboutMe->update($data);
 
         return redirect()->route('admin.about-me.edit')
                          ->with('success', 'About Me updated successfully.');
@@ -89,7 +102,26 @@ class AboutMeController extends Controller
     // 🔓 Public: Show about me page
     public function publicShow()
     {
-        $aboutMe = AboutMe::first();
-        return view('site.about', compact('aboutMe'));
+        try {
+            $aboutMe = AboutMe::first();
+            
+            // If no about me record exists, create a default one
+            if (!$aboutMe) {
+                $aboutMe = AboutMe::create([
+                    'title' => 'About Me',
+                    'content' => 'Tell visitors about yourself...',
+                    'email' => 'your.email@example.com',
+                    'phone' => '',
+                    'location' => '',
+                    'linkedin' => '',
+                    'github' => '',
+                ]);
+            }
+            
+            return view('site.about', compact('aboutMe'));
+        } catch (\Exception $e) {
+            // If there's an error, return the view with null
+            return view('site.about', ['aboutMe' => null]);
+        }
     }
 }

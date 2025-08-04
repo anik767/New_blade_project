@@ -3,8 +3,8 @@
 @section('title', 'View Contact')
 
 @section('content')
-<div class="container mx-auto px-4 py-8">
-    <div class="max-w-4xl mx-auto">
+<div class="p-6">
+    <div>
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-3xl font-bold text-text">View Contact</h1>
             <div class="flex space-x-2">

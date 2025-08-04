@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\HomeBanner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class HomeBannerController extends Controller
 {
@@ -18,7 +19,7 @@ class HomeBannerController extends Controller
             $banner = new HomeBanner(); // empty banner instance
         }
 
-        return view('admin.home-banner.edit', compact('banner'));
+        return view('admin.home.banner.edit', compact('banner'));
     }
 
     // Update banner data
@@ -26,49 +27,70 @@ class HomeBannerController extends Controller
     {
         // Validate incoming request
         $request->validate([
-            'title_line1'       => 'required|string|max:255',
-            'title_line2'       => 'required|string|max:255',
-            'subtitle'          => 'required|string',
-
-            'background_image'  => 'nullable|image|max:2048',
-            'person_image'      => 'nullable|image|max:2048',
+            'title_line1'       => 'nullable|string|max:255',
+            'title_line2'       => 'nullable|string|max:255',
+            'subtitle'          => 'nullable|string',
+            'background_image'  => 'nullable|image',
+            'person_image'      => 'nullable|image',
             'cv_file'           => 'nullable|file|mimes:pdf,doc,docx|max:5120',
         ]);
 
         // Retrieve existing banner or create new
         $banner = HomeBanner::latest()->first() ?? new HomeBanner();
 
-        // Update text fields
-        $banner->title_line1 = $request->title_line1;
-        $banner->title_line2 = $request->title_line2;
-        $banner->subtitle = $request->subtitle;
+        // Update text fields with default values if null
+        $banner->title_line1 = $request->title_line1 ?? '';
+        $banner->title_line2 = $request->title_line2 ?? '';
+        $banner->subtitle = $request->subtitle ?? '';
 
         // Handle background image upload & delete old if exists
         if ($request->hasFile('background_image')) {
+            Log::info('Background image file detected', [
+                'filename' => $request->file('background_image')->getClientOriginalName(),
+                'size' => $request->file('background_image')->getSize(),
+                'mime' => $request->file('background_image')->getMimeType()
+            ]);
+            
             if ($banner->background_image && Storage::disk('public')->exists($banner->background_image)) {
                 Storage::disk('public')->delete($banner->background_image);
             }
             $banner->background_image = $request->file('background_image')->store('banners', 'public');
+            Log::info('Background image stored', ['path' => $banner->background_image]);
         }
 
         // Handle person image upload & delete old if exists
         if ($request->hasFile('person_image')) {
+            Log::info('Person image file detected', [
+                'filename' => $request->file('person_image')->getClientOriginalName(),
+                'size' => $request->file('person_image')->getSize(),
+                'mime' => $request->file('person_image')->getMimeType()
+            ]);
+            
             if ($banner->person_image && Storage::disk('public')->exists($banner->person_image)) {
                 Storage::disk('public')->delete($banner->person_image);
             }
             $banner->person_image = $request->file('person_image')->store('banners', 'public');
+            Log::info('Person image stored', ['path' => $banner->person_image]);
         }
 
         // Handle CV file upload & delete old if exists
         if ($request->hasFile('cv_file')) {
+            Log::info('CV file detected', [
+                'filename' => $request->file('cv_file')->getClientOriginalName(),
+                'size' => $request->file('cv_file')->getSize(),
+                'mime' => $request->file('cv_file')->getMimeType()
+            ]);
+            
             if ($banner->cv_file && Storage::disk('public')->exists($banner->cv_file)) {
                 Storage::disk('public')->delete($banner->cv_file);
             }
             $banner->cv_file = $request->file('cv_file')->store('cv', 'public');
+            Log::info('CV file stored', ['path' => $banner->cv_file]);
         }
 
         // Save banner to DB
         $banner->save();
+        Log::info('Banner saved', ['id' => $banner->id]);
 
         // Redirect back with success message
         return redirect()->back()->with('success', 'Home banner updated successfully.');

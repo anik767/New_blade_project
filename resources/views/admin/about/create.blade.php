@@ -2,6 +2,7 @@
 @section('title', 'Create About Me Content')
 
 @section('content')
+<div class="p-6">
     <x-admin-form 
         :action="route('admin.about-me.store')" 
         title="Create About Me Content"
@@ -28,7 +29,7 @@
             label="Profile Image" 
             name="image" 
             type="file" 
-            help="Upload your profile picture (max 2MB, JPG, PNG, GIF)"
+            help="Upload your profile picture (no size limit, JPG, PNG, GIF)"
             accept="image/*"
         />
         
@@ -78,4 +79,5 @@
             />
         </div>
     </x-admin-form>
+</div>
 @endsection 
