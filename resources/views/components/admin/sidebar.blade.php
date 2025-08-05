@@ -162,7 +162,7 @@
                     <span class="font-medium">Messages</span>
                 </div>
                 @php
-                    $messageCount = \App\Models\ContactMessage::where('is_read', false)->count();
+                    $messageCount = \App\Models\ContactMessage::where('status', 'unread')->count();
                 @endphp
                 @if($messageCount > 0)
                     <span class="bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded-full">{{ $messageCount }}</span>
@@ -194,6 +194,17 @@
                     </svg>
                 </div>
                 <span class="font-medium">Contact Info</span>
+            </a>
+
+            <!-- Themes (Theme Management) -->
+            <a href="{{ route('admin.themes.index') }}" 
+               class="sidebar-item flex items-center px-4 py-3 text-gray-300 rounded-xl hover:bg-gray-700 hover:text-white transition-all duration-200 group {{ request()->routeIs('admin.themes.*') ? 'bg-blue-600 text-white shadow-lg' : '' }}">
+                <div class="flex items-center justify-center w-8 h-8 mr-3 rounded-lg {{ request()->routeIs('admin.themes.*') ? 'bg-blue-500' : 'bg-gray-700 group-hover:bg-gray-600' }} transition-colors duration-200">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                </div>
+                <span class="font-medium">Themes</span>
             </a>
         </div>
     </nav>

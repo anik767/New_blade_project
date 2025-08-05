@@ -15,9 +15,21 @@
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    @php
+        $themeId = \DB::table('settings')->where('key', 'selected_theme')->value('value');
+        $theme = $themeId ? \App\Models\Theme::find($themeId) : null;
+        $colors = $theme ? json_decode($theme->colors, true) : [];
+    @endphp
+    <style>
+    :root {
+        @foreach($colors as $key => $value)
+            --color-{{ str_replace('_', '-', $key) }}: {{ $value }};
+        @endforeach
+    }
+    </style>
 </head>
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-background">
+    <div class="min-h-screen bg-background bg-background-gradient">
         <!-- Navigation -->
         @include('layouts.components.navigation')
 

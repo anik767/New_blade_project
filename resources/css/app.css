@@ -9,3 +9,5 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
+/* Removed static :root theme block. All theme variables are now injected from Blade. */

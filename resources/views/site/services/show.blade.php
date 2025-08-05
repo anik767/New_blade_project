@@ -1,25 +1,25 @@
 @extends('layouts.site')
 @section('title', "Service - {$service->title}")
 @section('content')
-<div class="bg-background text-text min-h-screen">
+<div class="bg-white text-gray-900 min-h-screen">
     <!-- Main Content -->
     <div class="container mx-auto px-6 py-16">
         <div class="max-w-4xl mx-auto">
             <!-- Page Title -->
             <div class="text-center mb-8">
-                <h1 class="text-4xl font-bold text-text mb-4">Service with Title, Image and Meta Info</h1>
+                <h1 class="text-4xl font-bold text-gray-900 mb-4">Service with Title, Image and Meta Info</h1>
             </div>
 
             <!-- Author and Meta Information -->
             <div class="text-center mb-6">
                 <div class="flex items-center justify-center mb-2">
                     <div class="w-10 h-10 bg-gray-600 rounded-full mr-3"></div>
-                    <span class="text-muted">Portfolio</span>
+                    <span class="text-gray-600">Portfolio</span>
                 </div>
-                <p class="text-muted text-sm mb-4">Published in Services, Portfolio</p>
+                <p class="text-gray-600 text-sm mb-4">Published in Services, Portfolio</p>
                 
                 <!-- Meta Info Line -->
-                <div class="flex items-center justify-center space-x-6 text-sm text-muted border-t border-gray-700 pt-4">
+                <div class="flex items-center justify-center space-x-6 text-sm text-gray-600 border-t border-gray-300 pt-4">
                     <span class="flex items-center">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
@@ -53,9 +53,9 @@
             <!-- Service Title -->
             <div class="flex items-center mb-4">
                 @if($service->icon)
-                    <span class="text-4xl mr-4">{{ $service->icon }}</span>
+                    
                 @endif
-                <h2 class="text-3xl font-bold text-text">{{ $service->title }}</h2>
+                <h2 class="text-3xl font-bold text-gray-900">{{ $service->title }}</h2>
             </div>
 
             <!-- Service Content -->
@@ -66,54 +66,54 @@
             </div>
 
             <!-- Comments Section -->
-            <div class="mt-12 pt-8 border-t border-gray-700">
-                <h3 class="text-2xl font-bold text-text mb-6">Comments ({{ $service->comments->count() }})</h3>
+            <div class="mt-12 pt-8 border-t border-gray-300">
+                <h3 class="text-2xl font-bold text-gray-900 mb-6">Comments ({{ $service->comments->count() }})</h3>
                 
                 <!-- Display Comments -->
                 @if($service->comments->count() > 0)
                     <div class="space-y-6 mb-8">
                         @foreach($service->comments as $comment)
-                            <div class="bg-card border border-gray-700 rounded-lg p-6">
+                            <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-lg">
                                 <div class="flex items-start space-x-4">
-                                    <div class="w-10 h-10 bg-accent rounded-full flex items-center justify-center text-background font-bold">
+                                    <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">
                                         {{ strtoupper(substr($comment->name, 0, 1)) }}
                                     </div>
                                     <div class="flex-1">
                                         <div class="flex items-center space-x-2 mb-2">
-                                            <h4 class="font-semibold text-text">{{ $comment->name }}</h4>
-                                            <span class="text-muted text-sm">{{ $comment->created_at->format('M d, Y g:i A') }}</span>
+                                            <h4 class="font-semibold text-gray-900">{{ $comment->name }}</h4>
+                                            <span class="text-gray-500 text-sm">{{ $comment->created_at->format('M d, Y g:i A') }}</span>
                                         </div>
-                                        <p class="text-muted">{{ $comment->comment }}</p>
+                                        <p class="text-gray-600">{{ $comment->comment }}</p>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
                     </div>
                 @else
-                    <p class="text-muted mb-8">No comments yet. Be the first to comment!</p>
+                    <p class="text-gray-600 mb-8">No comments yet. Be the first to comment!</p>
                 @endif
 
                 <!-- Comment Form -->
-                <div class="bg-card border border-gray-700 rounded-lg p-6">
-                    <h4 class="text-lg font-semibold text-text mb-4">Leave a Comment</h4>
+                <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-lg">
+                    <h4 class="text-lg font-semibold text-gray-900 mb-4">Leave a Comment</h4>
                     <form id="comment-form" class="space-y-6">
                         @csrf
                         <input type="hidden" name="type" value="service">
                         <input type="hidden" name="id" value="{{ $service->id }}">
                         
                         <div>
-                            <label for="comment" class="block text-sm font-medium text-muted mb-2">Comment *</label>
-                            <textarea id="comment" name="comment" rows="6" required class="w-full px-4 py-3 bg-background border border-gray-700 rounded-lg text-text placeholder-muted focus:outline-none focus:ring-2 focus:ring-accent resize-none"></textarea>
+                            <label for="comment" class="block text-sm font-medium text-gray-700 mb-2">Comment *</label>
+                            <textarea id="comment" name="comment" rows="6" required class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none"></textarea>
                         </div>
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label for="name" class="block text-sm font-medium text-muted mb-2">Name *</label>
-                                <input type="text" id="name" name="name" required class="w-full px-4 py-3 bg-background border border-gray-700 rounded-lg text-text placeholder-muted focus:outline-none focus:ring-2 focus:ring-accent">
+                                <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Name *</label>
+                                <input type="text" id="name" name="name" required class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                             </div>
                             <div>
-                                <label for="email" class="block text-sm font-medium text-muted mb-2">Email *</label>
-                                <input type="email" id="email" name="email" required class="w-full px-4 py-3 bg-background border border-gray-700 rounded-lg text-text placeholder-muted focus:outline-none focus:ring-2 focus:ring-accent">
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+                                <input type="email" id="email" name="email" required class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                             </div>
                         </div>
                         
@@ -122,7 +122,7 @@
                             <div id="comment-error" class="bg-red-500/20 border border-red-500 text-red-400 px-4 py-3 rounded text-sm hidden"></div>
                         </div>
                         
-                        <button type="submit" class="bg-accent text-background px-8 py-3 rounded-lg hover:bg-acttive transition duration-300 font-medium">
+                        <button type="submit" class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition duration-300 font-medium">
                             Post Comment
                         </button>
                     </form>
@@ -130,9 +130,9 @@
             </div>
 
             <!-- Share Service Section -->
-            <div class="mt-12 pt-8 border-t border-gray-700">
+            <div class="mt-12 pt-8 border-t border-gray-300">
                 <div class="flex items-center mb-4">
-                    <span class="text-muted font-medium mr-4">Share Service:</span>
+                    <span class="text-gray-600 font-medium mr-4">Share Service:</span>
                     <div class="flex space-x-3">
                         <a href="#" class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white hover:bg-blue-700 transition-colors">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -159,30 +159,30 @@
             </div>
 
             <!-- More Recommended Section -->
-            <div class="mt-12 pt-8 border-t border-gray-700">
-                <h3 class="text-2xl font-bold text-text mb-6">More Recommended</h3>
+            <div class="mt-12 pt-8 border-t border-gray-300">
+                <h3 class="text-2xl font-bold text-gray-900 mb-6">More Recommended</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     @php
                         $recentServices = \App\Models\Service::where('is_active', true)->latest()->take(3)->get();
                     @endphp
                     @foreach($recentServices as $recentService)
-                        <div class="bg-card border border-gray-700 rounded-lg overflow-hidden shadow-lg shadow-accent/30 hover:shadow-acttive/50 transition-shadow">
+                        <div class="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
                             @if($recentService->image)
                                 <div class="relative">
                                     <img src="{{ asset('storage/' . $recentService->image) }}" 
                                          alt="{{ $recentService->title }}" 
                                          class="w-full h-48 object-cover">
-                                    <div class="absolute top-2 right-2 bg-accent text-background px-2 py-1 rounded text-xs font-medium">
+                                    <div class="absolute top-2 right-2 bg-blue-600 text-white px-2 py-1 rounded text-xs font-medium">
                                         SERV
                                     </div>
                                 </div>
                             @endif
                             <div class="p-4">
-                                <h4 class="font-bold text-text mb-2 line-clamp-2">{{ $recentService->title }}</h4>
-                                <a href="{{ route('services.show', $recentService->slug) }}" class="text-accent hover:text-acttive text-sm font-medium">
+                                <h4 class="font-bold text-gray-900 mb-2 line-clamp-2">{{ $recentService->title }}</h4>
+                                <a href="{{ route('services.show', $recentService->slug) }}" class="text-blue-600 hover:text-blue-700 text-sm font-medium">
                                     READ MORE »
                                 </a>
-                                <p class="text-muted text-sm mt-2">
+                                <p class="text-gray-500 text-sm mt-2">
                                     {{ $recentService->created_at->format('F d, Y') }} • No Comments
                                 </p>
                             </div>

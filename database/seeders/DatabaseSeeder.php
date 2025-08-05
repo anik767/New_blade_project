@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -24,7 +26,14 @@ class DatabaseSeeder extends Seeder
         // Run the sample data seeder
         $this->call([
             SampleDataSeeder::class,
+            ThemeSeeder::class,
         ]);
+
+        // Set Light theme as default
+        DB::table('settings')->updateOrInsert(
+            ['key' => 'selected_theme'],
+            ['value' => 1] // Light theme ID
+        );
             
     }
 }

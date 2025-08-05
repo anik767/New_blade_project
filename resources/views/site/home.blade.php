@@ -2,14 +2,14 @@
 @section('title', 'Home')
 @section('content')
 
-<div class="bg-background text-text min-h-screen">
+<div class="bg-background bg-background-gradient text-text min-h-screen">
 
     {{-- Hero Section --}}
     <section class="relative h-screen bg-cover bg-center bg-no-repeat overflow-hidden"
         style="background-image: url('{{ optional($banner) && optional($banner)->background_image ? asset('storage/' . $banner->background_image) : asset('images/Home/banner-background-one.jpg') }}')">
-        <div class="absolute inset-0 bg-gradient-to-r from-background/80 via-background/60 to-background/40"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-card/80 via-card/60 to-card/40"></div>
 
-        <div class="container mx-auto h-full grid grid-cols-1 lg:grid-cols-2 items-center px-6 relative font-rajdhani z-10 text-[#c4cfde]">
+        <div class="container mx-auto h-full grid grid-cols-1 lg:grid-cols-2 items-center px-6 relative font-rajdhani z-10 text-text">
             <div class="flex flex-col justify-center space-y-8 text-center lg:text-left py-10 lg:py-0 max-w-2xl mx-auto lg:mx-0 reveal-on-scroll">
                 <div class="space-y-4">
                     <h1 class="text-5xl lg:text-7xl font-extrabold tracking-tight drop-shadow-lg capitalize leading-tight">
@@ -25,7 +25,7 @@
                 <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                     @if (optional($banner)->cv_file)
                         <a href="{{ asset('storage/' . $banner->cv_file) }}" download
-                            class="inline-flex items-center px-8 py-4 border-2 border-accent rounded-xl font-semibold tracking-wide text-accent hover:bg-accent hover:text-dark transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
+                            class="inline-flex items-center px-8 py-4 border-2 border-accent rounded-xl font-semibold tracking-wide text-accent hover:bg-accent hover:text-background transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                             </svg>
@@ -40,7 +40,7 @@
                         </span>
                     @endif
                     <a href="{{ route('contact') }}"
-                        class="inline-flex items-center px-8 py-4 bg-accent text-dark rounded-xl font-semibold tracking-wide hover:bg-accent/90 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
+                        class="inline-flex items-center px-8 py-4 bg-accent text-background rounded-xl font-semibold tracking-wide hover:bg-accent/90 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
                         </svg>
@@ -64,7 +64,7 @@
     <section class="py-32 font-sans reveal-on-scroll">
         <div class="container mx-auto px-6">
             <header class="text-center mb-24">
-                <h2 class="text-5xl lg:text-6xl font-extrabold tracking-wide mb-6 text-text">Get to Know Me</h2>
+                <h2 class="text-5xl lg:text-6xl font-extrabold tracking-wide mb-6 text-heading">Get to Know Me</h2>
                 <p class="text-xl text-muted font-medium max-w-3xl mx-auto leading-relaxed">Let me introduce myself and share my passion for creating exceptional digital experiences</p>
             </header>
 
@@ -93,7 +93,7 @@
                     @endphp
 
                     @foreach ($highlights as $item)
-                        <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] rounded-2xl p-8 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 text-center hover:scale-105 hover:-translate-y-2">
+                        <div class="bg-card rounded-2xl p-8 border border-card shadow-lg hover:shadow-xl transition-all duration-300 text-center hover:scale-105 hover:-translate-y-2">
                             <div class="text-5xl mb-5 text-accent">{{ $item['icon'] }}</div>
                             <h3 class="text-2xl font-semibold mb-3 text-text">{{ $item['title'] }}</h3>
                             <p class="text-muted text-base leading-relaxed">{{ $item['desc'] }}</p>
@@ -108,7 +108,7 @@
     <section class="py-32" id="projects">
         <div class="container mx-auto px-6">
             <header class="text-center mb-24 reveal-on-scroll">
-                <h2 class="text-5xl lg:text-6xl font-extrabold text-text mb-6">Featured Projects</h2>
+                <h2 class="text-5xl lg:text-6xl font-extrabold text-heading mb-6">Featured Projects</h2>
                 <p class="text-xl text-muted font-medium max-w-3xl mx-auto">Showcasing my latest work and creative solutions</p>
             </header>
 
@@ -121,7 +121,7 @@
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     @foreach ($projects as $project)
                         <a href="{{ route('projects.show', $project->slug) }}"
-                            class="group block rounded-3xl overflow-hidden border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/50 transition-all duration-300 cursor-pointer bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/10 to-[#1e2024] hover:scale-105 hover:-translate-y-2 reveal-on-scroll">
+                            class="group block rounded-3xl overflow-hidden border border-card shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer bg-card hover:scale-105 hover:-translate-y-2 reveal-on-scroll">
                             <div class="relative overflow-hidden">
                                 @if ($project->image)
                                     <img src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->title }}"
@@ -130,10 +130,10 @@
                                     <img src="https://via.placeholder.com/400x256?text=No+Image" alt="No image"
                                         class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
                                 @endif
-                                <div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                <div class="absolute inset-0 bg-gradient-to-t from-card/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             </div>
                             <div class="p-8">
-                                <h3 class="text-2xl font-semibold mb-4 text-text two-line-ellipsis capitalize group-hover:text-accent transition-colors duration-300"
+                                <h3 class="text-2xl font-semibold mb-4 text-heading two-line-ellipsis capitalize group-hover:text-accent transition-colors duration-300"
                                     title="{{ $project->title }}">
                                     {{ $project->title }}
                                 </h3>
@@ -157,7 +157,7 @@
 
                 <div class="mt-16 text-center reveal-on-scroll">
                     <a href="{{ route('projects.index') }}"
-                        class="inline-flex items-center px-8 py-4 border-2 border-accent rounded-xl font-semibold tracking-wide text-accent hover:bg-accent hover:border-accent hover:text-dark transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
+                        class="inline-flex items-center px-8 py-4 border-2 border-accent rounded-xl font-semibold tracking-wide text-accent hover:bg-accent hover:border-accent hover:text-background transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
                         View All Projects
                         <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
@@ -172,7 +172,7 @@
     <section class="py-32" id="skills">
         <div class="container mx-auto px-6 text-center">
             <header class="mb-24 reveal-on-scroll">
-                <h2 class="text-5xl lg:text-6xl font-extrabold text-text mb-6">Skills & Tech Stack</h2>
+                <h2 class="text-5xl lg:text-6xl font-extrabold text-heading mb-6">Skills & Tech Stack</h2>
                 <p class="text-xl text-muted font-medium max-w-3xl mx-auto">Technologies and tools I use to bring ideas to life</p>
             </header>
             <div class="flex flex-wrap justify-center gap-6 reveal-on-scroll">
@@ -180,7 +180,7 @@
                     $skills = optional($banner)->skills ?? ['HTML', 'CSS', 'Tailwind', 'Laravel', 'React', 'Vue.js', 'JavaScript', 'PHP', 'MySQL', 'Git'];
                 @endphp
                 @foreach ($skills as $skill)
-                    <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] px-8 py-6 rounded-2xl border border-gray-700 shadow-lg shadow-accent/30 text-muted font-semibold text-lg hover:scale-110 hover:shadow-acttive/50 transform transition-all duration-300 hover:text-accent">
+                    <div class="bg-card px-8 py-6 rounded-2xl border border-card shadow-lg hover:shadow-xl text-muted font-semibold text-lg hover:scale-110 transform transition-all duration-300 hover:text-accent">
                         {{ $skill }}
                     </div>
                 @endforeach
@@ -192,7 +192,7 @@
     <section class="py-32" id="experience">
         <div class="container mx-auto px-6">
             <header class="text-center mb-24 reveal-on-scroll">
-                <h2 class="text-5xl lg:text-6xl font-extrabold text-text mb-6">Professional Experience</h2>
+                <h2 class="text-5xl lg:text-6xl font-extrabold text-heading mb-6">Professional Experience</h2>
                 <p class="text-xl text-muted font-medium max-w-3xl mx-auto">My journey in the world of web development</p>
             </header>
             <div class="space-y-8 max-w-4xl mx-auto">
@@ -207,9 +207,9 @@
                     ];
                 @endphp
                 @foreach ($experiences as $experience)
-                    <div class="border-l-4 border-accent hover:border-acttive transition-all duration-300 pl-8 space-y-6 bg-gradient-to-l from-[#23272b] to-[#1e2024] rounded-2xl p-8 hover:scale-105 hover:shadow-xl reveal-on-scroll">
+                    <div class="border-l-4 border-accent hover:border-acttive transition-all duration-300 pl-8 space-y-6 bg-card rounded-2xl p-8 hover:scale-105 hover:shadow-xl reveal-on-scroll">
                         <div>
-                            <h3 class="text-2xl font-semibold text-text mb-2">{{ $experience['title'] }} 
+                            <h3 class="text-2xl font-semibold text-heading mb-2">{{ $experience['title'] }} 
                                 <span class="text-muted font-normal">— {{ $experience['company'] }}</span>
                             </h3>
                             <p class="text-sm text-muted mb-4">{{ $experience['period'] }}</p>
@@ -225,7 +225,7 @@
     <section class="py-32" id="blog">
         <div class="container mx-auto px-6">
             <header class="text-center mb-24 reveal-on-scroll">
-                <h2 class="text-5xl lg:text-6xl font-extrabold text-text mb-6">Latest Articles</h2>
+                <h2 class="text-5xl lg:text-6xl font-extrabold text-heading mb-6">Latest Articles</h2>
                 <p class="text-xl text-muted font-medium max-w-3xl mx-auto">Insights, tutorials, and thoughts on web development</p>
             </header>
 
@@ -238,7 +238,7 @@
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     @foreach ($posts as $post)
                         <a href="{{ route('site.blog.show', $post->slug) }}"
-                            class="group bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/10 to-[#1e2024] rounded-3xl p-8 cursor-pointer flex flex-col border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/50 transition-all duration-300 no-underline hover:scale-105 hover:-translate-y-2 reveal-on-scroll">
+                            class="group bg-card rounded-3xl p-8 cursor-pointer flex flex-col border border-card shadow-lg hover:shadow-xl transition-all duration-300 no-underline hover:scale-105 hover:-translate-y-2 reveal-on-scroll">
 
                             <div class="relative overflow-hidden rounded-2xl mb-6">
                                 @if ($post->image)
@@ -248,10 +248,10 @@
                                     <img src="https://via.placeholder.com/400x200?text=No+Image" alt="No image"
                                         class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110" />
                                 @endif
-                                <div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                <div class="absolute inset-0 bg-gradient-to-t from-card/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             </div>
 
-                            <h3 class="text-2xl font-semibold mb-4 text-text group-hover:text-accent transition-colors duration-300">
+                            <h3 class="text-2xl font-semibold mb-4 text-heading group-hover:text-accent transition-colors duration-300">
                                 {{ $post->title }}
                             </h3>
 
@@ -271,7 +271,7 @@
 
                 <div class="mt-16 text-center reveal-on-scroll">
                     <a href="{{ route('site.blog.index') }}"
-                        class="inline-flex items-center px-8 py-4 border-2 border-accent rounded-xl font-semibold tracking-wide text-accent hover:bg-accent hover:border-accent hover:text-dark transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
+                        class="inline-flex items-center px-8 py-4 border-2 border-accent rounded-xl font-semibold tracking-wide text-accent hover:bg-accent hover:border-accent hover:text-background transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
                         View All Articles
                         <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
@@ -286,11 +286,11 @@
     <section class="py-32" id="case-studies">
         <div class="container mx-auto px-6">
             <header class="text-center mb-24 reveal-on-scroll">
-                <h2 class="text-5xl lg:text-6xl font-extrabold text-text mb-6">Case Studies</h2>
+                <h2 class="text-5xl lg:text-6xl font-extrabold text-heading mb-6">Case Studies</h2>
                 <p class="text-xl text-muted font-medium max-w-3xl mx-auto">Real-world solutions and performance improvements</p>
             </header>
             <div class="space-y-8 max-w-4xl mx-auto">
-                <div class="bg-gradient-to-l from-[#23272b] via-[#e2e2e2]/10 to-[#1e2024] p-8 rounded-3xl border border-gray-700 shadow-lg shadow-accent/30 transition-all duration-300 hover:shadow-acttive/50 hover:scale-105 reveal-on-scroll">
+                <div class="bg-card p-8 rounded-3xl border border-card shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 reveal-on-scroll">
                     <h3 class="text-3xl font-semibold mb-6 text-text">Speed Optimization for a Laravel App</h3>
                     <p class="text-muted text-lg mb-6 leading-relaxed">Reduced load time from 4s to under 1s by implementing caching, lazy loading, and queue jobs.</p>
                     <div class="flex items-center space-x-4">

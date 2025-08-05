@@ -11,6 +11,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ContactFormController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\ThemeController;
 
 // Public routes (no prefix, no middleware)
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -99,6 +100,18 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/comments', [App\Http\Controllers\Admin\CommentController::class, 'index'])->name('comments.index');
     Route::patch('/comments/{comment}/approve', [App\Http\Controllers\Admin\CommentController::class, 'approve'])->name('comments.approve');
     Route::delete('/comments/{comment}', [App\Http\Controllers\Admin\CommentController::class, 'destroy'])->name('comments.destroy');
+});
+
+// Admin theme management routes
+Route::middleware(['auth'])->prefix('admin/themes')->name('admin.themes.')->group(function () {
+    Route::get('/', [ThemeController::class, 'index'])->name('index');
+    Route::get('/create', [ThemeController::class, 'create'])->name('create');
+    Route::post('/', [ThemeController::class, 'store'])->name('store');
+    Route::get('/{theme}/edit', [ThemeController::class, 'edit'])->name('edit');
+    Route::put('/{theme}', [ThemeController::class, 'update'])->name('update');
+    Route::delete('/{theme}', [ThemeController::class, 'destroy'])->name('destroy');
+    Route::post('/{theme}/activate', [ThemeController::class, 'activate'])->name('activate');
+    Route::post('/set-active', [ThemeController::class, 'setActive'])->name('setActive');
 });
 
 require __DIR__.'/auth.php';
