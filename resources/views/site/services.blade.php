@@ -29,19 +29,19 @@
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     @foreach($services as $service)
-                    <div class="bg-gradient-to-tl from-[#1e2024] via-white/10 to-[#23272b] rounded-3xl overflow-hidden shadow-lg shadow-accent/30 hover:shadow-acttive/50 transform transition-all duration-300 group hover:scale-105 hover:-translate-y-2 reveal-on-scroll">
-                        <a href="{{ route('services.show', $service->slug) }}" class="block">
+                    <div class="bg-gradient-to-tl from-[#1e2024] via-white/10 to-[#23272b] rounded-3xl overflow-hidden shadow-lg shadow-accent/30 hover:shadow-acttive/50 transform transition-all duration-300 group hover:scale-105 hover:-translate-y-2 reveal-on-scroll flex flex-col h-full">
+                        <a href="{{ route('services.show', $service->slug) }}" class="block flex flex-col h-full">
                             @if($service->image)
                                 <div class="relative overflow-hidden">
                                     <img src="{{ asset('storage/' . $service->image) }}" 
                                          alt="{{ $service->title }}" 
-                                         class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
+                                         class="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-500">
                                     <div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                 </div>
                             @endif
 
-                            <div class="p-8">
-                                <div class="flex items-center mb-6">
+                            <div class="p-4 flex flex-col flex-grow">
+                                <div class="flex items-center mb-3">
                                     @if($service->icon)
                                         <span class="text-4xl mr-4">{{ $service->icon }}</span>
                                     @endif
@@ -50,9 +50,9 @@
                                     </h2>
                                 </div>
 
-                                <p class="text-muted mb-6 leading-relaxed">{{ Str::limit($service->description, 150) }}</p>
+                                <p class="text-muted mb-3 leading-tight flex-grow">{{ Str::limit($service->description, 150) }}</p>
 
-                                <div class="flex justify-between items-center">
+                                <div class="flex justify-between items-center mt-auto">
                                     <span class="text-sm text-accent font-medium">Order: {{ $service->order }}</span>
                                     <a href="{{ route('services.show', $service->slug) }}" 
                                        class="inline-flex items-center px-4 py-2 bg-accent text-background rounded-lg hover:bg-acttive transition-all duration-300 font-medium text-sm group-hover:scale-105">

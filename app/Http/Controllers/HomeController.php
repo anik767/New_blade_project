@@ -11,7 +11,7 @@ class HomeController extends Controller
     public function index()
     {
         $posts = BlogPost::latest()->paginate(6);           // Latest 6 blog posts
-        $projects = ProjectPost::latest()->take(3)->get();  // Latest 3 projects
+        $projects = ProjectPost::latest()->take(6)->get();  // Latest 3 projects
 
         // Assuming you have only one banner or want the latest banner
         $banner = HomeBanner::latest()->first();
