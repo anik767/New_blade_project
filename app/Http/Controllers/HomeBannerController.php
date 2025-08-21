@@ -19,7 +19,7 @@ class HomeBannerController extends Controller
             $banner = new HomeBanner(); // empty banner instance
         }
 
-        return view('admin.home-banner.edit', compact('banner'));
+        return view('admin.home.banner.edit', compact('banner'));
     }
 
     // Update banner data
@@ -30,7 +30,7 @@ class HomeBannerController extends Controller
             'title_line1'       => 'nullable|string|max:255',
             'title_line2'       => 'nullable|string|max:255',
             'subtitle'          => 'nullable|string',
-            'background_image'  => 'nullable|image',
+            'background_image'  => 'nullable|file|mimes:jpg,jpeg,png,gif,webp,mp4,webm',
             'person_image'      => 'nullable|image',
             'cv_file'           => 'nullable|file|mimes:pdf,doc,docx|max:5120',
         ]);
@@ -94,76 +94,5 @@ class HomeBannerController extends Controller
 
         // Redirect back with success message
         return redirect()->back()->with('success', 'Home banner updated successfully.');
-    }
-
-    // Show skills edit form
-    public function skills()
-    {
-        $banner = HomeBanner::latest()->first();
-
-        if (!$banner) {
-            $banner = new HomeBanner(); // empty banner instance
-        }
-
-        return view('admin.home-banner.skills', compact('banner'));
-    }
-
-    // Update skills data
-    public function updateSkills(Request $request)
-    {
-        // Validate incoming request
-        $request->validate([
-            'skills' => 'nullable|array',
-            'skills.*' => 'string|max:100',
-        ]);
-
-        // Retrieve existing banner or create new
-        $banner = HomeBanner::latest()->first() ?? new HomeBanner();
-
-        // Update skills
-        $banner->skills = $request->skills ?? [];
-
-        // Save banner to DB
-        $banner->save();
-
-        // Redirect back with success message
-        return redirect()->back()->with('success', 'Skills & Tech Stack updated successfully.');
-    }
-
-    // Show experience edit form
-    public function experience()
-    {
-        $banner = HomeBanner::latest()->first();
-
-        if (!$banner) {
-            $banner = new HomeBanner(); // empty banner instance
-        }
-
-        return view('admin.home-banner.experience', compact('banner'));
-    }
-
-    // Update experience data
-    public function updateExperience(Request $request)
-    {
-        // Validate incoming request
-        $request->validate([
-            'experience' => 'nullable|array',
-            'experience.*.title' => 'nullable|string|max:255',
-            'experience.*.company' => 'nullable|string|max:255',
-            'experience.*.period' => 'nullable|string|max:100',
-            'experience.*.description' => 'nullable|string',
-        ]);
-
-        // Retrieve existing banner or create new
-        $banner = HomeBanner::latest()->first() ?? new HomeBanner();
-
-        // Update experience
-        $banner->experience = $request->experience ?? [];
-
-        // Save banner to DB
-        $banner->save();
-
-        // Redirect back with success message
-        return redirect()->back()->with('success', 'Experience updated successfully.');
     }
 }

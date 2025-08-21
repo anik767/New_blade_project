@@ -44,7 +44,7 @@
             </a>
 
             <!-- Home Section (Collapsible) -->
-            <div class="sidebar-item">
+            <div class="mb-4">
                 <button onclick="toggleSubmenu('home-submenu')" 
                         class="flex items-center justify-between w-full px-4 py-3 text-gray-300 rounded-lg hover:bg-gray-700 hover:text-white transition-all duration-200 group {{ request()->routeIs('admin.home.*') ? 'bg-blue-600 text-white shadow-lg' : '' }}">
                     <div class="flex items-center">
@@ -63,16 +63,34 @@
                 <!-- Home Submenu -->
                 <div id="home-submenu" class="hidden overflow-hidden">
                     <div class="mt-2 ml-4 space-y-1 border-l-2 border-gray-600 pl-4">
-                        <a href="{{ route('admin.home.edit') }}" 
-                           class="submenu-item flex items-center px-3 py-2.5 text-gray-400 rounded-lg hover:bg-gray-700 hover:text-white transition-all duration-200 {{ request()->routeIs('admin.home.edit') ? 'bg-blue-600 text-white shadow-md' : '' }}">
-                            <div class="w-1.5 h-1.5 {{ request()->routeIs('admin.home.edit') ? 'bg-white' : 'bg-gray-500' }} rounded-full mr-3 transition-colors duration-200"></div>
-                            <span class="text-sm font-medium">Home Banner</span>
-                            @if(request()->routeIs('admin.home.edit'))
+                        <a href="{{ route('admin.home.banner.edit') }}" 
+                           class="submenu-item flex items-center px-3 py-2.5 text-gray-400 rounded-lg hover:bg-gray-700 hover:text-white transition-all duration-200 {{ request()->routeIs('admin.home.banner.*') ? 'bg-blue-600 text-white shadow-md' : '' }}">
+                            <div class="w-1.5 h-1.5 {{ request()->routeIs('admin.home.banner.*') ? 'bg-white' : 'bg-gray-500' }} rounded-full mr-3 transition-colors duration-200"></div>
+                            <span class="text-sm font-medium">Banner</span>
+                            @if(request()->routeIs('admin.home.banner.*'))
+                                <div class="ml-auto w-1 h-1 bg-white rounded-full"></div>
+                            @endif
+                        </a>
+                        
+                        <a href="{{ route('admin.home.skills.edit') }}" 
+                           class="submenu-item flex items-center px-3 py-2.5 text-gray-400 rounded-lg hover:bg-gray-700 hover:text-white transition-all duration-200 {{ request()->routeIs('admin.home.skills.*') ? 'bg-blue-600 text-white shadow-md' : '' }}">
+                            <div class="w-1.5 h-1.5 {{ request()->routeIs('admin.home.skills.*') ? 'bg-white' : 'bg-gray-500' }} rounded-full mr-3 transition-colors duration-200"></div>
+                            <span class="text-sm font-medium">Skills</span>
+                            @if(request()->routeIs('admin.home.skills.*'))
+                                <div class="ml-auto w-1 h-1 bg-white rounded-full"></div>
+                            @endif
+                        </a>
+                        
+                        <a href="{{ route('admin.home.experience.edit') }}" 
+                           class="submenu-item flex items-center px-3 py-2.5 text-gray-400 rounded-lg hover:bg-gray-700 hover:text-white transition-all duration-200 {{ request()->routeIs('admin.home.experience.*') ? 'bg-blue-600 text-white shadow-md' : '' }}">
+                            <div class="w-1.5 h-1.5 {{ request()->routeIs('admin.home.experience.*') ? 'bg-white' : 'bg-gray-500' }} rounded-full mr-3 transition-colors duration-200"></div>
+                            <span class="text-sm font-medium">Experience</span>
+                            @if(request()->routeIs('admin.home.experience.*'))
                                 <div class="ml-auto w-1 h-1 bg-white rounded-full"></div>
                             @endif
                         </a>
                     </div>
-                </div>
+
             </div>
 
             <!-- Projects -->
@@ -144,7 +162,7 @@
                     <span class="font-medium">Messages</span>
                 </div>
                 @php
-                    $messageCount = \App\Models\ContactMessage::where('is_read', false)->count();
+                    $messageCount = \App\Models\ContactMessage::where('status', 'unread')->count();
                 @endphp
                 @if($messageCount > 0)
                     <span class="bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded-full">{{ $messageCount }}</span>
@@ -176,6 +194,17 @@
                     </svg>
                 </div>
                 <span class="font-medium">Contact Info</span>
+            </a>
+
+            <!-- Page Banners -->
+            <a href="{{ route('admin.page-banners.index') }}" 
+               class="sidebar-item flex items-center px-4 py-3 text-gray-300 rounded-xl hover:bg-gray-700 hover:text-white transition-all duration-200 group {{ request()->routeIs('admin.page-banners.*') ? 'bg-blue-600 text-white shadow-lg' : '' }}">
+                <div class="flex items-center justify-center w-8 h-8 mr-3 rounded-lg {{ request()->routeIs('admin.page-banners.*') ? 'bg-blue-500' : 'bg-gray-700 group-hover:bg-gray-600' }} transition-colors duration-200">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4-4 4 4m0 0l4-4 4 4M4 8h16"></path>
+                    </svg>
+                </div>
+                <span class="font-medium">Page Banners</span>
             </a>
         </div>
     </nav>

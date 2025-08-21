@@ -28,7 +28,7 @@
         </div>
     </div>
 
-    <x-admin-form 
+    <x-forms.admin-form 
         :action="route('admin.blog.store')" 
         title="Blog Post Information"
         submit-text="Create Post"
@@ -43,14 +43,14 @@
                 Basic Post Information
             </h3>
             
-            <x-form-field 
+            <x-forms.form-field 
                 label="Post Title" 
                 name="title" 
                 required 
                 placeholder="How to Build a Modern Web Application with Laravel and Vue.js"
             />
             
-            <x-form-field 
+            <x-forms.form-field 
                 label="Post Content" 
                 name="content" 
                 type="textarea" 
@@ -91,7 +91,7 @@
                             <ul class="text-sm text-blue-700 mt-1 list-disc list-inside space-y-1">
                                 <li>Recommended size: 1200x630 pixels (social media optimized)</li>
                                 <li>Formats: JPG, PNG, GIF</li>
-                                <li>Maximum file size: 2MB</li>
+                                <li>No file size limit</li>
                                 <li>High-quality images work best for engagement</li>
                             </ul>
                         </div>
@@ -163,6 +163,6 @@
                 </div>
             </div>
         </div>
-    </x-admin-form>
+    </x-forms.admin-form>
 </div>
 @endsection

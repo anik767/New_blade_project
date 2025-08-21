@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\BlogPost;
 use App\Models\ProjectPost;
+use App\Models\HomeBanner;
+use App\Traits\AdminNotificationTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
 class ProjectPostController extends Controller
 {
+    use AdminNotificationTrait;
     // 🔓 Public: Home page
     public function publicHome()
     {
@@ -20,14 +23,17 @@ class ProjectPostController extends Controller
     public function publicList()
     {
         $projects = ProjectPost::latest()->paginate(6);
-        return view('site.projects.index', compact('projects'));
+        $banner = HomeBanner::latest()->first();
+        $pageBanner = \App\Models\PageBanner::where('page', 'projects')->first();
+        return view('site.projects.index', compact('projects', 'banner','pageBanner'));
     }
 
     // 🔓 Public: View single project by slug
     public function publicSingle($slug)
     {
         $project = ProjectPost::where('slug', $slug)->firstOrFail();
-        return view('site.projects.show', compact('project'));
+        $pageBanner = \App\Models\PageBanner::where('page', 'projects')->first();
+        return view('site.projects.show', compact('project','pageBanner'));
     }
 
     // 🔐 Admin: Dashboard view with project count
@@ -57,7 +63,7 @@ class ProjectPostController extends Controller
             'title'        => 'required|string|max:255',
             'description'  => 'required|string',
             'github_link'  => 'nullable|url',
-            'image'        => 'nullable|image|max:2048',
+            'image'        => 'nullable|image',
         ]);
 
         $imagePath = null;
@@ -75,8 +81,7 @@ class ProjectPostController extends Controller
             'image'        => $imagePath,
         ]);
 
-        return redirect()->route('admin.projects.index')
-                         ->with('success', 'Project created successfully.');
+        return $this->successRedirect('Project created successfully.', 'admin.projects.index');
     }
 
     // 🔐 Admin: Show project edit form
@@ -92,35 +97,38 @@ class ProjectPostController extends Controller
             'title'        => 'required|string|max:255',
             'description'  => 'required|string',
             'github_link'  => 'nullable|url',
-            'image'        => 'nullable|image|max:2048',
+            'image'        => 'nullable|image',
         ]);
 
-        // Handle image upload & replace old image if new one is uploaded
-        if ($request->hasFile('image')) {
-            if ($project->image && Storage::disk('public')->exists($project->image)) {
-                Storage::disk('public')->delete($project->image);
+        try {
+            // Handle image upload & replace old image if new one is uploaded
+            if ($request->hasFile('image')) {
+                if ($project->image && Storage::disk('public')->exists($project->image)) {
+                    Storage::disk('public')->delete($project->image);
+                }
+                $imagePath = $request->file('image')->store('projects', 'public');
+            } else {
+                $imagePath = $project->image;
             }
-            $imagePath = $request->file('image')->store('projects', 'public');
-        } else {
-            $imagePath = $project->image;
+
+            // Update slug if title changed
+            $slug = $project->slug;
+            if ($request->title !== $project->title) {
+                $slug = $this->generateUniqueSlug($request->title, $project->id);
+            }
+
+            $project->update([
+                'title'        => $request->title,
+                'slug'         => $slug,
+                'description'  => $request->description,
+                'github_link'  => $request->github_link,
+                'image'        => $imagePath,
+            ]);
+
+            return $this->successRedirect('Project updated successfully.', 'admin.projects.index');
+        } catch (\Exception $e) {
+            return $this->handleException($e, 'Failed to update project');
         }
-
-        // Update slug if title changed
-        $slug = $project->slug;
-        if ($request->title !== $project->title) {
-            $slug = $this->generateUniqueSlug($request->title, $project->id);
-        }
-
-        $project->update([
-            'title'        => $request->title,
-            'slug'         => $slug,
-            'description'  => $request->description,
-            'github_link'  => $request->github_link,
-            'image'        => $imagePath,
-        ]);
-
-        return redirect()->route('admin.projects.index')
-                         ->with('success', 'Project updated successfully.');
     }
 
     // 🔐 Admin: Delete project
@@ -133,8 +141,7 @@ class ProjectPostController extends Controller
 
         $project->delete();
 
-        return redirect()->route('admin.projects.index')
-                         ->with('success', 'Project deleted successfully.');
+        return $this->successRedirect('Project deleted successfully.', 'admin.projects.index');
     }
 
     // 🧠 Utility: Generate a unique slug based on the title

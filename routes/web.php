@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\HomeBannerController;
+use App\Http\Controllers\HomeSkillsController;
+use App\Http\Controllers\HomeExperienceController;
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProjectPostController;
@@ -57,14 +59,22 @@ Route::post('/comment', [App\Http\Controllers\CommentController::class, 'store']
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [ProjectPostController::class, 'dashboard'])->name('dashboard');
 
-    Route::get('home', [HomeBannerController::class, 'edit'])->name('home.edit');
-    Route::put('home', [HomeBannerController::class, 'update'])->name('home.update');
+    // Home Banner routes
+    Route::get('home/banner', [HomeBannerController::class, 'edit'])->name('home.banner.edit');
+    Route::put('home/banner', [HomeBannerController::class, 'update'])->name('home.banner.update');
 
-    // Home Skills & Experience routes
-    Route::get('home/skills', [HomeBannerController::class, 'skills'])->name('home.skills');
-    Route::put('home/skills', [HomeBannerController::class, 'updateSkills'])->name('home.update-skills');
-    Route::get('home/experience', [HomeBannerController::class, 'experience'])->name('home.experience');
-    Route::put('home/experience', [HomeBannerController::class, 'updateExperience'])->name('home.update-experience');
+    // Page Banners
+    Route::get('page-banners', [\App\Http\Controllers\Admin\PageBannerController::class, 'index'])->name('page-banners.index');
+    Route::get('page-banners/{page}', [\App\Http\Controllers\Admin\PageBannerController::class, 'edit'])->name('page-banners.edit');
+    Route::put('page-banners/{page}', [\App\Http\Controllers\Admin\PageBannerController::class, 'update'])->name('page-banners.update');
+
+    // Home Skills routes
+    Route::get('home/skills', [HomeSkillsController::class, 'edit'])->name('home.skills.edit');
+    Route::put('home/skills', [HomeSkillsController::class, 'update'])->name('home.skills.update');
+
+    // Home Experience routes
+    Route::get('home/experience', [HomeExperienceController::class, 'edit'])->name('home.experience.edit');
+    Route::put('home/experience', [HomeExperienceController::class, 'update'])->name('home.experience.update');
 
     Route::get('/projects', [ProjectPostController::class, 'index'])->name('projects.index');
     Route::get('/projects/create', [ProjectPostController::class, 'create'])->name('projects.create');
@@ -92,7 +102,9 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
     // Comments management
     Route::get('/comments', [App\Http\Controllers\Admin\CommentController::class, 'index'])->name('comments.index');
+    Route::get('/comments/{comment}', [App\Http\Controllers\Admin\CommentController::class, 'show'])->name('comments.show');
     Route::patch('/comments/{comment}/approve', [App\Http\Controllers\Admin\CommentController::class, 'approve'])->name('comments.approve');
+    Route::put('/comments/{comment}/status', [App\Http\Controllers\Admin\CommentController::class, 'updateStatus'])->name('comments.update-status');
     Route::delete('/comments/{comment}', [App\Http\Controllers\Admin\CommentController::class, 'destroy'])->name('comments.destroy');
 });
 

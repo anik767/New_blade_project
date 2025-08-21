@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AboutMe;
+use App\Models\HomeBanner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -104,6 +105,8 @@ class AboutMeController extends Controller
     {
         try {
             $aboutMe = AboutMe::first();
+            $banner = HomeBanner::latest()->first();
+            $pageBanner = \App\Models\PageBanner::where('page', 'about')->first();
             
             // If no about me record exists, create a default one
             if (!$aboutMe) {
@@ -118,10 +121,12 @@ class AboutMeController extends Controller
                 ]);
             }
             
-            return view('site.about', compact('aboutMe'));
+            return view('site.about.index', compact('aboutMe', 'banner','pageBanner'));
         } catch (\Exception $e) {
             // If there's an error, return the view with null
-            return view('site.about', ['aboutMe' => null]);
+            $banner = HomeBanner::latest()->first();
+            $pageBanner = \App\Models\PageBanner::where('page', 'about')->first();
+            return view('site.about.index', ['aboutMe' => null, 'banner' => $banner, 'pageBanner' => $pageBanner]);
         }
     }
 }
