@@ -6,31 +6,11 @@
 @section('content')
     <div class="bg-background text-text min-h-screen">
         
-        {{-- Hero Section --}}
-        <section class="py-32 reveal-on-scroll">
-            <div class="container mx-auto px-6">
-                <div class="text-center max-w-4xl mx-auto">
-                    <h1 class="text-5xl lg:text-7xl font-extrabold text-text mb-8">About Me</h1>
-                    <p class="text-xl lg:text-2xl text-muted leading-relaxed mb-12">
-                        Passionate frontend developer with a love for creating beautiful, functional, and user-friendly web experiences.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <div class="flex items-center justify-center space-x-2 text-accent">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
-                            </svg>
-                            <span class="font-semibold">Creative Problem Solver</span>
-                        </div>
-                        <div class="flex items-center justify-center space-x-2 text-muted">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                            </svg>
-                            <span>Fast & Efficient Development</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <x-site.banner 
+            title="About Me"
+            subtitle="Passionate frontend developer with a love for creating beautiful, functional, and user-friendly web experiences."
+            :banner="$banner"
+        />
 
         <!-- Main Content Section -->
         <section class="py-20 reveal-on-scroll">
@@ -45,7 +25,7 @@
                                     <div class="relative">
                                         <div class="absolute inset-0 bg-gradient-to-br from-accent/20 to-transparent rounded-3xl blur-2xl"></div>
                                         <img src="{{ asset('storage/' . $aboutMe->image) }}" alt="{{ $aboutMe->name }}"
-                                            class="relative w-full max-w-md mx-auto lg:mx-0 rounded-3xl object-cover shadow-2xl hover:scale-105 transition-transform duration-500">
+                                            class="relative w-full max-w-md mx-auto lg:mx-0 rounded-3xl object-cover shadow-2xl  transition-transform duration-500">
                                     </div>
                                 @else
                                     <div class="relative">
@@ -85,7 +65,7 @@
                             </div>
                             
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] rounded-2xl p-8 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 text-center hover:scale-105 hover:-translate-y-2">
+                                <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] rounded-2xl p-8 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 text-center  ">
                                     <div class="text-5xl mb-6">🧠</div>
                                     <h3 class="text-2xl font-semibold mb-4 text-text">Problem Solver</h3>
                                     <p class="text-muted leading-relaxed">
@@ -93,7 +73,7 @@
                                     </p>
                                 </div>
 
-                                <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] rounded-2xl p-8 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 text-center hover:scale-105 hover:-translate-y-2">
+                                <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] rounded-2xl p-8 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 text-center  ">
                                     <div class="text-5xl mb-6">🚀</div>
                                     <h3 class="text-2xl font-semibold mb-4 text-text">Fast Learner</h3>
                                     <p class="text-muted leading-relaxed">
@@ -101,7 +81,7 @@
                                     </p>
                                 </div>
 
-                                <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] rounded-2xl p-8 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 text-center hover:scale-105 hover:-translate-y-2">
+                                <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] rounded-2xl p-8 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 text-center  ">
                                     <div class="text-5xl mb-6">🎨</div>
                                     <h3 class="text-2xl font-semibold mb-4 text-text">Creative Coder</h3>
                                     <p class="text-muted leading-relaxed">
@@ -109,7 +89,7 @@
                                     </p>
                                 </div>
 
-                                <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] rounded-2xl p-8 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 text-center hover:scale-105 hover:-translate-y-2">
+                                <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] rounded-2xl p-8 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 text-center  ">
                                     <div class="text-5xl mb-6">🤝</div>
                                     <h3 class="text-2xl font-semibold mb-4 text-text">Team Player</h3>
                                     <p class="text-muted leading-relaxed">
@@ -147,7 +127,7 @@
                                 
                                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                                     @if ($aboutMe->email)
-                                        <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] rounded-2xl p-6 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 hover:scale-105">
+                                        <div class=" rounded-2xl p-6 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 ">
                                             <div class="flex items-center space-x-4">
                                                 <div class="p-3 bg-accent/10 rounded-xl">
                                                     <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -165,7 +145,7 @@
                                     @endif
 
                                     @if ($aboutMe->phone)
-                                        <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] rounded-2xl p-6 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 hover:scale-105">
+                                        <div class=" rounded-2xl p-6 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 ">
                                             <div class="flex items-center space-x-4">
                                                 <div class="p-3 bg-accent/10 rounded-xl">
                                                     <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -183,7 +163,7 @@
                                     @endif
 
                                     @if ($aboutMe->location)
-                                        <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] rounded-2xl p-6 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 hover:scale-105">
+                                        <div class=" rounded-2xl p-6 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 ">
                                             <div class="flex items-center space-x-4">
                                                 <div class="p-3 bg-accent/10 rounded-xl">
                                                     <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -200,7 +180,7 @@
                                     @endif
 
                                     @if ($aboutMe->linkedin || $aboutMe->github)
-                                        <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] rounded-2xl p-6 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 hover:scale-105">
+                                        <div class=" rounded-2xl p-6 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 ">
                                             <div class="flex items-center space-x-4">
                                                 <div class="p-3 bg-accent/10 rounded-xl">
                                                     <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -236,7 +216,7 @@
                 @else
                     <!-- Empty State -->
                     <div class="text-center py-20 reveal-on-scroll">
-                        <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/10 to-[#1e2024] rounded-3xl p-16 max-w-md mx-auto shadow-2xl border border-gray-700">
+                        <div class=" rounded-3xl p-16 max-w-md mx-auto shadow-2xl border border-gray-700">
                             <div class="text-8xl mb-6">👤</div>
                             <h2 class="text-3xl font-bold text-text mb-4">About Me</h2>
                             <p class="text-muted text-lg">Information about me will be available soon!</p>
@@ -248,7 +228,7 @@
         
         <!-- Location Map Section -->
         @if ($aboutMe && $aboutMe->map_embed_code)
-            <section class="py-20 bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] reveal-on-scroll">
+            <section class="py-20  reveal-on-scroll">
                 <div class="container mx-auto px-6">
                     <div class="max-w-6xl mx-auto">
                         <div class="text-center mb-16">

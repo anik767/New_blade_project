@@ -25,7 +25,7 @@
                 <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                     @if (optional($banner)->cv_file)
                         <a href="{{ asset('storage/' . $banner->cv_file) }}" download
-                            class="inline-flex items-center px-8 py-4 border-2 border-accent rounded-xl font-semibold tracking-wide text-accent hover:bg-accent hover:text-dark transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
+                            class="inline-flex items-center px-8 py-4 border-2 border-accent rounded-xl font-semibold tracking-wide text-accent hover:bg-accent hover:text-dark transition-all duration-300 shadow-lg hover:shadow-xl ">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                             </svg>
@@ -40,7 +40,7 @@
                         </span>
                     @endif
                     <a href="{{ route('contact') }}"
-                        class="inline-flex items-center px-8 py-4 bg-accent text-dark rounded-xl font-semibold tracking-wide hover:bg-accent/90 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
+                        class="inline-flex items-center px-8 py-4 bg-accent text-dark rounded-xl font-semibold tracking-wide hover:bg-accent/90 transition-all duration-300 shadow-lg hover:shadow-xl ">
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
                         </svg>
@@ -93,7 +93,7 @@
                     @endphp
 
                     @foreach ($highlights as $item)
-                        <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] rounded-2xl p-8 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 text-center hover:scale-105 hover:-translate-y-2">
+                        <div class=" rounded-2xl p-8 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 text-center  ">
                             <div class="text-5xl mb-5 text-accent">{{ $item['icon'] }}</div>
                             <h3 class="text-2xl font-semibold mb-3 text-text">{{ $item['title'] }}</h3>
                             <p class="text-muted text-base leading-relaxed">{{ $item['desc'] }}</p>
@@ -121,7 +121,7 @@
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     @foreach ($projects as $project)
                         <a href="{{ route('projects.show', $project->slug) }}"
-                            class="group block rounded-3xl overflow-hidden border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/50 transition-all duration-300 cursor-pointer bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/10 to-[#1e2024] hover:scale-105 hover:-translate-y-2 reveal-on-scroll">
+                            class="group block rounded-3xl overflow-hidden border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/50 transition-all duration-300 cursor-pointer    reveal-on-scroll">
                             <div class="relative overflow-hidden">
                                 @if ($project->image)
                                     <img src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->title }}"
@@ -157,7 +157,7 @@
 
                 <div class="mt-16 text-center reveal-on-scroll">
                     <a href="{{ route('projects.index') }}"
-                        class="inline-flex items-center px-8 py-4 border-2 border-accent rounded-xl font-semibold tracking-wide text-accent hover:bg-accent hover:border-accent hover:text-dark transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
+                        class="inline-flex items-center px-8 py-4 border-2 border-accent rounded-xl font-semibold tracking-wide text-accent hover:bg-accent hover:border-accent hover:text-dark transition-all duration-300 shadow-lg hover:shadow-xl ">
                         View All Projects
                         <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
@@ -180,7 +180,7 @@
                     $skills = optional($banner)->skills ?? ['HTML', 'CSS', 'Tailwind', 'Laravel', 'React', 'Vue.js', 'JavaScript', 'PHP', 'MySQL', 'Git'];
                 @endphp
                 @foreach ($skills as $skill)
-                    <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] px-8 py-6 rounded-2xl border border-gray-700 shadow-lg shadow-accent/30 text-muted font-semibold text-lg hover:scale-110 hover:shadow-acttive/50 transform transition-all duration-300 hover:text-accent">
+                    <div class=" px-8 py-6 rounded-2xl border border-gray-700 shadow-lg shadow-accent/30 text-muted font-semibold text-lg hover:scale-110 hover:shadow-acttive/50 transform transition-all duration-300 hover:text-accent">
                         {{ $skill }}
                     </div>
                 @endforeach
@@ -207,7 +207,7 @@
                     ];
                 @endphp
                 @foreach ($experiences as $experience)
-                    <div class="border-l-4 border-accent hover:border-acttive transition-all duration-300 pl-8 space-y-6 bg-gradient-to-l from-[#23272b] to-[#1e2024] rounded-2xl p-8 hover:scale-105 hover:shadow-xl reveal-on-scroll">
+                    <div class="border-l-4 border-accent hover:border-acttive transition-all duration-300 pl-8 space-y-6  rounded-2xl p-8  hover:shadow-xl reveal-on-scroll">
                         <div>
                             <h3 class="text-2xl font-semibold text-text mb-2">{{ $experience['title'] }} 
                                 <span class="text-muted font-normal">— {{ $experience['company'] }}</span>
@@ -238,7 +238,7 @@
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     @foreach ($posts as $post)
                         <a href="{{ route('site.blog.show', $post->slug) }}"
-                            class="group bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/10 to-[#1e2024] rounded-3xl p-8 cursor-pointer flex flex-col border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/50 transition-all duration-300 no-underline hover:scale-105 hover:-translate-y-2 reveal-on-scroll">
+                            class="group  rounded-3xl p-8 cursor-pointer flex flex-col border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/50 transition-all duration-300 no-underline   reveal-on-scroll">
 
                             <div class="relative overflow-hidden rounded-2xl mb-6">
                                 @if ($post->image)
@@ -271,7 +271,7 @@
 
                 <div class="mt-16 text-center reveal-on-scroll">
                     <a href="{{ route('site.blog.index') }}"
-                        class="inline-flex items-center px-8 py-4 border-2 border-accent rounded-xl font-semibold tracking-wide text-accent hover:bg-accent hover:border-accent hover:text-dark transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
+                        class="inline-flex items-center px-8 py-4 border-2 border-accent rounded-xl font-semibold tracking-wide text-accent hover:bg-accent hover:border-accent hover:text-dark transition-all duration-300 shadow-lg hover:shadow-xl ">
                         View All Articles
                         <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
@@ -282,80 +282,7 @@
         </div>
     </section>
 
-    {{-- Case Studies Section --}}
-    <section class="py-32" id="case-studies">
-        <div class="container mx-auto px-6">
-            <header class="text-center mb-24 reveal-on-scroll">
-                <h2 class="text-5xl lg:text-6xl font-extrabold text-text mb-6">Case Studies</h2>
-                <p class="text-xl text-muted font-medium max-w-3xl mx-auto">Real-world solutions and performance improvements</p>
-            </header>
-            <div class="space-y-8 max-w-4xl mx-auto">
-                <div class="bg-gradient-to-l from-[#23272b] via-[#e2e2e2]/10 to-[#1e2024] p-8 rounded-3xl border border-gray-700 shadow-lg shadow-accent/30 transition-all duration-300 hover:shadow-acttive/50 hover:scale-105 reveal-on-scroll">
-                    <h3 class="text-3xl font-semibold mb-6 text-text">Speed Optimization for a Laravel App</h3>
-                    <p class="text-muted text-lg mb-6 leading-relaxed">Reduced load time from 4s to under 1s by implementing caching, lazy loading, and queue jobs.</p>
-                    <div class="flex items-center space-x-4">
-                        <span class="text-muted font-medium text-sm">Tools: Laravel, Redis, Debugbar</span>
-                        <span class="text-accent font-semibold">Performance +75%</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    {{-- Design and Develop Section --}}
-    <section class="container mx-auto px-6 py-32">
-        <div class="grid md:grid-cols-2 gap-20 items-start">
-            <div class="reveal-on-scroll">
-                <h2 class="text-5xl lg:text-6xl font-extrabold mb-8 text-text">Design</h2>
-                <p class="text-muted mb-10 leading-relaxed text-xl max-w-lg">
-                    Immersed in the vibrant world of creativity, I specialize in designing visually striking and
-                    user-centric digital experiences.
-                </p>
-
-                <ul class="space-y-6 list-none text-muted font-semibold text-xl max-w-md">
-                    <li class="flex items-center space-x-4">
-                        <div class="w-2 h-2 bg-accent rounded-full"></div>
-                        <span>Web User Interface</span>
-                    </li>
-                    <li class="flex items-center space-x-4">
-                        <div class="w-2 h-2 bg-accent rounded-full"></div>
-                        <span>Marketing and Branding</span>
-                    </li>
-                    <li class="flex items-center space-x-4">
-                        <div class="w-2 h-2 bg-accent rounded-full"></div>
-                        <span>3D Animation</span>
-                    </li>
-                    <li class="flex items-center space-x-4">
-                        <div class="w-2 h-2 bg-accent rounded-full"></div>
-                        <span>Icon Design</span>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="reveal-on-scroll">
-                <h2 class="text-5xl lg:text-6xl font-extrabold mb-8 text-text">Develop</h2>
-                <p class="text-muted mb-10 leading-relaxed text-xl max-w-lg">
-                    As a seasoned developer, I translate design concepts into functional and responsive websites that go
-                    beyond aesthetics.
-                </p>
-
-                <ul class="space-y-6 list-none text-muted font-semibold text-xl max-w-md">
-                    <li class="flex items-center space-x-4">
-                        <div class="w-2 h-2 bg-accent rounded-full"></div>
-                        <span>HTML, CSS, and JavaScript</span>
-                    </li>
-                    <li class="flex items-center space-x-4">
-                        <div class="w-2 h-2 bg-accent rounded-full"></div>
-                        <span>CMS WordPress</span>
-                    </li>
-                    <li class="flex items-center space-x-4">
-                        <div class="w-2 h-2 bg-accent rounded-full"></div>
-                        <span>Webflow</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </section>
+    
 
 </div>
 

@@ -6,9 +6,11 @@
 @section('content')
 <div class="bg-background text-text min-h-screen">
     
-    
-
-
+    <x-site.banner 
+        title="My Services"
+        subtitle="Comprehensive web development solutions tailored to your needs. From concept to deployment, I help businesses create exceptional digital experiences."
+        :banner="$banner"
+    />
 
     {{-- Services List Section --}}
     <section class="py-20 reveal-on-scroll">
@@ -29,7 +31,7 @@
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     @foreach($services as $service)
-                    <div class="bg-gradient-to-tl from-[#1e2024] via-white/10 to-[#23272b] rounded-3xl overflow-hidden shadow-lg shadow-accent/30 hover:shadow-acttive/50 transform transition-all duration-300 group hover:scale-105 hover:-translate-y-2 reveal-on-scroll">
+                    <div class="bg-gradient-to-tl from-[#1e2024] via-white/10 to-[#23272b] rounded-3xl overflow-hidden shadow-lg shadow-accent/30 hover:shadow-acttive/50 transform transition-all duration-300 group   reveal-on-scroll">
                         <a href="{{ route('services.show', $service->slug) }}" class="block">
                             @if($service->image)
                                 <div class="relative overflow-hidden">
@@ -55,7 +57,7 @@
                                 <div class="flex justify-between items-center">
                                     <span class="text-sm text-accent font-medium">Order: {{ $service->order }}</span>
                                     <a href="{{ route('services.show', $service->slug) }}" 
-                                       class="inline-flex items-center px-4 py-2 bg-accent text-background rounded-lg hover:bg-acttive transition-all duration-300 font-medium text-sm group-hover:scale-105">
+                                       class="inline-flex items-center px-4 py-2 bg-accent text-background rounded-lg hover:bg-acttive transition-all duration-300 font-medium text-sm group-">
                                         Learn More
                                         <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>

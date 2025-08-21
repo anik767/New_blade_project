@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BlogPost;
 use App\Models\ProjectPost;
+use App\Models\HomeBanner;
 use App\Traits\AdminNotificationTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -22,7 +23,8 @@ class ProjectPostController extends Controller
     public function publicList()
     {
         $projects = ProjectPost::latest()->paginate(6);
-        return view('site.projects.index', compact('projects'));
+        $banner = HomeBanner::latest()->first();
+        return view('site.projects.index', compact('projects', 'banner'));
     }
 
     // 🔓 Public: View single project by slug

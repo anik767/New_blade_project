@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Service;
+use App\Models\HomeBanner;
 use App\Traits\AdminNotificationTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -151,7 +152,8 @@ class ServiceController extends Controller
     public function publicList()
     {
         $services = Service::where('is_active', true)->orderBy('order')->paginate(6);
-        return view('site.services', compact('services'));
+        $banner = HomeBanner::latest()->first();
+        return view('site.services', compact('services', 'banner'));
     }
 
     // 🔓 Public: View single service by slug

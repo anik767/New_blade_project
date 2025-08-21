@@ -6,16 +6,18 @@
 @section('content')
     <div class="bg-background text-text min-h-screen">
         
-
-
-
+        <x-site.banner 
+            title="My Blog"
+            subtitle="Insights, tutorials, and thoughts on web development, design, and technology. Sharing knowledge and experiences to help you grow as a developer."
+            :banner="$banner"
+        />
 
         {{-- Blog Posts Section --}}
         <section class="py-20 reveal-on-scroll">
             <div class="container mx-auto px-6">
                 @if ($posts->isEmpty())
                     <div class="text-center py-16">
-                        <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/10 to-[#1e2024] rounded-3xl p-12 max-w-md mx-auto shadow-lg">
+                        <div class=" rounded-3xl p-12 max-w-md mx-auto shadow-lg">
                             <div class="text-6xl mb-4">📝</div>
                             <h2 class="text-2xl font-semibold text-text mb-2">Blog Posts</h2>
                             <p class="text-muted">My blog posts will be available soon!</p>
@@ -29,7 +31,7 @@
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         @foreach ($posts as $post)
-                            <div class="bg-gradient-to-tl from-[#1e2024] via-white/10 to-[#23272b] rounded-3xl overflow-hidden shadow-lg shadow-accent/30 hover:shadow-acttive/50 transform transition-all duration-300 group hover:scale-105 hover:-translate-y-2 reveal-on-scroll">
+                            <div class=" rounded-3xl overflow-hidden shadow-lg shadow-accent/30 hover:shadow-acttive/50 transform transition-all duration-300 group   reveal-on-scroll">
                                 <a href="{{ route('site.blog.show', $post->slug) }}" class="block">
                                     @if ($post->image)
                                         <div class="relative overflow-hidden">
@@ -53,7 +55,7 @@
                                         <div class="flex justify-between items-center">
                                             <span class="text-sm text-accent font-medium">{{ $post->created_at->format('M d, Y') }}</span>
                                             <a href="{{ route('site.blog.show', $post->slug) }}" 
-                                               class="inline-flex items-center px-4 py-2 bg-accent text-background rounded-lg hover:bg-acttive transition-all duration-300 font-medium text-sm group-hover:scale-105">
+                                               class="inline-flex items-center px-4 py-2 bg-accent text-background rounded-lg hover:bg-acttive transition-all duration-300 font-medium text-sm group-">
                                                 Read More
                                                 <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>

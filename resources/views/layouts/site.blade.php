@@ -17,7 +17,7 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-background">
+    <div class="min-h-screen">
         <!-- Navigation -->
         @include('layouts.components.navigation')
 

@@ -19,7 +19,7 @@
             </div>
         </div>
 
-        <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/10 to-[#1e2024] rounded-lg shadow-lg p-6">
+        <div class=" rounded-lg shadow-lg p-6">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 @if($aboutMe->image)
                     <div>

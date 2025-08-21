@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BlogPost;
+use App\Models\HomeBanner;
 use App\Traits\AdminNotificationTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -15,7 +16,8 @@ class BlogPostController extends Controller
     public function publicList()
     {
         $posts = BlogPost::latest()->paginate(6);
-        return view('site.blog.index', compact('posts'));
+        $banner = HomeBanner::latest()->first();
+        return view('site.blog.index', compact('posts', 'banner'));
     }
     public function publicHome()
     {

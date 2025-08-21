@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
+use App\Models\HomeBanner;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -63,6 +64,7 @@ class ContactController extends Controller
     public function publicShow()
     {
         $contact = Contact::first();
-        return view('site.contact', compact('contact'));
+        $banner = HomeBanner::latest()->first();
+        return view('site.contact', compact('contact', 'banner'));
     }
 }

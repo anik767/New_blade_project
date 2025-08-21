@@ -6,32 +6,11 @@
 @section('content')
 <div class="bg-background text-text min-h-screen">
     
-    {{-- Hero Section --}}
-    <section class="py-32 reveal-on-scroll">
-        <div class="container mx-auto px-6">
-            <div class="text-center max-w-4xl mx-auto">
-                <h1 class="text-5xl lg:text-7xl font-extrabold text-text mb-8">Let's Connect</h1>
-                <p class="text-xl lg:text-2xl text-muted leading-relaxed mb-12">
-                    Ready to start your next project? I'm here to help bring your ideas to life. 
-                    Let's discuss your vision and create something amazing together.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <div class="flex items-center justify-center space-x-2 text-accent">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        <span class="font-semibold">Available for new projects</span>
-                    </div>
-                    <div class="flex items-center justify-center space-x-2 text-muted">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                        </svg>
-                        <span>Response within 24 hours</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <x-site.banner 
+        title="Let's Connect"
+        subtitle="Ready to start your next project? I'm here to help bring your ideas to life. Let's discuss your vision and create something amazing together."
+        :banner="$banner"
+    />
 
     {{-- Contact Information Section --}}
     <section class="py-20 reveal-on-scroll">
@@ -41,7 +20,7 @@
                     
                     {{-- Contact Details Card --}}
                     <div class="lg:col-span-1">
-                        <div class="bg-gradient-to-tl from-[#1e2024] via-white/10 to-[#23272b] rounded-3xl p-8 shadow-lg shadow-accent/30 hover:shadow-xl transition-all duration-300">
+                        <div class=" rounded-3xl p-8 shadow-lg shadow-accent/30 hover:shadow-xl transition-all duration-300">
                             <h2 class="text-3xl font-semibold mb-8 text-accent">Get In Touch</h2>
                             
                             <div class="space-y-8">
@@ -134,7 +113,7 @@
 
                     {{-- Message Content Card --}}
                     <div class="lg:col-span-2">
-                        <div class="bg-gradient-to-tl from-[#1e2024] via-white/10 to-[#23272b] rounded-3xl p-8 shadow-lg shadow-accent/30 hover:shadow-xl transition-all duration-300">
+                        <div class=" rounded-3xl p-8 shadow-lg shadow-accent/30 hover:shadow-xl transition-all duration-300">
                             <h2 class="text-3xl font-semibold mb-8 text-accent">A Message from Me</h2>
                             <div class="prose prose-lg text-text leading-relaxed">
                                 {!! nl2br(e($contact->content)) !!}
@@ -144,7 +123,7 @@
                 </div>
             @else
                 <div class="text-center py-16 reveal-on-scroll">
-                    <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/10 to-[#1e2024] rounded-3xl p-12 max-w-md mx-auto shadow-lg">
+                    <div class=" rounded-3xl p-12 max-w-md mx-auto shadow-lg">
                         <div class="text-6xl mb-4">📞</div>
                         <h2 class="text-2xl font-semibold text-text mb-2">Contact</h2>
                         <p class="text-muted">Contact information will be available soon!</p>
@@ -163,19 +142,19 @@
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] rounded-2xl p-8 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 text-center hover:scale-105 hover:-translate-y-2">
+                <div class=" rounded-2xl p-8 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 text-center  ">
                     <div class="text-4xl mb-6">🎨</div>
                     <h3 class="text-2xl font-semibold mb-4 text-text">Web Design</h3>
                     <p class="text-muted leading-relaxed">Creating beautiful, user-friendly interfaces that engage and convert visitors into customers.</p>
                 </div>
                 
-                <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] rounded-2xl p-8 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 text-center hover:scale-105 hover:-translate-y-2">
+                <div class=" rounded-2xl p-8 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 text-center  ">
                     <div class="text-4xl mb-6">💻</div>
                     <h3 class="text-2xl font-semibold mb-4 text-text">Frontend Development</h3>
                     <p class="text-muted leading-relaxed">Building responsive, fast-loading websites using modern technologies and best practices.</p>
                 </div>
                 
-                <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] rounded-2xl p-8 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 text-center hover:scale-105 hover:-translate-y-2">
+                <div class=" rounded-2xl p-8 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 text-center  ">
                     <div class="text-4xl mb-6">⚡</div>
                     <h3 class="text-2xl font-semibold mb-4 text-text">Performance Optimization</h3>
                     <p class="text-muted leading-relaxed">Optimizing websites for speed, SEO, and user experience to maximize conversions.</p>
@@ -237,17 +216,17 @@
             </div>
             
             <div class="max-w-4xl mx-auto space-y-6">
-                <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] rounded-2xl p-8 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300">
+                <div class=" rounded-2xl p-8 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300">
                     <h3 class="text-xl font-semibold mb-4 text-text">What technologies do you work with?</h3>
                     <p class="text-muted leading-relaxed">I specialize in modern web technologies including HTML5, CSS3, JavaScript, React, Vue.js, Laravel, and more. I choose the best tools for each project's specific needs.</p>
                 </div>
                 
-                <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] rounded-2xl p-8 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300">
+                <div class=" rounded-2xl p-8 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300">
                     <h3 class="text-xl font-semibold mb-4 text-text">How long does a typical project take?</h3>
                     <p class="text-muted leading-relaxed">Project timelines vary based on complexity. A simple website might take 2-4 weeks, while complex applications can take 2-3 months. I'll provide a detailed timeline during our initial discussion.</p>
                 </div>
                 
-                <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] rounded-2xl p-8 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300">
+                <div class=" rounded-2xl p-8 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300">
                     <h3 class="text-xl font-semibold mb-4 text-text">Do you provide ongoing support?</h3>
                     <p class="text-muted leading-relaxed">Yes! I offer ongoing maintenance, updates, and support packages to ensure your website continues to perform optimally after launch.</p>
                 </div>
@@ -258,7 +237,7 @@
     {{-- CTA Section --}}
     <section class="py-20 reveal-on-scroll">
         <div class="container mx-auto px-6">
-            <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/10 to-[#1e2024] rounded-3xl p-12 text-center border border-gray-700 shadow-lg shadow-accent/30">
+            <div class=" rounded-3xl p-12 text-center border border-gray-700 shadow-lg shadow-accent/30">
                 <h2 class="text-4xl lg:text-5xl font-extrabold text-text mb-6">Ready to Start Your Project?</h2>
                 <p class="text-xl text-muted mb-8 max-w-2xl mx-auto leading-relaxed">
                     Let's discuss your ideas and create something amazing together. 
@@ -266,14 +245,14 @@
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
                     <a href="mailto:{{ $contact->email ?? 'contact@example.com' }}" 
-                       class="inline-flex items-center px-8 py-4 bg-accent text-dark rounded-xl font-semibold tracking-wide hover:bg-accent/90 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
+                       class="inline-flex items-center px-8 py-4 bg-accent text-dark rounded-xl font-semibold tracking-wide hover:bg-accent/90 transition-all duration-300 shadow-lg hover:shadow-xl ">
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                         </svg>
                         Send Email
                     </a>
                     <a href="{{ route('home') }}" 
-                       class="inline-flex items-center px-8 py-4 border-2 border-accent text-accent rounded-xl font-semibold tracking-wide hover:bg-accent hover:text-dark transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
+                       class="inline-flex items-center px-8 py-4 border-2 border-accent text-accent rounded-xl font-semibold tracking-wide hover:bg-accent hover:text-dark transition-all duration-300 shadow-lg hover:shadow-xl ">
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                         </svg>
