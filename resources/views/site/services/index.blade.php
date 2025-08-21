@@ -31,14 +31,21 @@
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     @foreach($services as $service)
-                    <div class="bg-gradient-to-tl from-[#1e2024] via-white/10 to-[#23272b] rounded-3xl overflow-hidden shadow-lg shadow-accent/30 hover:shadow-acttive/50 transform transition-all duration-300 group   reveal-on-scroll">
+                    <div class=" rounded-3xl overflow-hidden shadow-lg shadow-accent/30 hover:shadow-acttive/50 transform transition-all duration-300 group   reveal-on-scroll">
                         <a href="{{ route('services.show', $service->slug) }}" class="block">
                             @if($service->image)
                                 <div class="relative overflow-hidden">
                                     <img src="{{ asset('storage/' . $service->image) }}" 
                                          alt="{{ $service->title }}" 
                                          class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                         <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-[#22262a]/70  to-[#22262a]/0"></div>
+                                </div>
+                              @else
+                                <div class="relative overflow-hidden">
+                                    <img src="{{ asset('images/Image_not_found.jpg') }}" 
+                                         alt="{{ $service->title }}" 
+                                         class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
+                                         <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-[#22262a]/70  to-[#22262a]/0"></div>
                                 </div>
                             @endif
 

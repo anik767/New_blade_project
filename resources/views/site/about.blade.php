@@ -45,11 +45,11 @@
                                 
                                 <!-- Quick Stats -->
                                 <div class="grid grid-cols-2 gap-6 pt-8">
-                                    <div class="text-center p-6 bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] rounded-2xl border border-gray-700">
+                                    <div class="text-center p-6  rounded-2xl border border-gray-700">
                                         <div class="text-3xl font-bold text-accent mb-2">3+</div>
                                         <div class="text-sm text-muted">Years Experience</div>
                                     </div>
-                                    <div class="text-center p-6 bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] rounded-2xl border border-gray-700">
+                                    <div class="text-center p-6  rounded-2xl border border-gray-700">
                                         <div class="text-3xl font-bold text-accent mb-2">50+</div>
                                         <div class="text-sm text-muted">Projects Completed</div>
                                     </div>
@@ -65,7 +65,7 @@
                             </div>
                             
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] rounded-2xl p-8 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 text-center  ">
+                                <div class=" rounded-2xl p-8 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 text-center  ">
                                     <div class="text-5xl mb-6">🧠</div>
                                     <h3 class="text-2xl font-semibold mb-4 text-text">Problem Solver</h3>
                                     <p class="text-muted leading-relaxed">
@@ -73,7 +73,7 @@
                                     </p>
                                 </div>
 
-                                <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] rounded-2xl p-8 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 text-center  ">
+                                <div class=" rounded-2xl p-8 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 text-center  ">
                                     <div class="text-5xl mb-6">🚀</div>
                                     <h3 class="text-2xl font-semibold mb-4 text-text">Fast Learner</h3>
                                     <p class="text-muted leading-relaxed">
@@ -81,7 +81,7 @@
                                     </p>
                                 </div>
 
-                                <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] rounded-2xl p-8 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 text-center  ">
+                                <div class=" rounded-2xl p-8 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 text-center  ">
                                     <div class="text-5xl mb-6">🎨</div>
                                     <h3 class="text-2xl font-semibold mb-4 text-text">Creative Coder</h3>
                                     <p class="text-muted leading-relaxed">
@@ -89,7 +89,7 @@
                                     </p>
                                 </div>
 
-                                <div class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/5 to-[#1e2024] rounded-2xl p-8 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 text-center  ">
+                                <div class=" rounded-2xl p-8 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 text-center  ">
                                     <div class="text-5xl mb-6">🤝</div>
                                     <h3 class="text-2xl font-semibold mb-4 text-text">Team Player</h3>
                                     <p class="text-muted leading-relaxed">

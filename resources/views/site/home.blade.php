@@ -7,7 +7,7 @@
     {{-- Hero Section --}}
     <section class="relative h-screen bg-cover bg-center bg-no-repeat overflow-hidden"
         style="background-image: url('{{ optional($banner) && optional($banner)->background_image ? asset('storage/' . $banner->background_image) : asset('images/Home/banner-background-one.jpg') }}')">
-        <div class="absolute inset-0 bg-gradient-to-r from-background/80 via-background/60 to-background/40"></div>
+        <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-[#22262a]/80 via-[#22262a]/60 to-[#22262a]/40"></div>
 
         <div class="container mx-auto h-full grid grid-cols-1 lg:grid-cols-2 items-center px-6 relative font-rajdhani z-10 text-[#c4cfde]">
             <div class="flex flex-col justify-center space-y-8 text-center lg:text-left py-10 lg:py-0 max-w-2xl mx-auto lg:mx-0 reveal-on-scroll">

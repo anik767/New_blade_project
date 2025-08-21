@@ -6,7 +6,7 @@
 
 <section class="relative py-32 bg-cover bg-center bg-no-repeat overflow-hidden"
     style="background-image: url('{{ optional($banner) && optional($banner)->background_image ? asset('storage/' . $banner->background_image) : asset('images/Home/banner-background-one.jpg') }}')">
-    <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-black/70 via-black/60 to-black/40 "></div>
+    <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-[#22292a]/90 via-[#22292a]/80 to-[#22292a]/70 "></div>
 
     <div class="container mx-auto px-6 relative z-10">
         <div class="text-center max-w-4xl mx-auto">

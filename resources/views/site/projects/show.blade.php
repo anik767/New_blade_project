@@ -46,7 +46,13 @@
                 <div class="mb-8">
                     <img src="{{ asset('storage/' . $project->image) }}" 
                          alt="{{ $project->title }}" 
-                         class="w-full h-96 object-cover rounded-lg">
+                         class="w-full h-96 object-cover object-top rounded-lg">
+                </div>
+                @else
+                <div class="mb-8">
+                    <img src="{{ asset('images/Image_not_found.jpg') }}" 
+                         alt="{{ $project->title }}" 
+                         class="w-full h-96 object-cover object-top rounded-lg">
                 </div>
             @endif
 
