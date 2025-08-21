@@ -153,13 +153,15 @@ class ServiceController extends Controller
     {
         $services = Service::where('is_active', true)->orderBy('order')->paginate(6);
         $banner = HomeBanner::latest()->first();
-        return view('site.services', compact('services', 'banner'));
+        $pageBanner = \App\Models\PageBanner::where('page', 'services')->first();
+        return view('site.services.index', compact('services', 'banner', 'pageBanner'));
     }
 
     // 🔓 Public: View single service by slug
     public function publicSingle($slug)
     {
         $service = Service::where('slug', $slug)->where('is_active', true)->firstOrFail();
-        return view('site.services.show', compact('service'));
+        $pageBanner = \App\Models\PageBanner::where('page', 'services')->first();
+        return view('site.services.show', compact('service','pageBanner'));
     }
 }

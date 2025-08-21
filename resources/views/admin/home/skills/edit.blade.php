@@ -47,7 +47,7 @@
             </div>
         </div>
 
-        <x-admin-form 
+        <x-forms.admin-form 
             :action="route('admin.home.skills.update')" 
             title=""
             submit-text="Update Skills"
@@ -116,7 +116,7 @@
                     </div>
                 </div>
             </div>
-        </x-admin-form>
+        </x-forms.admin-form>
     </div>
 </div>
 @endsection 

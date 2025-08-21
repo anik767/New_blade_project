@@ -22,11 +22,15 @@ class CommentController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Validation failed',
-                'errors' => $validator->errors()
-            ], 422);
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Validation failed',
+                    'errors' => $validator->errors()
+                ], 422);
+            }
+
+            return back()->withErrors($validator)->withInput();
         }
 
         try {
@@ -44,25 +48,35 @@ class CommentController extends Controller
                     break;
             }
 
-            // Create the comment
+            // Create the comment (requires admin approval)
             $comment = $commentable->comments()->create([
                 'name' => $request->name,
                 'email' => $request->email,
                 'comment' => $request->comment,
-                'is_approved' => false // Comments need approval by default
+                'is_approved' => false
             ]);
 
-            return response()->json([
-                'success' => true,
-                'message' => 'Comment submitted successfully! It will be visible after approval.',
-                'comment' => $comment
-            ]);
+            $pendingMsg = 'Comment submitted! It will be visible after admin approval.';
+
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => $pendingMsg,
+                    'comment' => $comment
+                ]);
+            }
+
+            return back()->with('success', $pendingMsg);
 
         } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Failed to submit comment. Please try again.'
-            ], 500);
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Failed to submit comment. Please try again.'
+                ], 500);
+            }
+
+            return back()->with('error', 'Failed to submit comment. Please try again.');
         }
     }
 }

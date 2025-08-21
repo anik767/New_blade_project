@@ -28,7 +28,7 @@
         </div>
     </div>
 
-    <x-admin-form 
+    <x-forms.admin-form 
         :action="route('admin.blog.store')" 
         title="Blog Post Information"
         submit-text="Create Post"
@@ -43,14 +43,14 @@
                 Basic Post Information
             </h3>
             
-            <x-form-field 
+            <x-forms.form-field 
                 label="Post Title" 
                 name="title" 
                 required 
                 placeholder="How to Build a Modern Web Application with Laravel and Vue.js"
             />
             
-            <x-form-field 
+            <x-forms.form-field 
                 label="Post Content" 
                 name="content" 
                 type="textarea" 
@@ -163,6 +163,6 @@
                 </div>
             </div>
         </div>
-    </x-admin-form>
+    </x-forms.admin-form>
 </div>
 @endsection

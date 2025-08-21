@@ -106,6 +106,7 @@ class AboutMeController extends Controller
         try {
             $aboutMe = AboutMe::first();
             $banner = HomeBanner::latest()->first();
+            $pageBanner = \App\Models\PageBanner::where('page', 'about')->first();
             
             // If no about me record exists, create a default one
             if (!$aboutMe) {
@@ -120,11 +121,12 @@ class AboutMeController extends Controller
                 ]);
             }
             
-            return view('site.about', compact('aboutMe', 'banner'));
+            return view('site.about.index', compact('aboutMe', 'banner','pageBanner'));
         } catch (\Exception $e) {
             // If there's an error, return the view with null
             $banner = HomeBanner::latest()->first();
-            return view('site.about', ['aboutMe' => null, 'banner' => $banner]);
+            $pageBanner = \App\Models\PageBanner::where('page', 'about')->first();
+            return view('site.about.index', ['aboutMe' => null, 'banner' => $banner, 'pageBanner' => $pageBanner]);
         }
     }
 }

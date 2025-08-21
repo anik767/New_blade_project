@@ -46,7 +46,7 @@
             </div>
         </div>
 
-        <x-admin-form 
+        <x-forms.admin-form 
             :action="route('admin.services.store')" 
             title=""
             submit-text="Create Service"
@@ -64,14 +64,14 @@
                 </h3>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <x-form-field 
+                    <x-forms.form-field 
                         label="Service Title" 
                         name="title" 
                         required 
                         placeholder="Web Development"
                     />
                     
-                    <x-form-field 
+                    <x-forms.form-field 
                         label="Service Icon" 
                         name="icon" 
                         placeholder="fas fa-code"
@@ -80,7 +80,7 @@
                 </div>
                 
                 <div class="mt-6">
-                    <x-form-field 
+                    <x-forms.form-field 
                         label="Service Description" 
                         name="description" 
                         type="textarea" 
@@ -238,7 +238,7 @@
                     </div>
                 </div>
             </div>
-        </x-admin-form>
+        </x-forms.admin-form>
     </div>
 </div>
 @endsection 

@@ -206,6 +206,15 @@
                                             SERV
                                         </div>
                                     </div>
+                                @else
+                                    <div class="relative">
+                                        <img src="{{ asset('images/Image_not_found.jpg') }}"
+                                            alt="{{ $recentService->title }}" class="w-full h-48 object-cover">
+                                        <div
+                                            class="absolute top-2 right-2 bg-accent text-background px-2 py-1 rounded text-xs font-medium">
+                                            SERV
+                                        </div>
+                                    </div>
                                 @endif
                                 <div class="p-4">
                                     <h4 class="font-bold text-text mb-2 line-clamp-2">{{ $recentService->title }}</h4>
@@ -224,4 +233,55 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('comment-form');
+            if (!form) return;
+
+            const successBox = document.getElementById('comment-success');
+            const errorBox = document.getElementById('comment-error');
+            const wrapper = document.getElementById('comment-message');
+            const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            const endpoint = "{{ route('comment.store') }}";
+
+            function showMessage(el, msg) {
+                wrapper.classList.remove('hidden');
+                successBox.classList.add('hidden');
+                errorBox.classList.add('hidden');
+                el.textContent = msg;
+                el.classList.remove('hidden');
+            }
+
+            form.addEventListener('submit', async function (e) {
+                e.preventDefault();
+                const formData = new FormData(form);
+
+                try {
+                    const res = await fetch(endpoint, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': token,
+                            'Accept': 'application/json'
+                        },
+                        body: formData
+                    });
+
+                    const data = await res.json();
+
+                    if (res.ok && data.success) {
+                        showMessage(successBox, data.message || 'Comment submitted successfully!');
+                        form.reset();
+                    } else if (res.status === 422 && data.errors) {
+                        const firstError = Object.values(data.errors)[0]?.[0] || 'Validation failed.';
+                        showMessage(errorBox, firstError);
+                    } else {
+                        showMessage(errorBox, data.message || 'Failed to submit comment. Please try again.');
+                    }
+                } catch (err) {
+                    showMessage(errorBox, 'Network error. Please try again.');
+                }
+            });
+        });
+    </script>
 @endsection

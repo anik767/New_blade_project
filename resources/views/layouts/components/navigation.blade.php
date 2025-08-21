@@ -1,4 +1,4 @@
-<nav class="bg-white shadow-sm   fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ease-in-out" 
+<nav class="bg-transparent max-w-7xl mx-auto rounded-[16px] translate-y-[10px] shadow-none fixed top-0 left-0 right-0 z-50  transition-transform duration-300 ease-in-out" 
      x-data="{ mobileMenuOpen: false, scrolled: false, lastScrollY: 0, isVisible: true }"
      x-init="
         window.addEventListener('scroll', () => { 
@@ -16,46 +16,46 @@
           lastScrollY = currentScrollY;
         })
      "
-     :style="isVisible ? 'transform: translateY(0)' : 'transform: translateY(-100%)'"
+     :style="isVisible ? 'transform: translateY(10px)' : 'transform: translateY(-100%)'"
      :class="{ 
-       'shadow-lg bg-white backdrop-blur-sm': scrolled, 
-       'bg-white': !scrolled
+       'shadow-lg   backdrop-blur-sm ': scrolled, 
+       'bg-transparent border-b border-transparent shadow-none': !scrolled
      }">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
+    <div class=" mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-10">
             <!-- Left side -->
             <div class="flex">
                 
                 
                 <!-- Desktop navigation -->
-                <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                <div class="hidden sm:ml-6 sm:flex sm:space-x-2">
                     <a href="{{ route('home') }}" 
-                       class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-200 {{ request()->routeIs('home') ? 'border-blue-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700' }}">
+                       class="inline-flex items-center px-3 py-1 border-b-2 text-sm font-medium rounded-lg backdrop-blur-sm transition-all duration-200 {{ request()->routeIs('home') ? 'border-blue-500 text-gray-900 bg-white/50' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 hover:bg-white/30' }}">
                         Home
                     </a>
                     
                     <a href="{{ route('about') }}" 
-                       class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-200 {{ request()->routeIs('about') ? 'border-blue-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700' }}">
+                       class="inline-flex items-center px-3 py-1 border-b-2 text-sm font-medium rounded-lg backdrop-blur-sm transition-all duration-200 {{ request()->routeIs('about') ? 'border-blue-500 text-gray-900 bg-white/50' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 hover:bg-white/30' }}">
                         About Me
                     </a>
                     
-                    <a href="{{ route('services.index') }}" 
-                       class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-200 {{ request()->routeIs('services') ? 'border-blue-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700' }}">
+                    <a href="{{ route('services') }}" 
+                       class="inline-flex items-center px-3 py-1 border-b-2 text-sm font-medium rounded-lg backdrop-blur-sm transition-all duration-200 {{ request()->routeIs('services') ? 'border-blue-500 text-gray-900 bg-white/50' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 hover:bg-white/30' }}">
                         Services
                     </a>
                     
                     <a href="{{ route('projects.index') }}" 
-                       class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-200 {{ request()->routeIs('projects.*') ? 'border-blue-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700' }}">
+                       class="inline-flex items-center px-3 py-1 border-b-2 text-sm font-medium rounded-lg backdrop-blur-sm transition-all duration-200 {{ request()->routeIs('projects.*') ? 'border-blue-500 text-gray-900 bg-white/50' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 hover:bg-white/30' }}">
                         Projects
                     </a>
                     
                     <a href="{{ route('site.blog.index') }}" 
-                       class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-200 {{ request()->routeIs('site.blog.*') ? 'border-blue-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700' }}">
+                       class="inline-flex items-center px-3 py-1 border-b-2 text-sm font-medium rounded-lg backdrop-blur-sm transition-all duration-200 {{ request()->routeIs('site.blog.*') ? 'border-blue-500 text-gray-900 bg-white/50' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 hover:bg-white/30' }}">
                         Blog
                     </a>
                     
                     <a href="{{ route('contact') }}" 
-                       class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-200 {{ request()->routeIs('contact') ? 'border-blue-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700' }}">
+                       class="inline-flex items-center px-3 py-1 border-b-2 text-sm font-medium rounded-lg backdrop-blur-sm transition-all duration-200 {{ request()->routeIs('contact') ? 'border-blue-500 text-gray-900 bg-white/50' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 hover:bg-white/30' }}">
                         Contact
                     </a>
                 </div>

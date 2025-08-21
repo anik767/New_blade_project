@@ -9,7 +9,7 @@
     <x-site.banner 
         title="Let's Connect"
         subtitle="Ready to start your next project? I'm here to help bring your ideas to life. Let's discuss your vision and create something amazing together."
-        :banner="$banner"
+        :banner="$banner" :pageBanner="$pageBanner"
     />
 
     {{-- Contact Information Section --}}

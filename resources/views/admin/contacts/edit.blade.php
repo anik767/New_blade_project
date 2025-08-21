@@ -55,7 +55,7 @@
             </div>
         </div>
 
-        <x-admin-form 
+        <x-forms.admin-form 
             :action="route('admin.contacts.update')" 
             title=""
             submit-text="Update Contact Info"
@@ -73,7 +73,7 @@
                 </h3>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <x-form-field 
+                    <x-forms.form-field 
                         label="Contact Title" 
                         name="title" 
                         required 
@@ -81,7 +81,7 @@
                         :value="$contact->title"
                     />
                     
-                    <x-form-field 
+                    <x-forms.form-field 
                         label="Email Address" 
                         name="email" 
                         type="email"
@@ -92,7 +92,7 @@
                 </div>
                 
                 <div class="mt-6">
-                    <x-form-field 
+                    <x-forms.form-field 
                         label="Contact Description" 
                         name="content" 
                         type="textarea" 
@@ -115,14 +115,14 @@
                 </h3>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <x-form-field 
+                    <x-forms.form-field 
                         label="Phone Number" 
                         name="phone" 
                         placeholder="+1 (555) 123-4567"
                         :value="$contact->phone"
                     />
                     
-                    <x-form-field 
+                    <x-forms.form-field 
                         label="Physical Address" 
                         name="address" 
                         placeholder="123 Main Street, Suite 100, City, State 12345"
@@ -143,7 +143,7 @@
                 </h3>
                 
                 <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-200">
-                    <x-form-field 
+                    <x-forms.form-field 
                         label="Social Media Links" 
                         name="social_links" 
                         type="textarea" 
@@ -169,7 +169,7 @@
                     </div>
                 </div>
             </div>
-        </x-admin-form>
+        </x-forms.admin-form>
     </div>
 </div>
 @endsection 

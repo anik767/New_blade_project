@@ -30,7 +30,7 @@ class HomeBannerController extends Controller
             'title_line1'       => 'nullable|string|max:255',
             'title_line2'       => 'nullable|string|max:255',
             'subtitle'          => 'nullable|string',
-            'background_image'  => 'nullable|image',
+            'background_image'  => 'nullable|file|mimes:jpg,jpeg,png,gif,webp,mp4,webm',
             'person_image'      => 'nullable|image',
             'cv_file'           => 'nullable|file|mimes:pdf,doc,docx|max:5120',
         ]);

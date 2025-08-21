@@ -55,7 +55,7 @@
             </div>
         </div>
 
-        <x-admin-form 
+        <x-forms.admin-form 
             :action="route('admin.about-me.update')" 
             title=""
             submit-text="Update Profile"
@@ -73,7 +73,7 @@
                 </h3>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <x-form-field 
+                    <x-forms.form-field 
                         label="Full Name" 
                         name="name" 
                         required 
@@ -81,7 +81,7 @@
                         :value="$aboutMe->name"
                     />
                     
-                    <x-form-field 
+                    <x-forms.form-field 
                         label="Professional Title" 
                         name="title" 
                         placeholder="e.g., Full Stack Developer, UI/UX Designer"
@@ -90,7 +90,7 @@
                 </div>
                 
                 <div class="mt-6">
-                    <x-form-field 
+                    <x-forms.form-field 
                         label="About Me Content" 
                         name="content" 
                         type="textarea" 
@@ -113,7 +113,7 @@
                 </h3>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <x-form-field 
+                    <x-forms.form-field 
                         label="Email Address" 
                         name="email" 
                         type="email"
@@ -121,7 +121,7 @@
                         :value="$aboutMe->email"
                     />
                     
-                    <x-form-field 
+                    <x-forms.form-field 
                         label="Phone Number" 
                         name="phone" 
                         placeholder="+1 (555) 123-4567"
@@ -130,14 +130,14 @@
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                    <x-form-field 
+                    <x-forms.form-field 
                         label="Location" 
                         name="location" 
                         placeholder="City, Country"
                         :value="$aboutMe->location"
                     />
                     
-                    <x-form-field 
+                    <x-forms.form-field 
                         label="LinkedIn Profile" 
                         name="linkedin" 
                         type="url"
@@ -147,7 +147,7 @@
                 </div>
                 
                 <div class="mt-6">
-                    <x-form-field 
+                    <x-forms.form-field 
                         label="GitHub Profile" 
                         name="github" 
                         type="url"
@@ -260,7 +260,7 @@
                 </h3>
                 
                 <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-200">
-                    <x-form-field 
+                    <x-forms.form-field 
                         label="Google Maps Embed Code" 
                         name="map_embed_code" 
                         type="textarea"
@@ -285,7 +285,7 @@
                     </div>
                 </div>
             </div>
-        </x-admin-form>
+        </x-forms.admin-form>
     </div>
 </div>
 

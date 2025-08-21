@@ -17,7 +17,8 @@ class BlogPostController extends Controller
     {
         $posts = BlogPost::latest()->paginate(6);
         $banner = HomeBanner::latest()->first();
-        return view('site.blog.index', compact('posts', 'banner'));
+        $pageBanner = \App\Models\PageBanner::where('page', 'blog')->first();
+        return view('site.blog.index', compact('posts', 'banner','pageBanner'));
     }
     public function publicHome()
     {
@@ -32,7 +33,8 @@ class BlogPostController extends Controller
     public function publicSingle($slug)
     {
         $post = BlogPost::where('slug', $slug)->firstOrFail();
-        return view('site.blog.show', compact('post'));
+        $pageBanner = \App\Models\PageBanner::where('page', 'blog')->first();
+        return view('site.blog.show', compact('post','pageBanner'));
     }
 
     // 🔐 Admin: List blog posts with pagination

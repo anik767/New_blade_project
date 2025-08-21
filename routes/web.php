@@ -63,6 +63,11 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('home/banner', [HomeBannerController::class, 'edit'])->name('home.banner.edit');
     Route::put('home/banner', [HomeBannerController::class, 'update'])->name('home.banner.update');
 
+    // Page Banners
+    Route::get('page-banners', [\App\Http\Controllers\Admin\PageBannerController::class, 'index'])->name('page-banners.index');
+    Route::get('page-banners/{page}', [\App\Http\Controllers\Admin\PageBannerController::class, 'edit'])->name('page-banners.edit');
+    Route::put('page-banners/{page}', [\App\Http\Controllers\Admin\PageBannerController::class, 'update'])->name('page-banners.update');
+
     // Home Skills routes
     Route::get('home/skills', [HomeSkillsController::class, 'edit'])->name('home.skills.edit');
     Route::put('home/skills', [HomeSkillsController::class, 'update'])->name('home.skills.update');
@@ -97,7 +102,9 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
     // Comments management
     Route::get('/comments', [App\Http\Controllers\Admin\CommentController::class, 'index'])->name('comments.index');
+    Route::get('/comments/{comment}', [App\Http\Controllers\Admin\CommentController::class, 'show'])->name('comments.show');
     Route::patch('/comments/{comment}/approve', [App\Http\Controllers\Admin\CommentController::class, 'approve'])->name('comments.approve');
+    Route::put('/comments/{comment}/status', [App\Http\Controllers\Admin\CommentController::class, 'updateStatus'])->name('comments.update-status');
     Route::delete('/comments/{comment}', [App\Http\Controllers\Admin\CommentController::class, 'destroy'])->name('comments.destroy');
 });
 

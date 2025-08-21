@@ -72,7 +72,7 @@
             </div>
         </div>
 
-        <x-admin-form 
+        <x-forms.admin-form 
             :action="route('admin.home.banner.update')" 
             title=""
             submit-text="Update Banner"
@@ -92,14 +92,14 @@
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="space-y-4">
-                        <x-form-field 
+                        <x-forms.form-field 
                             label="Title Line 1" 
                             name="title_line1" 
                             placeholder="e.g., Hi, I'm John Doe"
                             :value="$banner->title_line1"
                         />
                         
-                        <x-form-field 
+                        <x-forms.form-field 
                             label="Title Line 2" 
                             name="title_line2" 
                             placeholder="e.g., Full Stack Developer"
@@ -123,7 +123,7 @@
                 </div>
                 
                 <div class="mt-8">
-                    <x-form-field 
+                    <x-forms.form-field 
                         label="Subtitle" 
                         name="subtitle" 
                         type="textarea" 
@@ -151,16 +151,26 @@
                             <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                             </svg>
-                            Background Image
+                            Background Media (Image/GIF/Video)
                         </label>
                         
                         @if($banner->background_image)
                             <div class="mb-6 p-4 bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200 rounded-xl">
-                                <p class="text-sm font-semibold text-gray-700 mb-4">Current Background Image:</p>
+                                <p class="text-sm font-semibold text-gray-700 mb-4">Current Background:</p>
                                 <div class="relative group">
-                                    <img src="{{ asset('storage/' . $banner->background_image) }}" 
-                                         alt="Current background" 
-                                         class="w-full h-48 object-cover rounded-xl border border-gray-200 shadow-lg group-hover:shadow-xl transition-all duration-300">
+                                    @php
+                                        $ext = strtolower(pathinfo($banner->background_image, PATHINFO_EXTENSION));
+                                        $isVideo = in_array($ext, ['mp4','webm']);
+                                    @endphp
+                                    @if($isVideo)
+                                        <video class="w-full h-48 object-cover rounded-xl border border-gray-200 shadow-lg group-hover:shadow-xl transition-all duration-300" autoplay muted loop playsinline>
+                                            <source src="{{ asset('storage/' . $banner->background_image) }}" type="video/{{ $ext == 'webm' ? 'webm' : 'mp4' }}">
+                                        </video>
+                                    @else
+                                        <img src="{{ asset('storage/' . $banner->background_image) }}" 
+                                             alt="Current background" 
+                                             class="w-full h-48 object-cover rounded-xl border border-gray-200 shadow-lg group-hover:shadow-xl transition-all duration-300">
+                                    @endif
                                     <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 rounded-xl flex items-center justify-center">
                                         <svg class="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -172,14 +182,30 @@
                         @endif
                         
                         <div class="space-y-4">
-                            <input type="file" name="background_image" accept="image/*" 
+                            <input id="homeBackgroundMediaInput" type="file" name="background_image" accept="image/*,video/mp4,video/webm" 
                                    class="w-full px-4 py-3 border-2 border-dashed border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-gray-50 hover:bg-gray-100">
                             <p class="text-sm text-gray-600 flex items-center">
                                 <svg class="w-4 h-4 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
-                                Recommended: 1920x1080 or larger, JPG/PNG
+                                Recommended image: 1920x1080+ (JPG/PNG/GIF/WEBP) or video: MP4/WEBM
                             </p>
+                            <div id="homeMediaPreviewWrapper" class="hidden">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Preview</label>
+                                <div class="relative w-full rounded-xl overflow-hidden border border-gray-200">
+                                    <div id="homeLoadingOverlay" class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                                        <svg class="animate-spin h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="bg-gray-100">
+                                        <video id="homeVideoPreview" class="w-full h-auto hidden" autoplay muted loop playsinline></video>
+                                        <img id="homeImagePreview" class="w-full h-auto hidden" alt="Selected preview" />
+                                    </div>
+                                </div>
+                                <p class="text-xs text-gray-500 mt-2">Shows a loading overlay until media is ready.</p>
+                            </div>
                         </div>
                     </div>
                     
@@ -261,7 +287,61 @@
                     </div>
                 </div>
             </div>
-        </x-admin-form>
+        </x-forms.admin-form>
     </div>
 </div>
 @endsection 
+@push('scripts')
+<script>
+  (function(){
+    const input = document.getElementById('homeBackgroundMediaInput');
+    const wrapper = document.getElementById('homeMediaPreviewWrapper');
+    const video = document.getElementById('homeVideoPreview');
+    const image = document.getElementById('homeImagePreview');
+    const overlay = document.getElementById('homeLoadingOverlay');
+
+    function showOverlay(){ overlay && overlay.classList.remove('hidden'); }
+    function hideOverlay(){ overlay && overlay.classList.add('hidden'); }
+    function resetPreview(){
+      if (video) {
+        video.classList.add('hidden');
+        video.removeAttribute('src');
+        video.load();
+      }
+      if (image) {
+        image.classList.add('hidden');
+        image.removeAttribute('src');
+      }
+    }
+
+    if (input) {
+      input.addEventListener('change', function(e){
+        const file = e.target.files && e.target.files[0];
+        if (!file) { return; }
+        const url = URL.createObjectURL(file);
+        if (wrapper) wrapper.classList.remove('hidden');
+        resetPreview();
+        showOverlay();
+
+        if (file.type && file.type.startsWith('video/')) {
+          if (video) {
+            video.src = url;
+            video.classList.remove('hidden');
+            const onLoaded = function(){ hideOverlay(); video.removeEventListener('loadeddata', onLoaded); };
+            const onErr = function(){ hideOverlay(); video.removeEventListener('error', onErr); };
+            video.addEventListener('loadeddata', onLoaded);
+            video.addEventListener('error', onErr);
+          }
+        } else {
+          if (image) {
+            image.src = url;
+            image.classList.remove('hidden');
+            image.onload = function(){ hideOverlay(); };
+            image.onerror = function(){ hideOverlay(); };
+          }
+        }
+      });
+    }
+  })();
+</script>
+@endpush

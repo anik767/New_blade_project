@@ -24,14 +24,16 @@ class ProjectPostController extends Controller
     {
         $projects = ProjectPost::latest()->paginate(6);
         $banner = HomeBanner::latest()->first();
-        return view('site.projects.index', compact('projects', 'banner'));
+        $pageBanner = \App\Models\PageBanner::where('page', 'projects')->first();
+        return view('site.projects.index', compact('projects', 'banner','pageBanner'));
     }
 
     // 🔓 Public: View single project by slug
     public function publicSingle($slug)
     {
         $project = ProjectPost::where('slug', $slug)->firstOrFail();
-        return view('site.projects.show', compact('project'));
+        $pageBanner = \App\Models\PageBanner::where('page', 'projects')->first();
+        return view('site.projects.show', compact('project','pageBanner'));
     }
 
     // 🔐 Admin: Dashboard view with project count

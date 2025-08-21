@@ -65,6 +65,7 @@ class ContactController extends Controller
     {
         $contact = Contact::first();
         $banner = HomeBanner::latest()->first();
-        return view('site.contact', compact('contact', 'banner'));
+        $pageBanner = \App\Models\PageBanner::where('page', 'contact')->first();
+        return view('site.contact.index', compact('contact', 'banner','pageBanner'));
     }
 }

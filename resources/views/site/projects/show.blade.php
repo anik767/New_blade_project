@@ -144,8 +144,7 @@
                         </a>
                         <a href="#" class="w-10 h-10 bg-blue-700 rounded-full flex items-center justify-center text-white hover:bg-blue-800 transition-colors">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                            </svg>
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065z"/>
                         </a>
                         <a href="#" class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center text-white hover:bg-red-700 transition-colors">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -174,6 +173,15 @@
                                         PROJ
                                     </div>
                                 </div>
+                            @else
+                                <div class="relative">
+                                    <img src="{{ asset('images/Image_not_found.jpg') }}" 
+                                         alt="{{ $recentProject->title }}" 
+                                         class="w-full h-48 object-cover">
+                                    <div class="absolute top-2 right-2 bg-accent text-background px-2 py-1 rounded text-xs font-medium">
+                                        PROJ
+                                    </div>
+                                </div>
                             @endif
                             <div class="p-4">
                                 <h4 class="font-bold text-text mb-2 line-clamp-2">{{ $recentProject->title }}</h4>
@@ -191,4 +199,55 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('comment-form');
+        if (!form) return;
+
+        const successBox = document.getElementById('comment-success');
+        const errorBox = document.getElementById('comment-error');
+        const wrapper = document.getElementById('comment-message');
+        const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        const endpoint = "{{ route('comment.store') }}";
+
+        function showMessage(el, msg) {
+            wrapper.classList.remove('hidden');
+            successBox.classList.add('hidden');
+            errorBox.classList.add('hidden');
+            el.textContent = msg;
+            el.classList.remove('hidden');
+        }
+
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const formData = new FormData(form);
+
+            try {
+                const res = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': token,
+                        'Accept': 'application/json'
+                    },
+                    body: formData
+                });
+
+                const data = await res.json();
+
+                if (res.ok && data.success) {
+                    showMessage(successBox, data.message || 'Comment submitted successfully!');
+                    form.reset();
+                } else if (res.status === 422 && data.errors) {
+                    const firstError = Object.values(data.errors)[0]?.[0] || 'Validation failed.';
+                    showMessage(errorBox, firstError);
+                } else {
+                    showMessage(errorBox, data.message || 'Failed to submit comment. Please try again.');
+                }
+            } catch (err) {
+                showMessage(errorBox, 'Network error. Please try again.');
+            }
+        });
+    });
+</script>
 @endsection

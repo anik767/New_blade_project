@@ -55,7 +55,7 @@
         </div>
     </div>
 
-    <x-admin-form 
+    <x-forms.admin-form 
         :action="route('admin.home.update')" 
         title="Banner Information"
         submit-text="Update Banner"
@@ -72,14 +72,14 @@
             </h3>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <x-form-field 
+                <x-forms.form-field 
                     label="Title Line 1" 
                     name="title_line1" 
                     placeholder="e.g., Hi, I'm John Doe"
                     :value="$banner->title_line1"
                 />
                 
-                <x-form-field 
+                <x-forms.form-field 
                     label="Title Line 2" 
                     name="title_line2" 
                     placeholder="e.g., Full Stack Developer"
@@ -87,7 +87,7 @@
                 />
             </div>
             
-            <x-form-field 
+            <x-forms.form-field 
                 label="Subtitle" 
                 name="subtitle" 
                 type="textarea" 
@@ -288,6 +288,6 @@
                 </div>
             </div>
         @endif
-    </x-admin-form>
+    </x-forms.admin-form>
 </div>
 @endsection 

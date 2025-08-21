@@ -9,7 +9,7 @@
         <x-site.banner 
             title="About Me"
             subtitle="Passionate frontend developer with a love for creating beautiful, functional, and user-friendly web experiences."
-            :banner="$banner"
+            :banner="$banner" :pageBanner="$pageBanner"
         />
 
         <!-- Main Content Section -->

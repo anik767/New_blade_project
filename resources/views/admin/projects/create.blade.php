@@ -28,7 +28,7 @@
         </div>
     </div>
 
-    <x-admin-form 
+    <x-forms.admin-form 
         :action="route('admin.projects.store')" 
         title=""
         submit-text="Create Project"
@@ -44,14 +44,14 @@
             </h3>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <x-form-field 
+                <x-forms.form-field 
                     label="Project Title" 
                     name="title" 
                     required 
                     placeholder="E-commerce Website"
                 />
                 
-                <x-form-field 
+                <x-forms.form-field 
                     label="GitHub Repository" 
                     name="github_link" 
                     type="url" 
@@ -60,7 +60,7 @@
                 />
             </div>
             
-            <x-form-field 
+            <x-forms.form-field 
                 label="Project Description" 
                 name="description" 
                 type="textarea" 
@@ -86,8 +86,14 @@
                 <div class="relative">
                     <input type="file" 
                            name="image" 
+                           id="project-image-input"
                            class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100"
                            accept="image/*">
+                </div>
+                
+                <div id="project-image-preview-wrapper" class="mt-4 hidden">
+                    <p class="text-sm font-medium text-gray-700 mb-2">Selected Image Preview:</p>
+                    <img id="project-image-preview" alt="Selected image preview" class="w-48 h-32 object-cover rounded-lg border border-gray-200 shadow-sm" />
                 </div>
                 
                 <div class="mt-2 p-3 bg-green-50 border border-green-200 rounded-lg">
@@ -172,6 +178,33 @@
                 </div>
             </div>
         </div>
-    </x-admin-form>
+    </x-forms.admin-form>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const input = document.getElementById('project-image-input');
+        const previewWrapper = document.getElementById('project-image-preview-wrapper');
+        const previewImg = document.getElementById('project-image-preview');
+        let previousObjectUrl = null;
+
+        if (input) {
+            input.addEventListener('change', function (e) {
+                const file = e.target.files && e.target.files[0];
+                if (file) {
+                    const objectUrl = URL.createObjectURL(file);
+                    previewImg.src = objectUrl;
+                    previewWrapper.classList.remove('hidden');
+                    if (previousObjectUrl) URL.revokeObjectURL(previousObjectUrl);
+                    previousObjectUrl = objectUrl;
+                } else {
+                    previewWrapper.classList.add('hidden');
+                    previewImg.removeAttribute('src');
+                    if (previousObjectUrl) URL.revokeObjectURL(previousObjectUrl);
+                    previousObjectUrl = null;
+                }
+            });
+        }
+    });
+</script>
 @endsection

@@ -47,7 +47,7 @@
             </div>
         </div>
 
-        <x-admin-form 
+        <x-forms.admin-form 
             :action="route('admin.home.experience.update')" 
             title=""
             submit-text="Update Experience"
@@ -160,7 +160,7 @@
                     </div>
                 </div>
             @endif
-        </x-admin-form>
+        </x-forms.admin-form>
     </div>
 </div>
 
