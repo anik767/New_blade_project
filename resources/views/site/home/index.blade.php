@@ -49,7 +49,7 @@
                     <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                         @if (optional($banner)->cv_file)
                             <a href="{{ asset('storage/' . $banner->cv_file) }}" download
-                                class="inline-flex items-center px-8 py-4 border-2 border-accent rounded-xl font-semibold tracking-wide text-accent hover:bg-accent hover:text-dark transition-all duration-300 shadow-lg hover:shadow-xl ">
+                                class="inline-flex items-center bg-black-500 px-8 py-4 border-2 border-accent rounded-xl font-semibold tracking-wide text-accent hover:bg-accent hover:text-dark transition-all duration-300 shadow-lg hover:shadow-xl ">
                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
@@ -69,7 +69,7 @@
                             </span>
                         @endif
                         <a href="{{ route('contact') }}"
-                            class="inline-flex items-center px-8 py-4 bg-accent text-dark rounded-xl font-semibold tracking-wide hover:bg-accent/90 transition-all duration-300 shadow-lg hover:shadow-xl ">
+                            class="inline-flex items-center px-8 py-4 bg-green-500 text-gray-800 rounded-xl font-semibold tracking-wide hover:bg-accent/90 transition-all duration-300 shadow-lg hover:shadow-xl ">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z">
@@ -92,7 +92,7 @@
         </section>
 
         {{-- About Section --}}
-        <section class="py-32 font-sans reveal-on-scroll">
+        <section class="py-20 font-sans">
             <div class="container mx-auto px-6">
                 <header class="text-center mb-24">
                     <h2 class="text-5xl lg:text-6xl font-extrabold tracking-wide mb-6 text-text">Get to Know Me</h2>
@@ -156,7 +156,7 @@
         </section>
 
         {{-- Projects Section --}}
-        <section class="py-32" id="projects">
+        <section class="py-20 font-sans" id="projects">
             <div class="container mx-auto px-6">
                 <header class="text-center mb-24 reveal-on-scroll">
                     <h2 class="text-5xl lg:text-6xl font-extrabold text-text mb-6">Featured Projects</h2>
@@ -204,7 +204,7 @@
         </section>
 
         {{-- Services Section --}}
-        <section class="py-32" id="services">
+        <section class="py-20 font-sans" id="services">
             <div class="container mx-auto px-6">
                 <header class="text-center mb-24 reveal-on-scroll">
                     <h2 class="text-5xl lg:text-6xl font-extrabold text-text mb-6">Services</h2>
@@ -250,7 +250,7 @@
         </section>
 
         {{-- Skills Section --}}
-        <section class="py-32" id="skills">
+        <section class="py-20 font-sans" id="skills">
             <div class="container mx-auto px-6 text-center">
                 <header class="mb-24 reveal-on-scroll">
                     <h2 class="text-5xl lg:text-6xl font-extrabold text-text mb-6">Skills & Tech Stack</h2>
@@ -283,7 +283,7 @@
         </section>
 
         {{-- Experience Section --}}
-        <section class="py-32" id="experience">
+        <section class="py-20 font-sans" id="experience">
             <div class="container mx-auto px-6">
                 <header class="text-center mb-24 reveal-on-scroll">
                     <h2 class="text-5xl lg:text-6xl font-extrabold text-text mb-6">Professional Experience</h2>
@@ -320,7 +320,7 @@
         </section>
 
         {{-- Blog Section --}}
-        <section class="py-32" id="blog">
+        <section class="py-20 font-sans" id="blog">
             <div class="container mx-auto px-6">
                 <header class="text-center mb-24 reveal-on-scroll">
                     <h2 class="text-5xl lg:text-6xl font-extrabold text-text mb-6">Latest Articles</h2>
