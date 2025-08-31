@@ -14,17 +14,17 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::create([
-            'name' => 'Admin',
-            'email' => 'azminanik@gmail.com',
-            'email_verified_at' => now(),
-            'password' => bcrypt('12345678'), 
-        ]);
+        // Create admin user only if it doesn't exist
+        User::firstOrCreate(
+            ['email' => 'azminanik@gmail.com'],
+            [
+                'name' => 'Admin',
+                'email_verified_at' => now(),
+                'password' => bcrypt('12345678'),
+            ]
+        );
 
-        // Run the sample data seeder
-        $this->call([
-            SampleDataSeeder::class,
-        ]);
+
             
     }
 }

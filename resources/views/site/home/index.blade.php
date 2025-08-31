@@ -104,8 +104,13 @@
                     <div class="space-y-8 reveal-on-scroll">
                         <div class="relative">
                             <div class="absolute inset-0  "></div>
-                            <img src="{{ asset('images/Home/damo.png') }}" alt="Azmain Iqtidar Anik"
-                                class="relative w-full max-w-md mx-auto lg:mx-0 rounded-3xl object-cover   transition-transform duration-500" />
+                            <div class="relative w-full max-w-md mx-auto lg:mx-0 rounded-3xl bg-gradient-to-br from-accent/20 to-accent/40 h-96 flex items-center justify-center">
+                                <div class="text-center">
+                                    <div class="text-8xl mb-4">👨‍💻</div>
+                                    <p class="text-xl font-semibold text-text">Azmain Iqtidar Anik</p>
+                                    <p class="text-muted">Frontend Developer</p>
+                                </div>
+                            </div>
                         </div>
 
                         <p class="text-xl leading-relaxed text-muted max-w-lg mx-auto lg:mx-0">

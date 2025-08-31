@@ -2,64 +2,265 @@
 @section('title', 'Edit Page Banner')
 
 @section('content')
-<div class="p-6">
-  <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
-    <h1 class="text-2xl font-bold mb-4">Page Banner: {{ $banner->page }}</h1>
-    <form id="pageBannerForm" method="POST" action="{{ route('admin.page-banners.update', $banner->page) }}" enctype="multipart/form-data" class="space-y-4">
-      @csrf
-      @method('PUT')
-
-      @if($banner->background_media)
-        @php
-          $ext = strtolower(pathinfo($banner->background_media, PATHINFO_EXTENSION));
-          $isVideo = in_array($ext, ['mp4','webm']);
-        @endphp
-        <div>
-          <label class="block text-sm font-medium text-gray-700 mb-2">Current Media</label>
-          @if($isVideo)
-            <video class="w-full max-w-xl rounded" autoplay muted loop playsinline>
-              <source src="{{ asset('storage/' . $banner->background_media) }}" type="video/{{ $ext == 'webm' ? 'webm' : 'mp4' }}">
-            </video>
-          @else
-            <img src="{{ asset('storage/' . $banner->background_media) }}" class="w-full max-w-xl rounded border" />
-          @endif
+<div class="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-6">
+    <div class="">
+        <!-- Header Section -->
+        <div class="bg-white rounded-3xl shadow-xl border border-gray-200 p-8 mb-8">
+            <div class="flex justify-between items-start">
+                <div class="flex-1">
+                    <div class="flex items-center gap-2 mb-6">
+                        <div class="p-4 bg-gradient-to-r from-purple-500 to-pink-600 rounded-2xl mr-6 shadow-lg">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h1 class="text-4xl font-bold text-gray-900 mb-2">Edit Page Banner</h1>
+                            <p class="text-gray-600 text-lg">Update background media for the {{ ucfirst($banner->page) }} page</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Page Info -->
+                    <div class="flex flex-wrap items-center gap-4">
+                        <div class="flex items-center bg-blue-50 px-5 py-3 rounded-xl border border-blue-200">
+                            <svg class="w-5 h-5 mr-3 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            <span class="text-blue-700 font-medium">{{ ucfirst($banner->page) }} Page Banner</span>
+                        </div>
+                        
+                        @if($banner->background_media)
+                            <div class="flex items-center bg-green-50 px-5 py-3 rounded-xl border border-green-200">
+                                <svg class="w-5 h-5 mr-3 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span class="text-green-700 font-medium">Banner configured</span>
+                            </div>
+                        @else
+                            <div class="flex items-center bg-yellow-50 px-5 py-3 rounded-xl border border-yellow-200">
+                                <svg class="w-5 h-5 mr-3 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                                </svg>
+                                <span class="text-yellow-700 font-medium">No banner set</span>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+                
+                <!-- Stats Cards -->
+                <div class="flex space-x-4">
+                    <div class="text-center p-4 bg-white rounded-2xl shadow-lg border border-gray-200 min-w-[80px]">
+                        <div class="text-3xl font-bold text-purple-600 mb-1">🎨</div>
+                        <div class="text-sm text-gray-600 font-medium">Banner</div>
+                    </div>
+                    
+                    <div class="text-center p-4 bg-white rounded-2xl shadow-lg border border-gray-200 min-w-[80px]">
+                        <div class="text-3xl font-bold text-blue-600 mb-1">📱</div>
+                        <div class="text-sm text-gray-600 font-medium">{{ ucfirst($banner->page) }}</div>
+                    </div>
+                </div>
+            </div>
         </div>
-      @endif
 
-      <div>
-        <label class="block text-sm font-medium text-gray-700 mb-2">Background Media (Image/GIF/Video)</label>
-        <input id="backgroundMediaInput" type="file" name="background_media" accept="image/*,video/mp4,video/webm" class="border rounded px-3 py-2 w-full" />
-        <p class="text-xs text-gray-500 mt-2">Accepted: JPG, PNG, GIF, WEBP, MP4, WEBM</p>
-      </div>
+        <x-forms.admin-form 
+            :action="route('admin.page-banners.update', $banner->page)" 
+            method="PUT"
+            title=""
+            submit-text="Update Banner"
+            :cancel-url="route('admin.page-banners.index')"
+        >
+            <!-- Current Banner Display -->
+            @if($banner->background_media)
+                <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-3xl p-8 mb-8 border border-green-200 shadow-lg">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <div class="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        Current Banner
+                    </h3>
+                    
+                    @php
+                        $ext = strtolower(pathinfo($banner->background_media, PATHINFO_EXTENSION));
+                        $isVideo = in_array($ext, ['mp4','webm']);
+                    @endphp
+                    
+                    <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-200">
+                        <div class="flex items-center mb-4">
+                            @if($isVideo)
+                                <svg class="w-6 h-6 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                </svg>
+                            @else
+                                <svg class="w-6 h-6 text-green-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                            @endif
+                            <span class="text-lg font-semibold text-gray-900">{{ basename($banner->background_media) }}</span>
+                        </div>
+                        
+                        <div class="relative w-full max-w-2xl rounded-xl overflow-hidden border border-gray-200 shadow-lg">
+                            @if($isVideo)
+                                <video class="w-full h-auto" autoplay muted loop playsinline>
+                                    <source src="{{ asset('storage/' . $banner->background_media) }}" type="video/{{ $ext == 'webm' ? 'webm' : 'mp4' }}">
+                                </video>
+                            @else
+                                <img src="{{ asset('storage/' . $banner->background_media) }}" class="w-full h-auto" alt="Current banner" />
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            @endif
 
-      <div id="mediaPreviewWrapper" class="hidden">
-        <label class="block text-sm font-medium text-gray-700 mb-2">Preview</label>
-        <div class="relative w-full max-w-2xl rounded overflow-hidden border border-gray-200">
-          <div id="loadingOverlay" class="absolute inset-0 bg-black/40 flex items-center justify-center">
-            <svg class="animate-spin h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
-            </svg>
-          </div>
-          <div class="bg-gray-100">
-            <video id="videoPreview" class="w-full h-auto hidden" autoplay muted loop playsinline></video>
-            <img id="imagePreview" class="w-full h-auto hidden" alt="Selected preview" />
-          </div>
-        </div>
-        <p class="text-xs text-gray-500 mt-2">A loading overlay appears until the media is ready.</p>
-      </div>
+            <!-- Upload New Banner -->
+            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-3xl p-8 mb-8 border border-blue-200 shadow-lg">
+                <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                    <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                        </svg>
+                    </div>
+                    Upload New Banner
+                </h3>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-200">
+                        <label class="block text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                            Background Media
+                        </label>
+                        
+                        <div class="space-y-4">
+                            <input id="backgroundMediaInput" 
+                                   type="file" 
+                                   name="background_media" 
+                                   accept="image/*,video/mp4,video/webm" 
+                                   class="w-full px-4 py-3 border-2 border-dashed border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-gray-50 hover:bg-gray-100">
+                            
+                            <div class="p-4 bg-gradient-to-r from-blue-50 to-blue-100 border border-blue-200 rounded-xl">
+                                <div class="flex items-start">
+                                    <svg class="w-5 h-5 text-blue-600 mr-3 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <div>
+                                        <p class="text-sm font-semibold text-blue-800 mb-2">Media Requirements:</p>
+                                        <ul class="text-sm text-blue-700 space-y-1">
+                                            <li>• Images: JPG, PNG, GIF, WEBP</li>
+                                            <li>• Videos: MP4, WEBM</li>
+                                            <li>• Recommended: High resolution for best quality</li>
+                                            <li>• No file size limit</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-200">
+                        <label class="block text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                            </svg>
+                            Media Preview
+                        </label>
+                        
+                        <div id="mediaPreviewWrapper" class="hidden">
+                            <div class="relative w-full rounded-xl overflow-hidden border border-gray-200">
+                                <div id="loadingOverlay" class="absolute inset-0 bg-black/40 flex items-center justify-center z-10">
+                                    <svg class="animate-spin h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                                    </svg>
+                                </div>
+                                <div class="bg-gray-100">
+                                    <video id="videoPreview" class="w-full h-auto hidden" autoplay muted loop playsinline></video>
+                                    <img id="imagePreview" class="w-full h-auto hidden" alt="Selected preview" />
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-2">Preview will appear once media is loaded</p>
+                        </div>
+                        
+                        <div id="noPreview" class="text-center py-8 text-gray-400">
+                            <svg class="w-16 h-16 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                            <p class="text-sm">Select a file to see preview</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-      <div>
-        <button id="submitBtn" class="px-4 py-2 bg-blue-600 text-white rounded inline-flex items-center gap-2">
-          <svg id="submitSpinner" class="hidden animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
-          </svg>
-          <span id="submitText">Save</span>
-        </button>
-      </div>
-    </form>
-  </div>
+            <!-- Banner Tips -->
+            <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-3xl p-8 border border-purple-200 shadow-lg">
+                <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                    <div class="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                        </svg>
+                    </div>
+                    Banner Best Practices
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="space-y-4">
+                        <div class="flex items-start p-4 bg-white rounded-xl border border-gray-200 shadow-sm">
+                            <div class="flex-shrink-0">
+                                <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                    <span class="text-blue-600 text-sm font-bold">1</span>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm font-semibold text-gray-900 mb-1">High Resolution</p>
+                                <p class="text-sm text-gray-600">Use high-quality images/videos for crisp display across all devices</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start p-4 bg-white rounded-xl border border-gray-200 shadow-sm">
+                            <div class="flex-shrink-0">
+                                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                    <span class="text-green-600 text-sm font-bold">2</span>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm font-semibold text-gray-900 mb-1">Aspect Ratio</p>
+                                <p class="text-sm text-gray-600">16:9 or 21:9 ratios work best for banner backgrounds</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start p-4 bg-white rounded-xl border border-gray-200 shadow-sm">
+                            <div class="flex-shrink-0">
+                                <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                                    <span class="text-purple-600 text-sm font-bold">3</span>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm font-semibold text-gray-900 mb-1">File Size</p>
+                                <p class="text-sm text-gray-600">Optimize files for web to ensure fast loading times</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start p-4 bg-white rounded-xl border border-gray-200 shadow-sm">
+                            <div class="flex-shrink-0">
+                                <div class="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
+                                    <span class="text-orange-600 text-sm font-bold">4</span>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm font-semibold text-gray-900 mb-1">Content Overlay</p>
+                                <p class="text-sm text-gray-600">Ensure text remains readable over your chosen background</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </x-forms.admin-form>
+    </div>
 </div>
 @endsection
 
@@ -68,13 +269,10 @@
   (function(){
     const input = document.getElementById('backgroundMediaInput');
     const wrapper = document.getElementById('mediaPreviewWrapper');
+    const noPreview = document.getElementById('noPreview');
     const video = document.getElementById('videoPreview');
     const image = document.getElementById('imagePreview');
     const overlay = document.getElementById('loadingOverlay');
-    const form = document.getElementById('pageBannerForm');
-    const submitBtn = document.getElementById('submitBtn');
-    const submitSpinner = document.getElementById('submitSpinner');
-    const submitText = document.getElementById('submitText');
 
     function showOverlay(){ overlay.classList.remove('hidden'); }
     function hideOverlay(){ overlay.classList.add('hidden'); }
@@ -89,9 +287,15 @@
     if (input) {
       input.addEventListener('change', function(e){
         const file = e.target.files && e.target.files[0];
-        if (!file) { return; }
+        if (!file) { 
+          wrapper.classList.add('hidden');
+          noPreview.classList.remove('hidden');
+          return; 
+        }
+        
         const url = URL.createObjectURL(file);
         wrapper.classList.remove('hidden');
+        noPreview.classList.add('hidden');
         resetPreview();
         showOverlay();
 
@@ -112,14 +316,6 @@
           image.onload = function(){ hideOverlay(); };
           image.onerror = function(){ hideOverlay(); };
         }
-      });
-    }
-
-    if (form) {
-      form.addEventListener('submit', function(){
-        submitBtn.setAttribute('disabled', 'disabled');
-        submitSpinner.classList.remove('hidden');
-        submitText.textContent = 'Saving...';
       });
     }
   })();

@@ -20,7 +20,7 @@
 <body class="font-sans antialiased">
     <div class="min-h-screen">
         <!-- Navigation -->
-        @include('layouts.components.navigation')
+        <x-site.navigation />
 
         <!-- Page Content -->
         <main>
@@ -28,7 +28,7 @@
         </main>
 
         <!-- Footer -->
-        @include('layouts.components.footer')
+        <x-site.footer />
     </div>
 </body>
 </html> 

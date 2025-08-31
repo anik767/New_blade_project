@@ -15,30 +15,6 @@ use Illuminate\Support\Facades\Route;
 // Public routes (no prefix, no middleware)
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [AboutMeController::class, 'publicShow'])->name('about');
-Route::get('/test-about', function() {
-    try {
-        $aboutMe = \App\Models\AboutMe::first();
-        if (!$aboutMe) {
-            $aboutMe = \App\Models\AboutMe::create([
-                'title' => 'Test About',
-                'content' => 'Test content',
-                'email' => 'test@example.com',
-            ]);
-        }
-        return response()->json(['success' => true, 'aboutMe' => $aboutMe]);
-    } catch (\Exception $e) {
-        return response()->json(['success' => false, 'error' => $e->getMessage()]);
-    }
-});
-
-Route::get('/test-about-view', function() {
-    try {
-        $aboutMe = \App\Models\AboutMe::first();
-        return view('site.about', compact('aboutMe'));
-    } catch (\Exception $e) {
-        return response()->json(['success' => false, 'error' => $e->getMessage()]);
-    }
-});
 Route::get('/services', [ServiceController::class, 'publicList'])->name('services');
 Route::get('/services/{slug}', [ServiceController::class, 'publicSingle'])->name('services.show');
 Route::get('/contact', [ContactController::class, 'publicShow'])->name('contact');
