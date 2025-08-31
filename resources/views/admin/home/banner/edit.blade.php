@@ -9,7 +9,7 @@
             <div class="bg-white rounded-3xl shadow-xl border border-gray-200 p-8 mb-8">
                 <div class="flex xl:flex-row flex-col justify-between items-center gap-4">
 
-                    <div class="flex lg:flex-row flex-col justify-between items-center gap-4">
+                    <div class="flex  flex-col justify-between items-start gap-4">
                         <div class="p-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl mr-6 shadow-lg">
                             <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
