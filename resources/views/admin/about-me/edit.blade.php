@@ -6,7 +6,7 @@
     <div class="">
         <!-- Header Section -->
         <div class="bg-white rounded-3xl shadow-xl border border-gray-200 p-8 mb-8">
-            <div class="flex justify-between items-start">
+            <div class="md:flex justify-between items-start">
                 <div class="flex-1">
                     <div class="flex items-center gap-2 mb-6">
                         <div class="p-4 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl mr-6 shadow-lg">
@@ -21,7 +21,7 @@
                     </div>
                     
                     <!-- Profile Status -->
-                    <div class="flex flex-wrap items-center gap-4">
+                    <div class="flex flex-col md:flex-row items-center gap-4">
                         <div class="flex items-center bg-green-50 px-5 py-3 rounded-xl border border-green-200">
                             <div class="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
                             <span class="text-gray-700 font-medium">Profile information updated</span>
@@ -76,7 +76,6 @@
                     <x-forms.form-field 
                         label="Full Name" 
                         name="name" 
-                        required 
                         placeholder="Enter your full name"
                         :value="$aboutMe->name"
                     />
@@ -94,7 +93,6 @@
                         label="About Me Content" 
                         name="content" 
                         type="textarea" 
-                        required 
                         placeholder="Tell visitors about yourself, your experience, skills, and what you do. You can use HTML formatting..."
                         :value="$aboutMe->content"
                     />
@@ -169,17 +167,13 @@
                 </h3>
                 
                 @if($aboutMe->image)
-                    <div class="mb-6 p-4 bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200 rounded-xl">
-                        <p class="text-sm font-semibold text-gray-700 mb-4">Current Profile Image:</p>
-                        <div class="relative inline-block group">
+                    <div class="mb-4 p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                        <p class="text-sm font-medium text-gray-700 mb-3">Current Profile Image:</p>
+                        <div class="relative group">
                             <img src="{{ asset('storage/' . $aboutMe->image) }}" 
                                  alt="Current profile image" 
-                                 class="w-32 h-32 object-cover rounded-xl border-4 border-white shadow-lg group-hover:shadow-xl transition-all duration-300">
-                            <div class="absolute -top-2 -right-2 bg-green-500 text-white rounded-full w-6 h-6 flex items-center justify-center">
-                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                                </svg>
-                            </div>
+                                 class=" h-32  rounded-lg border border-gray-200 shadow-sm group-hover:shadow-md transition-shadow duration-200">
+                            
                         </div>
                     </div>
                 @endif
@@ -195,21 +189,21 @@
                     <div class="space-y-4">
                         <input type="file" 
                                name="image" 
-                               class="w-full px-4 py-3 border-2 border-dashed border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 bg-gray-50 hover:bg-gray-100"
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
                                accept="image/*">
                         
-                        <div class="p-4 bg-gradient-to-r from-purple-50 to-purple-100 border border-purple-200 rounded-xl">
+                        <div class="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg">
                             <div class="flex items-start">
-                                <svg class="w-5 h-5 text-purple-600 mr-3 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <svg class="w-4 h-4 text-blue-600 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
                                 </svg>
                                 <div>
-                                    <p class="text-sm font-semibold text-purple-800 mb-2">Image Requirements:</p>
-                                    <ul class="text-sm text-purple-700 space-y-1">
-                                        <li>• Recommended size: 400x400 pixels</li>
-                                        <li>• Formats: JPG, PNG, GIF</li>
-                                        <li>• Professional headshot works best</li>
-                                        <li>• High-quality images preferred</li>
+                                    <p class="text-sm font-medium text-blue-800">Image Requirements:</p>
+                                    <ul class="text-sm text-blue-700 mt-1 list-disc list-inside space-y-1">
+                                        <li>Recommended size: 400x400 pixels (profile optimized)</li>
+                                        <li>Formats: JPG, PNG, GIF</li>
+                                        <li>Professional headshot works best</li>
+                                        <li>Leave empty to keep current image</li>
                                     </ul>
                                 </div>
                             </div>
@@ -303,7 +297,7 @@
                     <input type="text" 
                            name="skills[${skillCount}][name]" 
                            class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-white shadow-sm"
-                           placeholder="e.g., HTML/CSS, JavaScript, React" required value="${name}">
+                           placeholder="e.g., HTML/CSS, JavaScript, React" value="${name}">
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-2">Proficiency (%)</label>
@@ -311,7 +305,7 @@
                            name="skills[${skillCount}][percentage]" 
                            min="0" max="100"
                            class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-white shadow-sm"
-                           placeholder="85" required value="${percentage}">
+                           placeholder="85" value="${percentage}">
                 </div>
                 <div class="flex items-center">
                     <button type="button" 

@@ -40,7 +40,7 @@
                         </h1>
                         <h2
                             class="text-4xl lg:text-6xl font-extrabold tracking-tight drop-shadow-lg min-h-[70px] text-accent leading-tight">
-                            {{ optional($banner)->title_line2 ?: 'I\'m Azmain Iqtidar Anik' }}
+                            {{ optional($banner)->title_line2 ?: 'Your Name' }}
                         </h2>
                     </div>
                     <p class="text-xl lg:text-2xl text-muted leading-relaxed drop-shadow-md max-w-lg">
@@ -84,7 +84,7 @@
                     <div class="relative">
                         <div class=" rounded-full "></div>
                         <img src="{{ optional($banner) && optional($banner)->person_image ? asset('storage/' . $banner->person_image) : asset('images/Image_not_found.jpg') }}"
-                            alt="{{ optional($banner)->title_line2 ?? 'Azmain Iqtidar Anik' }}"
+                            alt="{{ optional($banner)->title_line2 ?? 'Your Name' }}"
                             class="relative object-contain w-full max-w-xs lg:max-w-lg max-h-[90vh]  rounded-2xl  transition-transform duration-500" />
                     </div>
                 </div>
@@ -92,7 +92,7 @@
         </section>
 
         {{-- About Section --}}
-        <section class="py-20 font-sans">
+        {{-- <section class="py-20 font-sans">
             <div class="container mx-auto px-6">
                 <header class="text-center mb-24">
                     <h2 class="text-5xl lg:text-6xl font-extrabold tracking-wide mb-6 text-text">Get to Know Me</h2>
@@ -158,7 +158,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> --}}
 
         {{-- Projects Section --}}
         <section class="py-20 font-sans" id="projects">

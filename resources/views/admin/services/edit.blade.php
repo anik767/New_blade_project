@@ -6,7 +6,7 @@
     <div class="">
         <!-- Header Section -->
         <div class="bg-white rounded-3xl shadow-xl border border-gray-200 p-8 mb-8">
-            <div class="flex justify-between items-start">
+            <div class="md:flex justify-between items-start">
                 <div class="flex-1">
                     <div class="flex items-center gap-2 mb-6">
                         <div class="p-4 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl mr-6 shadow-lg">
@@ -77,7 +77,6 @@
                     <x-forms.form-field 
                         label="Service Title" 
                         name="title" 
-                        required 
                         placeholder="Web Development"
                         :value="$service->title"
                     />
@@ -92,14 +91,13 @@
                 </div>
                 
                 <div class="mt-6">
-                    <x-forms.form-field 
-                        label="Service Description" 
-                        name="description" 
-                        type="textarea" 
-                        required 
-                        placeholder="Describe your service in detail. What problems does it solve? What value does it provide to clients?"
-                        :value="$service->description"
-                    />
+                                    <x-forms.form-field 
+                    label="Service Description" 
+                    name="description" 
+                    type="textarea" 
+                    placeholder="Describe your service in detail. What problems does it solve? What value does it provide to clients?"
+                    :value="$service->description"
+                />
                 </div>
             </div>
 
@@ -143,21 +141,21 @@
                         <div class="space-y-4">
                             <input type="file" 
                                    name="image" 
-                                   class="w-full px-4 py-3 border-2 border-dashed border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-gray-50 hover:bg-gray-100"
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
                                    accept="image/*">
                             
-                            <div class="p-4 bg-gradient-to-r from-blue-50 to-blue-100 border border-blue-200 rounded-xl">
+                            <div class="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg">
                                 <div class="flex items-start">
-                                    <svg class="w-5 h-5 text-blue-600 mr-3 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-4 h-4 text-blue-600 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
                                     </svg>
                                     <div>
-                                        <p class="text-sm font-semibold text-blue-800 mb-2">Image Requirements:</p>
-                                        <ul class="text-sm text-blue-700 space-y-1">
-                                            <li>• Recommended size: 800x600 pixels</li>
-                                            <li>• Formats: JPG, PNG, GIF</li>
-                                            <li>• No file size limit</li>
-                                            <li>• Leave empty to keep current image</li>
+                                        <p class="text-sm font-medium text-blue-800">Image Requirements:</p>
+                                        <ul class="text-sm text-blue-700 mt-1 list-disc list-inside space-y-1">
+                                            <li>Recommended size: 800x600 pixels (service optimized)</li>
+                                            <li>Formats: JPG, PNG, GIF</li>
+                                            <li>No file size limit</li>
+                                            <li>Leave empty to keep current image</li>
                                         </ul>
                                     </div>
                                 </div>

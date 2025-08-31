@@ -13,9 +13,9 @@ return new class extends Migration
 {
     Schema::create('blog_posts', function (Blueprint $table) {
         $table->id();
-        $table->string('title');
-        $table->string('slug')->unique();
-        $table->text('content'); // blog content, can be markdown or html
+        $table->string('title')->nullable();
+        $table->string('slug')->unique()->nullable();
+        $table->text('content')->nullable(); // blog content, can be markdown or html
         $table->string('image')->nullable(); // featured image
         $table->timestamps();
     });

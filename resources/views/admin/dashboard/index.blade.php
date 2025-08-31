@@ -12,7 +12,7 @@
                     <svg class="w-10 h-10 mr-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
                     </svg>
-                    Welcome back, {{ auth()->user()->name }}!
+                    Welcome back {{ auth()->user()->name }}
                 </h1>
                 <p class="text-gray-600 mt-2 text-lg">Here's your website overview for {{ now()->format('l, F j, Y') }}</p>
                 <div class="mt-3 flex items-center space-x-4 text-sm text-gray-500">
@@ -165,7 +165,7 @@
                     @endphp
                     
                     <!-- Banner Section -->
-                    <div class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg p-4 border border-indigo-200">
+                    <div class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg p-4 border border-indigo-200 h-52 relative">
                         <div class="flex items-center justify-between mb-3">
                             <div class="flex items-center">
                                 <svg class="w-6 h-6 text-indigo-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -194,7 +194,7 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="mt-4">
+                        <div class="mt-4 absolute bottom-0 left-0 right-0 p-4">
                             <a href="{{ route('admin.home.banner.edit') }}" 
                                class="w-full bg-indigo-600 text-white px-3 py-2 rounded-lg hover:bg-indigo-700 transition-colors duration-200 text-center block text-sm">
                                 Edit Banner
@@ -203,7 +203,7 @@
                     </div>
 
                     <!-- Skills Section -->
-                    <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4 border border-green-200">
+                    <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4 border border-green-200 h-52 relative">
                         <div class="flex items-center justify-between mb-3">
                             <div class="flex items-center">
                                 <svg class="w-6 h-6 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -230,7 +230,7 @@
                                 <p class="text-xs text-gray-500">No skills added yet</p>
                             @endif
                         </div>
-                        <div class="mt-4">
+                        <div class="mt-4 absolute bottom-0 left-0 right-0 p-4">
                             <a href="{{ route('admin.home.skills.edit') }}" 
                                class="w-full bg-green-600 text-white px-3 py-2 rounded-lg hover:bg-green-700 transition-colors duration-200 text-center block text-sm">
                                 Edit Skills
@@ -239,7 +239,7 @@
                     </div>
 
                     <!-- Experience Section -->
-                    <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg p-4 border border-purple-200">
+                    <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg p-4 border border-purple-200 h-52 relative">
                         <div class="flex items-center justify-between mb-3">
                             <div class="flex items-center">
                                 <svg class="w-6 h-6 text-purple-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -269,7 +269,7 @@
                                 <p class="text-xs text-gray-500">No experience added yet</p>
                             @endif
                         </div>
-                        <div class="mt-4">
+                        <div class="mt-4 absolute bottom-0 left-0 right-0 p-4">
                             <a href="{{ route('admin.home.experience.edit') }}" 
                                class="w-full bg-purple-600 text-white px-3 py-2 rounded-lg hover:bg-purple-700 transition-colors duration-200 text-center block text-sm">
                                 Edit Experience
@@ -483,16 +483,16 @@
         <!-- Right Column: Notifications & Stats -->
         <div class="space-y-8">
             <!-- Recent Messages -->
-            <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
-                <div class="bg-gradient-to-r from-red-50 to-pink-50 px-6 py-4 border-b border-gray-200">
+            <div class="bg-blue rounded-xl shadow-lg border border-gray-200 overflow-hidden">
+                <div class="bg-gradient-to-r from-blue-50 to-blue-50 px-6 py-4 border-b border-gray-200">
                     <h3 class="text-lg font-semibold text-gray-900 flex items-center justify-between">
                         <span class="flex items-center">
-                            <svg class="w-5 h-5 mr-2 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
                             </svg>
                             Recent Messages
                         </span>
-                        <span class="text-sm text-red-600 font-medium">{{ \App\Models\ContactMessage::where('status', 'unread')->count() }} unread</span>
+                        <span class="text-sm text-blue-600 font-medium">{{ \App\Models\ContactMessage::where('status', 'unread')->count() }} unread</span>
                     </h3>
                 </div>
                 <div class="p-6">
@@ -511,9 +511,9 @@
                             </div>
                             <div class="flex-shrink-0">
                                 @if($message->status === 'unread')
-                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">New</span>
+                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">New</span>
                                 @else
-                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">Read</span>
+                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">Read</span>
                                 @endif
                             </div>
                         </div>

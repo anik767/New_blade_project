@@ -1,4 +1,4 @@
-<footer class="bg-card text-text border-t border-accent/20">
+<footer class="bg-[#222] text-text border-t border-accent/20">
     <div class="container mx-auto px-4 py-6">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             

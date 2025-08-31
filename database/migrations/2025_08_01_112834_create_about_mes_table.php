@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('about_mes', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('content');
+            $table->string('title')->nullable();
+            $table->text('content')->nullable();
             $table->string('image')->nullable();
             $table->string('skills')->nullable();
             $table->string('experience')->nullable();

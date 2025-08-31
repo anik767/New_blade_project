@@ -21,36 +21,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3.10.0/notyf.min.css">
     <script src="https://cdn.jsdelivr.net/npm/notyf@3.10.0/notyf.min.js"></script>
     
-    <style>
-        /* Ensure notifications stay on one line */
-        .notyf__toast {
-            white-space: nowrap !important;
-            overflow: hidden !important;
-            text-overflow: ellipsis !important;
-            max-width: 400px !important;
-        }
-        
-        .notyf__toast .notyf__message {
-            white-space: nowrap !important;
-            overflow: hidden !important;
-            text-overflow: ellipsis !important;
-        }
-        
-        /* Custom single line class */
-        .notyf__toast--single-line {
-            white-space: nowrap !important;
-            overflow: hidden !important;
-            text-overflow: ellipsis !important;
-        }
-    </style>
+    
 </head>
-<body class="bg-white text-gray-900">
+<body class="bg-white text-gray-900 w-full">
     <!-- Fallback notifications -->
     <x-notification />
     
-    <div class="min-h-screen flex">
+    
         <x-admin.sidebar />
-    </div>
+    
     
     <script src="{{ asset('js/app.js') }}"></script>
     @stack('scripts')

@@ -18,7 +18,7 @@
                 @if ($services->isEmpty())
                     <div class="text-center py-16">
                         <div
-                            class="bg-gradient-to-tl from-[#23272b] via-[#e2e2e2]/10 to-[#1e2024] rounded-3xl p-12 max-w-md mx-auto shadow-lg">
+                            class=" rounded-3xl p-12 max-w-md mx-auto shadow-lg">
                             <div class="text-6xl mb-4">🛠️</div>
                             <h2 class="text-2xl font-semibold text-text mb-2">Services</h2>
                             <p class="text-muted">My services will be available soon!</p>

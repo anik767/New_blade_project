@@ -44,12 +44,11 @@
             </h3>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <x-forms.form-field 
-                    label="Project Title" 
-                    name="title" 
-                    required 
-                    placeholder="E-commerce Website"
-                />
+                                    <x-forms.form-field 
+                        label="Project Title" 
+                        name="title" 
+                        placeholder="E-commerce Website"
+                    />
                 
                 <x-forms.form-field 
                     label="GitHub Repository" 
@@ -64,7 +63,6 @@
                 label="Project Description" 
                 name="description" 
                 type="textarea" 
-                required 
                 placeholder="Describe your project in detail. What technologies did you use? What problems did you solve? What are the key features?"
             />
         </div>
@@ -86,28 +84,22 @@
                 <div class="relative">
                     <input type="file" 
                            name="image" 
-                           id="project-image-input"
-                           class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100"
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
                            accept="image/*">
                 </div>
                 
-                <div id="project-image-preview-wrapper" class="mt-4 hidden">
-                    <p class="text-sm font-medium text-gray-700 mb-2">Selected Image Preview:</p>
-                    <img id="project-image-preview" alt="Selected image preview" class="w-48 h-32 object-cover rounded-lg border border-gray-200 shadow-sm" />
-                </div>
-                
-                <div class="mt-2 p-3 bg-green-50 border border-green-200 rounded-lg">
+                <div class="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg">
                     <div class="flex items-start">
-                        <svg class="w-4 h-4 text-green-600 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <svg class="w-4 h-4 text-blue-600 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
                         </svg>
                         <div>
-                            <p class="text-sm font-medium text-green-800">Image Requirements:</p>
-                            <ul class="text-sm text-green-700 mt-1 list-disc list-inside space-y-1">
-                                <li>Recommended size: 1200x800 pixels</li>
+                            <p class="text-sm font-medium text-blue-800">Image Requirements:</p>
+                            <ul class="text-sm text-blue-700 mt-1 list-disc list-inside space-y-1">
+                                <li>Recommended size: 1200x800 pixels (portfolio optimized)</li>
                                 <li>Formats: JPG, PNG, GIF</li>
                                 <li>No file size limit</li>
-                                <li>Screenshots or mockups work best</li>
+                                <li>High-quality screenshots or mockups work best</li>
                             </ul>
                         </div>
                     </div>
@@ -181,30 +173,5 @@
     </x-forms.admin-form>
 </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const input = document.getElementById('project-image-input');
-        const previewWrapper = document.getElementById('project-image-preview-wrapper');
-        const previewImg = document.getElementById('project-image-preview');
-        let previousObjectUrl = null;
 
-        if (input) {
-            input.addEventListener('change', function (e) {
-                const file = e.target.files && e.target.files[0];
-                if (file) {
-                    const objectUrl = URL.createObjectURL(file);
-                    previewImg.src = objectUrl;
-                    previewWrapper.classList.remove('hidden');
-                    if (previousObjectUrl) URL.revokeObjectURL(previousObjectUrl);
-                    previousObjectUrl = objectUrl;
-                } else {
-                    previewWrapper.classList.add('hidden');
-                    previewImg.removeAttribute('src');
-                    if (previousObjectUrl) URL.revokeObjectURL(previousObjectUrl);
-                    previousObjectUrl = null;
-                }
-            });
-        }
-    });
-</script>
 @endsection

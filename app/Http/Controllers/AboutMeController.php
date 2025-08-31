@@ -19,6 +19,7 @@ class AboutMeController extends Controller
         if (!$aboutMe) {
             // Create a default about me entry if none exists
             $aboutMe = AboutMe::create([
+                'name' => 'Your Full Name',
                 'title' => 'Your Title',
                 'content' => 'Tell visitors about yourself...',
                 'email' => 'your.email@example.com',
@@ -38,8 +39,9 @@ class AboutMeController extends Controller
     public function update(Request $request)
     {
         $request->validate([
+            'name' => 'nullable|string|max:255',
             'title' => 'nullable|string|max:255',
-            'content' => 'required|string',
+            'content' => 'nullable|string',
             'image' => 'nullable|image|max:2048',
             'email' => 'nullable|email|max:255',
             'phone' => 'nullable|string|max:255',
@@ -48,8 +50,8 @@ class AboutMeController extends Controller
             'github' => 'nullable|url|max:255',
             'map_embed_code' => 'nullable|string',
             'skills' => 'nullable|array',
-            'skills.*.name' => 'required|string|max:255',
-            'skills.*.percentage' => 'required|integer|min:0|max:100',
+            'skills.*.name' => 'nullable|string|max:255',
+            'skills.*.percentage' => 'nullable|integer|min:0|max:100',
         ]);
 
         $aboutMe = AboutMe::first();
@@ -81,6 +83,7 @@ class AboutMeController extends Controller
         }
 
         $data = [
+            'name' => $request->name,
             'title' => $request->title,
             'content' => $request->content,
             'image' => $imagePath,

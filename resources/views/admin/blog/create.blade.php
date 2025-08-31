@@ -46,7 +46,6 @@
             <x-forms.form-field 
                 label="Post Title" 
                 name="title" 
-                required 
                 placeholder="How to Build a Modern Web Application with Laravel and Vue.js"
             />
             
@@ -54,7 +53,6 @@
                 label="Post Content" 
                 name="content" 
                 type="textarea" 
-                required 
                 placeholder="Write your blog post content here. You can use HTML tags for formatting, including headings, lists, links, and more..."
                 help="You can use HTML tags for formatting. Examples: &lt;h2&gt;Heading&lt;/h2&gt;, &lt;p&gt;Paragraph&lt;/p&gt;, &lt;ul&gt;&lt;li&gt;List item&lt;/li&gt;&lt;/ul&gt;"
             />

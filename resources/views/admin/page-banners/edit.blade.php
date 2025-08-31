@@ -6,7 +6,7 @@
     <div class="">
         <!-- Header Section -->
         <div class="bg-white rounded-3xl shadow-xl border border-gray-200 p-8 mb-8">
-            <div class="flex justify-between items-start">
+            <div class="md:flex justify-between items-start">
                 <div class="flex-1">
                     <div class="flex items-center gap-2 mb-6">
                         <div class="p-4 bg-gradient-to-r from-purple-500 to-pink-600 rounded-2xl mr-6 shadow-lg">

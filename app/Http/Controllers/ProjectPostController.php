@@ -60,8 +60,8 @@ class ProjectPostController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title'        => 'required|string|max:255',
-            'description'  => 'required|string',
+            'title'        => 'nullable|string|max:255',
+            'description'  => 'nullable|string',
             'github_link'  => 'nullable|url',
             'image'        => 'nullable|image',
         ]);
@@ -94,8 +94,8 @@ class ProjectPostController extends Controller
     public function update(Request $request, ProjectPost $project)
     {
         $request->validate([
-            'title'        => 'required|string|max:255',
-            'description'  => 'required|string',
+            'title'        => 'nullable|string|max:255',
+            'description'  => 'nullable|string',
             'github_link'  => 'nullable|url',
             'image'        => 'nullable|image',
         ]);

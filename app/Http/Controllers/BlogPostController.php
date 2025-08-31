@@ -55,8 +55,8 @@ class BlogPostController extends Controller
     {
         try {
             $request->validate([
-                'title'   => 'required|string|max:255',
-                'content' => 'required|string',
+                'title'   => 'nullable|string|max:255',
+                'content' => 'nullable|string',
                 'image'   => 'nullable|image',
             ]);
 
@@ -95,8 +95,8 @@ class BlogPostController extends Controller
     {
         try {
             $request->validate([
-                'title'   => 'required|string|max:255',
-                'content' => 'required|string',
+                'title'   => 'nullable|string|max:255',
+                'content' => 'nullable|string',
                 'image'   => 'nullable|image',
             ]);
 

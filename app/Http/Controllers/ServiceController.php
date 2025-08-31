@@ -35,8 +35,8 @@ class ServiceController extends Controller
     {
         try {
             $request->validate([
-                'title' => 'required|string|max:255',
-                'description' => 'required|string',
+                'title' => 'nullable|string|max:255',
+                'description' => 'nullable|string',
                 'icon' => 'nullable|string|max:255',
                 'image' => 'nullable|image',
                 'order' => 'nullable|integer|min:0',
@@ -95,8 +95,8 @@ class ServiceController extends Controller
     {
         try {
             $request->validate([
-                'title' => 'required|string|max:255',
-                'description' => 'required|string',
+                'title' => 'nullable|string|max:255',
+                'description' => 'nullable|string',
                 'icon' => 'nullable|string|max:255',
                 'image' => 'nullable|image',
                 'order' => 'nullable|integer|min:0',
