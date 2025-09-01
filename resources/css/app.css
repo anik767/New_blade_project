@@ -68,7 +68,7 @@ h1, h2, h3 {
 
 .pagination span {
   background-color: #7f8389; /* Tailwind bg-muted */
-  color: #f6fbfb; /* Tailwind text-text */
+  color: #f6fbfb; /* Tailwind text-black */
 }
 
 .pagination .current {

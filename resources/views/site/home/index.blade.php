@@ -2,7 +2,7 @@
 @section('title', 'Home')
 @section('content')
 
-    <div class="bg-background text-text min-h-screen">
+    <div class="bg-background text-black min-h-screen">
 
         {{-- Hero Section --}}
         @php
@@ -39,7 +39,7 @@
                             {{ optional($banner)->title_line1 ?: 'Hello' }}
                         </h1>
                         <h2
-                            class="text-4xl lg:text-6xl font-extrabold tracking-tight drop-shadow-lg min-h-[70px] text-accent leading-tight">
+                            class="text-4xl lg:text-6xl font-extrabold tracking-tight drop-shadow-lg min-h-[70px] text-black leading-tight">
                             {{ optional($banner)->title_line2 ?: 'Your Name' }}
                         </h2>
                     </div>
@@ -49,7 +49,7 @@
                     <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                         @if (optional($banner)->cv_file)
                             <a href="{{ asset('storage/' . $banner->cv_file) }}" download
-                                class="inline-flex items-center bg-black-500 px-8 py-4 border-2 border-accent rounded-xl font-semibold tracking-wide text-accent hover:bg-accent hover:text-dark transition-all duration-300 shadow-lg hover:shadow-xl ">
+                                class="inline-flex items-center bg-black-500 px-8 py-4 border-2 border-accent rounded-xl font-semibold tracking-wide text-black hover:bg-accent hover:text-dark transition-all duration-300 shadow-lg hover:shadow-xl ">
                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
@@ -95,7 +95,7 @@
         {{-- <section class="py-20 font-sans">
             <div class="container mx-auto px-6">
                 <header class="text-center mb-24">
-                    <h2 class="text-5xl lg:text-6xl font-extrabold tracking-wide mb-6 text-text">Get to Know Me</h2>
+                    <h2 class="text-5xl lg:text-6xl font-extrabold tracking-wide mb-6 text-black">Get to Know Me</h2>
                     <p class="text-xl text-muted font-medium max-w-3xl mx-auto leading-relaxed">Let me introduce myself and
                         share my passion for creating exceptional digital experiences</p>
                 </header>
@@ -107,7 +107,7 @@
                             <div class="relative w-full max-w-md mx-auto lg:mx-0 rounded-3xl bg-gradient-to-br from-accent/20 to-accent/40 h-96 flex items-center justify-center">
                                 <div class="text-center">
                                     <div class="text-8xl mb-4">👨‍💻</div>
-                                    <p class="text-xl font-semibold text-text">Azmain Iqtidar Anik</p>
+                                    <p class="text-xl font-semibold text-black">Azmain Iqtidar Anik</p>
                                     <p class="text-muted">Frontend Developer</p>
                                 </div>
                             </div>
@@ -150,8 +150,8 @@
                         @foreach ($highlights as $item)
                             <div
                                 class=" rounded-2xl p-8 border border-gray-700 shadow-lg shadow-accent/30 hover:shadow-acttive/30 transition-all duration-300 text-center  ">
-                                <div class="text-5xl mb-5 text-accent">{{ $item['icon'] }}</div>
-                                <h3 class="text-2xl font-semibold mb-3 text-text">{{ $item['title'] }}</h3>
+                                <div class="text-5xl mb-5 text-black">{{ $item['icon'] }}</div>
+                                <h3 class="text-2xl font-semibold mb-3 text-black">{{ $item['title'] }}</h3>
                                 <p class="text-muted text-base leading-relaxed">{{ $item['desc'] }}</p>
                             </div>
                         @endforeach
@@ -164,7 +164,7 @@
         <section class="py-20 font-sans" id="projects">
             <div class="container mx-auto px-6">
                 <header class="text-center mb-24 reveal-on-scroll">
-                    <h2 class="text-5xl lg:text-6xl font-extrabold text-text mb-6">Featured Projects</h2>
+                    <h2 class="text-5xl lg:text-6xl font-extrabold text-black mb-6">Featured Projects</h2>
                     <p class="text-xl text-muted font-medium max-w-3xl mx-auto">Showcasing my latest work and creative
                         solutions</p>
                 </header>
@@ -193,7 +193,7 @@
 
                     <div class="mt-16 text-center">
                         <a href="{{ route('projects.index') }}"
-                            class="inline-flex items-center px-8 py-4 border-2 border-accent rounded-xl font-semibold tracking-wide text-accent
+                            class="inline-flex items-center px-8 py-4 border-2 border-accent rounded-xl font-semibold tracking-wide text-black
                                hover:bg-accent hover:border-accent hover:text-dark transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:-translate-y-1">
                             View All Projects
                             <svg class="w-5 h-5 ml-2 transform transition-transform duration-300 group-hover:translate-x-2"
@@ -212,7 +212,7 @@
         <section class="py-20 font-sans" id="services">
             <div class="container mx-auto px-6">
                 <header class="text-center mb-24 reveal-on-scroll">
-                    <h2 class="text-5xl lg:text-6xl font-extrabold text-text mb-6">Services</h2>
+                    <h2 class="text-5xl lg:text-6xl font-extrabold text-black mb-6">Services</h2>
                     <p class="text-xl text-muted font-medium max-w-3xl mx-auto">What I can help you with</p>
                 </header>
 
@@ -240,7 +240,7 @@
 
                     <div class="mt-16 text-center">
                         <a href="{{ route('services') }}"
-                            class="inline-flex items-center px-8 py-4 border-2 border-accent rounded-xl font-semibold tracking-wide text-accent
+                            class="inline-flex items-center px-8 py-4 border-2 border-accent rounded-xl font-semibold tracking-wide text-black
                                hover:bg-accent hover:border-accent hover:text-dark transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:-translate-y-1">
                             View All Services
                             <svg class="w-5 h-5 ml-2 transform transition-transform duration-300 group-hover:translate-x-2"
@@ -258,7 +258,7 @@
         <section class="py-20 font-sans" id="skills">
             <div class="container mx-auto px-6 text-center">
                 <header class="mb-24 reveal-on-scroll">
-                    <h2 class="text-5xl lg:text-6xl font-extrabold text-text mb-6">Skills & Tech Stack</h2>
+                    <h2 class="text-5xl lg:text-6xl font-extrabold text-black mb-6">Skills & Tech Stack</h2>
                     <p class="text-xl text-muted font-medium max-w-3xl mx-auto">Technologies and tools I use to bring ideas
                         to life</p>
                 </header>
@@ -279,7 +279,7 @@
                     @endphp
                     @foreach ($skills as $skill)
                         <div
-                            class=" px-8 py-6 rounded-2xl border border-gray-700 shadow-lg shadow-accent/30 text-muted font-semibold text-lg hover:scale-110 hover:shadow-acttive/50 transform transition-all duration-300 hover:text-accent">
+                            class=" px-8 py-6 rounded-2xl border border-gray-700 shadow-lg shadow-accent/30 text-muted font-semibold text-lg hover:scale-110 hover:shadow-acttive/50 transform transition-all duration-300 hover:text-black">
                             {{ $skill }}
                         </div>
                     @endforeach
@@ -291,7 +291,7 @@
         <section class="py-20 font-sans" id="experience">
             <div class="container mx-auto px-6">
                 <header class="text-center mb-24 reveal-on-scroll">
-                    <h2 class="text-5xl lg:text-6xl font-extrabold text-text mb-6">Professional Experience</h2>
+                    <h2 class="text-5xl lg:text-6xl font-extrabold text-black mb-6">Professional Experience</h2>
                     <p class="text-xl text-muted font-medium max-w-3xl mx-auto">My journey in the world of web development
                     </p>
                 </header>
@@ -311,7 +311,7 @@
                         <div
                             class="border-l-4 border-accent hover:border-acttive transition-all duration-300 pl-8 space-y-6  rounded-2xl p-8  hover:shadow-xl reveal-on-scroll">
                             <div>
-                                <h3 class="text-2xl font-semibold text-text mb-2">{{ $experience['title'] }}
+                                <h3 class="text-2xl font-semibold text-black mb-2">{{ $experience['title'] }}
                                     <span class="text-muted font-normal">— {{ $experience['company'] }}</span>
                                 </h3>
                                 <p class="text-sm text-muted mb-4">{{ $experience['period'] }}</p>
@@ -328,7 +328,7 @@
         <section class="py-20 font-sans" id="blog">
             <div class="container mx-auto px-6">
                 <header class="text-center mb-24 reveal-on-scroll">
-                    <h2 class="text-5xl lg:text-6xl font-extrabold text-text mb-6">Latest Articles</h2>
+                    <h2 class="text-5xl lg:text-6xl font-extrabold text-black mb-6">Latest Articles</h2>
                     <p class="text-xl text-muted font-medium max-w-3xl mx-auto">Insights, tutorials, and thoughts on web
                         development</p>
                 </header>
@@ -357,7 +357,7 @@
 
                     <div class="mt-16 text-center reveal-on-scroll">
                         <a href="{{ route('site.blog.index') }}"
-                            class="inline-flex items-center px-8 py-4 border-2 border-accent rounded-xl font-semibold tracking-wide text-accent hover:bg-accent hover:border-accent hover:text-dark transition-all duration-300 shadow-lg hover:shadow-xl ">
+                            class="inline-flex items-center px-8 py-4 border-2 border-accent rounded-xl font-semibold tracking-wide text-black hover:bg-accent hover:border-accent hover:text-dark transition-all duration-300 shadow-lg hover:shadow-xl ">
                             View All Articles
                             <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

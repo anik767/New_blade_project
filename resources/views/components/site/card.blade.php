@@ -19,14 +19,14 @@
       @if($leadingIcon)
         <span class="text-lg mr-4"><span class="font-semibold">Type:</span> {{ $leadingIcon }}</span>
       @endif
-      <h3 class="text-xl font-semibold mb-4 text-text two-line-ellipsis capitalize group-hover:text-accent transition-colors duration-300" title="{{ $title }}">
+      <h3 class="text-xl font-semibold mb-4 text-black two-line-ellipsis capitalize group-hover:text-black transition-colors duration-300" title="{{ $title }}">
         {{ $title }}
       </h3>
     </div>
     @if($excerpt)
       <p class="text-muted mb-6 leading-relaxed">{{ $excerpt }}</p>
     @endif
-    <span class="inline-flex items-center text-acttive font-semibold cursor-pointer group hover:text-accent ">
+    <span class="inline-flex items-center text-acttive font-semibold cursor-pointer group hover:text-black ">
       {{ $ctaLabel }}
       <svg class="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-1 left_right_animation" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>

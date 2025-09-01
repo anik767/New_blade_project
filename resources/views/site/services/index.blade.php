@@ -6,7 +6,7 @@
     optimization, I help businesses create exceptional digital experiences.')
 
 @section('content')
-    <div class="bg-background text-text min-h-screen">
+    <div class="bg-background text-black min-h-screen">
 
         <x-site.banner title="My Services"
             subtitle="Comprehensive web development solutions tailored to your needs. From concept to deployment, I help businesses create exceptional digital experiences."
@@ -20,13 +20,13 @@
                         <div
                             class=" rounded-3xl p-12 max-w-md mx-auto shadow-lg">
                             <div class="text-6xl mb-4">🛠️</div>
-                            <h2 class="text-2xl font-semibold text-text mb-2">Services</h2>
+                            <h2 class="text-2xl font-semibold text-black mb-2">Services</h2>
                             <p class="text-muted">My services will be available soon!</p>
                         </div>
                     </div>
                 @else
                     <div class="text-center mb-16">
-                        <h2 class="text-4xl lg:text-5xl font-extrabold text-text mb-6">Detailed Services</h2>
+                        <h2 class="text-4xl lg:text-5xl font-extrabold text-black mb-6">Detailed Services</h2>
                         <p class="text-xl text-muted max-w-3xl mx-auto">Explore my comprehensive range of web development
                             services</p>
                     </div>

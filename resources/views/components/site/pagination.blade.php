@@ -20,14 +20,14 @@
     <nav class="mt-16 flex justify-center space-x-2 pagination ">
         {{-- Previous Page --}}
         @if ($paginator->onFirstPage())
-            <span class="px-4 py-2 bg-muted text-text rounded cursor-not-allowed">Previous</span>
+            <span class="px-4 py-2 bg-muted text-black rounded cursor-not-allowed">Previous</span>
         @else
             <a href="{{ $paginator->previousPageUrl() }}" class="px-4 py-2 bg-acttive text-dark font-semibold rounded hover:bg-acttive-500 transition">Previous</a>
         @endif
 
         {{-- First Page --}}
         @if ($pageStart > 1)
-            <a href="{{ $paginator->url(1) }}" class="px-4 py-2 bg-muted text-text rounded hover:bg-muted/80">1</a>
+            <a href="{{ $paginator->url(1) }}" class="px-4 py-2 bg-muted text-black rounded hover:bg-muted/80">1</a>
             @if ($pageStart > 2)
                 <span class="px-2 py-2 text-muted">...</span>
             @endif
@@ -38,7 +38,7 @@
             @if ($i == $currentPage)
                 <span class="px-4 py-2 bg-acttive text-dark font-semibold rounded">{{ $i }}</span>
             @else
-                <a href="{{ $paginator->url($i) }}" class="px-4 py-2 bg-muted text-text rounded hover:bg-muted/80">{{ $i }}</a>
+                <a href="{{ $paginator->url($i) }}" class="px-4 py-2 bg-muted text-black rounded hover:bg-muted/80">{{ $i }}</a>
             @endif
         @endfor
 
@@ -47,14 +47,14 @@
             @if ($pageEnd < $totalPages - 1)
                 <span class="px-2 py-2 text-muted">...</span>
             @endif
-            <a href="{{ $paginator->url($totalPages) }}" class="px-4 py-2 bg-muted text-text rounded hover:bg-muted/80">{{ $totalPages }}</a>
+            <a href="{{ $paginator->url($totalPages) }}" class="px-4 py-2 bg-muted text-black rounded hover:bg-muted/80">{{ $totalPages }}</a>
         @endif
 
         {{-- Next Page --}}
         @if ($paginator->hasMorePages())
             <a href="{{ $paginator->nextPageUrl() }}" class="px-4 py-2 bg-acttive text-dark font-semibold rounded hover:bg-acttive-500 transition">Next</a>
         @else
-            <span class="px-4 py-2 bg-muted text-text rounded cursor-not-allowed">Next</span>
+            <span class="px-4 py-2 bg-muted text-black rounded cursor-not-allowed">Next</span>
         @endif
     </nav>
 @endif

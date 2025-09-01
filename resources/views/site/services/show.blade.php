@@ -1,13 +1,13 @@
 @extends('layouts.site')
 @section('title', "Service - {$service->title}")
 @section('content')
-    <div class="bg-background text-text min-h-screen">
+    <div class="bg-background text-black min-h-screen">
         <!-- Main Content -->
         <div class="container mx-auto px-6 py-16">
             <div class="max-w-4xl mx-auto">
                 <!-- Page Title -->
                 <div class="text-center mb-8">
-                    <h1 class="text-4xl font-bold text-text mb-4">Service with Title, Image and Meta Info</h1>
+                    <h1 class="text-4xl font-bold text-black mb-4">Service with Title, Image and Meta Info</h1>
                 </div>
 
                 <!-- Author and Meta Information -->
@@ -66,7 +66,7 @@
                     @if ($service->icon)
                         <span class="text-4xl mr-4">{{ $service->icon }}</span>
                     @endif
-                    <h2 class="text-3xl font-bold text-text">{{ $service->title }}</h2>
+                    <h2 class="text-3xl font-bold text-black">{{ $service->title }}</h2>
                 </div>
 
                 <!-- Service Content -->
@@ -78,7 +78,7 @@
 
                 <!-- Comments Section -->
                 <div class="mt-12 pt-8 border-t border-gray-700">
-                    <h3 class="text-2xl font-bold text-text mb-6">Comments ({{ $service->comments->count() }})</h3>
+                    <h3 class="text-2xl font-bold text-black mb-6">Comments ({{ $service->comments->count() }})</h3>
 
                     <!-- Display Comments -->
                     @if ($service->comments->count() > 0)
@@ -92,7 +92,7 @@
                                         </div>
                                         <div class="flex-1">
                                             <div class="flex items-center space-x-2 mb-2">
-                                                <h4 class="font-semibold text-text">{{ $comment->name }}</h4>
+                                                <h4 class="font-semibold text-black">{{ $comment->name }}</h4>
                                                 <span
                                                     class="text-muted text-sm">{{ $comment->created_at->format('M d, Y g:i A') }}</span>
                                             </div>
@@ -108,7 +108,7 @@
 
                     <!-- Comment Form -->
                     <div class="bg-card border border-gray-700 rounded-lg p-6">
-                        <h4 class="text-lg font-semibold text-text mb-4">Leave a Comment</h4>
+                        <h4 class="text-lg font-semibold text-black mb-4">Leave a Comment</h4>
                         <form id="comment-form" class="space-y-6">
                             @csrf
                             <input type="hidden" name="type" value="service">
@@ -117,19 +117,19 @@
                             <div>
                                 <label for="comment" class="block text-sm font-medium text-muted mb-2">Comment *</label>
                                 <textarea id="comment" name="comment" rows="6" required
-                                    class="w-full px-4 py-3 bg-background border border-gray-700 rounded-lg text-text placeholder-muted focus:outline-none focus:ring-2 focus:ring-accent resize-none"></textarea>
+                                    class="w-full px-4 py-3 bg-background border border-gray-700 rounded-lg text-black placeholder-muted focus:outline-none focus:ring-2 focus:ring-accent resize-none"></textarea>
                             </div>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label for="name" class="block text-sm font-medium text-muted mb-2">Name *</label>
                                     <input type="text" id="name" name="name" required
-                                        class="w-full px-4 py-3 bg-background border border-gray-700 rounded-lg text-text placeholder-muted focus:outline-none focus:ring-2 focus:ring-accent">
+                                        class="w-full px-4 py-3 bg-background border border-gray-700 rounded-lg text-black placeholder-muted focus:outline-none focus:ring-2 focus:ring-accent">
                                 </div>
                                 <div>
                                     <label for="email" class="block text-sm font-medium text-muted mb-2">Email *</label>
                                     <input type="email" id="email" name="email" required
-                                        class="w-full px-4 py-3 bg-background border border-gray-700 rounded-lg text-text placeholder-muted focus:outline-none focus:ring-2 focus:ring-accent">
+                                        class="w-full px-4 py-3 bg-background border border-gray-700 rounded-lg text-black placeholder-muted focus:outline-none focus:ring-2 focus:ring-accent">
                                 </div>
                             </div>
 
@@ -189,7 +189,7 @@
 
                 <!-- More Recommended Section -->
                 <div class="mt-12 pt-8 border-t border-gray-700">
-                    <h3 class="text-2xl font-bold text-text mb-6">More Recommended</h3>
+                    <h3 class="text-2xl font-bold text-black mb-6">More Recommended</h3>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         @php
                             $recentServices = \App\Models\Service::where('is_active', true)->latest()->take(3)->get();
@@ -217,9 +217,9 @@
                                     </div>
                                 @endif
                                 <div class="p-4">
-                                    <h4 class="font-bold text-text mb-2 line-clamp-2">{{ $recentService->title }}</h4>
+                                    <h4 class="font-bold text-black mb-2 line-clamp-2">{{ $recentService->title }}</h4>
                                     <a href="{{ route('services.show', $recentService->slug) }}"
-                                        class="text-accent hover:text-acttive text-sm font-medium">
+                                        class="text-black hover:text-acttive text-sm font-medium">
                                         READ MORE »
                                     </a>
                                     <p class="text-muted text-sm mt-2">

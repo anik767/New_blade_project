@@ -23,8 +23,8 @@ class AboutMeController extends Controller
                 'title' => 'Your Title',
                 'content' => 'Tell visitors about yourself...',
                 'email' => 'your.email@example.com',
-                'phone' => '',
-                'location' => '',
+                'phone' => '+971 50 123 4567',
+                'location' => 'Dubai, UAE',
                 'linkedin' => '',
                 'github' => '',
             ]);
@@ -69,17 +69,16 @@ class AboutMeController extends Controller
             $imagePath = $aboutMe->image;
         }
 
-        // Process skills data
-        $skills = [];
+        // Process skills data - store as simple string format
+        $skillsString = '';
         if ($request->has('skills')) {
+            $skillParts = [];
             foreach ($request->skills as $skill) {
                 if (!empty($skill['name']) && isset($skill['percentage'])) {
-                    $skills[] = [
-                        'name' => $skill['name'],
-                        'percentage' => (int) $skill['percentage']
-                    ];
+                    $skillParts[] = $skill['name'] . ':' . (int) $skill['percentage'];
                 }
             }
+            $skillsString = implode('|', $skillParts);
         }
 
         $data = [
@@ -93,7 +92,7 @@ class AboutMeController extends Controller
             'linkedin' => $request->linkedin,
             'github' => $request->github,
             'map_embed_code' => $request->map_embed_code,
-            'skills' => json_encode($skills),
+            'skills' => $skillsString,
         ];
 
         $aboutMe = AboutMe::firstOrCreate([], $data);
@@ -122,6 +121,22 @@ class AboutMeController extends Controller
                     'linkedin' => '',
                     'github' => '',
                 ]);
+            }
+            
+            // Convert skills string back to array format for the view
+            if ($aboutMe->skills) {
+                $skillsArray = [];
+                $skillParts = explode('|', $aboutMe->skills);
+                foreach ($skillParts as $part) {
+                    if (strpos($part, ':') !== false) {
+                        list($name, $percentage) = explode(':', $part, 2);
+                        $skillsArray[] = [
+                            'name' => $name,
+                            'percentage' => (int) $percentage
+                        ];
+                    }
+                }
+                $aboutMe->skills_array = $skillsArray;
             }
             
             return view('site.about.index', compact('aboutMe', 'banner','pageBanner'));

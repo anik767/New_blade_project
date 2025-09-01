@@ -4,7 +4,7 @@
 @section('description', 'Read my latest articles about web development, design trends, and technology insights. Stay updated with industry best practices and innovative solutions.')
 
 @section('content')
-    <div class="bg-background text-text min-h-screen">
+    <div class="bg-background text-black min-h-screen">
         
         <x-site.banner 
             title="My Blog"
@@ -19,13 +19,13 @@
                     <div class="text-center py-16">
                         <div class=" rounded-3xl p-12 max-w-md mx-auto shadow-lg">
                             <div class="text-6xl mb-4">📝</div>
-                            <h2 class="text-2xl font-semibold text-text mb-2">Blog Posts</h2>
+                            <h2 class="text-2xl font-semibold text-black mb-2">Blog Posts</h2>
                             <p class="text-muted">My blog posts will be available soon!</p>
                         </div>
                     </div>
                 @else
                     <div class="text-center mb-16">
-                        <h2 class="text-4xl lg:text-5xl font-extrabold text-text mb-6">Featured Articles</h2>
+                        <h2 class="text-4xl lg:text-5xl font-extrabold text-black mb-6">Featured Articles</h2>
                         <p class="text-xl text-muted max-w-3xl mx-auto">Latest insights and tutorials to help you grow as a developer</p>
                     </div>
                     

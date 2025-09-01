@@ -3,7 +3,7 @@
 @section('description', 'Explore my portfolio of web development projects. From responsive websites to complex applications, see how I bring ideas to life with modern technologies.')
 
 @section('content')
-    <div class="bg-background text-text min-h-screen">
+    <div class="bg-background text-black min-h-screen">
         
         <x-site.banner 
             title="My Projects"
@@ -18,13 +18,13 @@
                     <div class="text-center py-16">
                         <div class=" rounded-3xl p-12 max-w-md mx-auto shadow-lg">
                             <div class="text-6xl mb-4">🚀</div>
-                            <h2 class="text-2xl font-semibold text-text mb-2">Projects</h2>
+                            <h2 class="text-2xl font-semibold text-black mb-2">Projects</h2>
                             <p class="text-muted">My projects will be available soon!</p>
                         </div>
                     </div>
                 @else
                     <div class="text-center mb-16">
-                        <h2 class="text-4xl lg:text-5xl font-extrabold text-text mb-6">Featured Projects</h2>
+                        <h2 class="text-4xl lg:text-5xl font-extrabold text-black mb-6">Featured Projects</h2>
                         <p class="text-xl text-muted max-w-3xl mx-auto">A selection of my best work showcasing different skills and technologies</p>
                     </div>
                     
