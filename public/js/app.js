@@ -4316,6 +4316,28 @@ window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"];
 window.Notyf = notyf__WEBPACK_IMPORTED_MODULE_1__.Notyf;
 alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].start();
 
+// Global scroll reveal logic
+document.addEventListener('DOMContentLoaded', function () {
+  try {
+    var observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+    document.querySelectorAll('.scroll-fade-in').forEach(function (el) {
+      return observer.observe(el);
+    });
+  } catch (e) {
+    // no-op in unsupported environments
+  }
+});
+
 /***/ })
 
 /******/ 	});

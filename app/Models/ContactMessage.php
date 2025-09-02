@@ -14,11 +14,13 @@ class ContactMessage extends Model
         'email',
         'phone',
         'message',
-        'status'
+        'status',
     ];
 
     const STATUS_UNREAD = 'unread';
+
     const STATUS_READ = 'read';
+
     const STATUS_REPLIED = 'replied';
 
     public function scopeUnread($query)

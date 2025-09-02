@@ -174,15 +174,15 @@
         <div class="pt-6 mt-6 border-t border-gray-700">
             <h3 class="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Settings</h3>
             
-            <!-- About Me -->
-            <a href="{{ route('admin.about-me.edit') }}" 
-               class="sidebar-item flex items-center px-4 py-3 text-gray-300 rounded-xl hover:bg-gray-700 hover:text-white transition-all duration-200 group {{ request()->routeIs('admin.about-me.*') ? 'bg-blue-600 text-white shadow-lg' : '' }}">
-                <div class="flex items-center justify-center w-8 h-8 mr-3 rounded-lg {{ request()->routeIs('admin.about-me.*') ? 'bg-blue-500' : 'bg-gray-700 group-hover:bg-gray-600' }} transition-colors duration-200">
+            <!-- About -->
+            <a href="{{ route('admin.about.edit') }}" 
+               class="sidebar-item flex items-center px-4 py-3 text-gray-300 rounded-xl hover:bg-gray-700 hover:text-white transition-all duration-200 group {{ request()->routeIs('admin.about.*') ? 'bg-blue-600 text-white shadow-lg' : '' }}">
+                <div class="flex items-center justify-center w-8 h-8 mr-3 rounded-lg {{ request()->routeIs('admin.about.*') ? 'bg-blue-500' : 'bg-gray-700 group-hover:bg-gray-600' }} transition-colors duration-200">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                     </svg>
                 </div>
-                <span class="font-medium">About Me</span>
+                <span class="font-medium">About</span>
             </a>
 
             <!-- Contact Info -->

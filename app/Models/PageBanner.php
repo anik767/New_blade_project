@@ -11,4 +11,3 @@ class PageBanner extends Model
         'background_media',
     ];
 }
-

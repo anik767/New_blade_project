@@ -1,44 +1,20 @@
 <?php
 
-use App\Http\Controllers\HomeBannerController;
-use App\Http\Controllers\HomeSkillsController;
-use App\Http\Controllers\HomeExperienceController;
-use App\Http\Controllers\BlogPostController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProjectPostController;
-use App\Http\Controllers\AboutMeController;
-use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ContactFormController;
+use App\Http\Controllers\HomeBannerController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\HomeExperienceController;
+use App\Http\Controllers\HomeSkillsController;
+use App\Http\Controllers\ProjectController as ProjectPostController;
+use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 
 // Public routes (no prefix, no middleware)
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/about', [AboutMeController::class, 'publicShow'])->name('about');
-Route::get('/test-about', function() {
-    try {
-        $aboutMe = \App\Models\AboutMe::first();
-        if (!$aboutMe) {
-            $aboutMe = \App\Models\AboutMe::create([
-                'title' => 'Test About',
-                'content' => 'Test content',
-                'email' => 'test@example.com',
-            ]);
-        }
-        return response()->json(['success' => true, 'aboutMe' => $aboutMe]);
-    } catch (\Exception $e) {
-        return response()->json(['success' => false, 'error' => $e->getMessage()]);
-    }
-});
-
-Route::get('/test-about-view', function() {
-    try {
-        $aboutMe = \App\Models\AboutMe::first();
-        return view('site.about', compact('aboutMe'));
-    } catch (\Exception $e) {
-        return response()->json(['success' => false, 'error' => $e->getMessage()]);
-    }
-});
+Route::get('/about', [AboutController::class, 'publicShow'])->name('about');
 Route::get('/services', [ServiceController::class, 'publicList'])->name('services');
 Route::get('/services/{slug}', [ServiceController::class, 'publicSingle'])->name('services.show');
 Route::get('/contact', [ContactController::class, 'publicShow'])->name('contact');
@@ -48,8 +24,8 @@ Route::get('/projects/{slug}', [ProjectPostController::class, 'publicSingle'])->
 
 // Public blog routes
 Route::prefix('blog')->name('site.blog.')->group(function () {
-    Route::get('/', [BlogPostController::class, 'publicList'])->name('index');   // site.blog.index
-    Route::get('/{slug}', [BlogPostController::class, 'publicSingle'])->name('show'); // site.blog.show
+    Route::get('/', [BlogController::class, 'publicList'])->name('index');   // site.blog.index
+    Route::get('/{slug}', [BlogController::class, 'publicSingle'])->name('show'); // site.blog.show
 });
 
 // Comment submission
@@ -83,17 +59,19 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::put('/projects/{project}', [ProjectPostController::class, 'update'])->name('projects.update');
     Route::delete('/projects/{project}', [ProjectPostController::class, 'destroy'])->name('projects.destroy');
 
-    Route::resource('blog', BlogPostController::class);
+    Route::resource('blog', BlogController::class);
     Route::resource('services', ServiceController::class);
+
+    // About - Edit only
+    Route::get('/about', [AboutController::class, 'edit'])->name('about.edit');
+    Route::post('/about', [AboutController::class, 'update'])->name('about.update');
+
     
-    // About Me - Edit only
-    Route::get('/about-me', [AboutMeController::class, 'edit'])->name('about-me.edit');
-    Route::post('/about-me', [AboutMeController::class, 'update'])->name('about-me.update');
-    
+
     // Contact - Edit only
     Route::get('/contacts', [ContactController::class, 'edit'])->name('contacts.edit');
     Route::post('/contacts', [ContactController::class, 'update'])->name('contacts.update');
-    
+
     // Contact Messages Management
     Route::get('/contact-messages', [ContactFormController::class, 'index'])->name('contact-messages.index');
     Route::get('/contact-messages/{contactMessage}', [ContactFormController::class, 'show'])->name('contact-messages.show');

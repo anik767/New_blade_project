@@ -15,11 +15,13 @@ class Comment extends Model
         'comment',
         'commentable_type',
         'commentable_id',
-        'is_approved'
+        'is_approved',
     ];
 
     protected $casts = [
         'is_approved' => 'boolean',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 
     /**
