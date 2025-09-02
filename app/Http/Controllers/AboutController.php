@@ -41,22 +41,22 @@ class AboutController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'name' => 'nullable|string|max:255',
-            'title' => 'nullable|string|max:255',
+            'name' => 'nullable|string',
+            'title' => 'nullable|string',
             'content' => 'nullable|string',
             'image' => 'nullable|image|max:2048',
-            'email' => 'nullable|email|max:255',
-            'phone' => 'nullable|string|max:255',
-            'location' => 'nullable|string|max:255',
-            'linkedin' => 'nullable|url|max:255',
-            'github' => 'nullable|url|max:255',
+            'email' => 'nullable|email',
+            'phone' => 'nullable|string',
+            'location' => 'nullable|string',
+            'linkedin' => 'nullable|url',
+            'github' => 'nullable|url',
             'map_embed_code' => 'nullable|string',
             'skills' => 'nullable|array',
-            'skills.*.name' => 'nullable|string|max:255',
+            'skills.*.name' => 'nullable|string',
             'skills.*.percentage' => 'nullable|integer|min:0|max:100',
             'strengths' => 'nullable|array',
-            'strengths.*.title' => 'nullable|string|max:255',
-            'strengths.*.subtitle' => 'nullable|string|max:255',
+            'strengths.*.title' => 'nullable|string',
+            'strengths.*.subtitle' => 'nullable|string',
             'strengths.*.description' => 'nullable|string',
         ]);
 

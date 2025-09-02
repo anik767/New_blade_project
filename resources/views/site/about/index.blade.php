@@ -86,7 +86,7 @@
                                             {{ $aboutMe->name }}
                                         </h1>
                                         @if ($aboutMe->title)
-                                            <p class="text-2xl text-gray-600 font-semibold">{{ $aboutMe->title }}</p>
+                                            <p class="text-2xl text-gray-600 font-semibold capitalize">{{ $aboutMe->title }}</p>
                                         @endif
                                     </div>
                                 @endif
@@ -197,7 +197,7 @@
                                                     <div class="p-6 md:p-7">
                                                         <!-- Header row -->
                                                         <div class="flex items-start justify-between mb-4">
-                                                            <h3 class="text-2xl font-bold text-gray-900 leading-snug">
+                                                            <h3 class="text-2xl font-bold text-gray-900 leading-snug capitalize">
                                                                 {{ $strength['title'] }}
                                                             </h3>
                                                             <span class="shrink-0 inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full bg-gradient-to-r from-green-100 to-blue-100 text-green-700 border border-green-200/70">
@@ -206,7 +206,7 @@
                                                         </div>
 
                                                         <div class="mb-4">
-                                                            <span class="inline-block px-3 py-1 text-sm font-medium rounded-full bg-blue-50 text-blue-700 border border-blue-200">
+                                                            <span class="inline-block px-3 py-1 text-sm font-medium rounded-full bg-blue-50 text-blue-700 border border-blue-200 capitalize">
                                                                 {{ $strength['subtitle'] }}
                                                             </span>
                                                         </div>
@@ -242,7 +242,7 @@
                                     @foreach($aboutMe->skills_array as $skill)
                                         <div class="mb-8 group">
                                             <div class="flex items-center justify-between mb-3">
-                                                <h3 class="text-xl font-semibold text-gray-800 group-hover:text-blue-600 transition-colors duration-300">
+                                                <h3 class="text-xl font-semibold text-gray-800 group-hover:text-blue-600 transition-colors duration-300 capitalize">
                                                     {{ $skill['name'] }}
                                                 </h3>
                                                 <span class="text-lg font-bold text-blue-600 group-hover:scale-110 transition-transform duration-300">{{ $skill['percentage'] }}%</span>
@@ -291,7 +291,7 @@
                                                 </div>
                                                 <div>
                                                         <h3 class="font-bold text-gray-900 mb-2 text-lg group-hover:text-green-600 transition-colors duration-300">Email</h3>
-                                                        <a href="mailto:{{ $aboutMe->email }}" class="text-green-600 hover:text-green-700 transition-colors duration-300 font-medium group-hover:scale-105 inline-block">
+                                                        <a href="mailto:{{ $aboutMe->email }}" class="text-green-600 hover:text-green-700 transition-colors duration-300 font-medium group-hover:scale-105 inline-block break-all">
                                                         {{ $aboutMe->email }}
                                                     </a>
                                                     </div>
@@ -334,7 +334,7 @@
                                                 </div>
                                                 <div>
                                                         <h3 class="font-bold text-gray-900 mb-2 text-lg">Location</h3>
-                                                        <span class="text-purple-600 font-medium">{{ $aboutMe->location }}</span>
+                                                        <span class="text-purple-600 font-medium break-words capitalize">{{ $aboutMe->location }}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -382,7 +382,7 @@
                         <div class="text-center py-20 scroll-fade-in">
                             <div class="relative">
                                 <!-- Background decoration -->
-                                <div class="absolute inset-0 bg-gradient-to-br from-green-100/50 via-blue-100/50 to-purple-100/50 rounded-3xl blur-3xl"></div>
+                                <div class="absolute  inset-0 bg-gradient-to-br from-green-100/50 via-blue-100/50 to-purple-100/50 rounded-3xl blur-3xl"></div>
                                 
                                 <div class="relative bg-white/80 backdrop-blur-sm rounded-3xl p-16 border border-gray-100 shadow-2xl">
                                     <div class="max-w-4xl mx-auto">
