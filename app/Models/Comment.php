@@ -20,6 +20,8 @@ class Comment extends Model
 
     protected $casts = [
         'is_approved' => 'boolean',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 
     /**

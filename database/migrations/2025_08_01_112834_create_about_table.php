@@ -13,12 +13,19 @@ return new class extends Migration
     {
         Schema::create('about', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->nullable();
             $table->string('title')->nullable();
             $table->text('content')->nullable();
             $table->string('image')->nullable();
-            $table->string('skills')->nullable();
-            $table->string('experience')->nullable();
-            $table->string('education')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('location')->nullable();
+            $table->string('linkedin')->nullable();
+            $table->string('github')->nullable();
+            $table->text('skills')->nullable();
+            $table->text('experience')->nullable();
+            $table->text('education')->nullable();
+            $table->text('map_embed_code')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

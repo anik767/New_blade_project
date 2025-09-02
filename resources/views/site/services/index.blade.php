@@ -6,60 +6,22 @@
     optimization, I help businesses create exceptional digital experiences.')
 
 @section('content')
-    <div class="bg-background text-black min-h-screen">
+    <x-site.banner title="My Services"
+        subtitle="Comprehensive web development solutions tailored to your needs. From concept to deployment, I help businesses create exceptional digital experiences."
+        :banner="$banner" :pageBanner="$pageBanner" />
 
-        <x-site.banner title="My Services"
-            subtitle="Comprehensive web development solutions tailored to your needs. From concept to deployment, I help businesses create exceptional digital experiences."
-            :banner="$banner" :pageBanner="$pageBanner" />
-
-        {{-- Services List Section --}}
-        <section class="py-20 reveal-on-scroll">
-            <div class="container mx-auto px-6">
-                @if ($services->isEmpty())
-                    <div class="text-center py-16">
-                        <div
-                            class=" rounded-3xl p-12 max-w-md mx-auto shadow-lg">
-                            <div class="text-6xl mb-4">🛠️</div>
-                            <h2 class="text-2xl font-semibold text-black mb-2">Services</h2>
-                            <p class="text-muted">My services will be available soon!</p>
-                        </div>
-                    </div>
-                @else
-                    <div class="text-center mb-16 scroll-fade-in">
-                        <div class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full text-sm font-medium text-blue-800 mb-6">
-                            <span class="w-3 h-3 bg-blue-500 rounded-full mr-2"></span>
-                            What I offer
-                        </div>
-                        <h2 class="text-4xl lg:text-5xl font-extrabold text-black mb-6">Detailed Services</h2>
-                        <p class="text-xl text-muted max-w-3xl mx-auto">Explore my comprehensive range of web development
-                            services</p>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 scroll-fade-in">
-                        @foreach ($services as $service)
-                            @php
-                                $img = $service->image ? asset('storage/' . $service->image) : asset('images/Image_not_found.jpg');
-                            @endphp
-                            <x-site.card 
-                                :title="$service->title"
-                                :image="$img"
-                                :href="route('services.show', $service->slug)"
-                                :excerpt="Str::limit($service->description, 120)"
-                                :leadingIcon="$service->icon"
-                                ctaLabel="Learn More"
-                            />
-                        @endforeach
-                    </div>
-
-
-                    <x-site.pagination :paginator="$services" />
-                @endif
-            </div>
-        </section>
-
-
-
-
-
-    </div>
+    <x-site.content-grid 
+        title="Detailed Services"
+        subtitle="Explore my comprehensive range of web development services"
+        badge="What I offer"
+        badgeColor="blue"
+        :items="$services"
+        emptyIcon="🛠️"
+        emptyTitle="Services"
+        emptyMessage="My services will be available soon!"
+        routeName="services.show"
+        routeParam="slug"
+        :excerptLength="120"
+        ctaLabel="Learn More"
+    />
 @endsection

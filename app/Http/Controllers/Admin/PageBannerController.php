@@ -41,6 +41,6 @@ class PageBannerController extends Controller
         $banner->page = $page;
         $banner->save();
 
-        return redirect()->back()->with('success', 'Page banner updated.');
+        return redirect()->route('admin.page-banners.index')->with('success', 'Page banner updated.');
     }
 }

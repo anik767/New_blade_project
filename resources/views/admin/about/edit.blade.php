@@ -144,17 +144,6 @@
                         Profile Image
                     </h3>
 
-                    @if ($about->image)
-                        <div class="mb-4 p-4 bg-gray-50 border border-gray-200 rounded-lg">
-                            <p class="text-sm font-medium text-gray-700 mb-3">Current Profile Image:</p>
-                            <div class="relative group">
-                                <img src="{{ asset('storage/' . $about->image) }}" alt="Current profile image"
-                                    class=" h-32  rounded-lg border border-gray-200 shadow-sm group-hover:shadow-md transition-shadow duration-200">
-
-                            </div>
-                        </div>
-                    @endif
-
                     <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-200">
                         <label class="block text-lg font-semibold text-gray-900 mb-4 flex items-center">
                             <svg class="w-5 h-5 mr-2 text-purple-600" fill="none" stroke="currentColor"
@@ -167,26 +156,63 @@
                         </label>
 
                         <div class="space-y-4">
-                            <input type="file" name="image"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-                                accept="image/*">
+                            <input type="file" name="image" id="imageInput"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
 
-                            <div class="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-                                <div class="flex items-start">
-                                    <svg class="w-4 h-4 text-blue-600 mr-2 mt-0.5" fill="currentColor"
-                                        viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd"
-                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                                            clip-rule="evenodd"></path>
-                                    </svg>
-                                    <div>
-                                        <p class="text-sm font-medium text-blue-800">Image Requirements:</p>
-                                        <ul class="text-sm text-blue-700 mt-1 list-disc list-inside space-y-1">
-                                            <li>Recommended size: 400x400 pixels (profile optimized)</li>
-                                            <li>Formats: JPG, PNG, GIF</li>
-                                            <li>Professional headshot works best</li>
-                                            <li>Leave empty to keep current image</li>
-                                        </ul>
+                            <!-- Current Profile Image Section (Always Visible) -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <!-- Current Image (Always Show) -->
+                                <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-6 border-2 border-green-200 shadow-lg">
+                                    <h4 class="text-lg font-semibold text-green-800 mb-4 flex items-center">
+                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        Current Profile Image
+                                    </h4>
+                                    <div class="relative w-full h-80 rounded-xl overflow-hidden border-2 border-green-200 bg-gray-100 shadow-sm">
+                                        @if ($about->image)
+                                            <img src="{{ asset('storage/' . $about->image) }}" 
+                                                 class="w-full h-full object-contain" 
+                                                 alt="Current profile image" />
+                                        @else
+                                            <div class="w-full h-full flex items-center justify-center text-gray-500">
+                                                <div class="text-center">
+                                                    <svg class="w-16 h-16 mx-auto mb-2 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                                    </svg>
+                                                    <p class="text-sm">No current image</p>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        <div class="absolute top-3 left-3 bg-green-600 text-white px-2 py-1 rounded-lg text-xs font-medium flex items-center">
+                                            <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 002 2z"></path>
+                                            </svg>
+                                            Current
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- New Upload Preview (Only Show When File Selected) -->
+                                <div id="newUploadPreview" class="hidden bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border-2 border-blue-200 shadow-lg">
+                                    <h4 class="text-lg font-semibold text-blue-800 mb-4 flex items-center">
+                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                        </svg>
+                                        New Upload Preview
+                                    </h4>
+                                    <div class="relative w-full h-80 rounded-xl overflow-hidden border-2 border-blue-200 bg-gray-100 shadow-sm">
+                                        <div id="loadingOverlay" class="absolute inset-0 bg-black/40 flex items-center justify-center z-10">
+                                            <div class="flex items-center space-x-2 text-white">
+                                                <svg class="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
+                                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                                </svg>
+                                                <span>Loading preview...</span>
+                                            </div>
+                                        </div>
+                                        <img id="imagePreview" class="w-full h-full object-contain hidden" alt="Selected preview" />
                                     </div>
                                 </div>
                             </div>
@@ -276,6 +302,21 @@
                     <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-200">
                         <x-forms.form-field label="Google Maps Embed Code" name="map_embed_code" type="textarea"
                             placeholder="Paste your Google Maps embed iframe code here..." :value="$about->map_embed_code" />
+
+                        <!-- Map Preview Section -->
+                        @if($about->map_embed_code)
+                            <div class="mt-6">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                                    <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-1.447-.894L15 4m0 13V4m-6 3l6-3"></path>
+                                    </svg>
+                                    Map Preview
+                                </h4>
+                                <div class="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-lg">
+                                    {!! $about->map_embed_code !!}
+                                </div>
+                            </div>
+                        @endif
 
                         <div class="mt-4 p-4 bg-gradient-to-r from-blue-50 to-blue-100 border border-blue-200 rounded-xl">
                             <div class="flex items-start">
@@ -429,49 +470,39 @@
 
         // Load existing data on page load
         document.addEventListener('DOMContentLoaded', function() {
-            // Load existing skills and strengths from combined data
-            @php
-                $existingSkills = [];
-                $existingStrengths = [];
+            // Image preview functionality
+            const imageInput = document.getElementById('imageInput');
+            const imagePreviewWrapper = document.getElementById('imagePreviewWrapper');
+            const imagePreview = document.getElementById('imagePreview');
+            const loadingOverlay = document.getElementById('loadingOverlay');
 
-                if ($about->skills) {
-                    // Split by double pipe to separate skills and strengths sections
-                    $sections = explode('||', $about->skills);
+            imageInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                
+                if (file) {
+                    // Show new upload preview
+                    document.getElementById('newUploadPreview').classList.remove('hidden');
+                    loadingOverlay.classList.remove('hidden');
+                    imagePreview.classList.add('hidden');
 
-                    foreach ($sections as $section) {
-                        if (strpos($section, 'SKILLS:') === 0) {
-                            // Parse skills section
-                            $skillsData = substr($section, strlen('SKILLS:')); // Remove 'SKILLS:' prefix
-                            $skillParts = explode('|', $skillsData);
-                            foreach ($skillParts as $part) {
-                                if (strpos($part, 'SKILL:') === 0) {
-                                    $skillData = substr($part, 6); // Remove 'SKILL:' prefix
-                                    if (strpos($skillData, ':') !== false) {
-                                        [$name, $percentage] = explode(':', $skillData, 2);
-                                        $existingSkills[] = [
-                                            'name' => $name,
-                                            'percentage' => (int) $percentage,
-                                        ];
-                                    }
-                                }
-                            }
-                        } elseif (strpos($section, 'STRENGTHS:') === 0) {
-                            // Parse strengths section
-                            $strengthsData = substr($section, strlen('STRENGTHS:')); // Remove 'STRENGTHS:' prefix
-                            $strengthParts = explode('|', $strengthsData);
-                            foreach ($strengthParts as $part) {
-                                if (substr_count($part, ':') >= 2) {
-                                    $parts = explode(':', $part, 3);
-                                    $existingStrengths[] = [
-                                        'title' => $parts[0],
-                                        'subtitle' => $parts[1],
-                                        'description' => $parts[2],
-                                    ];
-                                }
-                            }
-                        }
-                    }
+                    // Create a FileReader to preview the image
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        imagePreview.src = e.target.result;
+                        imagePreview.classList.remove('hidden');
+                        loadingOverlay.classList.add('hidden');
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    // Hide new upload preview if no file selected
+                    document.getElementById('newUploadPreview').classList.add('hidden');
                 }
+            });
+
+            // Load existing skills and strengths using model accessors
+            @php
+                $existingSkills = $about->skills_array ?? [];
+                $existingStrengths = $about->strengths_array ?? [];
             @endphp
 
             const existingSkills = @json($existingSkills);

@@ -11,20 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('services', function (Blueprint $table) {
-            $table->string('slug')->nullable()->after('title');
-        });
-
-        // Generate slugs for existing services
-        $services = \App\Models\Service::all();
-        foreach ($services as $service) {
-            $service->slug = \Illuminate\Support\Str::slug($service->title);
-            $service->save();
+        if (Schema::hasColumn('services', 'slug')) {
+            return;
         }
 
-        // Make slug unique and not nullable
         Schema::table('services', function (Blueprint $table) {
-            $table->string('slug')->unique()->nullable(false)->change();
+            $table->string('slug')->nullable()->after('title');
+            $table->unique('slug', 'services_slug_unique');
         });
     }
 
@@ -33,8 +26,11 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('services', function (Blueprint $table) {
-            $table->dropColumn('slug');
-        });
+        if (Schema::hasColumn('services', 'slug')) {
+            Schema::table('services', function (Blueprint $table) {
+                $table->dropUnique('services_slug_unique');
+                $table->dropColumn('slug');
+            });
+        }
     }
 };

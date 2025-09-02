@@ -44,7 +44,7 @@ class AboutController extends Controller
             'name' => 'nullable|string',
             'title' => 'nullable|string',
             'content' => 'nullable|string',
-            'image' => 'nullable|image|max:2048',
+            'image' => 'nullable|file',
             'email' => 'nullable|email',
             'phone' => 'nullable|string',
             'location' => 'nullable|string',
@@ -180,51 +180,8 @@ class AboutController extends Controller
                 ]);
             }
 
-            // Convert combined skills and strengths string back to array format for the view
-            if ($aboutMe->skills) {
-                $skillsArray = [];
-                $strengthsArray = [];
-
-                // Split by double pipe to separate skills and strengths sections
-                $sections = explode('||', $aboutMe->skills);
-
-                foreach ($sections as $section) {
-                    if (strpos($section, 'SKILLS:') === 0) {
-                        // Parse skills section (use correct prefix length)
-                        $skillsData = substr($section, strlen('SKILLS:'));
-                        $skillParts = explode('|', $skillsData);
-                        foreach ($skillParts as $part) {
-                            if (strpos($part, 'SKILL:') === 0) {
-                                $skillData = substr($part, 6); // Remove 'SKILL:' prefix
-                                if (strpos($skillData, ':') !== false) {
-                                    [$name, $percentage] = explode(':', $skillData, 2);
-                                    $skillsArray[] = [
-                                        'name' => $name,
-                                        'percentage' => (int) $percentage,
-                                    ];
-                                }
-                            }
-                        }
-                    } elseif (strpos($section, 'STRENGTHS:') === 0) {
-                        // Parse strengths section (use correct prefix length)
-                        $strengthsData = substr($section, strlen('STRENGTHS:'));
-                        $strengthParts = explode('|', $strengthsData);
-                        foreach ($strengthParts as $part) {
-                            if (substr_count($part, ':') >= 2) {
-                                $parts = explode(':', $part, 3);
-                                $strengthsArray[] = [
-                                    'title' => $parts[0],
-                                    'subtitle' => $parts[1],
-                                    'description' => $parts[2],
-                                ];
-                            }
-                        }
-                    }
-                }
-
-                $aboutMe->skills_array = $skillsArray;
-                $aboutMe->strengths_array = $strengthsArray;
-            }
+            // The accessor methods in the About model will automatically parse the skills and strengths
+            // No need to manually parse here - the model handles it via getSkillsArrayAttribute() and getStrengthsArrayAttribute()
 
             return view('site.about.index', compact('aboutMe', 'banner', 'pageBanner'));
         } catch (\Exception $e) {

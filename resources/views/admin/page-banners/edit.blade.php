@@ -69,68 +69,27 @@
             submit-text="Update Banner"
             :cancel-url="route('admin.page-banners.index')"
         >
-            <!-- Current Banner Display -->
-            @if($banner->background_media)
-                <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-3xl p-8 mb-8 border border-green-200 shadow-lg">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                        <div class="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
-                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                            </svg>
-                        </div>
-                        Current Banner
-                    </h3>
-                    
-                    @php
-                        $ext = strtolower(pathinfo($banner->background_media, PATHINFO_EXTENSION));
-                        $isVideo = in_array($ext, ['mp4','webm']);
-                    @endphp
-                    
-                    <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-200">
-                        <div class="flex items-center mb-4">
-                            @if($isVideo)
-                                <svg class="w-6 h-6 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
-                                </svg>
-                            @else
-                                <svg class="w-6 h-6 text-green-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                </svg>
-                            @endif
-                            <span class="text-lg font-semibold text-gray-900">{{ basename($banner->background_media) }}</span>
-                        </div>
-                        
-                        <div class="relative w-full max-w-2xl rounded-xl overflow-hidden border border-gray-200 shadow-lg">
-                            @if($isVideo)
-                                <video class="w-full h-auto" autoplay muted loop playsinline>
-                                    <source src="{{ asset('storage/' . $banner->background_media) }}" type="video/{{ $ext == 'webm' ? 'webm' : 'mp4' }}">
-                                </video>
-                            @else
-                                <img src="{{ asset('storage/' . $banner->background_media) }}" class="w-full h-auto" alt="Current banner" />
-                            @endif
-                        </div>
-                    </div>
-                </div>
-            @endif
 
-            <!-- Upload New Banner -->
+
+            <!-- Banner Management -->
             <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-3xl p-8 mb-8 border border-blue-200 shadow-lg">
                 <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
                     <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
                         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                         </svg>
                     </div>
-                    Upload New Banner
+                    Banner Management
                 </h3>
                 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Upload Section -->
                     <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-200">
                         <label class="block text-lg font-semibold text-gray-900 mb-4 flex items-center">
                             <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
                             </svg>
-                            Background Media
+                            Upload New Banner
                         </label>
                         
                         <div class="space-y-4">
@@ -159,33 +118,83 @@
                         </div>
                     </div>
                     
+                    <!-- Preview Section -->
                     <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-200">
                         <label class="block text-lg font-semibold text-gray-900 mb-4 flex items-center">
                             <svg class="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                             </svg>
-                            Media Preview
+                            Banner Preview
                         </label>
                         
-                        <div id="mediaPreviewWrapper" class="hidden">
-                            <div class="relative w-full rounded-xl overflow-hidden border border-gray-200">
-                                <div id="loadingOverlay" class="absolute inset-0 bg-black/40 flex items-center justify-center z-10">
-                                    <svg class="animate-spin h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
-                                    </svg>
+                        <!-- Current Banner Display -->
+                        @if($banner->background_media)
+                            @php
+                                $ext = strtolower(pathinfo($banner->background_media, PATHINFO_EXTENSION));
+                                $isVideo = in_array($ext, ['mp4','webm']);
+                            @endphp
+                            
+                            <div class="mb-6">
+                                <div class="flex items-center justify-between mb-3">
+                                    <div class="flex items-center">
+                                        <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                                        <span class="text-sm font-semibold text-gray-700">Current Banner</span>
+                                    </div>
+                                    <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">{{ basename($banner->background_media) }}</span>
                                 </div>
-                                <div class="bg-gray-100">
-                                    <video id="videoPreview" class="w-full h-auto hidden" autoplay muted loop playsinline></video>
-                                    <img id="imagePreview" class="w-full h-auto hidden" alt="Selected preview" />
+                                <div class="relative w-full h-80 rounded-xl overflow-hidden border-2 border-gray-200 bg-gray-100 shadow-sm hover:shadow-md transition-shadow duration-200">
+                                    @if($isVideo)
+                                        <video class="w-full h-full object-contain" muted loop playsinline>
+                                            <source src="{{ asset('storage/' . $banner->background_media) }}" type="video/{{ $ext == 'webm' ? 'webm' : 'mp4' }}">
+                                        </video>
+                                        <div class="absolute top-3 left-3 bg-blue-600 text-white px-2 py-1 rounded-lg text-xs font-medium flex items-center">
+                                            <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                                <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path>
+                                            </svg>
+                                            Video
+                                        </div>
+                                    @else
+                                        <img src="{{ asset('storage/' . $banner->background_media) }}" 
+                                             class="w-full h-full object-contain" 
+                                             alt="Current banner" />
+                                        <div class="absolute top-3 left-3 bg-green-600 text-white px-2 py-1 rounded-lg text-xs font-medium flex items-center">
+                                            <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            Image
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
-                            <p class="text-xs text-gray-500 mt-2">Preview will appear once media is loaded</p>
+                        @endif
+                        
+                        <!-- New Upload Preview -->
+                        <div id="mediaPreviewWrapper" class="hidden">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center">
+                                    <div class="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
+                                    <span class="text-sm font-semibold text-gray-700">New Upload Preview</span>
+                                </div>
+                                <span class="text-xs text-blue-600 bg-blue-50 px-2 py-1 rounded-full">Preview</span>
+                            </div>
+                            <div class="relative w-full h-80 rounded-xl overflow-hidden border-2 border-blue-200 bg-gray-100 shadow-sm">
+                                <div id="loadingOverlay" class="absolute inset-0 bg-black/40 flex items-center justify-center z-10">
+                                    <div class="bg-white rounded-lg p-3 flex items-center">
+                                        <svg class="animate-spin h-5 w-5 text-blue-600 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                                        </svg>
+                                        <span class="text-sm text-gray-700">Loading preview...</span>
+                                    </div>
+                                </div>
+                                <video id="videoPreview" class="w-full h-full object-contain hidden" autoplay muted loop playsinline></video>
+                                <img id="imagePreview" class="w-full h-full object-contain hidden" alt="Selected preview" />
+                            </div>
                         </div>
                         
-                        <div id="noPreview" class="text-center py-8 text-gray-400">
-                            <svg class="w-16 h-16 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div id="noPreview" class="text-center py-6 text-gray-400 {{ $banner->background_media ? 'hidden' : '' }}">
+                            <svg class="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                             </svg>
                             <p class="text-sm">Select a file to see preview</p>
@@ -289,7 +298,11 @@
         const file = e.target.files && e.target.files[0];
         if (!file) { 
           wrapper.classList.add('hidden');
-          noPreview.classList.remove('hidden');
+          // Only show noPreview if there's no current banner
+          const hasCurrentBanner = {{ $banner->background_media ? 'true' : 'false' }};
+          if (!hasCurrentBanner) {
+            noPreview.classList.remove('hidden');
+          }
           return; 
         }
         
