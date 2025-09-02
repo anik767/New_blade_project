@@ -25,13 +25,17 @@
                         </div>
                     </div>
                 @else
-                    <div class="text-center mb-16">
+                    <div class="text-center mb-16 scroll-fade-in">
+                        <div class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full text-sm font-medium text-blue-800 mb-6">
+                            <span class="w-3 h-3 bg-blue-500 rounded-full mr-2"></span>
+                            What I offer
+                        </div>
                         <h2 class="text-4xl lg:text-5xl font-extrabold text-black mb-6">Detailed Services</h2>
                         <p class="text-xl text-muted max-w-3xl mx-auto">Explore my comprehensive range of web development
                             services</p>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 scroll-fade-in">
                         @foreach ($services as $service)
                             @php
                                 $img = $service->image ? asset('storage/' . $service->image) : asset('images/Image_not_found.jpg');

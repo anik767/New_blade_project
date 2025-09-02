@@ -19,20 +19,21 @@
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     
                     {{-- Contact Details Card --}}
-                    <div class="lg:col-span-1">
-                        <div class=" rounded-3xl p-8 shadow-lg shadow-accent/30 hover:shadow-xl transition-all duration-300">
+                    <div class="lg:col-span-1 scroll-fade-in">
+                        <div class="p-[1.5px] rounded-3xl bg-gradient-to-br from-green-400 via-blue-400 to-purple-400">
+                        <div class="relative rounded-3xl bg-white/90 backdrop-blur-sm border border-gray-100 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 p-8">
                             <h2 class="text-3xl font-semibold mb-8 text-black">Get In Touch</h2>
                             
                             <div class="space-y-8">
                                 <div class="flex items-start space-x-4 group">
-                                    <div class="flex-shrink-0 p-3 bg-accent/10 rounded-xl group-hover:bg-accent/20 transition-colors duration-300">
+                                    <div class="flex-shrink-0 p-3 bg-gradient-to-br from-green-500 to-blue-600 rounded-2xl shadow-lg group-hover:scale-110 transition-transform duration-300 group-hover:rotate-3">
                                         <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                                         </svg>
                                     </div>
                                     <div>
                                         <h3 class="font-semibold text-black mb-2">Email</h3>
-                                        <a href="mailto:{{ $contact->email }}" class="text-black hover:text-acttive transition-colors duration-300 text-lg">
+                                        <a href="mailto:{{ $contact->email }}" class="text-black hover:text-acttive transition-colors duration-300 text-lg break-all">
                                             {{ $contact->email }}
                                         </a>
                                     </div>
@@ -40,7 +41,7 @@
 
                                 @if($contact->phone)
                                     <div class="flex items-start space-x-4 group">
-                                        <div class="flex-shrink-0 p-3 bg-accent/10 rounded-xl group-hover:bg-accent/20 transition-colors duration-300">
+                                        <div class="flex-shrink-0 p-3 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl shadow-lg group-hover:scale-110 transition-transform duration-300">
                                             <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
                                             </svg>
@@ -56,7 +57,7 @@
 
                                 @if($contact->address)
                                     <div class="flex items-start space-x-4 group">
-                                        <div class="flex-shrink-0 p-3 bg-accent/10 rounded-xl group-hover:bg-accent/20 transition-colors duration-300">
+                                        <div class="flex-shrink-0 p-3 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl shadow-lg group-hover:scale-110 transition-transform duration-300">
                                             <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -109,15 +110,18 @@
                                 </div>
                             @endif
                         </div>
+                        </div>
                     </div>
 
                     {{-- Message Content Card --}}
-                    <div class="lg:col-span-2">
-                        <div class=" rounded-3xl p-8 shadow-lg shadow-accent/30 hover:shadow-xl transition-all duration-300">
+                    <div class="lg:col-span-2 scroll-fade-in">
+                        <div class="p-[1.5px] rounded-3xl bg-gradient-to-br from-green-400 via-blue-400 to-purple-400">
+                        <div class="relative rounded-3xl bg-white/90 backdrop-blur-sm border border-gray-100 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 p-8">
                             <h2 class="text-3xl font-semibold mb-8 text-black">A Message from Me</h2>
                             <div class="prose prose-lg text-black leading-relaxed">
                                 {!! nl2br(e($contact->content)) !!}
                             </div>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -136,7 +140,11 @@
     {{-- Services Overview Section --}}
     <section class="py-20 reveal-on-scroll">
         <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
+            <div class="text-center mb-16 scroll-fade-in">
+                <div class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-100 to-blue-100 rounded-full text-sm font-medium text-green-800 mb-6">
+                    <span class="w-3 h-3 bg-green-500 rounded-full mr-2"></span>
+                    Let's connect
+                </div>
                 <h2 class="text-4xl lg:text-5xl font-extrabold text-black mb-6">What I Can Help You With</h2>
                 <p class="text-xl text-muted max-w-3xl mx-auto">From concept to deployment, I provide comprehensive web development services</p>
             </div>
@@ -166,7 +174,7 @@
     {{-- Process Section --}}
     <section class="py-20 reveal-on-scroll">
         <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
+            <div class="text-center mb-16 scroll-fade-in">
                 <h2 class="text-4xl lg:text-5xl font-extrabold text-black mb-6">How We'll Work Together</h2>
                 <p class="text-xl text-muted max-w-3xl mx-auto">A simple, transparent process to bring your vision to life</p>
             </div>

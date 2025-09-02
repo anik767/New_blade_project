@@ -6,7 +6,7 @@
     
     <div class="bg-gradient-to-br from-gray-50 via-white to-gray-50 min-h-screen relative overflow-hidden">
         <!-- Scroll Progress Indicator -->
-        <div class="scroll-indicator" id="scrollIndicator"></div>
+        <div class="scroll-indicator" id="scrollIndicator" style="position:fixed;top:0;left:0;height:4px;width:100%;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,#22c55e,#3b82f6,#8b5cf6);z-index:50;transition:transform 120ms linear"></div>
         
         <!-- Scroll to Top Button -->
         <div class="scroll-to-top" id="scrollToTop" onclick="scrollToTop()">
@@ -431,9 +431,10 @@
         // Scroll Progress Indicator
         function updateScrollIndicator() {
             const scrollIndicator = document.getElementById('scrollIndicator');
+            if (!scrollIndicator) return;
             const scrollTop = window.pageYOffset;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const scrollPercent = (scrollTop / docHeight) * 100;
+            const docHeight = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+            const scrollPercent = Math.min(100, Math.max(0, (scrollTop / docHeight) * 100));
             scrollIndicator.style.transform = `scaleX(${scrollPercent / 100})`;
         }
         
@@ -521,6 +522,11 @@
             // Initial call
             updateScrollIndicator();
             toggleScrollToTop();
+        });
+
+        // Ensure progress bar resets correctly when navigating back/forward with bfcache
+        window.addEventListener('pageshow', function() {
+            requestAnimationFrame(() => updateScrollIndicator());
         });
         
         // Enhanced scroll performance

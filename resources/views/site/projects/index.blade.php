@@ -23,12 +23,16 @@
                         </div>
                     </div>
                 @else
-                    <div class="text-center mb-16">
+                    <div class="text-center mb-16 scroll-fade-in">
+                        <div class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-100 to-blue-100 rounded-full text-sm font-medium text-green-800 mb-6">
+                            <span class="w-3 h-3 bg-green-500 rounded-full mr-2"></span>
+                            Portfolio
+                        </div>
                         <h2 class="text-4xl lg:text-5xl font-extrabold text-black mb-6">Featured Projects</h2>
                         <p class="text-xl text-muted max-w-3xl mx-auto">A selection of my best work showcasing different skills and technologies</p>
                     </div>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 scroll-fade-in">
                         @foreach ($projects as $project)
                             @php
                                 $img = $project->image ? asset('storage/' . $project->image) : asset('images/Image_not_found.jpg');
