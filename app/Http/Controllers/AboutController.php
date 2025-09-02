@@ -91,10 +91,10 @@ class AboutController extends Controller
                 $name = isset($skill['name']) ? trim((string) $skill['name']) : '';
                 $percentage = isset($skill['percentage']) && $skill['percentage'] !== '' ? (int) $skill['percentage'] : 0;
         
-                $name = str_replace(['|', ':'], ['/', '-'], $name);
-        
                 // Only persist rows with a non-empty name
                 if ($name !== '') {
+                    // Clean the name to avoid format conflicts
+                    $name = str_replace(['|', ':'], ['/', '-'], $name);
                     $skillParts[] = 'SKILL:'.$name.':'.$percentage;
                 }
             }
@@ -105,21 +105,39 @@ class AboutController extends Controller
         if ($request->has('strengths')) {
             $strengthParts = [];
             $strengthsInput = is_array($request->strengths) ? $request->strengths : [];
+            
+            // Debug: Log what we're receiving
+            \Log::info('Strengths input received:', ['strengths' => $strengthsInput]);
+            
             foreach ($strengthsInput as $strength) {
                 $title = isset($strength['title']) ? trim((string) $strength['title']) : '';
                 $subtitle = isset($strength['subtitle']) ? trim((string) $strength['subtitle']) : '';
                 $description = isset($strength['description']) ? trim((string) $strength['description']) : '';
 
-                $title = str_replace(['|', ':'], ['/', '-'], $title);
-                $subtitle = str_replace(['|', ':'], ['/', '-'], $subtitle);
-                // Allow ':' and '|' in description by replacing them to keep format safe
-                $description = str_replace(['|', ':'], ['/', '-'], $description);
-
-                if ($title !== '' && $subtitle !== '' && $description !== '') {
+                // Only require title to be non-empty, subtitle and description can be optional
+                if ($title !== '') {
+                    // Clean the data to avoid format conflicts
+                    $title = str_replace(['|', ':'], ['/', '-'], $title);
+                    $subtitle = str_replace(['|', ':'], ['/', '-'], $subtitle);
+                    $description = str_replace(['|', ':'], ['/', '-'], $description);
+                    
+                    // If subtitle is empty, use title as subtitle
+                    if ($subtitle === '') {
+                        $subtitle = $title;
+                    }
+                    
+                    // If description is empty, use subtitle as description
+                    if ($description === '') {
+                        $description = $subtitle;
+                    }
+                    
                     $strengthParts[] = $title.':'.$subtitle.':'.$description;
                 }
             }
             $newStrengthsSection = !empty($strengthParts) ? 'STRENGTHS:'.implode('|', $strengthParts) : '';
+            
+            // Debug: Log the final strengths section
+            \Log::info('Final strengths section:', ['strengths_section' => $newStrengthsSection, 'strength_parts' => $strengthParts]);
         }
 
         // Combine (only non-empty sections)
