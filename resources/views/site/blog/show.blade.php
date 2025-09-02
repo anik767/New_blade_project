@@ -156,7 +156,7 @@
                 <h3 class="text-2xl font-bold text-black mb-6">More Recommended</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     @php
-                        $recentPosts = \App\Models\BlogPost::latest()->take(3)->get();
+                        $recentPosts = \App\Models\Blog::latest()->take(3)->get();
                     @endphp
                     @foreach($recentPosts as $recentPost)
                         <div class="bg-card border border-gray-700 rounded-lg overflow-hidden shadow-lg shadow-accent/30 hover:shadow-acttive/50 transition-shadow">

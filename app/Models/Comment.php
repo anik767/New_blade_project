@@ -15,7 +15,7 @@ class Comment extends Model
         'comment',
         'commentable_type',
         'commentable_id',
-        'is_approved'
+        'is_approved',
     ];
 
     protected $casts = [

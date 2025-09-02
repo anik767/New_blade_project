@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Service;
 use App\Models\HomeBanner;
+use App\Models\Service;
 use App\Traits\AdminNotificationTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -11,12 +11,14 @@ use Illuminate\Support\Facades\Storage;
 class ServiceController extends Controller
 {
     use AdminNotificationTrait;
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         $services = Service::orderBy('order')->paginate(10);
+
         return view('admin.services.index', compact('services'));
     }
 
@@ -69,6 +71,7 @@ class ServiceController extends Controller
     {
         try {
             $service = Service::findOrFail($id);
+
             return view('admin.services.show', compact('service'));
         } catch (\Exception $e) {
             return $this->errorRedirect('Service not found', 'admin.services.index');
@@ -82,6 +85,7 @@ class ServiceController extends Controller
     {
         try {
             $service = Service::findOrFail($id);
+
             return view('admin.services.edit', compact('service'));
         } catch (\Exception $e) {
             return $this->errorRedirect('Service not found', 'admin.services.index');
@@ -135,11 +139,11 @@ class ServiceController extends Controller
     {
         try {
             $service = Service::findOrFail($id);
-            
+
             if ($service->image && Storage::disk('public')->exists($service->image)) {
                 Storage::disk('public')->delete($service->image);
             }
-            
+
             $service->delete();
 
             return $this->successRedirect('Service deleted successfully.', 'admin.services.index');
@@ -154,6 +158,7 @@ class ServiceController extends Controller
         $services = Service::where('is_active', true)->orderBy('order')->paginate(6);
         $banner = HomeBanner::latest()->first();
         $pageBanner = \App\Models\PageBanner::where('page', 'services')->first();
+
         return view('site.services.index', compact('services', 'banner', 'pageBanner'));
     }
 
@@ -162,6 +167,7 @@ class ServiceController extends Controller
     {
         $service = Service::where('slug', $slug)->where('is_active', true)->firstOrFail();
         $pageBanner = \App\Models\PageBanner::where('page', 'services')->first();
-        return view('site.services.show', compact('service','pageBanner'));
+
+        return view('site.services.show', compact('service', 'pageBanner'));
     }
 }

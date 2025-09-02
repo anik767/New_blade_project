@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use App\Models\Comment;
 use App\Models\ProjectPost;
-use App\Models\BlogPost;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -18,7 +18,7 @@ class CommentController extends Controller
             'email' => 'required|email|max:255',
             'comment' => 'required|string|max:1000',
             'type' => 'required|in:project,blog,service',
-            'id' => 'required|integer'
+            'id' => 'required|integer',
         ]);
 
         if ($validator->fails()) {
@@ -26,7 +26,7 @@ class CommentController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'Validation failed',
-                    'errors' => $validator->errors()
+                    'errors' => $validator->errors(),
                 ], 422);
             }
 
@@ -41,7 +41,7 @@ class CommentController extends Controller
                     $commentable = ProjectPost::findOrFail($request->id);
                     break;
                 case 'blog':
-                    $commentable = BlogPost::findOrFail($request->id);
+                    $commentable = Blog::findOrFail($request->id);
                     break;
                 case 'service':
                     $commentable = Service::findOrFail($request->id);
@@ -53,7 +53,7 @@ class CommentController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'comment' => $request->comment,
-                'is_approved' => false
+                'is_approved' => false,
             ]);
 
             $pendingMsg = 'Comment submitted! It will be visible after admin approval.';
@@ -62,7 +62,7 @@ class CommentController extends Controller
                 return response()->json([
                     'success' => true,
                     'message' => $pendingMsg,
-                    'comment' => $comment
+                    'comment' => $comment,
                 ]);
             }
 
@@ -72,7 +72,7 @@ class CommentController extends Controller
             if ($request->expectsJson()) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Failed to submit comment. Please try again.'
+                    'message' => 'Failed to submit comment. Please try again.',
                 ], 500);
             }
 

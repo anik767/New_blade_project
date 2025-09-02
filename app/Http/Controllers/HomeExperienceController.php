@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\HomeBanner;
 use Illuminate\Http\Request;
 
@@ -13,8 +12,8 @@ class HomeExperienceController extends Controller
     {
         $banner = HomeBanner::latest()->first();
 
-        if (!$banner) {
-            $banner = new HomeBanner(); // empty banner instance
+        if (! $banner) {
+            $banner = new HomeBanner; // empty banner instance
         }
 
         return view('admin.home.experience.edit', compact('banner'));
@@ -33,7 +32,7 @@ class HomeExperienceController extends Controller
         ]);
 
         // Retrieve existing banner or create new
-        $banner = HomeBanner::latest()->first() ?? new HomeBanner();
+        $banner = HomeBanner::latest()->first() ?? new HomeBanner;
 
         // Update experience
         $banner->experience = $request->experience ?? [];
@@ -44,4 +43,4 @@ class HomeExperienceController extends Controller
         // Redirect back with success message
         return redirect()->back()->with('success', 'Experience updated successfully.');
     }
-} 
+}

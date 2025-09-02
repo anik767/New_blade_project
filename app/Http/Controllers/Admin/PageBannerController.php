@@ -12,12 +12,14 @@ class PageBannerController extends Controller
     public function index()
     {
         $banners = PageBanner::orderBy('page')->get();
+
         return view('admin.page-banners.index', compact('banners'));
     }
 
     public function edit(string $page)
     {
         $banner = PageBanner::firstOrNew(['page' => $page]);
+
         return view('admin.page-banners.edit', compact('banner'));
     }
 
@@ -42,4 +44,3 @@ class PageBannerController extends Controller
         return redirect()->back()->with('success', 'Page banner updated.');
     }
 }
-

@@ -18,7 +18,7 @@ class CreateHomeBannersTable extends Migration
             $table->string('cv_file')->nullable();
             $table->timestamps();
         });
-        
+
     }
 
     public function down()

@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\NewPasswordController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
+use Illuminate\Support\Facades\Route;
 
 // Login routes wrapped in guest middleware
 Route::middleware('guest')->group(function () {
@@ -19,8 +19,6 @@ Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])->n
 
 Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])->name('password.reset');
 Route::post('reset-password', [NewPasswordController::class, 'store'])->name('password.update');
-
-
 
 Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
     ->middleware('auth')

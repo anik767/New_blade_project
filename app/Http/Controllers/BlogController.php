@@ -2,28 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BlogPost;
+use App\Models\Blog;
 use App\Models\HomeBanner;
 use App\Traits\AdminNotificationTrait;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
-class BlogPostController extends Controller
+class BlogController extends Controller
 {
     use AdminNotificationTrait;
+
     // 🔓 Public: List blog posts (pagination)
     public function publicList()
     {
-        $posts = BlogPost::latest()->paginate(6);
+        $posts = Blog::latest()->paginate(6);
         $banner = HomeBanner::latest()->first();
         $pageBanner = \App\Models\PageBanner::where('page', 'blog')->first();
-        return view('site.blog.index', compact('posts', 'banner','pageBanner'));
+
+        return view('site.blog.index', compact('posts', 'banner', 'pageBanner'));
     }
+
     public function publicHome()
     {
         // Fetch latest 6 blog posts (for blog section)
-        $posts = BlogPost::latest()->take(6)->get();
+        $posts = Blog::latest()->take(6)->get();
 
         // Only pass blog posts — no projects
         return view('site.home', compact('posts'));
@@ -32,15 +35,17 @@ class BlogPostController extends Controller
     // 🔓 Public: Single blog post by slug
     public function publicSingle($slug)
     {
-        $post = BlogPost::where('slug', $slug)->firstOrFail();
+        $post = Blog::where('slug', $slug)->firstOrFail();
         $pageBanner = \App\Models\PageBanner::where('page', 'blog')->first();
-        return view('site.blog.show', compact('post','pageBanner'));
+
+        return view('site.blog.show', compact('post', 'pageBanner'));
     }
 
     // 🔐 Admin: List blog posts with pagination
     public function index()
     {
-        $posts = BlogPost::latest()->paginate(10);
+        $posts = Blog::latest()->paginate(10);
+
         return view('admin.blog.index', compact('posts'));
     }
 
@@ -55,9 +60,9 @@ class BlogPostController extends Controller
     {
         try {
             $request->validate([
-                'title'   => 'nullable|string|max:255',
+                'title' => 'nullable|string|max:255',
                 'content' => 'nullable|string',
-                'image'   => 'nullable|image',
+                'image' => 'nullable|image',
             ]);
 
             $imagePath = null;
@@ -67,11 +72,11 @@ class BlogPostController extends Controller
 
             $slug = $this->generateUniqueSlug($request->title);
 
-            BlogPost::create([
-                'title'   => $request->title,
-                'slug'    => $slug,
+            Blog::create([
+                'title' => $request->title,
+                'slug' => $slug,
                 'content' => $request->content,
-                'image'   => $imagePath,
+                'image' => $imagePath,
             ]);
 
             return $this->successRedirect('Blog created successfully.', 'admin.blog.index');
@@ -81,7 +86,7 @@ class BlogPostController extends Controller
     }
 
     // 🔐 Admin: Show edit form
-    public function edit(BlogPost $blog)
+    public function edit(Blog $blog)
     {
         try {
             return view('admin.blog.edit', ['post' => $blog]);
@@ -91,13 +96,13 @@ class BlogPostController extends Controller
     }
 
     // 🔐 Admin: Update blog post
-    public function update(Request $request, BlogPost $blog)
+    public function update(Request $request, Blog $blog)
     {
         try {
             $request->validate([
-                'title'   => 'nullable|string|max:255',
+                'title' => 'nullable|string|max:255',
                 'content' => 'nullable|string',
-                'image'   => 'nullable|image',
+                'image' => 'nullable|image',
             ]);
 
             if ($request->hasFile('image')) {
@@ -115,10 +120,10 @@ class BlogPostController extends Controller
             }
 
             $blog->update([
-                'title'   => $request->title,
-                'slug'    => $slug,
+                'title' => $request->title,
+                'slug' => $slug,
                 'content' => $request->content,
-                'image'   => $imagePath,
+                'image' => $imagePath,
             ]);
 
             return $this->successRedirect('Blog updated successfully.', 'admin.blog.index');
@@ -128,7 +133,7 @@ class BlogPostController extends Controller
     }
 
     // 🔐 Admin: Delete blog post
-    public function destroy(BlogPost $blog)
+    public function destroy(Blog $blog)
     {
         try {
             if ($blog->image && Storage::disk('public')->exists($blog->image)) {
@@ -151,11 +156,11 @@ class BlogPostController extends Controller
         $counter = 2;
 
         while (
-            BlogPost::where('slug', $slug)
-            ->when($ignoreId, fn($query) => $query->where('id', '!=', $ignoreId))
-            ->exists()
+            Blog::where('slug', $slug)
+                ->when($ignoreId, fn ($query) => $query->where('id', '!=', $ignoreId))
+                ->exists()
         ) {
-            $slug = $baseSlug . '-' . $counter++;
+            $slug = $baseSlug.'-'.$counter++;
         }
 
         return $slug;

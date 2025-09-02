@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProjectPost extends Model
 {
+    protected $table = 'project_posts';
     protected $fillable = [
         'title',
         'slug',
@@ -14,19 +15,14 @@ class ProjectPost extends Model
         'github_link',
     ];
 
-    /**
-     * Get the route key for the model.
-     */
     public function getRouteKeyName()
     {
         return 'id';
     }
 
-    /**
-     * Get the comments for the project.
-     */
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable')->where('is_approved', true);
     }
 }
+

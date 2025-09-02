@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BlogPost;
-use App\Models\ProjectPost;
 use App\Models\HomeBanner;
+use App\Models\ProjectPost;
 use App\Traits\AdminNotificationTrait;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
-class ProjectPostController extends Controller
+class ProjectController extends Controller
 {
     use AdminNotificationTrait;
+
     // 🔓 Public: Home page
     public function publicHome()
     {
@@ -25,7 +25,8 @@ class ProjectPostController extends Controller
         $projects = ProjectPost::latest()->paginate(6);
         $banner = HomeBanner::latest()->first();
         $pageBanner = \App\Models\PageBanner::where('page', 'projects')->first();
-        return view('site.projects.index', compact('projects', 'banner','pageBanner'));
+
+        return view('site.projects.index', compact('projects', 'banner', 'pageBanner'));
     }
 
     // 🔓 Public: View single project by slug
@@ -33,13 +34,15 @@ class ProjectPostController extends Controller
     {
         $project = ProjectPost::where('slug', $slug)->firstOrFail();
         $pageBanner = \App\Models\PageBanner::where('page', 'projects')->first();
-        return view('site.projects.show', compact('project','pageBanner'));
+
+        return view('site.projects.show', compact('project', 'pageBanner'));
     }
 
     // 🔐 Admin: Dashboard view with project count
     public function dashboard()
     {
         $projectCount = ProjectPost::count();
+
         return view('admin.dashboard.index', compact('projectCount'));
     }
 
@@ -47,6 +50,7 @@ class ProjectPostController extends Controller
     public function index()
     {
         $projects = ProjectPost::latest()->paginate(10);
+
         return view('admin.projects.index', compact('projects'));
     }
 
@@ -60,10 +64,10 @@ class ProjectPostController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title'        => 'nullable|string|max:255',
-            'description'  => 'nullable|string',
-            'github_link'  => 'nullable|url',
-            'image'        => 'nullable|image',
+            'title' => 'nullable|string|max:255',
+            'description' => 'nullable|string',
+            'github_link' => 'nullable|url',
+            'image' => 'nullable|image',
         ]);
 
         $imagePath = null;
@@ -74,11 +78,11 @@ class ProjectPostController extends Controller
         $slug = $this->generateUniqueSlug($request->title);
 
         ProjectPost::create([
-            'title'        => $request->title,
-            'slug'         => $slug,
-            'description'  => $request->description,
-            'github_link'  => $request->github_link,
-            'image'        => $imagePath,
+            'title' => $request->title,
+            'slug' => $slug,
+            'description' => $request->description,
+            'github_link' => $request->github_link,
+            'image' => $imagePath,
         ]);
 
         return $this->successRedirect('Project created successfully.', 'admin.projects.index');
@@ -94,10 +98,10 @@ class ProjectPostController extends Controller
     public function update(Request $request, ProjectPost $project)
     {
         $request->validate([
-            'title'        => 'nullable|string|max:255',
-            'description'  => 'nullable|string',
-            'github_link'  => 'nullable|url',
-            'image'        => 'nullable|image',
+            'title' => 'nullable|string|max:255',
+            'description' => 'nullable|string',
+            'github_link' => 'nullable|url',
+            'image' => 'nullable|image',
         ]);
 
         try {
@@ -118,11 +122,11 @@ class ProjectPostController extends Controller
             }
 
             $project->update([
-                'title'        => $request->title,
-                'slug'         => $slug,
-                'description'  => $request->description,
-                'github_link'  => $request->github_link,
-                'image'        => $imagePath,
+                'title' => $request->title,
+                'slug' => $slug,
+                'description' => $request->description,
+                'github_link' => $request->github_link,
+                'image' => $imagePath,
             ]);
 
             return $this->successRedirect('Project updated successfully.', 'admin.projects.index');
@@ -153,10 +157,10 @@ class ProjectPostController extends Controller
 
         while (
             ProjectPost::where('slug', $slug)
-                ->when($ignoreId, fn($query) => $query->where('id', '!=', $ignoreId))
+                ->when($ignoreId, fn ($query) => $query->where('id', '!=', $ignoreId))
                 ->exists()
         ) {
-            $slug = $baseSlug . '-' . $counter++;
+            $slug = $baseSlug.'-'.$counter++;
         }
 
         return $slug;

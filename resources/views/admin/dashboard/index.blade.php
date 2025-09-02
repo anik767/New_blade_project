@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="text-right">
-                <div class="text-2xl font-bold text-indigo-600">{{ \App\Models\ProjectPost::count() + \App\Models\BlogPost::count() + \App\Models\Service::count() }}</div>
+                <div class="text-2xl font-bold text-indigo-600">{{ \App\Models\ProjectPost::count() + \App\Models\Blog::count() + \App\Models\Service::count() }}</div>
                 <div class="text-sm text-gray-500">Total Content Items</div>
             </div>
         </div>
@@ -74,13 +74,13 @@
                     </svg>
                 </div>
                 <div class="text-right">
-                    <div class="text-3xl font-bold text-green-900">{{ \App\Models\BlogPost::count() }}</div>
+                    <div class="text-3xl font-bold text-green-900">{{ \App\Models\Blog::count() }}</div>
                     <div class="text-sm font-medium text-green-700">Blog Posts</div>
                 </div>
             </div>
             <div class="mt-4 flex items-center justify-between">
                 <span class="text-sm text-green-600 font-medium">
-                    {{ \App\Models\BlogPost::where('created_at', '>=', now()->subDays(7))->count() }} new this week
+                    {{ \App\Models\Blog::where('created_at', '>=', now()->subDays(7))->count() }} new this week
                 </span>
                 <a href="{{ route('admin.blog.index') }}" class="text-green-600 hover:text-green-800 font-medium text-sm flex items-center">
                     View all
@@ -313,7 +313,7 @@
                             }
                             
                             // Add recent blog posts
-                            foreach(\App\Models\BlogPost::latest()->take(3)->get() as $post) {
+                            foreach(\App\Models\Blog::latest()->take(3)->get() as $post) {
                                 $recentActivities->push([
                                     'type' => 'blog',
                                     'title' => $post->title,
@@ -440,7 +440,7 @@
                         </h3>
                     </div>
                     <div class="p-6 space-y-3">
-                        <a href="{{ route('admin.about-me.edit') }}" class="flex items-center p-3 rounded-lg hover:bg-indigo-50 transition-colors group">
+                        <a href="{{ route('admin.about.edit') }}" class="flex items-center p-3 rounded-lg hover:bg-indigo-50 transition-colors group">
                             <div class="p-2 rounded-full bg-indigo-100 text-indigo-600 group-hover:bg-indigo-200 transition-colors">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>

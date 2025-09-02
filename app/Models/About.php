@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AboutMe extends Model
+class About extends Model
 {
     use HasFactory;
+
+    protected $table = 'about';
 
     protected $fillable = [
         'name',
@@ -23,10 +25,11 @@ class AboutMe extends Model
         'skills',
         'experience',
         'education',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
     ];
-} 
+}
+

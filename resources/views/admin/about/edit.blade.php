@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Edit About Me')
+@section('title', 'Edit About')
 
 @section('content')
 <div class="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-6">
@@ -31,7 +31,7 @@
                             <svg class="w-5 h-5 mr-3 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
                             </svg>
-                            <span class="text-gray-700 font-medium">{{ $aboutMe->skills ? count(explode('|', $aboutMe->skills)) : 0 }} skills added</span>
+                            <span class="text-gray-700 font-medium">{{ $about->skills ? count(explode('|', $about->skills)) : 0 }} skills added</span>
                         </div>
                     </div>
                 </div>
@@ -40,14 +40,14 @@
                 <div class="flex space-x-4">
                     <div class="text-center p-4 bg-white rounded-2xl shadow-lg border border-gray-200 min-w-[80px]">
                         <div class="text-3xl font-bold text-indigo-600 mb-1">
-                            {{ $aboutMe->skills ? count(explode('|', $aboutMe->skills)) : 0 }}
+                            {{ $about->skills ? count(explode('|', $about->skills)) : 0 }}
                         </div>
                         <div class="text-sm text-gray-600 font-medium">Skills</div>
                     </div>
                     
                     <div class="text-center p-4 bg-white rounded-2xl shadow-lg border border-gray-200 min-w-[80px]">
-                        <div class="text-3xl font-bold {{ $aboutMe->image ? 'text-green-600' : 'text-red-500' }} mb-1">
-                            {{ $aboutMe->image ? '✓' : '✗' }}
+                        <div class="text-3xl font-bold {{ $about->image ? 'text-green-600' : 'text-red-500' }} mb-1">
+                            {{ $about->image ? '✓' : '✗' }}
                         </div>
                         <div class="text-sm text-gray-600 font-medium">Photo</div>
                     </div>
@@ -56,7 +56,7 @@
         </div>
 
         <x-forms.admin-form 
-            :action="route('admin.about-me.update')" 
+            :action="route('admin.about.update')" 
             title=""
             submit-text="Update Profile"
             method="POST"
@@ -77,14 +77,14 @@
                         label="Full Name" 
                         name="name" 
                         placeholder="Enter your full name"
-                        :value="$aboutMe->name"
+                        :value="$about->name"
                     />
                     
                     <x-forms.form-field 
                         label="Professional Title" 
                         name="title" 
                         placeholder="e.g., Full Stack Developer, UI/UX Designer"
-                        :value="$aboutMe->title"
+                        :value="$about->title"
                     />
                 </div>
                 
@@ -94,7 +94,7 @@
                         name="content" 
                         type="textarea" 
                         placeholder="Tell visitors about yourself, your experience, skills, and what you do. You can use HTML formatting..."
-                        :value="$aboutMe->content"
+                        :value="$about->content"
                     />
                 </div>
             </div>
@@ -116,14 +116,14 @@
                         name="email" 
                         type="email"
                         placeholder="your.email@example.com"
-                        :value="$aboutMe->email"
+                        :value="$about->email"
                     />
                     
                     <x-forms.form-field 
                         label="Phone Number" 
                         name="phone" 
                         placeholder="+1 (555) 123-4567"
-                        :value="$aboutMe->phone"
+                        :value="$about->phone"
                     />
                 </div>
                 
@@ -132,7 +132,7 @@
                         label="Location" 
                         name="location" 
                         placeholder="City, Country"
-                        :value="$aboutMe->location"
+                        :value="$about->location"
                     />
                     
                     <x-forms.form-field 
@@ -140,7 +140,7 @@
                         name="linkedin" 
                         type="url"
                         placeholder="https://linkedin.com/in/yourprofile"
-                        :value="$aboutMe->linkedin"
+                        :value="$about->linkedin"
                     />
                 </div>
                 
@@ -150,7 +150,7 @@
                         name="github" 
                         type="url"
                         placeholder="https://github.com/yourusername"
-                        :value="$aboutMe->github"
+                        :value="$about->github"
                     />
                 </div>
             </div>
@@ -166,11 +166,11 @@
                     Profile Image
                 </h3>
                 
-                @if($aboutMe->image)
+                @if($about->image)
                     <div class="mb-4 p-4 bg-gray-50 border border-gray-200 rounded-lg">
                         <p class="text-sm font-medium text-gray-700 mb-3">Current Profile Image:</p>
                         <div class="relative group">
-                            <img src="{{ asset('storage/' . $aboutMe->image) }}" 
+                            <img src="{{ asset('storage/' . $about->image) }}" 
                                  alt="Current profile image" 
                                  class=" h-32  rounded-lg border border-gray-200 shadow-sm group-hover:shadow-md transition-shadow duration-200">
                             
@@ -212,7 +212,36 @@
                 </div>
             </div>
 
-            <!-- Skills Section -->
+            <!-- Strengths Section -->
+            <div class="bg-gradient-to-r from-pink-50 to-rose-50 rounded-3xl p-8 mb-8 border border-pink-200 shadow-lg">
+                <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                    <div class="w-10 h-10 bg-gradient-to-r from-pink-500 to-rose-600 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
+                        <svg class="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
+                        </svg>
+                    </div>
+                    My Strengths
+                </h3>
+                
+                <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-200 mb-6">
+                    <p class="text-sm text-gray-600 mb-4">Add your key strengths and qualities that make you stand out as a developer.</p>
+                    
+                    <div id="strengths-container" class="space-y-4">
+                        <!-- Strengths will be added here dynamically -->
+                    </div>
+                    
+                    <button type="button" 
+                            onclick="addStrength()" 
+                            class="mt-6 inline-flex items-center px-6 py-3 bg-gradient-to-r from-pink-500 to-rose-600 text-white font-semibold rounded-xl hover:from-pink-600 hover:to-rose-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                        Add New Strength
+                    </button>
+                </div>
+            </div>
+
+            <!-- Skills Section (Fresh Minimal) -->
             <div class="bg-gradient-to-r from-orange-50 to-yellow-50 rounded-3xl p-8 mb-8 border border-orange-200 shadow-lg">
                 <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
                     <div class="w-10 h-10 bg-gradient-to-r from-orange-500 to-yellow-600 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
@@ -222,17 +251,12 @@
                     </div>
                     Technical Skills
                 </h3>
-                
+
                 <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-200 mb-6">
-                    <p class="text-sm text-gray-600 mb-4">Add your technical skills with proficiency percentages. These will be displayed on your portfolio.</p>
-                    
-                    <div id="skills-container" class="space-y-4">
-                        <!-- Skills will be added here dynamically -->
-                    </div>
-                    
-                    <button type="button" 
-                            onclick="addSkill()" 
-                            class="mt-6 inline-flex items-center px-6 py-3 bg-gradient-to-r from-orange-500 to-yellow-600 text-white font-semibold rounded-xl hover:from-orange-600 hover:to-yellow-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                    <div id="skills-container" class="space-y-4"></div>
+
+                    <button type="button" onclick="addSkill()"
+                        class="mt-6 inline-flex items-center px-6 py-3 bg-gradient-to-r from-orange-500 to-yellow-600 text-white font-semibold rounded-xl hover:from-orange-600 hover:to-yellow-700 transition-all duration-200 shadow-lg">
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                         </svg>
@@ -259,7 +283,7 @@
                         name="map_embed_code" 
                         type="textarea"
                         placeholder="Paste your Google Maps embed iframe code here..."
-                        :value="$aboutMe->map_embed_code"
+                        :value="$about->map_embed_code"
                     />
                     
                     <div class="mt-4 p-4 bg-gradient-to-r from-blue-50 to-blue-100 border border-blue-200 rounded-xl">
@@ -285,6 +309,7 @@
 
 <script>
     let skillCount = 0;
+    let strengthCount = 0;
     
     function addSkill(name = '', percentage = '') {
         const container = document.getElementById('skills-container');
@@ -337,32 +362,127 @@
             }, 200);
         }
     }
+
+    function addStrength(title = '', subtitle = '', description = '') {
+        const container = document.getElementById('strengths-container');
+        const strengthDiv = document.createElement('div');
+        strengthDiv.className = 'strength-row bg-gradient-to-r from-pink-50 to-rose-50 rounded-xl border border-pink-200 p-6 shadow-sm hover:shadow-md transition-all duration-200';
+        strengthDiv.innerHTML = `
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Subtitle</label>
+                    <input type="text" 
+                           name="strengths[${strengthCount}][subtitle]" 
+                           class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-200 bg-white shadow-sm"
+                           placeholder="e.g., Creative Thinker, Quick Adaptor" value="${subtitle}">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Title</label>
+                    <input type="text" 
+                           name="strengths[${strengthCount}][title]" 
+                           class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-200 bg-white shadow-sm"
+                           placeholder="e.g., Problem Solver, Fast Learner" value="${title}">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Description</label>
+                    <textarea name="strengths[${strengthCount}][description]" 
+                              rows="3"
+                              class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-200 bg-white shadow-sm"
+                              placeholder="Describe this strength...">${description}</textarea>
+                </div>
+                <div class="flex items-center md:col-span-3">
+                    <button type="button" 
+                            onclick="removeStrength(this)" 
+                            class="inline-flex items-center px-4 py-3 bg-red-100 text-red-700 rounded-xl hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500 transition-all duration-200">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                        </svg>
+                        Remove
+                    </button>
+                </div>
+            </div>
+        `;
+        container.appendChild(strengthDiv);
+        strengthCount++;
+    }
     
-    // Load existing skills on page load
+    function removeStrength(button) {
+        const strengthRow = button.closest('.strength-row');
+        if (strengthRow) {
+            strengthRow.style.opacity = '0';
+            strengthRow.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                strengthRow.remove();
+            }, 200);
+        }
+    }
+    
+    // Load existing data on page load
     document.addEventListener('DOMContentLoaded', function() {
+        // Load existing skills and strengths from combined data
         @php
             $existingSkills = [];
-            if ($aboutMe->skills) {
-                $skillParts = explode('|', $aboutMe->skills);
-                foreach ($skillParts as $part) {
-                    if (strpos($part, ':') !== false) {
-                        list($name, $percentage) = explode(':', $part, 2);
-                        $existingSkills[] = [
-                            'name' => $name,
-                            'percentage' => (int) $percentage
-                        ];
+            $existingStrengths = [];
+            
+            if ($about->skills) {
+                // Split by double pipe to separate skills and strengths sections
+                $sections = explode('||', $about->skills);
+                
+                foreach ($sections as $section) {
+                    if (strpos($section, 'SKILLS:') === 0) {
+                        // Parse skills section
+                        $skillsData = substr($section, 8); // Remove 'SKILLS:' prefix
+                        $skillParts = explode('|', $skillsData);
+                        foreach ($skillParts as $part) {
+                            if (strpos($part, 'SKILL:') === 0) {
+                                $skillData = substr($part, 6); // Remove 'SKILL:' prefix
+                                if (strpos($skillData, ':') !== false) {
+                                    list($name, $percentage) = explode(':', $skillData, 2);
+                                    $existingSkills[] = [
+                                        'name' => $name,
+                                        'percentage' => (int) $percentage
+                                    ];
+                                }
+                            }
+                        }
+                    } elseif (strpos($section, 'STRENGTHS:') === 0) {
+                        // Parse strengths section
+                        $strengthsData = substr($section, 11); // Remove 'STRENGTHS:' prefix
+                        $strengthParts = explode('|', $strengthsData);
+                        foreach ($strengthParts as $part) {
+                            if (substr_count($part, ':') >= 2) {
+                                $parts = explode(':', $part, 3);
+                                $existingStrengths[] = [
+                                    'title' => $parts[0],
+                                    'subtitle' => $parts[1],
+                                    'description' => $parts[2]
+                                ];
+                            }
+                        }
                     }
                 }
             }
         @endphp
         
         const existingSkills = @json($existingSkills);
+        const existingStrengths = @json($existingStrengths);
         
         if (existingSkills.length > 0) {
             existingSkills.forEach(skill => {
                 addSkill(skill.name, skill.percentage);
             });
+        } else {
+            // Ensure at least one empty row is visible
+            addSkill('', 0);
         }
+
+        if (existingStrengths.length > 0) {
+            existingStrengths.forEach(strength => {
+                addStrength(strength.title, strength.subtitle, strength.description);
+            });
+        }
+
+        // No client-side reindexing; server handles sparse indices and ignores empty names
     });
 </script>
 @endsection 

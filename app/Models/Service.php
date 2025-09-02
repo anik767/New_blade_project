@@ -17,7 +17,7 @@ class Service extends Model
         'icon',
         'image',
         'order',
-        'is_active'
+        'is_active',
     ];
 
     protected $casts = [

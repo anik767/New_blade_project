@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('about_mes', function (Blueprint $table) {
-            //
+        Schema::table('about', function (Blueprint $table) {
+            $table->text('map_embed_code')->nullable()->after('github');
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('about_mes', function (Blueprint $table) {
-            //
+        Schema::table('about', function (Blueprint $table) {
+            $table->dropColumn('map_embed_code');
         });
     }
 };

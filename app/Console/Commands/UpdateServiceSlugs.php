@@ -28,7 +28,7 @@ class UpdateServiceSlugs extends Command
     public function handle()
     {
         $services = Service::all();
-        
+
         foreach ($services as $service) {
             if (empty($service->slug)) {
                 $service->slug = Str::slug($service->title);
@@ -38,7 +38,7 @@ class UpdateServiceSlugs extends Command
                 $this->line("Service '{$service->title}' already has slug: {$service->slug}");
             }
         }
-        
+
         $this->info('All services updated successfully!');
     }
 }
