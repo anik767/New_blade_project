@@ -28,9 +28,9 @@
         </div>
     </div>
 
-    <x-admin-form 
+    <x-forms.admin-form 
         :action="route('admin.projects.store')" 
-        title="Project Information"
+        title=""
         submit-text="Create Project"
         :cancel-url="route('admin.projects.index')"
     >
@@ -44,14 +44,13 @@
             </h3>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <x-form-field 
-                    label="Project Title" 
-                    name="title" 
-                    required 
-                    placeholder="E-commerce Website"
-                />
+                                    <x-forms.form-field 
+                        label="Project Title" 
+                        name="title" 
+                        placeholder="E-commerce Website"
+                    />
                 
-                <x-form-field 
+                <x-forms.form-field 
                     label="GitHub Repository" 
                     name="github_link" 
                     type="url" 
@@ -60,11 +59,10 @@
                 />
             </div>
             
-            <x-form-field 
+            <x-forms.form-field 
                 label="Project Description" 
                 name="description" 
                 type="textarea" 
-                required 
                 placeholder="Describe your project in detail. What technologies did you use? What problems did you solve? What are the key features?"
             />
         </div>
@@ -78,35 +76,16 @@
                 Project Media
             </h3>
             
-            <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2">
-                    Project Image <span class="text-red-500">*</span>
-                </label>
-                
-                <div class="relative">
-                    <input type="file" 
-                           name="image" 
-                           class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100"
-                           accept="image/*">
-                </div>
-                
-                <div class="mt-2 p-3 bg-green-50 border border-green-200 rounded-lg">
-                    <div class="flex items-start">
-                        <svg class="w-4 h-4 text-green-600 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
-                        </svg>
-                        <div>
-                            <p class="text-sm font-medium text-green-800">Image Requirements:</p>
-                            <ul class="text-sm text-green-700 mt-1 list-disc list-inside space-y-1">
-                                <li>Recommended size: 1200x800 pixels</li>
-                                <li>Formats: JPG, PNG, GIF</li>
-                                <li>Maximum file size: 2MB</li>
-                                <li>Screenshots or mockups work best</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <x-forms.image-upload 
+                name="image"
+                label="Project Image"
+                accept="image/*"
+                helpText="Recommended size: 1200x800 pixels (portfolio optimized). Formats: JPG, PNG, GIF. No file size limit. High-quality screenshots or mockups work best."
+                previewHeight="h-48"
+                previewWidth="w-full"
+                previewShape="rounded-xl"
+                required="true"
+            />
         </div>
 
         <!-- Project Creation Tips -->
@@ -172,6 +151,8 @@
                 </div>
             </div>
         </div>
-    </x-admin-form>
+    </x-forms.admin-form>
 </div>
+
+
 @endsection

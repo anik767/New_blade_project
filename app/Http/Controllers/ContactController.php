@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
+use App\Models\HomeBanner;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -13,8 +14,8 @@ class ContactController extends Controller
     public function edit()
     {
         $contact = Contact::first();
-        
-        if (!$contact) {
+
+        if (! $contact) {
             // Create a default contact entry if none exists
             $contact = Contact::create([
                 'title' => 'Contact Information',
@@ -25,7 +26,7 @@ class ContactController extends Controller
                 'social_links' => '',
             ]);
         }
-        
+
         return view('admin.contacts.edit', compact('contact'));
     }
 
@@ -56,13 +57,16 @@ class ContactController extends Controller
         $contact->update($data);
 
         return redirect()->route('admin.contacts.edit')
-                         ->with('success', 'Contact information updated successfully.');
+            ->with('success', 'Contact information updated successfully.');
     }
 
     // 🔓 Public: Show contact page
     public function publicShow()
     {
         $contact = Contact::first();
-        return view('site.contact', compact('contact'));
+        $banner = HomeBanner::latest()->first();
+        $pageBanner = \App\Models\PageBanner::where('page', 'contact')->first();
+
+        return view('site.contact.index', compact('contact', 'banner', 'pageBanner'));
     }
 }

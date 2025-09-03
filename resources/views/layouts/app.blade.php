@@ -12,13 +12,13 @@
 <body class="bg-gray-100 text-gray-900 min-h-full flex flex-col">
 
   {{-- Site Navigation --}}
-  <x-site-navigation />
+  <x-site.navigation />
 
   <main class="min-h-[95vh]" role="main">
     @yield('content')
   </main>
 
-  <x-site-footer />
+  <x-site.footer />
 
   <script src="{{ asset('js/app.js') }}"></script>
   @stack('scripts')

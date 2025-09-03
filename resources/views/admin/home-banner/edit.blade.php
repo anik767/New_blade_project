@@ -15,18 +15,27 @@
                 </h1>
                 <p class="text-gray-600 mt-2">Update your homepage banner content and media</p>
                 <div class="mt-2 flex items-center space-x-4 text-sm text-gray-500">
-                    <span class="flex items-center">
-                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        Last updated: {{ $banner->updated_at->diffForHumans() }}
-                    </span>
-                    <span class="flex items-center">
-                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2m-9 0a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V6a2 2 0 00-2-2M9 4a2 2 0 012-2h4a2 2 0 012 2"></path>
-                        </svg>
-                        Created: {{ $banner->created_at->format('M d, Y') }}
-                    </span>
+                    @if($banner->exists)
+                        <span class="flex items-center">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            Last updated: {{ $banner->updated_at->diffForHumans() }}
+                        </span>
+                        <span class="flex items-center">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2m-9 0a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 00-2-2V6a2 2 0 00-2-2M9 4a2 2 0 012-2h4a2 2 0 012 2"></path>
+                            </svg>
+                            Created: {{ $banner->created_at->format('M d, Y') }}
+                        </span>
+                    @else
+                        <span class="flex items-center text-blue-600">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            New banner - will be created when saved
+                        </span>
+                    @endif
                 </div>
             </div>
             <div class="flex items-center space-x-4">
@@ -46,7 +55,7 @@
         </div>
     </div>
 
-    <x-admin-form 
+    <x-forms.admin-form 
         :action="route('admin.home.update')" 
         title="Banner Information"
         submit-text="Update Banner"
@@ -63,14 +72,14 @@
             </h3>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <x-form-field 
+                <x-forms.form-field 
                     label="Title Line 1" 
                     name="title_line1" 
                     placeholder="e.g., Hi, I'm John Doe"
                     :value="$banner->title_line1"
                 />
                 
-                <x-form-field 
+                <x-forms.form-field 
                     label="Title Line 2" 
                     name="title_line2" 
                     placeholder="e.g., Full Stack Developer"
@@ -78,7 +87,7 @@
                 />
             </div>
             
-            <x-form-field 
+            <x-forms.form-field 
                 label="Subtitle" 
                 name="subtitle" 
                 type="textarea" 
@@ -136,7 +145,7 @@
                                 <ul class="text-sm text-blue-700 mt-1 list-disc list-inside space-y-1">
                                     <li>Recommended size: 1920x1080 pixels</li>
                                     <li>Formats: JPG, PNG, GIF</li>
-                                    <li>Maximum file size: 2MB</li>
+                                    <li>No file size limit</li>
                                     <li>High-quality, professional images work best</li>
                                     <li>Leave empty to keep current image or skip upload</li>
                                 </ul>
@@ -184,7 +193,7 @@
                                 <ul class="text-sm text-green-700 mt-1 list-disc list-inside space-y-1">
                                     <li>Recommended size: 400x400 pixels (square)</li>
                                     <li>Formats: JPG, PNG, GIF</li>
-                                    <li>Maximum file size: 2MB</li>
+                                    <li>No file size limit</li>
                                     <li>Professional headshot or portrait works best</li>
                                     <li>Leave empty to keep current image or skip upload</li>
                                 </ul>
@@ -279,6 +288,6 @@
                 </div>
             </div>
         @endif
-    </x-admin-form>
+    </x-forms.admin-form>
 </div>
 @endsection 

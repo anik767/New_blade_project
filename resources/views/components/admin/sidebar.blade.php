@@ -44,7 +44,7 @@
             </a>
 
             <!-- Home Section (Collapsible) -->
-            <div class="sidebar-item">
+            <div class="mb-4">
                 <button onclick="toggleSubmenu('home-submenu')" 
                         class="flex items-center justify-between w-full px-4 py-3 text-gray-300 rounded-lg hover:bg-gray-700 hover:text-white transition-all duration-200 group {{ request()->routeIs('admin.home.*') ? 'bg-blue-600 text-white shadow-lg' : '' }}">
                     <div class="flex items-center">
@@ -63,16 +63,34 @@
                 <!-- Home Submenu -->
                 <div id="home-submenu" class="hidden overflow-hidden">
                     <div class="mt-2 ml-4 space-y-1 border-l-2 border-gray-600 pl-4">
-                        <a href="{{ route('admin.home.edit') }}" 
-                           class="submenu-item flex items-center px-3 py-2.5 text-gray-400 rounded-lg hover:bg-gray-700 hover:text-white transition-all duration-200 {{ request()->routeIs('admin.home.edit') ? 'bg-blue-600 text-white shadow-md' : '' }}">
-                            <div class="w-1.5 h-1.5 {{ request()->routeIs('admin.home.edit') ? 'bg-white' : 'bg-gray-500' }} rounded-full mr-3 transition-colors duration-200"></div>
-                            <span class="text-sm font-medium">Home Banner</span>
-                            @if(request()->routeIs('admin.home.edit'))
+                        <a href="{{ route('admin.home.banner.edit') }}" 
+                           class="submenu-item flex items-center px-3 py-2.5 text-gray-400 rounded-lg hover:bg-gray-700 hover:text-white transition-all duration-200 {{ request()->routeIs('admin.home.banner.*') ? 'bg-blue-600 text-white shadow-md' : '' }}">
+                            <div class="w-1.5 h-1.5 {{ request()->routeIs('admin.home.banner.*') ? 'bg-white' : 'bg-gray-500' }} rounded-full mr-3 transition-colors duration-200"></div>
+                            <span class="text-sm font-medium">Banner</span>
+                            @if(request()->routeIs('admin.home.banner.*'))
+                                <div class="ml-auto w-1 h-1 bg-white rounded-full"></div>
+                            @endif
+                        </a>
+                        
+                        <a href="{{ route('admin.home.skills.edit') }}" 
+                           class="submenu-item flex items-center px-3 py-2.5 text-gray-400 rounded-lg hover:bg-gray-700 hover:text-white transition-all duration-200 {{ request()->routeIs('admin.home.skills.*') ? 'bg-blue-600 text-white shadow-md' : '' }}">
+                            <div class="w-1.5 h-1.5 {{ request()->routeIs('admin.home.skills.*') ? 'bg-white' : 'bg-gray-500' }} rounded-full mr-3 transition-colors duration-200"></div>
+                            <span class="text-sm font-medium">Skills</span>
+                            @if(request()->routeIs('admin.home.skills.*'))
+                                <div class="ml-auto w-1 h-1 bg-white rounded-full"></div>
+                            @endif
+                        </a>
+                        
+                        <a href="{{ route('admin.home.experience.edit') }}" 
+                           class="submenu-item flex items-center px-3 py-2.5 text-gray-400 rounded-lg hover:bg-gray-700 hover:text-white transition-all duration-200 {{ request()->routeIs('admin.home.experience.*') ? 'bg-blue-600 text-white shadow-md' : '' }}">
+                            <div class="w-1.5 h-1.5 {{ request()->routeIs('admin.home.experience.*') ? 'bg-white' : 'bg-gray-500' }} rounded-full mr-3 transition-colors duration-200"></div>
+                            <span class="text-sm font-medium">Experience</span>
+                            @if(request()->routeIs('admin.home.experience.*'))
                                 <div class="ml-auto w-1 h-1 bg-white rounded-full"></div>
                             @endif
                         </a>
                     </div>
-                </div>
+
             </div>
 
             <!-- Projects -->
@@ -86,7 +104,7 @@
                 <span class="font-medium">Projects</span>
             </a>
 
-            <!-- Blog Posts -->
+            <!-- Blog -->
             <a href="{{ route('admin.blog.index') }}" 
                class="sidebar-item flex items-center px-4 py-3 text-gray-300 rounded-xl hover:bg-gray-700 hover:text-white transition-all duration-200 group {{ request()->routeIs('admin.blog.*') ? 'bg-blue-600 text-white shadow-lg' : '' }}">
                 <div class="flex items-center justify-center w-8 h-8 mr-3 rounded-lg {{ request()->routeIs('admin.blog.*') ? 'bg-blue-500' : 'bg-gray-700 group-hover:bg-gray-600' }} transition-colors duration-200">
@@ -94,7 +112,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                     </svg>
                 </div>
-                <span class="font-medium">Blog Posts</span>
+                <span class="font-medium">Blogs</span>
             </a>
 
             <!-- Services -->
@@ -144,7 +162,7 @@
                     <span class="font-medium">Messages</span>
                 </div>
                 @php
-                    $messageCount = \App\Models\ContactMessage::where('is_read', false)->count();
+                    $messageCount = \App\Models\ContactMessage::where('status', 'unread')->count();
                 @endphp
                 @if($messageCount > 0)
                     <span class="bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded-full">{{ $messageCount }}</span>
@@ -156,15 +174,26 @@
         <div class="pt-6 mt-6 border-t border-gray-700">
             <h3 class="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Settings</h3>
             
-            <!-- About Me -->
-            <a href="{{ route('admin.about-me.edit') }}" 
-               class="sidebar-item flex items-center px-4 py-3 text-gray-300 rounded-xl hover:bg-gray-700 hover:text-white transition-all duration-200 group {{ request()->routeIs('admin.about-me.*') ? 'bg-blue-600 text-white shadow-lg' : '' }}">
-                <div class="flex items-center justify-center w-8 h-8 mr-3 rounded-lg {{ request()->routeIs('admin.about-me.*') ? 'bg-blue-500' : 'bg-gray-700 group-hover:bg-gray-600' }} transition-colors duration-200">
+            <!-- Profile -->
+            <a href="{{ route('admin.profile.edit') }}" 
+               class="sidebar-item flex items-center px-4 py-3 text-gray-300 rounded-xl hover:bg-gray-700 hover:text-white transition-all duration-200 group {{ request()->routeIs('admin.profile.*') ? 'bg-blue-600 text-white shadow-lg' : '' }}">
+                <div class="flex items-center justify-center w-8 h-8 mr-3 rounded-lg {{ request()->routeIs('admin.profile.*') ? 'bg-blue-500' : 'bg-gray-700 group-hover:bg-gray-600' }} transition-colors duration-200">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                     </svg>
                 </div>
-                <span class="font-medium">About Me</span>
+                <span class="font-medium">Profile</span>
+            </a>
+            
+            <!-- About -->
+            <a href="{{ route('admin.about.edit') }}" 
+               class="sidebar-item flex items-center px-4 py-3 text-gray-300 rounded-xl hover:bg-gray-700 hover:text-white transition-all duration-200 group {{ request()->routeIs('admin.about.*') ? 'bg-blue-600 text-white shadow-lg' : '' }}">
+                <div class="flex items-center justify-center w-8 h-8 mr-3 rounded-lg {{ request()->routeIs('admin.about.*') ? 'bg-blue-500' : 'bg-gray-700 group-hover:bg-gray-600' }} transition-colors duration-200">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                    </svg>
+                </div>
+                <span class="font-medium">About</span>
             </a>
 
             <!-- Contact Info -->
@@ -177,6 +206,17 @@
                 </div>
                 <span class="font-medium">Contact Info</span>
             </a>
+
+            <!-- Page Banners -->
+            <a href="{{ route('admin.page-banners.index') }}" 
+               class="sidebar-item flex items-center px-4 py-3 text-gray-300 rounded-xl hover:bg-gray-700 hover:text-white transition-all duration-200 group {{ request()->routeIs('admin.page-banners.*') ? 'bg-blue-600 text-white shadow-lg' : '' }}">
+                <div class="flex items-center justify-center w-8 h-8 mr-3 rounded-lg {{ request()->routeIs('admin.page-banners.*') ? 'bg-blue-500' : 'bg-gray-700 group-hover:bg-gray-600' }} transition-colors duration-200">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4-4 4 4m0 0l4-4 4 4M4 8h16"></path>
+                    </svg>
+                </div>
+                <span class="font-medium">Page Banners</span>
+            </a>
         </div>
     </nav>
 
@@ -184,9 +224,14 @@
     <div class="mt-auto p-4 border-t border-gray-700 bg-gray-900">
         <div class="flex items-center justify-between">
             <div class="flex items-center">
-                <div class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center">
-                    <span class="text-white font-semibold text-sm">{{ substr(auth()->user()->name ?? 'A', 0, 1) }}</span>
-                </div>
+                @php($avatar = auth()->user()->profile_image ?? null)
+                @if($avatar)
+                    <img src="{{ asset('storage/' . $avatar) }}" alt="Avatar" class="w-10 h-10 rounded-full object-cover border-2 border-purple-500">
+                @else
+                    <div class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center">
+                        <span class="text-white font-semibold text-sm">{{ substr(auth()->user()->name ?? 'A', 0, 1) }}</span>
+                    </div>
+                @endif
                 <div class="ml-3">
                     <p class="text-sm font-medium text-white">{{ auth()->user()->name ?? 'Admin' }}</p>
                     <p class="text-xs text-gray-400">Administrator</p>
