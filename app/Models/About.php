@@ -26,10 +26,12 @@ class About extends Model
         'experience',
         'education',
         'is_active',
+        'strengths_json',
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
+        'strengths_json' => 'array',
     ];
 
     // Accessor for skills array
@@ -65,6 +67,22 @@ class About extends Model
     // Accessor for strengths array
     public function getStrengthsArrayAttribute()
     {
+        // Prefer JSON column if present
+        if (is_array($this->strengths_json) && count($this->strengths_json) > 0) {
+            // Normalize: ensure each has title, subtitle
+            return collect($this->strengths_json)
+                ->map(function ($item) {
+                    return [
+                        'title' => trim($item['title'] ?? ''),
+                        'subtitle' => trim($item['subtitle'] ?? ''),
+                    ];
+                })
+                ->filter(fn ($i) => $i['title'] !== '')
+                ->values()
+                ->all();
+        }
+
+        // Legacy parsing fallback
         if (!$this->skills) return [];
         
         $parts = explode('||', $this->skills);
@@ -79,10 +97,14 @@ class About extends Model
         foreach (explode('|', $strengths) as $strength) {
             $parts = explode(':', $strength, 2);
             if (count($parts) >= 2) {
-                $strengthArray[] = [
-                    'title' => trim($parts[0]),
-                    'subtitle' => trim($parts[1])
-                ];
+                $title = trim($parts[0] ?? '');
+                $subtitle = trim($parts[1] ?? '');
+                if ($title !== '') {
+                    $strengthArray[] = [
+                        'title' => $title,
+                        'subtitle' => $subtitle,
+                    ];
+                }
             }
         }
         

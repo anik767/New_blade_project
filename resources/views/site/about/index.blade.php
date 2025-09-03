@@ -50,7 +50,7 @@
                                         <!-- Main image with enhanced styling -->
                                         <div class="relative z-10">
                                             <img src="{{ asset('storage/' . $aboutMe->image) }}" alt="{{ $aboutMe->name }}"
-                                                class="relative w-full h-auto max-h-[600px] mx-auto rounded-3xl object-contain transition-all duration-700 group-hover:scale-105 group-hover:shadow-3xl shadow-2xl">
+                                                class="relative w-full h-auto max-h-[600px] mx-auto rounded-3xl object-contain transition-all duration-700 group-hover:scale-105  ">
                                         </div>
                                         
                                         <!-- Enhanced floating elements -->

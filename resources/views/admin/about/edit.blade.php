@@ -129,6 +129,39 @@
                     </div>
                 </div>
 
+                <!-- Experience & Education Section -->
+                <div
+                    class="bg-gradient-to-r from-indigo-50 to-blue-50 rounded-3xl p-8 mb-8 border border-indigo-200 shadow-lg">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <div
+                            class="w-10 h-10 bg-gradient-to-r from-indigo-500 to-blue-600 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
+                            <svg class="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2V6"></path>
+                            </svg>
+                        </div>
+                        Experience & Education
+                    </h3>
+
+                    <div class="grid grid-cols-1 gap-6">
+                        <x-forms.form-field 
+                            label="Professional Experience"
+                            name="experience"
+                            type="textarea"
+                            placeholder="Describe your work experience, roles, responsibilities, and achievements..."
+                            :value="$about->experience"
+                        />
+
+                        <x-forms.form-field 
+                            label="Education Background"
+                            name="education"
+                            type="textarea"
+                            placeholder="List your educational qualifications, degrees, certifications, and academic achievements..."
+                            :value="$about->education"
+                        />
+                    </div>
+                </div>
+
                 <!-- Profile Image Section -->
                 <div
                     class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-3xl p-8 mb-8 border border-purple-200 shadow-lg">
@@ -144,89 +177,26 @@
                         Profile Image
                     </h3>
 
-                    <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-200">
-                        <label class="block text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                            <svg class="w-5 h-5 mr-2 text-purple-600" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
-                                </path>
-                            </svg>
-                            Upload New Image
-                        </label>
-
-                        <div class="space-y-4">
-                            <input type="file" name="image" id="imageInput"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
-
-                            <!-- Current Profile Image Section (Always Visible) -->
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <!-- Current Image (Always Show) -->
-                                <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-6 border-2 border-green-200 shadow-lg">
-                                    <h4 class="text-lg font-semibold text-green-800 mb-4 flex items-center">
-                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                        Current Profile Image
-                                    </h4>
-                                    <div class="relative w-full h-80 rounded-xl overflow-hidden border-2 border-green-200 bg-gray-100 shadow-sm">
-                                        @if ($about->image)
-                                            <img src="{{ asset('storage/' . $about->image) }}" 
-                                                 class="w-full h-full object-contain" 
-                                                 alt="Current profile image" />
-                                        @else
-                                            <div class="w-full h-full flex items-center justify-center text-gray-500">
-                                                <div class="text-center">
-                                                    <svg class="w-16 h-16 mx-auto mb-2 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                                    </svg>
-                                                    <p class="text-sm">No current image</p>
-                                                </div>
-                                            </div>
-                                        @endif
-                                        <div class="absolute top-3 left-3 bg-green-600 text-white px-2 py-1 rounded-lg text-xs font-medium flex items-center">
-                                            <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 002 2z"></path>
-                                            </svg>
-                                            Current
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- New Upload Preview (Only Show When File Selected) -->
-                                <div id="newUploadPreview" class="hidden bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border-2 border-blue-200 shadow-lg">
-                                    <h4 class="text-lg font-semibold text-blue-800 mb-4 flex items-center">
-                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                                        </svg>
-                                        New Upload Preview
-                                    </h4>
-                                    <div class="relative w-full h-80 rounded-xl overflow-hidden border-2 border-blue-200 bg-gray-100 shadow-sm">
-                                        <div id="loadingOverlay" class="absolute inset-0 bg-black/40 flex items-center justify-center z-10">
-                                            <div class="flex items-center space-x-2 text-white">
-                                                <svg class="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
-                                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                                </svg>
-                                                <span>Loading preview...</span>
-                                            </div>
-                                        </div>
-                                        <img id="imagePreview" class="w-full h-full object-contain hidden" alt="Selected preview" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <x-forms.image-upload 
+                        name="image"
+                        label="Profile Image"
+                        :currentImage="$about->image"
+                        accept="image/*"
+                        helpText="Recommended: Square image, 400x400 or larger (JPG, PNG, GIF, WEBP)"
+                        previewHeight="h-80"
+                        previewWidth="w-full"
+                        previewShape="rounded-xl"
+                        currentImageClass="mx-auto"
+                    />
                 </div>
 
                 <!-- Strengths Section -->
                 <div
-                    class="bg-gradient-to-r from-pink-50 to-rose-50 rounded-3xl p-8 mb-8 border border-pink-200 shadow-lg">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                    class="bg-gradient-to-r from-pink-50 to-rose-50 rounded-3xl p-6 mb-6 border border-pink-200 shadow-lg">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
                         <div
-                            class="w-10 h-10 bg-gradient-to-r from-pink-500 to-rose-600 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
-                            <svg class="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            class="w-8 h-8 bg-gradient-to-r from-pink-500 to-rose-600 rounded-xl flex items-center justify-center mr-3 shadow-lg">
+                            <svg class="w-5 h-5 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z">
                                 </path>
@@ -235,17 +205,17 @@
                         My Strengths
                     </h3>
 
-                    <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-200 mb-6">
-                        <p class="text-sm text-gray-600 mb-4">Add your key strengths and qualities that make you stand out
+                    <div class="bg-white rounded-xl p-4 shadow-lg border border-gray-200 mb-4">
+                        <p class="text-xs text-gray-600 mb-3">Add your key strengths and qualities that make you stand out
                             as a developer.</p>
 
-                        <div id="strengths-container" class="space-y-4">
+                        <div id="strengths-container" class="space-y-3">
                             <!-- Strengths will be added here dynamically -->
                         </div>
 
                         <button type="button" onclick="addStrength()"
-                            class="mt-6 inline-flex items-center px-6 py-3 bg-gradient-to-r from-pink-500 to-rose-600 text-white font-semibold rounded-xl hover:from-pink-600 hover:to-rose-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            class="mt-4 inline-flex items-center px-4 py-2 bg-gradient-to-r from-pink-500 to-rose-600 text-white text-sm font-semibold rounded-lg hover:from-pink-600 hover:to-rose-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-1">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                             </svg>
@@ -402,47 +372,47 @@
     const container = document.getElementById('strengths-container');
     const strengthDiv = document.createElement('div');
     strengthDiv.className =
-        'strength-row bg-gradient-to-r from-pink-50 via-rose-50 to-pink-100 rounded-2xl border border-pink-200 p-6 shadow-md hover:shadow-lg transition-all duration-300 ease-in-out mb-6';
+        'strength-row bg-gradient-to-r from-pink-50 via-rose-50 to-pink-100 rounded-xl border border-pink-200 p-4 shadow-sm hover:shadow-md transition-all duration-300 ease-in-out mb-3';
 
     strengthDiv.innerHTML = `
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
             
             <!-- Title -->
             <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2">Title</label>
+                <label class="block text-xs font-semibold text-gray-700 mb-1">Title</label>
                 <input type="text" 
                        name="strengths[${strengthCount}][title]" 
-                       class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-pink-400 transition-all duration-300 bg-white shadow-sm hover:shadow-md"
-                       placeholder="e.g., Problem Solver, Fast Learner" 
+                       class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-pink-400 transition-all duration-300 bg-white shadow-sm hover:shadow-md text-sm"
+                       placeholder="e.g., Problem Solver" 
                        value="${title}">
             </div>
 
             <!-- Subtitle -->
             <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2">Subtitle</label>
+                <label class="block text-xs font-semibold text-gray-700 mb-1">Subtitle</label>
                 <input type="text" 
                        name="strengths[${strengthCount}][subtitle]" 
-                       class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-pink-400 transition-all duration-300 bg-white shadow-sm hover:shadow-md"
-                       placeholder="e.g., Creative Thinker, Quick Adaptor" 
+                       class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-pink-400 transition-all duration-300 bg-white shadow-sm hover:shadow-md text-sm"
+                       placeholder="e.g., Creative Thinker" 
                        value="${subtitle}">
             </div>
 
             <!-- Description -->
             <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2">Description</label>
+                <label class="block text-xs font-semibold text-gray-700 mb-1">Description</label>
                 <textarea name="strengths[${strengthCount}][description]" 
-                          rows="3"
-                          class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-pink-400 transition-all duration-300 bg-white shadow-sm hover:shadow-md"
+                          rows="2"
+                          class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-pink-400 transition-all duration-300 bg-white shadow-sm hover:shadow-md text-sm"
                           placeholder="Describe this strength...">${description}</textarea>
             </div>
         </div>
 
         <!-- Remove Button -->
-        <div class="flex justify-end mt-4">
+        <div class="flex justify-end mt-3">
             <button type="button" 
                     onclick="removeStrength(this)" 
-                    class="inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-red-400 to-red-500 text-white font-medium rounded-xl hover:from-red-500 hover:to-red-600 shadow-md hover:shadow-lg transition-all duration-300 ease-in-out">
-                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    class="inline-flex items-center px-3 py-1.5 bg-gradient-to-r from-red-400 to-red-500 text-white text-xs font-medium rounded-lg hover:from-red-500 hover:to-red-600 shadow-sm hover:shadow-md transition-all duration-300 ease-in-out">
+                <svg class="w-3 h-3 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
                           d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
                     </path>
@@ -470,34 +440,16 @@
 
         // Load existing data on page load
         document.addEventListener('DOMContentLoaded', function() {
-            // Image preview functionality
-            const imageInput = document.getElementById('imageInput');
-            const imagePreviewWrapper = document.getElementById('imagePreviewWrapper');
-            const imagePreview = document.getElementById('imagePreview');
-            const loadingOverlay = document.getElementById('loadingOverlay');
-
-            imageInput.addEventListener('change', function(e) {
-                const file = e.target.files[0];
-                
-                if (file) {
-                    // Show new upload preview
-                    document.getElementById('newUploadPreview').classList.remove('hidden');
-                    loadingOverlay.classList.remove('hidden');
-                    imagePreview.classList.add('hidden');
-
-                    // Create a FileReader to preview the image
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        imagePreview.src = e.target.result;
-                        imagePreview.classList.remove('hidden');
-                        loadingOverlay.classList.add('hidden');
-                    };
-                    reader.readAsDataURL(file);
-                } else {
-                    // Hide new upload preview if no file selected
-                    document.getElementById('newUploadPreview').classList.add('hidden');
+            // Debug: Add form submit logging
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function(e) {
+                const formData = new FormData(form);
+                console.log('Form data being submitted:');
+                for (let [key, value] of formData.entries()) {
+                    console.log(key, ':', value);
                 }
             });
+
 
             // Load existing skills and strengths using model accessors
             @php
@@ -507,6 +459,10 @@
 
             const existingSkills = @json($existingSkills);
             const existingStrengths = @json($existingStrengths);
+            
+            // Debug: Log what we're loading
+            console.log('Existing skills:', existingSkills);
+            console.log('Existing strengths:', existingStrengths);
 
             if (existingSkills.length > 0) {
                 existingSkills.forEach(skill => {
@@ -526,4 +482,6 @@
             // No client-side reindexing; server handles sparse indices and ignores empty names
         });
     </script>
+
+    
 @endsection

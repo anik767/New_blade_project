@@ -3,150 +3,276 @@
 @section('title', 'Admin Dashboard')
 
 @section('content')
-<div class="p-6">
-    <!-- Enhanced Welcome Header -->
-    <div class="mb-8">
-        <div class="flex items-center justify-between">
-            <div>
-                <h1 class="text-4xl font-bold text-gray-900 flex items-center">
-                    <svg class="w-10 h-10 mr-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                    </svg>
-                    Welcome back {{ auth()->user()->name }}
-                </h1>
-                <p class="text-gray-600 mt-2 text-lg">Here's your website overview for {{ now()->format('l, F j, Y') }}</p>
-                <div class="mt-3 flex items-center space-x-4 text-sm text-gray-500">
-                    <span class="flex items-center">
-                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        Last login: {{ auth()->user()->updated_at->diffForHumans() }}
-                    </span>
-                    <span class="flex items-center">
-                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                        </svg>
-                        {{ \App\Models\ContactMessage::where('status', 'unread')->count() }} new messages
-                    </span>
+<div class="dashboard-container">
+    <!-- Modern Welcome Header with Glassmorphism -->
+    <div class="relative overflow-hidden">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 bg-gradient-to-r from-blue-600/5 via-purple-600/5 to-indigo-600/5"></div>
+        <div class="absolute inset-0" style="background-image: radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.1) 0%, transparent 50%), radial-gradient(circle at 75% 75%, rgba(147, 51, 234, 0.1) 0%, transparent 50%);"></div>
+        
+        <div class="relative p-6 lg:p-8">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                <div class="flex-1">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="relative">
+                            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                </svg>
+                            </div>
+                            <div class="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white animate-pulse"></div>
+                        </div>
+                        <div>
+                            <h1 class="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 bg-clip-text text-transparent">
+                                Welcome back, {{ auth()->user()->name }}! 👋
+                            </h1>
+                            <p class="text-gray-600 mt-1 text-lg">Here's your website overview for {{ now()->format('l, F j, Y') }}</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Stats Row -->
+                    <div class="flex flex-wrap items-center gap-6 text-sm">
+                        <div class="flex items-center gap-2 px-3 py-2 bg-white/60 backdrop-blur-sm rounded-full border border-white/20">
+                            <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                            <span class="text-gray-700 font-medium">Last login: {{ auth()->user()->updated_at->diffForHumans() }}</span>
+                        </div>
+                        <div class="flex items-center gap-2 px-3 py-2 bg-white/60 backdrop-blur-sm rounded-full border border-white/20">
+                            <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                            </svg>
+                            <span class="text-gray-700 font-medium">{{ \App\Models\ContactMessage::where('status', 'unread')->count() }} new messages</span>
+                        </div>
+                        <div class="flex items-center gap-2 px-3 py-2 bg-white/60 backdrop-blur-sm rounded-full border border-white/20">
+                            <svg class="w-4 h-4 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                            </svg>
+                            <span class="text-gray-700 font-medium">System running smoothly</span>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="text-right">
-                <div class="text-2xl font-bold text-indigo-600">{{ \App\Models\ProjectPost::count() + \App\Models\Blog::count() + \App\Models\Service::count() }}</div>
-                <div class="text-sm text-gray-500">Total Content Items</div>
+                
+                <!-- Quick Actions -->
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <a href="{{ route('admin.projects.create') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl hover:from-blue-600 hover:to-blue-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                        New Project
+                    </a>
+                    <a href="{{ route('admin.blog.create') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-xl hover:from-green-600 hover:to-green-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                        New Post
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Enhanced Statistics Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <!-- Projects Card -->
-        <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl shadow-lg border border-blue-200 p-6 hover:shadow-xl transition-all duration-300">
-            <div class="flex items-center justify-between">
-                <div class="p-3 rounded-full bg-blue-500 text-white shadow-lg">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-                    </svg>
-                </div>
-                <div class="text-right">
-                    <div class="text-3xl font-bold text-blue-900">{{ \App\Models\ProjectPost::count() }}</div>
-                    <div class="text-sm font-medium text-blue-700">Projects</div>
+    <!-- Modern Statistics Cards with Glassmorphism -->
+    <div class="px-6 lg:px-8 mt-8 relative z-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Projects Card -->
+            <div class="dashboard-card group relative overflow-hidden p-6">
+                <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="relative">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="p-3 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 text-white shadow-lg group-hover:scale-110 transition-transform duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                            </svg>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-3xl font-bold text-gray-900">{{ \App\Models\ProjectPost::count() }}</div>
+                            <div class="text-sm font-medium text-gray-600">Projects</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-blue-600 font-medium bg-blue-50 px-2 py-1 rounded-full">
+                            {{ \App\Models\ProjectPost::where('created_at', '>=', now()->subDays(7))->count() }} new this week
+                        </span>
+                        <a href="{{ route('admin.projects.index') }}" class="text-blue-600 hover:text-blue-800 font-medium text-sm flex items-center group-hover:translate-x-1 transition-transform duration-200">
+                            View all
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
             </div>
-            <div class="mt-4 flex items-center justify-between">
-                <span class="text-sm text-blue-600 font-medium">
-                    {{ \App\Models\ProjectPost::where('created_at', '>=', now()->subDays(7))->count() }} new this week
-                </span>
-                <a href="{{ route('admin.projects.index') }}" class="text-blue-600 hover:text-blue-800 font-medium text-sm flex items-center">
-                    View all
-                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                    </svg>
-                </a>
+
+            <!-- Blog Posts Card -->
+            <div class="dashboard-card group relative overflow-hidden p-6">
+                <div class="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="relative">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="p-3 rounded-xl bg-gradient-to-br from-green-500 to-green-600 text-white shadow-lg group-hover:scale-110 transition-transform duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-3xl font-bold text-gray-900">{{ \App\Models\Blog::count() }}</div>
+                            <div class="text-sm font-medium text-gray-600">Blog Posts</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-green-600 font-medium bg-green-50 px-2 py-1 rounded-full">
+                            {{ \App\Models\Blog::where('created_at', '>=', now()->subDays(7))->count() }} new this week
+                        </span>
+                        <a href="{{ route('admin.blog.index') }}" class="text-green-600 hover:text-green-800 font-medium text-sm flex items-center group-hover:translate-x-1 transition-transform duration-200">
+                            View all
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Services Card -->
+            <div class="group relative overflow-hidden dashboard-card p-6 ">
+                <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="relative">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="p-3 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 text-white shadow-lg group-hover:scale-110 transition-transform duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-3xl font-bold text-gray-900">{{ \App\Models\Service::count() }}</div>
+                            <div class="text-sm font-medium text-gray-600">Services</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-purple-600 font-medium bg-purple-50 px-2 py-1 rounded-full">
+                            {{ \App\Models\Service::where('is_active', true)->count() }} active
+                        </span>
+                        <a href="{{ route('admin.services.index') }}" class="text-purple-600 hover:text-purple-800 font-medium text-sm flex items-center group-hover:translate-x-1 transition-transform duration-200">
+                            View all
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Messages Card -->
+            <div class="dashboard-card group relative overflow-hidden p-6">
+                <div class="absolute inset-0 bg-gradient-to-br from-red-500/10 to-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="relative">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="p-3 rounded-xl bg-gradient-to-br from-red-500 to-red-600 text-white shadow-lg group-hover:scale-110 transition-transform duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                            </svg>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-3xl font-bold text-gray-900">{{ \App\Models\ContactMessage::where('status', 'unread')->count() }}</div>
+                            <div class="text-sm font-medium text-gray-600">New Messages</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-red-600 font-medium bg-red-50 px-2 py-1 rounded-full">
+                            {{ \App\Models\ContactMessage::where('created_at', '>=', now()->subDays(7))->count() }} this week
+                        </span>
+                        <a href="{{ route('admin.contact-messages.index') }}" class="text-red-600 hover:text-red-800 font-medium text-sm flex items-center group-hover:translate-x-1 transition-transform duration-200">
+                            View all
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
 
-        <!-- Blog Posts Card -->
-        <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl shadow-lg border border-green-200 p-6 hover:shadow-xl transition-all duration-300">
-            <div class="flex items-center justify-between">
-                <div class="p-3 rounded-full bg-green-500 text-white shadow-lg">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                    </svg>
-                </div>
-                <div class="text-right">
-                    <div class="text-3xl font-bold text-green-900">{{ \App\Models\Blog::count() }}</div>
-                    <div class="text-sm font-medium text-green-700">Blog Posts</div>
+    <!-- New Modern Features Section -->
+    <div class="px-6 lg:px-8 mb-6">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Analytics Widget -->
+            <div class="lg:col-span-2">
+                <div class="dashboard-card p-6 shadow-xl">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-bold text-gray-900 flex items-center gap-2">
+                            <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                            Website Analytics
+                        </h3>
+                        <div class="flex items-center gap-2 text-sm text-gray-600">
+                            <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                            Live
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="text-center p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl">
+                            <div class="text-2xl font-bold text-blue-600">{{ \App\Models\ProjectPost::count() + \App\Models\Blog::count() }}</div>
+                            <div class="text-sm text-blue-700">Total Posts</div>
+                        </div>
+                        <div class="text-center p-4 bg-gradient-to-br from-green-50 to-green-100 rounded-xl">
+                            <div class="text-2xl font-bold text-green-600">{{ \App\Models\Comment::count() }}</div>
+                            <div class="text-sm text-green-700">Comments</div>
+                        </div>
+                        <div class="text-center p-4 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl">
+                            <div class="text-2xl font-bold text-purple-600">{{ \App\Models\ContactMessage::count() }}</div>
+                            <div class="text-sm text-purple-700">Messages</div>
+                        </div>
+                        <div class="text-center p-4 bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl">
+                            <div class="text-2xl font-bold text-orange-600">{{ \App\Models\Service::where('is_active', true)->count() }}</div>
+                            <div class="text-sm text-orange-700">Active Services</div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="mt-4 flex items-center justify-between">
-                <span class="text-sm text-green-600 font-medium">
-                    {{ \App\Models\Blog::where('created_at', '>=', now()->subDays(7))->count() }} new this week
-                </span>
-                <a href="{{ route('admin.blog.index') }}" class="text-green-600 hover:text-green-800 font-medium text-sm flex items-center">
-                    View all
-                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                    </svg>
-                </a>
-            </div>
-        </div>
 
-        <!-- Services Card -->
-        <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl shadow-lg border border-purple-200 p-6 hover:shadow-xl transition-all duration-300">
-            <div class="flex items-center justify-between">
-                <div class="p-3 rounded-full bg-purple-500 text-white shadow-lg">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                    </svg>
+            <!-- Performance Metrics -->
+            <div class="space-y-6">
+                <div class="dashboard-card p-6 shadow-xl">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                        </svg>
+                        Performance
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-600">Server Status</span>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                <div class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5 animate-pulse"></div>
+                                Online
+                            </span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-600">Database</span>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                <div class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5 animate-pulse"></div>
+                                Healthy
+                            </span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-600">Storage</span>
+                            <span class="text-sm font-medium text-gray-900">2.4 GB / 10 GB</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full" style="width: 24%"></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="text-right">
-                    <div class="text-3xl font-bold text-purple-900">{{ \App\Models\Service::count() }}</div>
-                    <div class="text-sm font-medium text-purple-700">Services</div>
-                </div>
-            </div>
-            <div class="mt-4 flex items-center justify-between">
-                <span class="text-sm text-purple-600 font-medium">
-                    {{ \App\Models\Service::where('is_active', true)->count() }} active
-                </span>
-                <a href="{{ route('admin.services.index') }}" class="text-purple-600 hover:text-purple-800 font-medium text-sm flex items-center">
-                    View all
-                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                    </svg>
-                </a>
-            </div>
-        </div>
 
-        <!-- Contact Messages Card -->
-        <div class="bg-gradient-to-br from-red-50 to-red-100 rounded-xl shadow-lg border border-red-200 p-6 hover:shadow-xl transition-all duration-300">
-            <div class="flex items-center justify-between">
-                <div class="p-3 rounded-full bg-red-500 text-white shadow-lg">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-                    </svg>
-                </div>
-                <div class="text-right">
-                    <div class="text-3xl font-bold text-red-900">{{ \App\Models\ContactMessage::where('status', 'unread')->count() }}</div>
-                    <div class="text-sm font-medium text-red-700">New Messages</div>
-                </div>
-            </div>
-            <div class="mt-4 flex items-center justify-between">
-                <span class="text-sm text-red-600 font-medium">
-                    {{ \App\Models\ContactMessage::where('created_at', '>=', now()->subDays(7))->count() }} this week
-                </span>
-                <a href="{{ route('admin.contact-messages.index') }}" class="text-red-600 hover:text-red-800 font-medium text-sm flex items-center">
-                    View all
-                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                    </svg>
-                </a>
+
             </div>
         </div>
     </div>
 
     <!-- Home Management Overview -->
-    <div class="mb-8">
-        <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
+    <div class="px-6 lg:px-8 mb-6">
+        <div class="dashboard-card shadow-xl overflow-hidden">
             <div class="bg-gradient-to-r from-indigo-50 to-purple-50 px-6 py-4 border-b border-gray-200">
                 <h3 class="text-lg font-semibold text-gray-900 flex items-center">
                     <svg class="w-5 h-5 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -281,326 +407,261 @@
         </div>
     </div>
 
-    <!-- Main Content Grid -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <!-- Left Column: Recent Activity & Quick Actions -->
-        <div class="lg:col-span-2 space-y-8">
-            <!-- Recent Activity Feed -->
-            <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
-                <div class="bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-4 border-b border-gray-200">
-                    <h3 class="text-lg font-semibold text-gray-900 flex items-center">
-                        <svg class="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+    <!-- Quick Actions - Full Width -->
+    <div class="px-6 lg:px-8 mb-6">
+        <div class="dashboard-card p-6 shadow-xl">
+            <h3 class="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <svg class="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                </svg>
+                Quick Actions
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <a href="{{ route('admin.profile.edit') }}" class="group flex items-center gap-4 p-4 rounded-xl hover:bg-gray-50 transition-all duration-200 border border-transparent hover:border-gray-200 hover:shadow-md">
+                    <div class="w-12 h-12 bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                         </svg>
-                        Recent Activity
-                    </h3>
-                </div>
-                <div class="p-6">
-                    <div class="space-y-4">
-                        @php
-                            $recentActivities = collect();
-                            
-                            // Add recent projects
-                            foreach(\App\Models\ProjectPost::latest()->take(3)->get() as $project) {
-                                $recentActivities->push([
-                                    'type' => 'project',
-                                    'title' => $project->title,
-                                    'time' => $project->created_at,
-                                    'icon' => 'M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10',
-                                    'color' => 'blue',
-                                    'url' => route('admin.projects.edit', $project)
-                                ]);
-                            }
-                            
-                            // Add recent blog posts
-                            foreach(\App\Models\Blog::latest()->take(3)->get() as $post) {
-                                $recentActivities->push([
-                                    'type' => 'blog',
-                                    'title' => $post->title,
-                                    'time' => $post->created_at,
-                                    'icon' => 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253',
-                                    'color' => 'green',
-                                    'url' => route('admin.blog.edit', $post)
-                                ]);
-                            }
-                            
-                            // Add recent comments
-                            foreach(\App\Models\Comment::with('commentable')->latest()->take(3)->get() as $comment) {
-                                $commentableTitle = 'Unknown';
-                                if ($comment->commentable) {
-                                    $commentableTitle = $comment->commentable->title ?? 'Unknown';
-                                }
-                                
-                                $recentActivities->push([
-                                    'type' => 'comment',
-                                    'title' => $comment->name . ' commented on ' . $commentableTitle,
-                                    'time' => $comment->created_at,
-                                    'icon' => 'M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z',
-                                    'color' => 'purple',
-                                    'url' => route('admin.comments.index')
-                                ]);
-                            }
-                            
-                            $recentActivities = $recentActivities->sortByDesc('time')->take(6);
-                        @endphp
-                        
-                        @foreach($recentActivities as $activity)
-                        <div class="flex items-start space-x-3 p-3 rounded-lg hover:bg-gray-50 transition-colors">
-                            <div class="flex-shrink-0">
-                                <div class="p-2 rounded-full bg-{{ $activity['color'] }}-100 text-{{ $activity['color'] }}-600">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ $activity['icon'] }}"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <p class="text-sm font-medium text-gray-900 truncate">{{ $activity['title'] }}</p>
-                                <p class="text-xs text-gray-500">{{ $activity['time']->diffForHumans() }}</p>
-                            </div>
-                            <div class="flex-shrink-0">
-                                <a href="{{ $activity['url'] }}" class="text-xs text-{{ $activity['color'] }}-600 hover:text-{{ $activity['color'] }}-800 font-medium">
-                                    View
-                                </a>
-                            </div>
-                        </div>
-                        @endforeach
-                        
-                        @if($recentActivities->isEmpty())
-                        <div class="text-center py-8">
-                            <svg class="w-12 h-12 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                            </svg>
-                            <p class="text-gray-500">No recent activity</p>
-                        </div>
-                        @endif
                     </div>
-                </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">Update Profile</h4>
+                        <p class="text-sm text-gray-500">Manage your personal information</p>
+                    </div>
+                </a>
+                
+                <a href="{{ route('admin.contacts.edit') }}" class="group flex items-center gap-4 p-4 rounded-xl hover:bg-gray-50 transition-all duration-200 border border-transparent hover:border-gray-200 hover:shadow-md">
+                    <div class="w-12 h-12 bg-gradient-to-br from-green-100 to-green-200 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-900 group-hover:text-green-600 transition-colors">Contact Info</h4>
+                        <p class="text-sm text-gray-500">Update contact details</p>
+                    </div>
+                </a>
+                
+                <a href="{{ route('admin.page-banners.index') }}" class="group flex items-center gap-4 p-4 rounded-xl hover:bg-gray-50 transition-all duration-200 border border-transparent hover:border-gray-200 hover:shadow-md">
+                    <div class="w-12 h-12 bg-gradient-to-br from-purple-100 to-purple-200 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4-4 4 4m0 0l4-4 4 4M4 8h16"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-900 group-hover:text-purple-600 transition-colors">Page Banners</h4>
+                        <p class="text-sm text-gray-500">Manage page banners</p>
+                    </div>
+                </a>
+                
+                <a href="{{ route('admin.dashboard') }}" class="group flex items-center gap-4 p-4 rounded-xl hover:bg-gray-50 transition-all duration-200 border border-transparent hover:border-gray-200 hover:shadow-md">
+                    <div class="w-12 h-12 bg-gradient-to-br from-orange-100 to-orange-200 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                        <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-900 group-hover:text-orange-600 transition-colors">Dashboard</h4>
+                        <p class="text-sm text-gray-500">View dashboard overview</p>
+                    </div>
+                </a>
             </div>
+        </div>
+    </div>
 
-            <!-- Quick Actions Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Create New Content -->
-                <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
-                    <div class="bg-gradient-to-r from-indigo-50 to-purple-50 px-6 py-4 border-b border-gray-200">
-                        <h3 class="text-lg font-semibold text-gray-900 flex items-center">
-                            <svg class="w-5 h-5 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+    <!-- Main Content Grid -->
+    <div class="px-6 lg:px-8 mt-4">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Column: Recent Activity -->
+            <div class="lg:col-span-2 space-y-8">
+                <!-- Modern Activity Feed -->
+                <div class="dashboard-card shadow-xl overflow-hidden">
+                    <div class="bg-gradient-to-r from-gray-50/80 to-gray-100/80 backdrop-blur-sm px-6 py-4 border-b border-gray-200/50">
+                        <h3 class="text-lg font-semibold text-gray-900 flex items-center gap-2">
+                            <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                             </svg>
-                            Create New Content
+                            Recent Activity
+                            <span class="ml-auto text-sm text-gray-500 font-normal">{{ $recentActivities->count() }} items</span>
                         </h3>
                     </div>
-                    <div class="p-6 space-y-3">
-                        <a href="{{ route('admin.projects.create') }}" class="flex items-center p-3 rounded-lg hover:bg-blue-50 transition-colors group">
-                            <div class="p-2 rounded-full bg-blue-100 text-blue-600 group-hover:bg-blue-200 transition-colors">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="p-6">
+                        <div class="space-y-4">
+                            
+                            @foreach($recentActivities as $activity)
+                            <div class="group flex items-start space-x-3 p-4 rounded-xl hover:bg-gray-50/80 transition-all duration-200 border border-transparent hover:border-gray-200/50">
+                                <div class="flex-shrink-0">
+                                    <div class="p-2.5 rounded-xl {{ $activity['bgColor'] }} {{ $activity['color'] }} group-hover:scale-110 transition-transform duration-200">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ $activity['icon'] }}"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-medium text-gray-900 truncate group-hover:text-gray-700 transition-colors">{{ $activity['title'] }}</p>
+                                    <p class="text-xs text-gray-500 mt-1">{{ $activity['time']->diffForHumans() }}</p>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <a href="{{ $activity['url'] }}" class="text-xs {{ $activity['color'] }} hover:opacity-80 font-medium px-2 py-1 rounded-lg {{ $activity['bgColor'] }} transition-colors">
+                                        View
+                                    </a>
+                                </div>
+                            </div>
+                            @endforeach
+                            
+                            @if($recentActivities->isEmpty())
+                            <div class="text-center py-12">
+                                <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                    </svg>
+                                </div>
+                                <p class="text-gray-500 font-medium">No recent activity</p>
+                                <p class="text-gray-400 text-sm mt-1">Start creating content to see activity here</p>
+                            </div>
+                            @endif
+                        </div>
+                    </div>
+            </div>
+
+                <!-- Modern Quick Actions -->
+                <div class="dashboard-card shadow-xl overflow-hidden">
+                    <div class="bg-gradient-to-r from-indigo-50/80 to-purple-50/80 backdrop-blur-sm px-6 py-4 border-b border-gray-200/50">
+                        <h3 class="text-lg font-semibold text-gray-900 flex items-center gap-2">
+                            <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                            </svg>
+                            Quick Actions
+                        </h3>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <a href="{{ route('admin.projects.create') }}" class="group flex items-center p-4 rounded-xl hover:bg-blue-50/80 transition-all duration-200 border border-transparent hover:border-blue-200/50">
+                            <div class="p-3 rounded-xl bg-gradient-to-br from-blue-100 to-blue-200 text-blue-600 group-hover:scale-110 transition-transform duration-200">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
                                 </svg>
                             </div>
-                            <div class="ml-3">
-                                <p class="text-sm font-medium text-gray-900">New Project</p>
+                            <div class="ml-4">
+                                <p class="text-sm font-medium text-gray-900 group-hover:text-blue-700 transition-colors">New Project</p>
                                 <p class="text-xs text-gray-500">Add a new portfolio project</p>
                             </div>
                         </a>
                         
-                        <a href="{{ route('admin.blog.create') }}" class="flex items-center p-3 rounded-lg hover:bg-green-50 transition-colors group">
-                            <div class="p-2 rounded-full bg-green-100 text-green-600 group-hover:bg-green-200 transition-colors">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <a href="{{ route('admin.blog.create') }}" class="group flex items-center p-4 rounded-xl hover:bg-green-50/80 transition-all duration-200 border border-transparent hover:border-green-200/50">
+                            <div class="p-3 rounded-xl bg-gradient-to-br from-green-100 to-green-200 text-green-600 group-hover:scale-110 transition-transform duration-200">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                                 </svg>
                             </div>
-                            <div class="ml-3">
-                                <p class="text-sm font-medium text-gray-900">New Blog Post</p>
+                            <div class="ml-4">
+                                <p class="text-sm font-medium text-gray-900 group-hover:text-green-700 transition-colors">New Blog Post</p>
                                 <p class="text-xs text-gray-500">Write a new blog article</p>
                             </div>
                         </a>
                         
-                        <a href="{{ route('admin.services.create') }}" class="flex items-center p-3 rounded-lg hover:bg-purple-50 transition-colors group">
-                            <div class="p-2 rounded-full bg-purple-100 text-purple-600 group-hover:bg-purple-200 transition-colors">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <a href="{{ route('admin.services.create') }}" class="group flex items-center p-4 rounded-xl hover:bg-purple-50/80 transition-all duration-200 border border-transparent hover:border-purple-200/50">
+                            <div class="p-3 rounded-xl bg-gradient-to-br from-purple-100 to-purple-200 text-purple-600 group-hover:scale-110 transition-transform duration-200">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                                 </svg>
                             </div>
-                            <div class="ml-3">
-                                <p class="text-sm font-medium text-gray-900">New Service</p>
+                            <div class="ml-4">
+                                <p class="text-sm font-medium text-gray-900 group-hover:text-purple-700 transition-colors">New Service</p>
                                 <p class="text-xs text-gray-500">Add a new service offering</p>
                             </div>
                         </a>
                     </div>
                 </div>
-
-                <!-- Quick Management -->
-                <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
-                    <div class="bg-gradient-to-r from-yellow-50 to-orange-50 px-6 py-4 border-b border-gray-200">
-                        <h3 class="text-lg font-semibold text-gray-900 flex items-center">
-                            <svg class="w-5 h-5 mr-2 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                            </svg>
-                            Quick Management
-                        </h3>
-                    </div>
-                    <div class="p-6 space-y-3">
-                        <a href="{{ route('admin.about.edit') }}" class="flex items-center p-3 rounded-lg hover:bg-indigo-50 transition-colors group">
-                            <div class="p-2 rounded-full bg-indigo-100 text-indigo-600 group-hover:bg-indigo-200 transition-colors">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                </svg>
-                            </div>
-                            <div class="ml-3">
-                                <p class="text-sm font-medium text-gray-900">About Me</p>
-                                <p class="text-xs text-gray-500">Update profile information</p>
-                            </div>
-                        </a>
-                        
-                        <a href="{{ route('admin.contacts.edit') }}" class="flex items-center p-3 rounded-lg hover:bg-blue-50 transition-colors group">
-                            <div class="p-2 rounded-full bg-blue-100 text-blue-600 group-hover:bg-blue-200 transition-colors">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                                </svg>
-                            </div>
-                            <div class="ml-3">
-                                <p class="text-sm font-medium text-gray-900">Contact Info</p>
-                                <p class="text-xs text-gray-500">Update contact details</p>
-                            </div>
-                        </a>
-                        
-                        <a href="{{ route('admin.home.banner.edit') }}" class="flex items-center p-3 rounded-lg hover:bg-yellow-50 transition-colors group">
-                            <div class="p-2 rounded-full bg-yellow-100 text-yellow-600 group-hover:bg-yellow-200 transition-colors">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                </svg>
-                            </div>
-                            <div class="ml-3">
-                                <p class="text-sm font-medium text-gray-900">Home Banner</p>
-                                <p class="text-xs text-gray-500">Manage homepage banner</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
         </div>
 
-        <!-- Right Column: Notifications & Stats -->
-        <div class="space-y-8">
-            <!-- Recent Messages -->
-            <div class="bg-blue rounded-xl shadow-lg border border-gray-200 overflow-hidden">
-                <div class="bg-gradient-to-r from-blue-50 to-blue-50 px-6 py-4 border-b border-gray-200">
-                    <h3 class="text-lg font-semibold text-gray-900 flex items-center justify-between">
-                        <span class="flex items-center">
-                            <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-                            </svg>
-                            Recent Messages
-                        </span>
-                        <span class="text-sm text-blue-600 font-medium">{{ \App\Models\ContactMessage::where('status', 'unread')->count() }} unread</span>
-                    </h3>
-                </div>
-                <div class="p-6">
-                    <div class="space-y-3">
-                        @foreach(\App\Models\ContactMessage::latest()->take(4)->get() as $message)
-                        <div class="flex items-start space-x-3 p-3 rounded-lg hover:bg-gray-50 transition-colors">
-                            <div class="flex-shrink-0">
-                                <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
-                                    <span class="text-sm font-medium text-gray-600">{{ strtoupper(substr($message->name, 0, 1)) }}</span>
+            <!-- Right Column: Modern Notifications & Stats -->
+            <div class="space-y-6">
+                <!-- Recent Messages -->
+                <div class="dashboard-card shadow-xl overflow-hidden">
+                    <div class="bg-gradient-to-r from-blue-50/80 to-indigo-50/80 backdrop-blur-sm px-6 py-4 border-b border-gray-200/50">
+                        <h3 class="text-lg font-semibold text-gray-900 flex items-center justify-between">
+                            <span class="flex items-center gap-2">
+                                <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                                </svg>
+                                Recent Messages
+                            </span>
+                            <span class="text-sm text-blue-600 font-medium bg-blue-100 px-2 py-1 rounded-full">{{ \App\Models\ContactMessage::where('status', 'unread')->count() }} unread</span>
+                        </h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="space-y-4">
+                            @foreach(\App\Models\ContactMessage::latest()->take(4)->get() as $message)
+                            <div class="group flex items-start space-x-3 p-3 rounded-xl hover:bg-gray-50/80 transition-all duration-200 border border-transparent hover:border-gray-200/50">
+                                <div class="flex-shrink-0">
+                                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                                        <span class="text-sm font-medium text-blue-700">{{ strtoupper(substr($message->name, 0, 1)) }}</span>
+                                    </div>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-medium text-gray-900 truncate">{{ $message->name }}</p>
+                                    <p class="text-xs text-gray-500 truncate mt-1">{{ Str::limit($message->message, 50) }}</p>
+                                    <p class="text-xs text-gray-400 mt-1">{{ $message->created_at->diffForHumans() }}</p>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    @if($message->status === 'unread')
+                                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 animate-pulse">New</span>
+                                    @else
+                                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">Read</span>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="flex-1 min-w-0">
-                                <p class="text-sm font-medium text-gray-900 truncate">{{ $message->name }}</p>
-                                <p class="text-xs text-gray-500 truncate">{{ Str::limit($message->message, 50) }}</p>
-                                <p class="text-xs text-gray-400">{{ $message->created_at->diffForHumans() }}</p>
+                            @endforeach
+                            
+                            @if(\App\Models\ContactMessage::count() === 0)
+                            <div class="text-center py-8">
+                                <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                                    </svg>
+                                </div>
+                                <p class="text-gray-500 text-sm font-medium">No messages yet</p>
+                                <p class="text-gray-400 text-xs mt-1">Messages will appear here when received</p>
                             </div>
-                            <div class="flex-shrink-0">
-                                @if($message->status === 'unread')
-                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">New</span>
-                                @else
-                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">Read</span>
-                                @endif
-                            </div>
+                            @endif
                         </div>
-                        @endforeach
-                        
-                        @if(\App\Models\ContactMessage::count() === 0)
-                        <div class="text-center py-4">
-                            <svg class="w-8 h-8 text-gray-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-                            </svg>
-                            <p class="text-gray-500 text-sm">No messages yet</p>
+                        <div class="mt-6 pt-4 border-t border-gray-200/50">
+                            <a href="{{ route('admin.contact-messages.index') }}" class="text-sm text-blue-600 hover:text-blue-800 font-medium flex items-center justify-center group">
+                                View all messages
+                                <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
                         </div>
-                        @endif
-                    </div>
-                    <div class="mt-4 pt-4 border-t border-gray-200">
-                        <a href="{{ route('admin.contact-messages.index') }}" class="text-sm text-red-600 hover:text-red-800 font-medium flex items-center justify-center">
-                            View all messages
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                            </svg>
-                        </a>
                     </div>
                 </div>
-            </div>
 
-            <!-- Website Statistics -->
-            <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
-                <div class="bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-4 border-b border-gray-200">
-                    <h3 class="text-lg font-semibold text-gray-900 flex items-center">
-                        <svg class="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                        </svg>
-                        Website Statistics
-                    </h3>
-                </div>
-                <div class="p-6 space-y-4">
-                    <div class="flex items-center justify-between">
-                        <span class="text-sm text-gray-600">Total Comments</span>
-                        <span class="text-sm font-semibold text-gray-900">{{ \App\Models\Comment::count() }}</span>
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <span class="text-sm text-gray-600">Pending Comments</span>
-                        <span class="text-sm font-semibold text-yellow-600">{{ \App\Models\Comment::where('is_approved', false)->count() }}</span>
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <span class="text-sm text-gray-600">Active Services</span>
-                        <span class="text-sm font-semibold text-green-600">{{ \App\Models\Service::where('is_active', true)->count() }}</span>
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <span class="text-sm text-gray-600">Total Messages</span>
-                        <span class="text-sm font-semibold text-blue-600">{{ \App\Models\ContactMessage::count() }}</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- System Status -->
-            <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
-                <div class="bg-gradient-to-r from-green-50 to-emerald-50 px-6 py-4 border-b border-gray-200">
-                    <h3 class="text-lg font-semibold text-gray-900 flex items-center">
-                        <svg class="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        System Status
-                    </h3>
-                </div>
-                <div class="p-6 space-y-3">
-                    <div class="flex items-center justify-between">
-                        <span class="text-sm text-gray-600">Database</span>
-                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                            <svg class="w-2 h-2 mr-1" fill="currentColor" viewBox="0 0 8 8">
-                                <circle cx="4" cy="4" r="3"></circle>
+                <!-- Modern Website Statistics -->
+                <div class="dashboard-card shadow-xl overflow-hidden">
+                    <div class="bg-gradient-to-r from-gray-50/80 to-gray-100/80 backdrop-blur-sm px-6 py-4 border-b border-gray-200/50">
+                        <h3 class="text-lg font-semibold text-gray-900 flex items-center gap-2">
+                            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
                             </svg>
-                            Online
-                        </span>
+                            Website Statistics
+                        </h3>
                     </div>
-                    <div class="flex items-center justify-between">
-                        <span class="text-sm text-gray-600">Storage</span>
-                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                            <svg class="w-2 h-2 mr-1" fill="currentColor" viewBox="0 0 8 8">
-                                <circle cx="4" cy="4" r="3"></circle>
-                            </svg>
-                            Available
-                        </span>
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <span class="text-sm text-gray-600">Last Backup</span>
-                        <span class="text-sm text-gray-900">{{ now()->subDays(rand(1, 7))->format('M j') }}</span>
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-gray-50/50">
+                            <span class="text-sm text-gray-600 font-medium">Total Comments</span>
+                            <span class="text-sm font-bold text-gray-900 bg-gray-100 px-2 py-1 rounded-full">{{ \App\Models\Comment::count() }}</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-yellow-50/50">
+                            <span class="text-sm text-gray-600 font-medium">Pending Comments</span>
+                            <span class="text-sm font-bold text-yellow-600 bg-yellow-100 px-2 py-1 rounded-full">{{ \App\Models\Comment::where('is_approved', false)->count() }}</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-green-50/50">
+                            <span class="text-sm text-gray-600 font-medium">Active Services</span>
+                            <span class="text-sm font-bold text-green-600 bg-green-100 px-2 py-1 rounded-full">{{ \App\Models\Service::where('is_active', true)->count() }}</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-blue-50/50">
+                            <span class="text-sm text-gray-600 font-medium">Total Messages</span>
+                            <span class="text-sm font-bold text-blue-600 bg-blue-100 px-2 py-1 rounded-full">{{ \App\Models\ContactMessage::count() }}</span>
+                        </div>
                     </div>
                 </div>
             </div>
