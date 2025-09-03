@@ -85,15 +85,15 @@
                     Project Media
                 </h3>
 
-                <x-forms.simple-image-upload 
+                <x-forms.image-upload 
                     name="image"
                     label="Project Image"
                     :currentImage="$project->image"
                     accept="image/*"
                     helpText="Recommended size: 1200x800 pixels (portfolio optimized). Formats: JPG, PNG, GIF. No file size limit. Leave empty to keep current image."
-                    previewHeight="h-32"
-                    previewWidth="w-48"
-                    previewShape="rounded-lg"
+                    previewHeight="h-48"
+                    previewWidth="w-full"
+                    previewShape="rounded-xl"
                 />
             </div>
 
@@ -169,31 +169,4 @@
             </div>
         </x-forms.admin-form>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const input = document.getElementById('project-image-input');
-            const previewWrapper = document.getElementById('project-image-preview-wrapper');
-            const previewImg = document.getElementById('project-image-preview');
-            let previousObjectUrl = null;
-
-            if (input) {
-                input.addEventListener('change', function(e) {
-                    const file = e.target.files && e.target.files[0];
-                    if (file) {
-                        const objectUrl = URL.createObjectURL(file);
-                        previewImg.src = objectUrl;
-                        previewWrapper.classList.remove('hidden');
-                        if (previousObjectUrl) URL.revokeObjectURL(previousObjectUrl);
-                        previousObjectUrl = objectUrl;
-                    } else {
-                        previewWrapper.classList.add('hidden');
-                        previewImg.removeAttribute('src');
-                        if (previousObjectUrl) URL.revokeObjectURL(previousObjectUrl);
-                        previousObjectUrl = null;
-                    }
-                });
-            }
-        });
-    </script>
 @endsection
