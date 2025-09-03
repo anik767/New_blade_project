@@ -26,20 +26,20 @@ RUN mkdir -p /run/nginx /var/log/supervisor /etc/nginx/conf.d
 
 # Nginx vhost template using $PORT
 RUN printf "server {\n\
-    listen ${PORT};\n\
+    listen 0.0.0.0:\$PORT;\n\
     server_name _;\n\
     root /var/www/html/public;\n\
     index index.php index.html;\n\
     location / {\n\
-        try_files $uri $uri/ /index.php?$query_string;\n\
+        try_files \$uri \$uri/ /index.php?\$query_string;\n\
     }\n\
-    location ~ \\.php$ {\n\
+    location ~ \\.php\$ {\n\
         include fastcgi_params;\n\
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;\n\
+        fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;\n\
         fastcgi_pass 127.0.0.1:9000;\n\
         fastcgi_read_timeout 300;\n\
     }\n\
-    location ~* \\.(jpg|jpeg|png|gif|svg|css|js|ico|webp)$ {\n\
+    location ~* \\.(jpg|jpeg|png|gif|svg|css|js|ico|webp)\$ {\n\
         expires 7d;\n\
         access_log off;\n\
     }\n\
