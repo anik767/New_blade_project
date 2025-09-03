@@ -1,12 +1,14 @@
 # syntax=docker/dockerfile:1
 FROM php:8.2-fpm-alpine
 
-# System deps
-RUN apk add --no-cache bash git curl libpng libjpeg-turbo libzip icu-dev oniguruma-dev libxml2-dev \
-    libpng-dev jpeg-dev zip unzip nodejs npm
+# System deps (add build tools + headers for zip/gd)
+RUN apk add --no-cache bash git curl \
+    libpng libjpeg-turbo libzip icu-dev oniguruma-dev libxml2-dev \
+    libpng-dev jpeg-dev freetype-dev libzip-dev zlib-dev \
+    pkgconfig build-base zip unzip nodejs npm
 
 # PHP extensions
-RUN docker-php-ext-configure gd --with-jpeg
+RUN docker-php-ext-configure gd --with-jpeg --with-freetype
 RUN docker-php-ext-install -j$(nproc) pdo pdo_mysql gd intl mbstring xml zip opcache
 
 # Composer
