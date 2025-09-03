@@ -335,7 +335,7 @@
                                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                                     @if ($aboutMe->email)
                                         <div class="group relative">
-                                            <div class="absolute inset-0 bg-gradient-to-br from-green-100 to-green-200 rounded-2xl transform group-hover:scale-105 transition-all duration-500"></div>
+                                            
                                             <div class="relative bg-white/90 backdrop-blur-sm rounded-2xl p-8 border border-gray-100 shadow-xl hover:shadow-2xl transition-all duration-500 transform group-hover:-translate-y-2">
                                             <div class="flex items-center space-x-4">
                                                     <div class="p-4 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl shadow-lg group-hover:scale-110 transition-transform duration-300 group-hover:rotate-3">
@@ -356,7 +356,7 @@
 
                                     @if ($aboutMe->phone)
                                         <div class="group relative">
-                                            <div class="absolute inset-0 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl transform group-hover:scale-105 transition-all duration-500"></div>
+                                            
                                             <div class="relative bg-white/90 backdrop-blur-sm rounded-2xl p-8 border border-gray-100 shadow-xl hover:shadow-2xl transition-all duration-500 transform group-hover:-translate-y-2">
                                                 <div class="flex items-center space-x-4">
                                                     <div class="p-4 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl shadow-lg group-hover:scale-110 transition-transform duration-300 group-hover:rotate-3">
@@ -377,7 +377,7 @@
 
                                     @if ($aboutMe->location)
                                         <div class="group relative">
-                                            <div class="absolute inset-0 bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl transform group-hover:scale-105 transition-all duration-500"></div>
+                                            
                                             <div class="relative bg-white/90 backdrop-blur-sm rounded-2xl p-8 border border-gray-100 shadow-xl hover:shadow-2xl transition-all duration-500 transform group-hover:-translate-y-2">
                                                 <div class="flex items-center space-x-4">
                                                     <div class="p-4 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl shadow-lg group-hover:scale-110 transition-transform duration-300 group-hover:rotate-3">
@@ -397,7 +397,7 @@
 
                                     @if ($aboutMe->linkedin || $aboutMe->github)
                                         <div class="group relative">
-                                            <div class="absolute inset-0 bg-gradient-to-br from-pink-100 to-pink-200 rounded-2xl transform group-hover:scale-105 transition-all duration-500"></div>
+                                            
                                             <div class="relative bg-white/90 backdrop-blur-sm rounded-2xl p-8 border border-gray-100 shadow-xl hover:shadow-2xl transition-all duration-500 transform group-hover:-translate-y-2">
                                                 <div class="flex items-center space-x-4">
                                                     <div class="p-4 bg-gradient-to-br from-pink-500 to-pink-600 rounded-2xl shadow-lg group-hover:scale-110 transition-transform duration-300 group-hover:rotate-3">

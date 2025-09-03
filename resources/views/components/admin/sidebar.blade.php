@@ -224,9 +224,14 @@
     <div class="mt-auto p-4 border-t border-gray-700 bg-gray-900">
         <div class="flex items-center justify-between">
             <div class="flex items-center">
-                <div class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center">
-                    <span class="text-white font-semibold text-sm">{{ substr(auth()->user()->name ?? 'A', 0, 1) }}</span>
-                </div>
+                @php($avatar = auth()->user()->profile_image ?? null)
+                @if($avatar)
+                    <img src="{{ asset('storage/' . $avatar) }}" alt="Avatar" class="w-10 h-10 rounded-full object-cover border-2 border-purple-500">
+                @else
+                    <div class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center">
+                        <span class="text-white font-semibold text-sm">{{ substr(auth()->user()->name ?? 'A', 0, 1) }}</span>
+                    </div>
+                @endif
                 <div class="ml-3">
                     <p class="text-sm font-medium text-white">{{ auth()->user()->name ?? 'Admin' }}</p>
                     <p class="text-xs text-gray-400">Administrator</p>
