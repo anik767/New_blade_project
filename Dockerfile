@@ -22,7 +22,7 @@ WORKDIR /var/www/html
 COPY . /var/www/html
 
 # Create required dirs for nginx/supervisor
-RUN mkdir -p /run/nginx /var/log/supervisor
+RUN mkdir -p /run/nginx /var/log/supervisor /etc/nginx/conf.d
 
 # Nginx vhost template using $PORT
 RUN printf "server {\n\
