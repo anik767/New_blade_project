@@ -4,16 +4,14 @@
 
 @section('content')
     <x-site.banner 
-        title="My Projects"
-        subtitle="A showcase of my best work, demonstrating creativity, technical skills, and attention to detail. Each project tells a unique story of innovation and problem-solving."
-        :banner="$banner" :pageBanner="$pageBanner"
-    />
-
-    <x-site.content-grid 
         title="Featured Projects"
         subtitle="A selection of my best work showcasing different skills and technologies"
         badge="Portfolio"
         badgeColor="green"
+        :banner="$banner" :pageBanner="$pageBanner"
+    />
+
+    <x-site.content-grid 
         :items="$projects"
         emptyIcon="🚀"
         emptyTitle="Projects"

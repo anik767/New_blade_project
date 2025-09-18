@@ -12,6 +12,8 @@ class HomeBanner extends Model
         'title_line1',
         'title_line2',
         'subtitle',
+        'badge',             // badge text
+        'badge_color',       // badge color
         'background_image',  // new field for background image
         'person_image',      // new field for person image
         'cv_file',           // CV upload

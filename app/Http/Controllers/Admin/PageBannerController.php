@@ -27,6 +27,8 @@ class PageBannerController extends Controller
     {
         $request->validate([
             'background_media' => 'nullable|file|mimes:jpg,jpeg,png,gif,webp,mp4,webm',
+            'badge' => 'nullable|string|max:255',
+            'badge_color' => 'nullable|string|in:blue,green,purple,orange,pink',
         ]);
 
         $banner = PageBanner::firstOrNew(['page' => $page]);
@@ -39,6 +41,8 @@ class PageBannerController extends Controller
         }
 
         $banner->page = $page;
+        $banner->badge = $request->badge ?? '';
+        $banner->badge_color = $request->badge_color ?? 'blue';
         $banner->save();
 
         return redirect()->route('admin.page-banners.index')->with('success', 'Page banner updated.');

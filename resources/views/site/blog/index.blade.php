@@ -7,14 +7,12 @@
     <x-site.banner 
         title="My Blog"
         subtitle="Insights, tutorials, and thoughts on web development, design, and technology. Sharing knowledge and experiences to help you grow as a developer."
+        badge="Latest Posts"
+        badgeColor="purple"
         :banner="$banner" :pageBanner="$pageBanner"
     />
 
     <x-site.content-grid 
-        title="Featured Articles"
-        subtitle="Latest insights and tutorials to help you grow as a developer"
-        badge="Latest posts"
-        badgeColor="purple"
         :items="$posts"
         emptyIcon="📝"
         emptyTitle="Blog Posts"

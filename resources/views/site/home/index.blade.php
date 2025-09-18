@@ -47,9 +47,9 @@
 
             <div class="container mx-auto h-full grid grid-cols-1 lg:grid-cols-2 items-center px-6 relative z-10">
                 <div class="flex flex-col justify-center space-y-8 text-center lg:text-left py-10 lg:py-0 max-w-2xl mx-auto lg:mx-0 reveal-on-scroll">
-                    <!-- Status Badge -->
-                    <div class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-green-100 to-blue-100 rounded-full text-sm font-medium text-green-800 mb-4 w-fit mx-auto lg:mx-0">
-                        <span class="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
+                    <!-- Enhanced Status Badge -->
+                    <div class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-green-100 via-blue-100 to-cyan-100 rounded-full text-sm font-medium text-green-800 mb-4 w-fit mx-auto lg:mx-0 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                        <span class="w-3 h-3 bg-gradient-to-r from-green-500 to-blue-500 rounded-full mr-3 animate-pulse shadow-lg"></span>
                         Available for new opportunities
                     </div>
                     
@@ -373,7 +373,7 @@
                             <div class="absolute inset-0 bg-gradient-to-r from-green-400/10 via-blue-400/10 to-purple-400/10 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
                             
                             <!-- Experience card -->
-                            <div class="relative border-l-4 border-green-500 hover:border-blue-500 transition-all duration-300 pl-8 space-y-6 rounded-3xl p-8 bg-white/80 backdrop-blur-sm border border-gray-200 shadow-lg hover:shadow-2xl transform hover:-translate-y-2">
+                            <div class="relative border-l-4 border-green-500 hover:border-blue-500 transition-all duration-300 pl-8 space-y-6 rounded-3xl p-8 bg-white/80 backdrop-blur-sm shadow-lg hover:shadow-2xl transform hover:-translate-y-2">
                                 <!-- Floating elements -->
                                 <div class="absolute -top-2 -right-2 w-4 h-4 bg-gradient-to-r from-green-400 to-blue-400 rounded-full opacity-0 group-hover:opacity-100 animate-pulse transition-opacity duration-300"></div>
                                 <div class="absolute -bottom-2 -left-2 w-3 h-3 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full opacity-0 group-hover:opacity-100 animate-bounce transition-opacity duration-300 delay-200"></div>

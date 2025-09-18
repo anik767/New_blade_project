@@ -31,6 +31,8 @@
              </div>
         <x-site.banner title="About Me"
             subtitle="Passionate frontend developer with a love for creating beautiful, functional, and user-friendly web experiences."
+            :badge="optional($pageBanner)->badge ?? 'My Story'"
+            :badgeColor="optional($pageBanner)->badge_color ?? 'blue'"
             :banner="$banner" :pageBanner="$pageBanner" />
 
         <!-- Main Content Section -->
@@ -97,7 +99,7 @@
                                         </div>
                                         
                                         <!-- Clean name with rose gradient -->
-                                        <h1 class="text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-rose-600 via-pink-600 to-fuchsia-600 bg-clip-text text-transparent mb-6 leading-tight">
+                                        <h1 class="text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-blue-600 via-blue-500 to-fuchsia-600 bg-clip-text text-transparent mb-6 leading-tight">
                                             {{ $aboutMe->name }}
                                         </h1>
                                         

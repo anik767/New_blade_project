@@ -1,8 +1,4 @@
 @props([
-    'title' => '',
-    'subtitle' => '',
-    'badge' => '',
-    'badgeColor' => 'blue',
     'items' => [],
     'emptyIcon' => '📦',
     'emptyTitle' => 'No Items',
@@ -15,26 +11,8 @@
     'ctaLabel' => 'View Details'
 ])
 
-<div class="bg-gradient-to-br from-slate-50 via-white to-blue-50 text-black min-h-screen relative overflow-hidden">
+{{-- <div class="bg-gradient-to-br from-slate-50 via-white to-blue-50 text-black min-h-screen relative overflow-hidden"> --}}
     
-    <!-- Enhanced floating background particles -->
-    <div class="absolute inset-0 pointer-events-none">
-        <div class="absolute top-20 left-10 w-3 h-3 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full animate-ping opacity-60"></div>
-        <div class="absolute top-40 right-20 w-2 h-2 bg-gradient-to-r from-green-400 to-blue-400 rounded-full animate-pulse delay-1000 opacity-50"></div>
-        <div class="absolute top-80 left-1/4 w-4 h-4 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full animate-bounce delay-500 opacity-40"></div>
-        <div class="absolute top-96 right-1/3 w-2 h-2 bg-gradient-to-r from-pink-400 to-yellow-400 rounded-full animate-pulse delay-2000 opacity-60"></div>
-        <div class="absolute top-1/2 left-20 w-3 h-3 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full animate-ping delay-1500 opacity-50"></div>
-        <div class="absolute bottom-40 right-10 w-4 h-4 bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full animate-bounce delay-3000 opacity-40"></div>
-        <div class="absolute top-1/3 right-1/4 w-2 h-2 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full animate-pulse delay-700 opacity-60"></div>
-        <div class="absolute bottom-1/3 left-1/3 w-3 h-3 bg-gradient-to-r from-rose-400 to-pink-400 rounded-full animate-bounce delay-1200 opacity-50"></div>
-    </div>
-
-    <!-- Floating gradient orbs -->
-    <div class="absolute inset-0 pointer-events-none">
-        <div class="absolute top-32 left-1/4 w-64 h-64 bg-gradient-to-r from-blue-500/5 to-purple-500/5 rounded-full blur-3xl animate-pulse"></div>
-        <div class="absolute bottom-32 right-1/4 w-80 h-80 bg-gradient-to-r from-green-500/5 to-blue-500/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-purple-500/3 to-pink-500/3 rounded-full blur-3xl animate-pulse delay-500"></div>
-    </div>
 
     {{-- Enhanced Content Grid Section --}}
     <section class="py-20 reveal-on-scroll relative">
@@ -51,40 +29,6 @@
                     </div>
                 </div>
             @else
-                <div class="text-center mb-16 scroll-fade-in">
-                    @php
-                        $badgeColors = [
-                            'blue' => 'from-blue-100 via-purple-100 to-indigo-100 text-blue-800',
-                            'green' => 'from-green-100 via-blue-100 to-cyan-100 text-green-800',
-                            'purple' => 'from-purple-100 via-pink-100 to-rose-100 text-purple-800',
-                            'orange' => 'from-orange-100 via-yellow-100 to-amber-100 text-orange-800',
-                            'pink' => 'from-pink-100 via-rose-100 to-fuchsia-100 text-pink-800'
-                        ];
-                        $badgeColorClass = $badgeColors[$badgeColor] ?? $badgeColors['blue'];
-                        $dotColors = [
-                            'blue' => 'bg-gradient-to-r from-blue-500 to-purple-500',
-                            'green' => 'bg-gradient-to-r from-green-500 to-blue-500',
-                            'purple' => 'bg-gradient-to-r from-purple-500 to-pink-500',
-                            'orange' => 'bg-gradient-to-r from-orange-500 to-yellow-500',
-                            'pink' => 'bg-gradient-to-r from-pink-500 to-rose-500'
-                        ];
-                        $dotColorClass = $dotColors[$badgeColor] ?? $dotColors['blue'];
-                    @endphp
-                    
-                    <!-- Enhanced Badge -->
-                    <div class="inline-flex items-center px-8 py-4 bg-gradient-to-r {{ $badgeColorClass }} rounded-full text-sm font-medium mb-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                        <span class="w-3 h-3 {{ $dotColorClass }} rounded-full mr-3 animate-pulse shadow-lg"></span>
-                        {{ $badge }}
-                    </div>
-                    
-                    <!-- Enhanced Title with better gradient -->
-                    <h2 class="text-5xl lg:text-6xl font-extrabold mb-8 bg-gradient-to-r from-gray-900 via-green-800 to-blue-800 bg-clip-text text-transparent leading-tight">
-                        {{ $title }}
-                    </h2>
-                    
-                    <!-- Enhanced Subtitle -->
-                    <p class="text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed font-medium">{{ $subtitle }}</p>
-                </div>
                 
                 <!-- Enhanced Grid with better spacing and animations -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 scroll-fade-in">

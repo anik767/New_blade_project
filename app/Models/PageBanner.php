@@ -9,5 +9,7 @@ class PageBanner extends Model
     protected $fillable = [
         'page',
         'background_media',
+        'badge',
+        'badge_color',
     ];
 }

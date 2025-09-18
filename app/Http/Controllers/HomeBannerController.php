@@ -29,6 +29,8 @@ class HomeBannerController extends Controller
             'title_line1' => 'nullable|string|max:255',
             'title_line2' => 'nullable|string|max:255',
             'subtitle' => 'nullable|string',
+            'badge' => 'nullable|string|max:255',
+            'badge_color' => 'nullable|string|in:blue,green,purple,orange,pink',
             'background_image' => 'nullable|file|mimes:jpg,jpeg,png,gif,webp,mp4,webm',
             'person_image' => 'nullable|image',
             'cv_file' => 'nullable|file|mimes:pdf,doc,docx|max:5120',
@@ -41,6 +43,8 @@ class HomeBannerController extends Controller
         $banner->title_line1 = $request->title_line1 ?? '';
         $banner->title_line2 = $request->title_line2 ?? '';
         $banner->subtitle = $request->subtitle ?? '';
+        $banner->badge = $request->badge ?? '';
+        $banner->badge_color = $request->badge_color ?? 'blue';
 
         // Handle background image upload & delete old if exists
         if ($request->hasFile('background_image')) {
