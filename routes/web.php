@@ -35,6 +35,7 @@ Route::post('/comment', [App\Http\Controllers\CommentController::class, 'store']
 // Admin routes (with prefix 'admin' and auth middleware)
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [ProjectPostController::class, 'dashboard'])->name('dashboard');
+    Route::get('/dashboard/search', [ProjectPostController::class, 'dashboard'])->name('dashboard.search');
 
     // Home Banner routes
     Route::get('home/banner', [HomeBannerController::class, 'edit'])->name('home.banner.edit');
