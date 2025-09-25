@@ -19,6 +19,6 @@ class HomeController extends Controller
         $banner = HomeBanner::latest()->first();
 
         // Pass all data to the home view
-        return view('site.home.index', compact('posts', 'projects', 'services', 'banner'));
+        return view('site.home', compact('posts', 'projects', 'services', 'banner'));
     }
 }
