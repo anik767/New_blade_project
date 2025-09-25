@@ -6,7 +6,7 @@
     $recentPosts = \App\Models\Blog::inRandomOrder()->take(3)->get();
 @endphp
 
-<x-site.single-page 
+<x-site.item-detail 
     :item="$post"
     type="blog"
     :title="$post->title"

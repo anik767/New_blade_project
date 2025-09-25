@@ -6,7 +6,7 @@
     $recentProjects = \App\Models\ProjectPost::inRandomOrder()->take(3)->get();
 @endphp
 
-<x-site.single-page 
+<x-site.item-detail 
     :item="$project"
     type="project"
     :title="$project->title"

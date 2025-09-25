@@ -6,7 +6,7 @@
     $recentServices = \App\Models\Service::where('is_active', true)->inRandomOrder()->take(3)->get();
 @endphp
 
-<x-site.single-page 
+<x-site.item-detail 
     :item="$service"
     type="service"
     :title="$service->title"
