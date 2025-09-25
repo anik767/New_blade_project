@@ -54,7 +54,7 @@
                 <!-- Search and Quick Actions -->
                 <div class="flex flex-col lg:flex-row gap-4">
                     <!-- Live Search Bar -->
-                    <div class="relative flex-1 max-w-md">
+                    <div class="relative flex-1 max-w-md z-50">
                         <div class="relative">
                             <input type="text" 
                                    id="liveSearchInput"
@@ -81,7 +81,7 @@
                         </div>
                         
                         <!-- Live Search Results Dropdown -->
-                        <div id="liveSearchResults" class="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-xl border border-gray-200 z-50 hidden max-h-96 overflow-y-auto">
+                        <div id="liveSearchResults" class="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-2xl border border-gray-200 z-[9999] hidden max-h-96 overflow-y-auto backdrop-blur-sm">
                             <div id="searchResultsContent" class="p-4">
                                 <!-- Results will be populated here -->
                             </div>
