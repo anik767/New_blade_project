@@ -91,6 +91,73 @@ class ProjectController extends Controller
         return view('admin.dashboard.index', compact('projectCount', 'recentActivities'));
     }
 
+    // 🔐 Admin: Live search for dashboard
+    public function liveSearch(Request $request)
+    {
+        $query = $request->get('q', '');
+        
+        if (strlen($query) < 2) {
+            return response()->json([
+                'projects' => [],
+                'blogs' => [],
+                'services' => [],
+                'totalResults' => 0,
+                'query' => $query
+            ]);
+        }
+
+        // Search projects with fuzzy matching
+        $projects = ProjectPost::where('title', 'like', "%{$query}%")
+            ->orWhere('description', 'like', "%{$query}%")
+            ->orWhere('github_link', 'like', "%{$query}%")
+            ->limit(5)
+            ->get()
+            ->map(function ($project) {
+                return [
+                    'id' => $project->id,
+                    'title' => $project->title,
+                    'description' => $project->description ? Str::limit($project->description, 100) : '',
+                    'github_link' => $project->github_link
+                ];
+            });
+
+        // Search blogs with fuzzy matching
+        $blogs = \App\Models\Blog::where('title', 'like', "%{$query}%")
+            ->orWhere('content', 'like', "%{$query}%")
+            ->limit(5)
+            ->get()
+            ->map(function ($blog) {
+                return [
+                    'id' => $blog->id,
+                    'title' => $blog->title,
+                    'content' => $blog->content ? Str::limit(strip_tags($blog->content), 100) : ''
+                ];
+            });
+
+        // Search services with fuzzy matching
+        $services = \App\Models\Service::where('title', 'like', "%{$query}%")
+            ->orWhere('description', 'like', "%{$query}%")
+            ->limit(5)
+            ->get()
+            ->map(function ($service) {
+                return [
+                    'id' => $service->id,
+                    'title' => $service->title,
+                    'description' => $service->description ? Str::limit($service->description, 100) : ''
+                ];
+            });
+
+        $totalResults = $projects->count() + $blogs->count() + $services->count();
+
+        return response()->json([
+            'projects' => $projects,
+            'blogs' => $blogs,
+            'services' => $services,
+            'totalResults' => $totalResults,
+            'query' => $query
+        ]);
+    }
+
     // 🔐 Admin: List all projects with pagination (10 per page)
     public function index()
     {

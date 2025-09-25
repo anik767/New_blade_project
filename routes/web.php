@@ -36,6 +36,7 @@ Route::post('/comment', [App\Http\Controllers\CommentController::class, 'store']
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [ProjectPostController::class, 'dashboard'])->name('dashboard');
     Route::get('/dashboard/search', [ProjectPostController::class, 'dashboard'])->name('dashboard.search');
+    Route::get('/dashboard/live-search', [ProjectPostController::class, 'liveSearch'])->name('dashboard.live-search');
 
     // Home Banner routes
     Route::get('home/banner', [HomeBannerController::class, 'edit'])->name('home.banner.edit');
