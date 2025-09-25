@@ -52,9 +52,9 @@
                 </div>
                 
                 <!-- Search and Quick Actions -->
-                <div class="flex flex-col lg:flex-row gap-4">
-                    <!-- Live Search Bar -->
-                    <div class="relative flex-1 max-w-md z-[9999]">
+                <div class="flex flex-col gap-4">
+                    <!-- Live Search Bar - Full Width -->
+                    <div class="relative w-full z-[9999]">
                         <div class="relative">
                             <input type="text" 
                                    id="liveSearchInput"
@@ -89,7 +89,7 @@
                     </div>
                     
                     <!-- Quick Actions -->
-                    <div class="flex flex-col sm:flex-row gap-3">
+                    <div class="flex flex-col sm:flex-row gap-3 justify-end">
                         <a href="{{ route('admin.projects.create') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl hover:from-blue-600 hover:to-blue-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
