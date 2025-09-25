@@ -42,7 +42,7 @@
                     menubar: false,
                     plugins: 'link lists table code image autoresize',
                     toolbar: 'undo redo | styles | bold italic underline | bullist numlist | link table | code',
-                    content_style: 'body{font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; font-size:14px}',
+                    content_style: 'body{font-family: Rajdhani, sans-serif; font-size:14px}',
                 });
             }
             mount();

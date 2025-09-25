@@ -74,8 +74,8 @@
 
     <div class="container mx-auto px-6 relative z-10">
         <div class="text-center max-w-4xl mx-auto">
-            <h1 class="text-5xl lg:text-7xl font-extrabold text-gray-200 mb-8 drop-shadow-lg">{{ $title }}</h1>
-            <p class="text-xl lg:text-2xl text-gray-100 leading-relaxed mb-12 drop-shadow-md">
+            <h1 class="text-6xl lg:text-8xl font-black text-white mb-8 drop-shadow-2xl" style="font-family: 'Rajdhani', sans-serif; text-shadow: 0 4px 8px rgba(0,0,0,0.3);">{{ $title }}</h1>
+            <p class="text-xl lg:text-2xl text-gray-100 leading-relaxed mb-12 drop-shadow-lg font-medium" style="font-family: 'Rajdhani', sans-serif; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">
                 {{ $subtitle }}
             </p>
         </div>

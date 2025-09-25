@@ -70,13 +70,6 @@
 
                 <!-- Enhanced Meta Information -->
                 <div class="text-center mb-8">
-                    <div class="flex items-center justify-center mb-4">
-                        <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-blue-500 rounded-full mr-4 flex items-center justify-center text-white font-bold text-lg">
-                            {{ strtoupper(substr($title, 0, 1)) }}
-                        </div>
-                        <span class="text-gray-600 font-medium">Portfolio</span>
-                    </div>
-                    <p class="text-gray-500 text-sm mb-4">Published in {{ ucfirst($type) }}s, Portfolio</p>
                     
                     <!-- Enhanced Meta Info Line -->
                     <div class="flex items-center justify-center space-x-8 text-sm text-gray-500 border-t border-gray-200 pt-4">

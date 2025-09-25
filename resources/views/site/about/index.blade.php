@@ -6,7 +6,7 @@
     
             <div class="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 text-gray-800 min-h-screen relative overflow-hidden">
                      <!-- Clean Scroll Progress Indicator -->
-             <div class="scroll-indicator" id="scrollIndicator" style="position:fixed;top:0;left:0;height:3px;width:100%;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,#8b5cf6,#6366f1,#3b82f6);z-index:50;transition:transform 120ms linear"></div>
+             <div class="scroll-indicator" id="scrollIndicator" style="position:fixed;top:0;left:0;height:3px;width:100%;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,#1e40af,#3b82f6,#60a5fa);z-index:50;transition:transform 120ms linear"></div>
              
              <!-- Clean Scroll to Top Button -->
              <div class="scroll-to-top" id="scrollToTop" onclick="scrollToTop()" class="fixed bottom-8 right-8 w-14 h-14 bg-gradient-to-r from-purple-500 to-indigo-500 border-0 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 cursor-pointer z-40 opacity-0 invisible">

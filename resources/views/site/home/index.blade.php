@@ -47,26 +47,21 @@
 
             <div class="container mx-auto h-full grid grid-cols-1 lg:grid-cols-2 items-center px-6 relative z-10">
                 <div class="flex flex-col justify-center space-y-8 text-center lg:text-left py-10 lg:py-0 max-w-2xl mx-auto lg:mx-0 reveal-on-scroll">
-                    <!-- Enhanced Status Badge -->
-                    <div class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-green-100 via-blue-100 to-cyan-100 rounded-full text-sm font-medium text-green-800 mb-4 w-fit mx-auto lg:mx-0 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                        <span class="w-3 h-3 bg-gradient-to-r from-green-500 to-blue-500 rounded-full mr-3 animate-pulse shadow-lg"></span>
-                        Available for new opportunities
-                    </div>
                     
-                    <div class="space-y-4">
-                        <h1 class="text-5xl lg:text-7xl font-extrabold tracking-tight leading-tight">
-                            <span class="bg-gradient-to-r from-gray-900 via-green-800 to-blue-800 bg-clip-text text-transparent">
+                    <div class="space-y-6">
+                        <h1 class="text-6xl lg:text-8xl font-black tracking-tight leading-tight" style="font-family: 'Rajdhani', sans-serif;">
+                            <span class="bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900 bg-clip-text text-transparent drop-shadow-2xl">
                                 {{ optional($banner)->title_line1 ?: 'Hello' }}
                             </span>
                         </h1>
-                        <h2 class="text-4xl lg:text-6xl font-extrabold tracking-tight min-h-[70px] leading-tight">
-                            <span class="bg-gradient-to-r from-green-600 via-blue-600 to-purple-600 bg-clip-text text-transparent">
+                        <h2 class="text-5xl lg:text-7xl font-black tracking-tight min-h-[80px] leading-tight" style="font-family: 'Rajdhani', sans-serif;">
+                            <span class="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent drop-shadow-xl">
                                 {{ optional($banner)->title_line2 ?: 'Your Name' }}
                             </span>
                         </h2>
                     </div>
                     
-                    <p class="text-xl lg:text-2xl text-gray-600 leading-relaxed max-w-lg font-medium">
+                    <p class="text-xl lg:text-2xl text-slate-700 leading-relaxed max-w-lg font-semibold" style="font-family: 'Rajdhani', sans-serif;">
                         {{ optional($banner)->subtitle ?: 'Frontend Developer passionate about crafting clean, user-friendly websites that delight users.' }}
                     </p>
                     

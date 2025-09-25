@@ -8,10 +8,7 @@
     <title>@yield('title', 'Azmain Iqtidar Anik - Frontend Developer')</title>
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
@@ -20,7 +17,7 @@
 <body class="font-sans antialiased">
     <div class="min-h-screen">
         <!-- Global Scroll Progress Indicator -->
-        <div id="globalScrollIndicator" style="position:fixed;top:0;left:0;height:4px;width:100%;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,#22c55e,#3b82f6,#8b5cf6);z-index:50;transition:transform 120ms linear"></div>
+        <div id="globalScrollIndicator" style="position:fixed;top:0;left:0;height:4px;width:100%;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,#1e40af,#3b82f6,#60a5fa);z-index:50;transition:transform 120ms linear"></div>
         <!-- Navigation -->
         <x-site.navigation />
 
