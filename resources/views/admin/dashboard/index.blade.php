@@ -236,7 +236,7 @@
                         $query = request('q');
                         $projects = \App\Models\ProjectPost::where('title', 'like', "%{$query}%")
                             ->orWhere('description', 'like', "%{$query}%")
-                            ->orWhere('content', 'like', "%{$query}%")
+                            ->orWhere('github_link', 'like', "%{$query}%")
                             ->limit(5)->get();
                         $blogs = \App\Models\Blog::where('title', 'like', "%{$query}%")
                             ->orWhere('content', 'like', "%{$query}%")
