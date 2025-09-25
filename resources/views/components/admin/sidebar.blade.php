@@ -267,6 +267,45 @@
             </div>
             
             <div class="flex items-center space-x-4">
+                <!-- Global Search Bar -->
+                <div class="relative w-80 z-[9999]">
+                    <div class="relative">
+                        <input type="text" 
+                               id="liveSearchInput"
+                               placeholder="Search projects, blogs, services..." 
+                               class="w-full pl-10 pr-4 py-2 text-sm bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 placeholder-gray-500">
+                        
+                        <!-- Search Icon -->
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                        </div>
+                        
+                        <!-- Loading Spinner -->
+                        <div id="searchLoading" class="absolute inset-y-0 right-0 pr-3 flex items-center hidden">
+                            <svg class="animate-spin h-4 w-4 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                        </div>
+                        
+                        <!-- Clear Button -->
+                        <button id="clearSearch" class="absolute inset-y-0 right-0 pr-3 flex items-center hidden">
+                            <svg class="h-4 w-4 text-gray-400 hover:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <!-- Live Search Results Dropdown -->
+                    <div id="liveSearchResults" class="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-2xl border border-gray-200 z-[99999] hidden max-h-96 overflow-y-auto backdrop-blur-sm">
+                        <div id="searchResultsContent" class="p-4">
+                            <!-- Results will be populated here -->
+                        </div>
+                    </div>
+                </div>
+                
                 <a href="{{ route('home') }}" target="_blank" class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors duration-200">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
@@ -523,4 +562,204 @@ document.addEventListener('DOMContentLoaded', function() {
     width: 3px;
     background: #60A5FA;
 }
-</style> 
+</style>
+
+<script>
+// Global Search Functionality
+let searchTimeout;
+let isSearching = false;
+
+// Live search input handler
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('liveSearchInput');
+    const clearBtn = document.getElementById('clearSearch');
+    const loading = document.getElementById('searchLoading');
+    const results = document.getElementById('liveSearchResults');
+    
+    if (!searchInput) return;
+    
+    searchInput.addEventListener('input', function(e) {
+        const query = e.target.value.trim();
+        
+        // Clear previous timeout
+        clearTimeout(searchTimeout);
+        
+        if (query.length === 0) {
+            clearLiveSearch();
+            return;
+        }
+        
+        // Show clear button
+        clearBtn.classList.remove('hidden');
+        
+        // Debounce search
+        searchTimeout = setTimeout(() => {
+            performLiveSearch(query);
+        }, 300);
+    });
+    
+    // Clear search handler
+    clearBtn.addEventListener('click', clearLiveSearch);
+    
+    // Show/hide clear button based on input
+    searchInput.addEventListener('input', function(e) {
+        if (e.target.value.length > 0) {
+            clearBtn.classList.remove('hidden');
+        } else {
+            clearBtn.classList.add('hidden');
+        }
+    });
+});
+
+// Perform live search via AJAX
+function performLiveSearch(query) {
+    if (isSearching) return;
+    
+    isSearching = true;
+    const loading = document.getElementById('searchLoading');
+    const results = document.getElementById('liveSearchResults');
+    const content = document.getElementById('searchResultsContent');
+    
+    loading.classList.remove('hidden');
+    
+    fetch(`/admin/dashboard/live-search?q=${encodeURIComponent(query)}`)
+        .then(response => response.json())
+        .then(data => {
+            loading.classList.add('hidden');
+            displayLiveResults(data, content);
+            results.classList.remove('hidden');
+            isSearching = false;
+        })
+        .catch(error => {
+            console.error('Search error:', error);
+            loading.classList.add('hidden');
+            content.innerHTML = '<div class="text-center py-4 text-gray-500">Search error occurred</div>';
+            results.classList.remove('hidden');
+            isSearching = false;
+        });
+}
+
+// Display live search results
+function displayLiveResults(data, container) {
+    if (data.totalResults === 0) {
+        container.innerHTML = `
+            <div class="text-center py-4">
+                <svg class="w-12 h-12 text-gray-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+                <p class="text-gray-500">No results found</p>
+            </div>
+        `;
+        return;
+    }
+    
+    let html = '<div class="space-y-4">';
+    
+    // Projects
+    if (data.projects && data.projects.length > 0) {
+        html += `
+            <div>
+                <h4 class="font-semibold text-gray-900 flex items-center mb-2">
+                    <svg class="w-4 h-4 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                    </svg>
+                    Projects (${data.projects.length})
+                </h4>
+                <div class="space-y-2">
+        `;
+        
+        data.projects.forEach(project => {
+            html += `
+                <a href="/admin/projects/${project.id}/edit" class="block p-3 hover:bg-gray-50 rounded-lg transition-colors">
+                    <div class="font-medium text-gray-900">${highlightMatch(project.title, data.query)}</div>
+                    <div class="text-sm text-gray-500 mt-1">${highlightMatch(project.description, data.query)}</div>
+                </a>
+            `;
+        });
+        
+        html += '</div></div>';
+    }
+    
+    // Blogs
+    if (data.blogs && data.blogs.length > 0) {
+        html += `
+            <div>
+                <h4 class="font-semibold text-gray-900 flex items-center mb-2">
+                    <svg class="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                    </svg>
+                    Blog Posts (${data.blogs.length})
+                </h4>
+                <div class="space-y-2">
+        `;
+        
+        data.blogs.forEach(blog => {
+            html += `
+                <a href="/admin/blog/${blog.id}/edit" class="block p-3 hover:bg-gray-50 rounded-lg transition-colors">
+                    <div class="font-medium text-gray-900">${highlightMatch(blog.title, data.query)}</div>
+                    <div class="text-sm text-gray-500 mt-1">${highlightMatch(blog.excerpt, data.query)}</div>
+                </a>
+            `;
+        });
+        
+        html += '</div></div>';
+    }
+    
+    // Services
+    if (data.services && data.services.length > 0) {
+        html += `
+            <div>
+                <h4 class="font-semibold text-gray-900 flex items-center mb-2">
+                    <svg class="w-4 h-4 mr-2 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2V6"></path>
+                    </svg>
+                    Services (${data.services.length})
+                </h4>
+                <div class="space-y-2">
+        `;
+        
+        data.services.forEach(service => {
+            html += `
+                <a href="/admin/services/${service.id}/edit" class="block p-3 hover:bg-gray-50 rounded-lg transition-colors">
+                    <div class="font-medium text-gray-900">${highlightMatch(service.title, data.query)}</div>
+                    <div class="text-sm text-gray-500 mt-1">${highlightMatch(service.description, data.query)}</div>
+                </a>
+            `;
+        });
+        
+        html += '</div></div>';
+    }
+    
+    html += '</div>';
+    container.innerHTML = html;
+}
+
+// Highlight matching text
+function highlightMatch(text, query) {
+    if (!text || !query) return text;
+    const regex = new RegExp(`(${query})`, 'gi');
+    return text.replace(regex, '<mark class="bg-yellow-200 px-1 rounded">$1</mark>');
+}
+
+// Clear live search
+function clearLiveSearch() {
+    const input = document.getElementById('liveSearchInput');
+    const clearBtn = document.getElementById('clearSearch');
+    const results = document.getElementById('liveSearchResults');
+    
+    input.value = '';
+    clearBtn.classList.add('hidden');
+    results.classList.add('hidden');
+    input.focus();
+}
+
+// Hide results when clicking outside
+document.addEventListener('click', function(e) {
+    const searchContainer = document.querySelector('.relative.w-80');
+    const results = document.getElementById('liveSearchResults');
+    
+    if (searchContainer && !searchContainer.contains(e.target)) {
+        results.classList.add('hidden');
+    }
+});
+</script> 

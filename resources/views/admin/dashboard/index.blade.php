@@ -22,12 +22,13 @@
                             </div>
                             <div class="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white animate-pulse"></div>
                         </div>
-                        <div>
+                        <div class="flex-1">
                             <h1 class="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 bg-clip-text text-transparent">
                                 Welcome back, {{ auth()->user()->name }}! 👋
                             </h1>
                             <p class="text-gray-600 mt-1 text-lg">Here's your website overview for {{ now()->format('l, F j, Y') }}</p>
                         </div>
+                        
                     </div>
                     
                     <!-- Quick Stats Row -->
@@ -52,7 +53,7 @@
                 </div>
                 
                 <!-- Quick Actions -->
-                <div class="flex flex-col sm:flex-row gap-3">
+                <div class="flex flex-col sm:flex-row gap-3 justify-end">
                     <a href="{{ route('admin.projects.create') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl hover:from-blue-600 hover:to-blue-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
@@ -190,6 +191,108 @@
             </div>
         </div>
     </div>
+
+    <!-- Search Results Section -->
+    @if(request('q'))
+        <div class="px-6 lg:px-8 mb-8">
+            <div class="dashboard-card shadow-xl">
+                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 px-6 py-4 border-b border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-900 flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                        Search Results for "{{ request('q') }}"
+                    </h3>
+                </div>
+                <div class="p-6">
+                    @php
+                        $query = request('q');
+                        $projects = \App\Models\ProjectPost::where('title', 'like', "%{$query}%")
+                            ->orWhere('description', 'like', "%{$query}%")
+                            ->orWhere('github_link', 'like', "%{$query}%")
+                            ->limit(5)->get();
+                        $blogs = \App\Models\Blog::where('title', 'like', "%{$query}%")
+                            ->orWhere('content', 'like', "%{$query}%")
+                            ->limit(5)->get();
+                        $services = \App\Models\Service::where('title', 'like', "%{$query}%")
+                            ->orWhere('description', 'like', "%{$query}%")
+                            ->limit(5)->get();
+                        $totalResults = $projects->count() + $blogs->count() + $services->count();
+                    @endphp
+
+                    @if($totalResults > 0)
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <!-- Projects Results -->
+                            @if($projects->count() > 0)
+                                <div class="space-y-3">
+                                    <h4 class="font-semibold text-gray-900 flex items-center">
+                                        <svg class="w-4 h-4 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                                        </svg>
+                                        Projects ({{ $projects->count() }})
+                                    </h4>
+                                    @foreach($projects as $project)
+                                        <div class="bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md transition-shadow">
+                                            <h5 class="font-medium text-gray-900 mb-1">{{ $project->title }}</h5>
+                                            <p class="text-sm text-gray-600 mb-2">{{ Str::limit($project->description, 100) }}</p>
+                                            <a href="{{ route('admin.projects.edit', $project) }}" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Edit Project →</a>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @endif
+
+                            <!-- Blog Posts Results -->
+                            @if($blogs->count() > 0)
+                                <div class="space-y-3">
+                                    <h4 class="font-semibold text-gray-900 flex items-center">
+                                        <svg class="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                        </svg>
+                                        Blog Posts ({{ $blogs->count() }})
+                                    </h4>
+                                    @foreach($blogs as $blog)
+                                        <div class="bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md transition-shadow">
+                                            <h5 class="font-medium text-gray-900 mb-1">{{ $blog->title }}</h5>
+                                            <p class="text-sm text-gray-600 mb-2">{{ Str::limit(strip_tags($blog->content), 100) }}</p>
+                                            <a href="{{ route('admin.blog.edit', $blog) }}" class="text-green-600 hover:text-green-800 text-sm font-medium">Edit Post →</a>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @endif
+
+                            <!-- Services Results -->
+                            @if($services->count() > 0)
+                                <div class="space-y-3">
+                                    <h4 class="font-semibold text-gray-900 flex items-center">
+                                        <svg class="w-4 h-4 mr-2 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                        </svg>
+                                        Services ({{ $services->count() }})
+                                    </h4>
+                                    @foreach($services as $service)
+                                        <div class="bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md transition-shadow">
+                                            <h5 class="font-medium text-gray-900 mb-1">{{ $service->title }}</h5>
+                                            <p class="text-sm text-gray-600 mb-2">{{ Str::limit($service->description, 100) }}</p>
+                                            <a href="{{ route('admin.services.edit', $service) }}" class="text-purple-600 hover:text-purple-800 text-sm font-medium">Edit Service →</a>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @endif
+
+                        </div>
+                    @else
+                        <div class="text-center py-8">
+                            <svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                            <h3 class="text-lg font-medium text-gray-900 mb-2">No results found</h3>
+                            <p class="text-gray-600">Try searching with different keywords or check your spelling.</p>
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </div>
+    @endif
 
     <!-- New Modern Features Section -->
     <div class="px-6 lg:px-8 mb-6">
@@ -668,4 +771,5 @@
         </div>
     </div>
 </div>
+
 @endsection
