@@ -501,20 +501,20 @@
                                         
                                         <!-- Enhanced buttons -->
                                         <div class="flex flex-col sm:flex-row gap-8 justify-center">
-                                            <a href="{{ route('contact') }}" 
-                                               class="group inline-flex items-center px-10 py-5 bg-gradient-to-r from-green-500 to-blue-600 text-white font-semibold rounded-2xl hover:from-green-600 hover:to-blue-700 transition-all duration-500 transform hover:scale-110 hover:-translate-y-2 shadow-xl hover:shadow-2xl border-0">
-                                                <svg class="w-6 h-6 mr-3 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-                                                </svg>
+                                            <x-site.custom-button 
+                                                variant="blue" 
+                                                href="{{ route('contact') }}" 
+                                                size="large"
+                                                icon='<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>'>
                                                 Start a Project
-                                            </a>
-                                            <a href="{{ route('services') }}" 
-                                               class="group inline-flex items-center px-10 py-5 border-2 border-gray-300 text-gray-700 font-semibold rounded-2xl hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-all duration-500 transform hover:scale-110 hover:-translate-y-2 shadow-lg hover:shadow-xl">
-                                                <svg class="w-6 h-6 mr-3 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                                </svg>
+                                            </x-site.custom-button>
+                                            <x-site.custom-button 
+                                                variant="secondary" 
+                                                href="{{ route('services') }}" 
+                                                size="large"
+                                                icon='<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>'>
                                                 View Services
-                                            </a>
+                                            </x-site.custom-button>
                                         </div>
                                     </div>
                                 </div>

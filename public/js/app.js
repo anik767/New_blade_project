@@ -4330,8 +4330,11 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       });
     }, observerOptions);
-    document.querySelectorAll('.scroll-fade-in').forEach(function (el) {
-      return observer.observe(el);
+
+    // Hide elements initially and then observe them
+    document.querySelectorAll('.scroll-fade-in, .reveal-on-scroll').forEach(function (el) {
+      el.classList.add('js-hidden');
+      observer.observe(el);
     });
   } catch (e) {
     // no-op in unsupported environments

@@ -225,9 +225,13 @@
                             </div>
                             
                             <div class="text-center">
-                                <button type="submit" class="bg-gradient-to-r from-green-500 to-blue-500 text-white px-10 py-4 rounded-xl hover:from-green-600 hover:to-blue-600 transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                                <x-site.custom-button 
+                                    variant="primary" 
+                                    type="submit" 
+                                    size="large"
+                                    icon='<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>'>
                                     Post Comment
-                                </button>
+                                </x-site.custom-button>
                             </div>
                         </form>
                     </div>

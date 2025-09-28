@@ -1,0 +1,378 @@
+/* Custom CSS Variables - Updated: 2024 */
+:root {
+    /* Primary Colors */
+    --primary: #333333; /* Dark Gray */
+    --secondary: #6E00FF; /* Purple */
+    --accent: #FF4081; /* Pink Accent */
+    --light: #F8F9FA; /* Light Gray */
+    --white: #FFFFFF; /* White */
+    
+    /* Button Gradient Colors */
+    --btn-primary-start: #667eea; /* Indigo */
+    --btn-primary-end: #764ba2; /* Violet */
+    
+    --btn-secondary-start: #f093fb; /* Light Pink */
+    --btn-secondary-end: #f5576c; /* Pink-Red */
+    
+    --btn-success-start: #10b981; /* Emerald Green */
+    --btn-success-end: #059669; /* Dark Emerald */
+    
+    --btn-warning-start: #f39c12; /* Amber/Orange */
+    --btn-warning-end: #f1c40f; /* Yellow */
+    
+    --btn-ocean-start: #3498db; /* Blue */
+    --btn-ocean-middle: #2ecc71; /* Green */
+    --btn-ocean-end: #1abc9c; /* Teal */
+    
+    --btn-sunset-start: #ff6b6b; /* Coral Red */
+    --btn-sunset-middle: #ffa726; /* Orange */
+    --btn-sunset-end: #f39c12; /* Amber */
+    
+    --btn-forest-start: #134e5e; /* Deep Teal */
+    --btn-forest-end: #71b280; /* Forest Green */
+    
+    --btn-purple-start: #8e44ad; /* Purple */
+    --btn-purple-middle: #9b59b6; /* Light Purple */
+    --btn-purple-end: #6E00FF; /* Strong Purple */
+    
+    --btn-blue-start: #3498db; /* Blue */
+    --btn-blue-middle: #2980b9; /* Dark Blue */
+    --btn-blue-end: #2c3e50; /* Navy */
+    
+    --btn-emerald-start: #1abc9c; /* Teal/Emerald */
+    --btn-emerald-middle: #16a085; /* Dark Teal */
+    --btn-emerald-end: #27ae60; /* Green */
+    
+    --btn-alt-start: #ff6b6b; /* Coral Red */
+    --btn-alt-end: #ffa726; /* Orange */
+    
+    /* Shadow Colors */
+    --shadow-primary: rgba(102, 126, 234, 0.3); /* Indigo Shadow */
+    --shadow-secondary: rgba(245, 87, 108, 0.3); /* Pink-Red Shadow */
+    --shadow-success: rgba(16, 185, 129, 0.3); /* Emerald Shadow */
+    --shadow-warning: rgba(243, 156, 18, 0.3); /* Amber Shadow */
+    --shadow-ocean: rgba(52, 152, 219, 0.3); /* Blue Shadow */
+    --shadow-sunset: rgba(255, 107, 107, 0.3); /* Coral Shadow */
+    --shadow-forest: rgba(19, 78, 94, 0.3); /* Teal Shadow */
+    --shadow-alt: rgba(255, 167, 38, 0.3); /* Orange Shadow */
+    --shadow-blue: rgba(52, 152, 219, 0.3); /* Blue Shadow */
+    --shadow-accent: rgba(255, 64, 129, 0.3); /* Pink Accent Shadow */
+    --shadow-accent-hover: rgba(255, 64, 129, 0.5); /* Pink Accent Shadow Hover */
+    }
+    
+    
+
+/* Crevo Special Button Styles */
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  transform: translateY(0);
+  text-decoration: none;
+  color: white;
+  gap: 0.5rem;
+}
+
+.cta-btn span {
+  position: relative;
+  z-index: 2;
+  transition: color 0.4s ease;
+}
+
+/* Button Effects */
+.scale-effect {
+  background: var(--accent);
+  color: white;
+  box-shadow: 0 4px 15px var(--shadow-accent);
+}
+
+.scale-effect:hover {
+  transform: scale(1.05) !important;
+  box-shadow: 0 8px 25px var(--shadow-accent-hover) !important;
+}
+
+.crevo-special {
+  background: linear-gradient(45deg, var(--secondary), var(--accent));
+  color: white;
+  box-shadow: 0 4px 15px var(--shadow-accent);
+  overflow: hidden;
+  position: relative;
+}
+
+.crevo-special::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: rotate(30deg);
+  transition: all 0.5s ease;
+  z-index: 1;
+}
+
+.crevo-special:hover::after {
+  transform: rotate(30deg) translate(10%, 10%) !important;
+}
+
+.crevo-special:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 25px var(--shadow-accent-hover) !important;
+}
+
+.crevo-special-alt {
+  background: linear-gradient(45deg, var(--btn-alt-start), var(--btn-alt-end));
+  color: white;
+  box-shadow: 0 4px 15px var(--shadow-alt);
+  overflow: hidden;
+  position: relative;
+}
+
+.crevo-special-alt::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: rotate(30deg);
+  transition: all 0.5s ease;
+  z-index: 1;
+}
+
+.crevo-special-alt:hover::after {
+  transform: rotate(30deg) translate(10%, 10%);
+}
+
+.crevo-special-alt:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px var(--shadow-alt);
+}
+
+.crevo-special-blue {
+  background: linear-gradient(45deg, var(--btn-success-start), var(--btn-success-end));
+  color: white;
+  box-shadow: 0 4px 15px var(--shadow-blue);
+  overflow: hidden;
+  position: relative;
+}
+
+.crevo-special-blue::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: rotate(30deg);
+  transition: all 0.5s ease;
+  z-index: 1;
+}
+
+.crevo-special-blue:hover::after {
+  transform: rotate(30deg) translate(10%, 10%);
+}
+
+.crevo-special-blue:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px var(--shadow-blue);
+}
+
+/* Gradient Button Styles */
+.gradient-btn-primary {
+  background: linear-gradient(135deg, var(--btn-primary-start) 0%, var(--btn-primary-end) 100%);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.gradient-btn-primary:hover {
+  background: linear-gradient(135deg, var(--btn-primary-start) 0%, var(--btn-primary-end) 100%) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 25px var(--shadow-primary) !important;
+}
+
+.gradient-btn-secondary {
+  background: linear-gradient(135deg, var(--btn-secondary-start) 0%, var(--btn-secondary-end) 100%);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.gradient-btn-secondary:hover {
+  background: linear-gradient(135deg, var(--btn-secondary-start) 0%, var(--btn-secondary-end) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px var(--shadow-secondary);
+}
+
+.gradient-btn-success {
+  background: linear-gradient(135deg, var(--btn-success-start) 0%, var(--btn-success-end) 100%);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.gradient-btn-success:hover {
+  background: linear-gradient(135deg, var(--btn-success-start) 0%, var(--btn-success-end) 100%) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 25px var(--shadow-success) !important;
+}
+
+.gradient-btn-warning {
+  background: linear-gradient(135deg, var(--btn-warning-start) 0%, var(--btn-warning-end) 100%);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.gradient-btn-warning:hover {
+  background: linear-gradient(135deg, var(--btn-warning-start) 0%, var(--btn-warning-end) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px var(--shadow-warning);
+}
+
+.gradient-btn-ocean {
+  background: linear-gradient(135deg, var(--btn-ocean-start) 0%, var(--btn-ocean-middle) 50%, var(--btn-ocean-end) 100%);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.gradient-btn-ocean:hover {
+  background: linear-gradient(135deg, var(--btn-ocean-start) 0%, var(--btn-ocean-middle) 50%, var(--btn-ocean-end) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px var(--shadow-ocean);
+}
+
+.gradient-btn-sunset {
+  background: linear-gradient(135deg, var(--btn-sunset-start) 0%, var(--btn-sunset-middle) 50%, var(--btn-sunset-end) 100%);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.gradient-btn-sunset:hover {
+  background: linear-gradient(135deg, var(--btn-sunset-start) 0%, var(--btn-sunset-middle) 50%, var(--btn-sunset-end) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px var(--shadow-sunset);
+}
+
+.gradient-btn-forest {
+  background: linear-gradient(135deg, var(--btn-forest-start) 0%, var(--btn-forest-end) 100%);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.gradient-btn-forest:hover {
+  background: linear-gradient(135deg, var(--btn-forest-start) 0%, var(--btn-forest-end) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px var(--shadow-forest);
+}
+
+/* Spinning Conic Gradient Button */
+.cta-btn.spinning-conic {
+  width: 300px;
+  padding: 20px 50px;
+  background: #000;
+  color: #fff;
+  font-family: monospace;
+  border-radius: 75px;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  animation: glow linear 2s infinite;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.cta-btn.spinning-conic::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  aspect-ratio: 1/1;
+  width: 150%;
+  height: auto;
+  border-radius: 50%;
+  background: conic-gradient(#fff 0%, #000 3%, #409 60%, #fff 100%);
+  animation: spin linear 2s infinite;
+  transform: translate(-50%, -50%);
+}
+
+.cta-btn.spinning-conic::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(100% - 1px);
+  height: calc(100% - 1px);
+  background: #000;
+  transform: translate(-50%, -50%);
+  border-radius: 75px;
+  backdrop-filter: blur(10px);
+}
+
+.cta-btn.spinning-conic span {
+  display: block;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Geo", monospace;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #fff;
+}
+
+@keyframes spin {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes glow {
+  0% {
+    border: 0 transparent solid;
+  }
+  25% {
+    border: 15px #409 solid;
+  }
+  50% {
+    border: 30px transparent solid;
+  }
+  100% {
+    border: 0 transparent solid;
+  }
+}
+
+/* Scroll reveal animations */
+.reveal-on-scroll {
+  transition: all 0.8s ease-out;
+}
+
+.reveal-on-scroll.js-hidden {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.reveal-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
