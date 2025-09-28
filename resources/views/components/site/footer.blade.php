@@ -56,10 +56,14 @@
                         <div id="message-error" class="text-red-400 text-xs mt-1 hidden"></div>
                     </div>
 
-                    <button type="submit"
-                        class="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold py-3 px-6 rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                    <x-site.custom-button 
+                        variant="primary" 
+                        type="submit" 
+                        size="large" 
+                        class="w-full"
+                        icon='<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>'>
                         Send Message
-                    </button>
+                    </x-site.custom-button>
                 </form>
 
                 <!-- Success/Error Messages -->

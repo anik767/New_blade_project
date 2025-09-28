@@ -25,7 +25,11 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }, observerOptions);
 
-    document.querySelectorAll('.scroll-fade-in').forEach(el => observer.observe(el));
+    // Hide elements initially and then observe them
+    document.querySelectorAll('.scroll-fade-in, .reveal-on-scroll').forEach(el => {
+      el.classList.add('js-hidden');
+      observer.observe(el);
+    });
   } catch (e) {
     // no-op in unsupported environments
   }

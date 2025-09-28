@@ -115,12 +115,14 @@
                     @endif
                 </div>
                 
-                <button type="button" onclick="addExperience()" class="mt-6 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-xl hover:from-purple-600 hover:to-pink-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center">
-                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                    </svg>
+                <x-site.custom-button 
+                    variant="primary" 
+                    type="button" 
+                    onclick="addExperience()" 
+                    class="mt-6"
+                    icon='<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>'>
                     Add Experience
-                </button>
+                </x-site.custom-button>
             </div>
 
             @if(is_array($banner->experience) && count($banner->experience) > 0)

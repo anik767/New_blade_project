@@ -340,20 +340,20 @@
                         I'm excited to hear about your vision and help bring it to life.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a href="mailto:{{ $contact->email ?? 'contact@example.com' }}" 
-                           class="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-green-500 to-blue-500 text-white rounded-xl font-semibold tracking-wide hover:from-green-600 hover:to-blue-600 transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:-translate-y-1 hover:scale-105">
-                            <svg class="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                            </svg>
+                        <x-site.custom-button 
+                            variant="warning" 
+                            size="large"
+                            type="submit"
+                            href="mailto:{{ $contact->email ?? 'contact@example.com' }}" 
+                            icon='<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>'>
                             Send Email
-                        </a>
-                        <a href="{{ route('home') }}" 
-                           class="group inline-flex items-center px-8 py-4 border-2 border-green-500 text-green-600 rounded-xl font-semibold tracking-wide hover:bg-green-500 hover:text-white transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:-translate-y-1 hover:scale-105">
-                            <svg class="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                            </svg>
+                        </x-site.custom-button>
+                        <x-site.custom-button 
+                            variant="success" 
+                            href="{{ route('home') }}" 
+                            icon='<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>'>
                             View My Work
-                        </a>
+                        </x-site.custom-button>
                     </div>
                 </div>
             </div>

@@ -13,6 +13,9 @@
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 <body class="font-sans antialiased">
     <div class="min-h-screen">
